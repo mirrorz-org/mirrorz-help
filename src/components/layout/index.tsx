@@ -1,4 +1,5 @@
 import style9 from 'style9';
+import Nav from './nav';
 
 const styles = style9.create({
   container: {
@@ -50,9 +51,7 @@ export function Layout({ children }: React.PropsWithChildren<unknown>) {
   return (
     <div className={styles('container')}>
       <div className={styles('sidenav_container')}>
-        <nav>
-          <p>Sidebar</p>
-        </nav>
+        <Nav />
       </div>
       <main className={styles('main')}>
         <div className={styles('main_spacer')} />

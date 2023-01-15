@@ -17,6 +17,7 @@
   "author": "Sukka <https://skk.moe>",
   "license": "MIT",
   "dependencies": {
+    "body-scroll-lock": "^4.0.0-beta.0",
     "clsx": "^1.2.1",
     "next": "^13.1.2",
     "react": "^18.2.0",
@@ -24,6 +25,7 @@
     "style9": "^0.16.1"
   },
   "devDependencies": {
+    "@types/body-scroll-lock": "^3.1.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.48.1",

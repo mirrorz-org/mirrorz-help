@@ -1,5 +1,8 @@
 import style9 from 'style9';
 import Nav from './nav';
+import { useRouter } from 'next/router';
+import DocumentationWrapper from './documentation-wrapper';
+import type { ToC } from '@/lib/parse-markdown';
 
 const styles = style9.create({
   container: {
@@ -20,7 +23,7 @@ const styles = style9.create({
     paddingTop: 0,
     paddingBottom: 0,
     zIndex: 50,
-    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+    boxShadow: 'var(--nav-shadow)',
     '@media screen and (min-width: 840px)': {
       position: 'sticky',
       boxShadow: 'none'
@@ -44,10 +47,19 @@ const styles = style9.create({
     '@media screen and (min-width: 1280px)': {
       display: 'block'
     }
+  },
+  article: {
+    overflowWrap: 'break-word'
   }
 });
 
-export function Layout({ children }: React.PropsWithChildren<unknown>) {
+interface LayoutProps {
+  toc?: ToC[]
+}
+
+export function Layout({ children, toc = [] }: React.PropsWithChildren<LayoutProps>) {
+  const { asPath } = useRouter();
+
   return (
     <div className={styles('container')}>
       <div className={styles('sidenav_container')}>
@@ -55,10 +67,16 @@ export function Layout({ children }: React.PropsWithChildren<unknown>) {
       </div>
       <main className={styles('main')}>
         <div className={styles('main_spacer')} />
-        {children}
+        <article className={styles('article')} key={asPath}>
+          <DocumentationWrapper>
+            {children}
+          </DocumentationWrapper>
+        </article>
       </main>
       <div className={styles('toc')}>
-        <p>ToC</p>
+        <p>
+          {JSON.stringify(toc)}
+        </p>
       </div>
     </div>
   );

@@ -1,5 +1,9 @@
+import { Layout } from '../components/layout';
+
 export default function HomePage() {
   return (
-    <h1>Hello World</h1>
+    <Layout>
+      <p>Hello World</p>
+    </Layout>
   );
 }

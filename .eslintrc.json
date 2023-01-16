@@ -13,6 +13,9 @@
         "**/*.ts",
         "**/*.tsx"
       ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      },
       "parserOptions": {
         "project": "./tsconfig.json",
         "sourceType": "module"
@@ -21,6 +24,18 @@
         "sukka/react",
         "sukka/typescript"
       ]
+    },
+    {
+      "files": [
+        "**/*.mdx"
+      ],
+      "extends": [
+        "plugin:mdx/recommended"
+      ],
+      // optional, if you want to lint code blocks at the same time
+      "settings": {
+        "mdx/code-blocks": true
+      }
     }
   ]
 }

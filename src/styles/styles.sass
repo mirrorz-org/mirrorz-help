@@ -1,0 +1,68 @@
+:root
+  --primary: rgb(21, 101, 138)
+  --text-primary: #23272F
+  --text-secondary: #404756
+  --text-link: #087EA4
+  --bg-wash: #FFF
+  // scrollbar
+  --scroller: rgba(0, 0, 0, 0.2)
+  --scroll-thumb: rgba(0, 0, 0, 0.35)
+  // navbar
+  --nav-shadow: #{0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%)}
+
+@mixin darkVariable()
+  // --primary: rgb(21, 101, 138)
+  --text-primary: #F6F7F9
+  --text-secondary: #EBECF0
+  --text-link: #149ECA
+  --bg-wash: #27272a
+  // scrollbar
+  --scroller: rgba(255, 255, 255, 0.2)
+  --scroll-thumb: rgba(255, 255, 255, 0.35)
+  --nav-shadow: #{0 1px 0 hsla(0, 0%, 100%, .1)}
+
+html.dark
+  @include darkVariable()
+
+@media (prefers-color-scheme: dark)
+  :not(.light):root
+    @include darkVariable
+
+body
+  color: var(--text-primary)
+  background-color: var(--bg-wash)
+
+/*
+ * Hopefully when scrollbar-color lands everywhere,
+ * (and not just in FF), we'll be able to keep just this.
+ */
+.no-bg-scrollbar
+  scrollbar-color: var(--scroller) transparent
+
+/*
+ * Until then, we have ... this.
+ * If you're changing this, make sure you've tested:
+ * - Different browsers (Chrome, Safari, FF)
+ * - Dark and light modes
+ * - System scrollbar settings ("always on" vs "when scrolling")
+ * - Switching between modes should never jump width
+ * - When you interact with a sidebar, it should always be visible
+ * - For each combination, test overflowing and non-overflowing sidebar
+ * I've spent hours picking these so I expect no less diligence from you.
+ */
+.no-bg-scrollbar::-webkit-scrollbar,
+.no-bg-scrollbar::-webkit-scrollbar-track
+  background-color: transparent
+
+.no-bg-scrollbar:hover::-webkit-scrollbar-thumb,
+.no-bg-scrollbar:focus::-webkit-scrollbar-thumb,
+.no-bg-scrollbar:focus-within::-webkit-scrollbar-thumb,
+.no-bg-scrollbar:active::-webkit-scrollbar-thumb
+  background-color: var(--scroller)
+  border: 4px solid transparent
+  background-clip: content-box
+  border-radius: 10px
+
+.no-bg-scrollbar::-webkit-scrollbar-thumb:hover,
+.no-bg-scrollbar::-webkit-scrollbar-thumb:active
+  background-color: var(--scroll-thumb)

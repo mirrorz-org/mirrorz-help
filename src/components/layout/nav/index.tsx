@@ -21,13 +21,13 @@ const styles = style9.create({
   container_open: {
     height: '100vh'
   },
-  tab: {
+  header: {
     alignItems: 'center',
     width: '100%',
     display: 'flex',
     zIndex: 50,
     justifyContent: 'space-between',
-    // backgroundColor: 'var(--color-wash)',
+    backgroundColor: 'var(--bg-wash)',
     paddingTop: 0,
     paddingRight: '20px',
     '@media screen and (min-width: 840px)': {
@@ -36,7 +36,7 @@ const styles = style9.create({
       paddingLeft: '20px'
     }
   },
-  tab_inner: {
+  header_inner: {
     display: 'flex',
     alignItems: 'center',
     '@media screen and (min-width: 1280px)': {
@@ -97,10 +97,10 @@ const styles = style9.create({
   },
   nav_container: {
     overflowY: 'scroll',
+    backgroundColor: 'var(--bg-wash)',
+    flexGrow: 1,
     '@media screen and (min-width: 840px)': {
-      width: '336px',
-      flexGrow: 1
-      // backgroundColor: 'var(--color-wash)',
+      width: '336px'
     }
   },
   aside: {
@@ -176,16 +176,19 @@ export default function Nav() {
   return (
     <div
       className={styles('container', isOpen && 'container_open')}>
-      <div className={styles('tab')}>
-        <div className={styles('tab_inner')}>
+      <div className={styles('header')}>
+        <div className={styles('header_inner')}>
           <button
             type="button"
             aria-label="Menu"
             onClick={useCallback(() => setIsOpen(isOpen => !isOpen), [])}
-            className={styles('menu_button', isOpen && 'menu_button_open')}>
-            {isOpen
-              ? <IconClose className={styles('icon')} />
-              : <IconHambuger className={styles('icon')} />}
+            className={styles('menu_button', isOpen && 'menu_button_open')}
+          >
+            {
+              isOpen
+                ? <IconClose className={styles('icon')} />
+                : <IconHambuger className={styles('icon')} />
+            }
           </button>
           <Link href="/" className={styles('title')}>
             {/* <Logo className="text-sm mr-2 w-8 h-8 text-link dark:text-link-dark" /> */}

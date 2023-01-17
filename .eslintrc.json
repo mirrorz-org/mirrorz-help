@@ -14,7 +14,8 @@
         "**/*.tsx"
       ],
       "rules": {
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "@fluffyfox/no-default-error": "off"
       },
       "parserOptions": {
         "project": "./tsconfig.json",
@@ -23,6 +24,17 @@
       "extends": [
         "sukka/react",
         "sukka/typescript"
+      ]
+    },
+    {
+      "files": [
+        "**/*.js"
+      ],
+      "rules": {
+        "node/no-extraneous-require": "off"
+      },
+      "extends": [
+        "sukka/node"
       ]
     },
     {

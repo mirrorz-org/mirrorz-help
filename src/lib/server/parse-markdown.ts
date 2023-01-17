@@ -13,6 +13,12 @@ import { Children } from 'react';
 
 import type React from 'react';
 
+import { compile as compileMdx } from '@/compiled/@mdx-js/mdx';
+import remarkGfm from '@/compiled/remark-gfm';
+import remarkUnwrapImages from '@/compiled/remark-unwrap-images';
+import remarkExternalLinks from '@/compiled/remark-external-links';
+import remarkHeaderCustomId from './remark-header-custom-id';
+
 const { FileStore, stableHash } = metroCache as any;
 
 const contentsPath = path.resolve(process.cwd(), 'contents');
@@ -49,7 +55,7 @@ const asyncCache = async <T>(key: string, fn: () => Promise<T>): Promise<T> => {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 0;
+const DISK_CACHE_BREAKER = 1;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -112,21 +118,9 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
     .map((key) => `import ${key} from "${key}";\n`)
     .join('\n')}`;
 
-  const [
-    { compile: compileMdx },
-    { default: remarkExternalLinks },
-    { default: remarkUnwrapImages },
-    { default: remarkGfm }
-  ] = await Promise.all([
-    import('@mdx-js/mdx'),
-    import('remark-external-links'),
-    import('remark-unwrap-images'),
-    import('remark-gfm')
-  ]);
-
   const jsxCode = await compileMdx(mdxWithFakeImports, {
     development: false,
-    remarkPlugins: [remarkExternalLinks, remarkUnwrapImages, remarkGfm],
+    remarkPlugins: [remarkExternalLinks, remarkUnwrapImages, remarkGfm, remarkHeaderCustomId],
     rehypePlugins: []
   });
 

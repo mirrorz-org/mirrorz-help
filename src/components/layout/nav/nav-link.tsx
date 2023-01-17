@@ -35,10 +35,11 @@ const styles = style9.create({
   },
   active: {
     fontWeight: 700,
-    color: '#fff',
+    color: 'var(--text-link)',
     backgroundColor: 'var(--bg-highlight)',
     ':hover': {
-      backgroundColor: 'var(--bg-highlight)'
+      backgroundColor: 'var(--bg-highlight)',
+      color: 'var(--text-link)'
     }
   },
   inactive: {

@@ -56,9 +56,10 @@ export const Heading = typescriptHappyForwardRef(<T extends 'h1' | 'h2' | 'h3' |
 ) => {
   const label = typeof children === 'string' ? `Link for ${children}` : 'Link for this heading';
   const Comp = as || 'h2';
+  const beaconClassName = (Comp === 'h2' || Comp === 'h3') && 'toc-heading-anchor';
 
   return (
-    <Comp id={id} {...props} ref={ref} className={clsx(headingAnchorStyles.heading, style9(styles.base, ...xstyle))}>
+    <Comp id={id} {...props} ref={ref} className={clsx(beaconClassName, headingAnchorStyles.heading, style9(styles.base, ...xstyle))}>
       {children}
       {isPageAnchor && (
         <a

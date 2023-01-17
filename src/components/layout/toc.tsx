@@ -1,5 +1,6 @@
 import type { ToC } from '@/lib/server/parse-markdown';
 import style9 from 'style9';
+import { useTocHighlight } from '../../hooks/use-toc-highlight';
 
 const styles = style9.create({
   header: {
@@ -33,20 +34,31 @@ const styles = style9.create({
     fontSize: 14,
     paddingTop: '8px',
     paddingBottom: '8px',
+    paddingLeft: '12px',
+    paddingRight: '12px',
     borderTopLeftRadius: '8px',
     borderBottomLeftRadius: '8px'
   },
   item_deep: {
-    paddingLeft: '16px'
+    paddingLeft: '20px'
+  },
+  item_active: {
+    backgroundColor: 'var(--bg-highlight)'
   },
   item_link: {
-    color: 'var(--text-secondary)',
     lineHeight: 1.5,
     paddingTop: '8px',
     paddingBottom: '8px',
     ':hover': {
       color: 'var(--text-link)'
     }
+  },
+  item_link_active: {
+    color: 'var(--text-link)',
+    fontWeight: 700
+  },
+  item_link_inactive: {
+    color: 'var(--text-secondary)'
   }
 });
 
@@ -55,6 +67,10 @@ interface ToCProps {
 }
 
 export default function ToCList({ toc }: ToCProps) {
+  const currentIndex = useTocHighlight();
+  // Prevent ToC overflow
+  const selectedIndex = currentIndex > toc.length - 1 ? toc.length - 1 : currentIndex;
+
   return (
     <nav role="navigation" className={styles('header')}>
       {toc.length > 0 && (
@@ -74,8 +90,18 @@ export default function ToCList({ toc }: ToCProps) {
               }
               if (h.depth < 2 && h.depth > 3) return null;
               return (
-                <li key={`heading-${h.url}-${i}`} className={styles('item', h.depth === 3 && 'item_deep')}>
-                  <a className={styles('item_link')} href={h.url}>
+                <li
+                  key={`heading-${h.url}-${i}`}
+                  className={styles(
+                    'item',
+                    h.depth === 3 && 'item_deep',
+                    selectedIndex === i && 'item_active'
+                  )}
+                >
+                  <a
+                    className={styles('item_link', selectedIndex === i ? 'item_link_active' : 'item_link_inactive')}
+                    href={h.url}
+                  >
                     {h.text}
                   </a>
                 </li>

@@ -13,6 +13,7 @@ const styles = style9.create({
   base: {
     paddingTop: '8px',
     paddingBottom: '8px',
+    marginTop: '4px',
     paddingLeft: '20px',
     paddingRight: '8px',
     width: '100%',

@@ -10,6 +10,7 @@ import MirrorZLogo from '../../mirrorz-logo';
 
 import routesJson from '@/routes.json';
 import Sidebar from './sidebar';
+import DarkModeSwitch from '../darkmode-switch';
 
 const styles = style9.create({
   container: {
@@ -207,7 +208,7 @@ export default function Nav() {
             <h1>MirrorZ Help</h1>
           </Link>
           <div className={styles('hidden_on_mobile_then_flex')}>
-            <p>Dark Mode</p>
+            <DarkModeSwitch />
           </div>
         </div>
         {!isOpen && (
@@ -220,7 +221,7 @@ export default function Nav() {
         </div> */}
         <div className={styles('search_container_on_mobile')}>
           <p>Search</p>
-          <p>Dark Mode</p>
+          <DarkModeSwitch />
         </div>
       </div>
 

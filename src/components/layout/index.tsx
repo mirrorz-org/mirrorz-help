@@ -2,7 +2,7 @@ import style9 from 'style9';
 import Nav from './nav';
 import { useRouter } from 'next/router';
 import DocumentationWrapper from './documentation-wrapper';
-import type { ToC } from '@/lib/parse-markdown';
+import type { ToC } from '@/lib/server/parse-markdown';
 
 const styles = style9.create({
   container: {

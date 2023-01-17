@@ -8,7 +8,7 @@ import routesJson from '@/routes.json';
 import * as Log from 'next/dist/build/output/log';
 
 import { transform } from '@swc/core';
-import { MDXComponents } from '../components/mdx-components';
+import { MDXComponents } from '@/components/mdx-components';
 import { Children } from 'react';
 
 import type React from 'react';
@@ -53,7 +53,7 @@ const DISK_CACHE_BREAKER = 0;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
-  root: `${process.cwd()}/node_modules/.cache/xtom-com-markdown-cache/`
+  root: `${process.cwd()}/node_modules/.cache/mirrorz-help-mdx-cache/`
 });
 
 export const getContentBySegments = async (segments: string[]): Promise<{ props: ContentProps } | { notFound: true }> => {
@@ -100,11 +100,9 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
     );
     return cached;
   }
-  if (process.env.NODE_ENV === 'production') {
-    Log.info(
-      `[CMS] Cache miss for MDX for /${id} from ./node_modules/.cache/`
-    );
-  }
+  Log.info(
+    `[CMS] Cache miss for MDX for /${id} from ./node_modules/.cache/`
+  );
 
   const { data: meta, content: mdx } = matter(raw);
   // If we don't add these fake imports, the MDX compiler

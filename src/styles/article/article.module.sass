@@ -1,0 +1,28 @@
+@import "_base"
+@import "_list"
+@import "_inline"
+@import "_table"
+
+.article
+  font-size: 1rem
+  font-weight: 400
+  line-height: 1.5
+  overflow-wrap: break-word
+  word-wrap: break-word
+  hyphens: auto
+
+  @include base()
+  @include list()
+  @include table()
+  @include inline()
+
+  pre > code, table
+    scrollbar-width: thin
+
+    &::-webkit-scrollbar
+      width: .35rem
+      height: .28rem
+
+    &::-webkit-scrollbar-thumb
+      background: var(--scroll-thumb)
+      border-radius: .5rem

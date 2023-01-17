@@ -1,0 +1,31 @@
+@mixin list()
+  ul,
+  ol
+    li
+      margin-top: 6px
+      margin-bottom: 6px
+
+    ul,
+    ol
+      margin-top: 0
+      margin-bottom: 0
+
+  ul ul,
+  ol ul
+    list-style-type: circle
+
+  ul ul ul,
+  ul ol ul,
+  ol ul ul,
+  ol ol ul
+    list-style-type: square
+
+  ol ol,
+  ul ol
+    list-style-type: lower-roman
+
+  ul ul ol,
+  ul ol ol,
+  ol ul ol,
+  ol ol ol
+    list-style-type: lower-alpha

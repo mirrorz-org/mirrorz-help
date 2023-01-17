@@ -1,0 +1,9 @@
+.heading .anchor svg {
+  visibility: hidden;
+}
+.heading:hover .anchor svg {
+  visibility: visible;
+}
+.heading .anchor:focus svg {
+  visibility: visible;
+}

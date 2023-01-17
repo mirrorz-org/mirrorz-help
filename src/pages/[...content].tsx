@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { ContentProps } from '../lib/parse-markdown';
-import { getAvaliableSegments, getContentBySegments } from '../lib/parse-markdown';
+import type { ContentProps } from '../lib/server/parse-markdown';
+import { getAvaliableSegments, getContentBySegments } from '../lib/server/parse-markdown';
 import { Fragment, useMemo } from 'react';
 import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';

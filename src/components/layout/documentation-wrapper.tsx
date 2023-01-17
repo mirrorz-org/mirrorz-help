@@ -1,6 +1,9 @@
 import React from 'react';
 import style9 from 'style9';
 
+import articleStyles from '@/styles/article/article.module.sass';
+import clsx from 'clsx';
+
 const styles = style9.create({
   wrapper: {
     paddingLeft: 0
@@ -31,7 +34,7 @@ export default function DocumentationWrapper({ children }: React.PropsWithChildr
           />
         )} */}
       <div className={styles('container')}>
-        <div className={styles('inner')}>
+        <div className={clsx(styles('inner'), articleStyles.article)}>
           {children}
         </div>
         {/* <DocsPageFooter

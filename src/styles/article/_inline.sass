@@ -1,0 +1,36 @@
+@mixin inline()
+  :not(pre)
+    & > code
+      background-color: var(--bg-inline-code)
+      padding: 0.125em 0.35em 0.1em
+      vertical-align: 0.15em
+      border-radius: 0.25em
+
+  :not(pre):not(a)
+    & > code
+      color: var(--text-secondary)
+
+  figcaption
+    display: inline-block
+    vertical-align: top
+    font-size: 0.875rem
+    text-align: start
+
+  input
+    margin: 0 0.2em 0.25em -1.6em
+    overflow: visible
+    vertical-align: middle
+
+  pre,
+  code,
+  kbd
+    font-family: Consolas, Monaco, SFMono-Regular, 'Andale Mono', 'Liberation Mono', 'Ubuntu Mono', Menlo, monospace
+
+  kbd
+    color: var(--text-secondary)
+    display: inline-block
+    padding: 0.1em 0.2em
+    vertical-align: middle
+    background-color: var(--bg-inline-code)
+    border-radius: 3px
+    box-shadow: 1px 1px 1px 0 #a4a5a6

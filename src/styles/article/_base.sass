@@ -1,0 +1,45 @@
+@mixin base
+  *:first-child
+    margin-top: 0
+
+  *:last-child
+    margin-bottom: 0
+
+  table
+    margin-top: 12px
+    margin-bottom: 24px
+
+  figure
+    display: block
+    text-align: center
+
+    > img
+      display: block
+      margin-left: auto
+      margin-right: auto
+
+  pre
+    color: var(--prism)
+    padding: 0
+    overflow-wrap: normal
+    background: var(--pre)
+    box-shadow: 0px 0.8px 2px rgba(0,0,0,.032),0px 2.7px 6.7px rgba(0,0,0,.048),0px 12px 30px rgba(0,0,0,.08)
+    margin: 24px 0
+    overflow: auto
+    white-space: pre
+    word-wrap: normal
+    border-radius: 4px
+    hyphens: none
+    contain: content
+
+    code
+      word-break: normal
+      white-space: pre
+      display: block
+      // padding: 1em
+      overflow-x: auto
+      color: currentColor
+
+      margin: 0
+      padding: 12px 16px
+      background-color: transparent

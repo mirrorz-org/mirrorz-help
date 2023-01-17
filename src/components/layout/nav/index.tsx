@@ -6,6 +6,10 @@ import Link from 'next/link';
 import IconHambuger from '../../icons/hamburger';
 import IconClose from '../../icons/close';
 import style9 from 'style9';
+import MirrorZLogo from '../../mirrorz-logo';
+
+import routesJson from '@/routes.json';
+import Sidebar from './sidebar';
 
 const styles = style9.create({
   container: {
@@ -67,10 +71,17 @@ const styles = style9.create({
     paddingTop: '4px',
     paddingBottom: '4px',
     marginRight: 0,
+    fontSize: 20,
+    flexGrow: 1,
     whiteSpace: 'nowrap',
     '@media screen and (min-width: 640px)': {
       marginRight: '12px'
     }
+  },
+  logo: {
+    width: '24px',
+    height: '24px',
+    marginRight: '8px'
   },
   search_container_inside_nav: {
     display: 'none',
@@ -191,12 +202,13 @@ export default function Nav() {
             }
           </button>
           <Link href="/" className={styles('title')}>
+            <MirrorZLogo className={styles('logo')} />
             {/* <Logo className="text-sm mr-2 w-8 h-8 text-link dark:text-link-dark" /> */}
-            Title
+            <h1>MirrorZ Help</h1>
           </Link>
-        </div>
-        <div className={styles('hidden_on_mobile_then_flex')}>
-          <p>Dark Mode</p>
+          <div className={styles('hidden_on_mobile_then_flex')}>
+            <p>Dark Mode</p>
+          </div>
         </div>
         {!isOpen && (
           <div className={styles('search_container_inside_nav')}>
@@ -228,7 +240,7 @@ export default function Nav() {
             role="navigation"
             className={styles('nav')}
           >
-            <p>Sidebar Menu</p>
+            <Sidebar routes={routesJson} />
           </nav>
         </aside>
       </div>

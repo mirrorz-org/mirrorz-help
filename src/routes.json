@@ -1,0 +1,12 @@
+{
+  "/archlinux/": {
+    "title": "Arch Linux 软件仓库镜像使用帮助",
+    "file": "archlinux.mdx",
+    "cname": "archlinux"
+  },
+  "/archlinuxarm/": {
+    "title": "Arch Linux ARM 软件仓库镜像使用帮助",
+    "file": "archlinuxarm.mdx",
+    "cname": "archlinuxarm"
+  }
+}

@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { ContentProps } from '../lib/parse-markdown';
-import { getAvaliableSegments, getContentById } from '../lib/parse-markdown';
+import { getAvaliableSegments, getContentBySegments } from '../lib/parse-markdown';
 import { Fragment, useMemo } from 'react';
 import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';
@@ -50,8 +50,7 @@ function reviveNodeOnClient(key: unknown, val: any) {
 }
 
 export const getStaticProps: GetStaticProps<ContentProps, { content: string[] }> = (context) => {
-  const id = (context.params?.content || []).join('/') || 'index';
-  return getContentById(id);
+  return getContentBySegments(context.params?.content || []);
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

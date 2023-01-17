@@ -1,27 +1,21 @@
-import listDir from '@sukka/listdir';
 import path from 'path';
 import fsPromises from 'fs/promises';
 import { default as matter } from 'gray-matter';
 import * as metroCache from 'metro-cache';
+
+import routesJson from '@/routes.json';
 
 import * as Log from 'next/dist/build/output/log';
 
 import { transform } from '@swc/core';
 import { MDXComponents } from '../components/mdx-components';
 import { Children } from 'react';
+
 import type React from 'react';
 
 const { FileStore, stableHash } = metroCache as any;
 
 const contentsPath = path.resolve(process.cwd(), 'contents');
-
-const getSegments = (file: string) => {
-  const segments = path.parse(file).name.replace(/\\/g, '/').split('/');
-  if (segments[segments.length - 1] === 'index') {
-    segments.pop();
-  }
-  return segments;
-};
 
 export interface ToC {
   url: string;
@@ -37,15 +31,20 @@ export interface ContentProps {
   };
 }
 
+const fromHrefToSegments = (href: string) => {
+  return href.replace(/^\/|\/$/g, '').split('/');
+};
+
 export const getAvaliableSegments = async () => {
-  return (
-    await listDir(contentsPath, { ignoreHidden: true })
-  )
-    .filter(p => {
-      const ext = path.extname(p);
-      return ext === '.md' || ext === '.mdx';
-    })
-    .map(p => getSegments(p));
+  return Object.keys(routesJson).map(p => fromHrefToSegments(p));
+};
+
+const _cache = new Map();
+const asyncCache = async <T>(key: string, fn: () => Promise<T>): Promise<T> => {
+  if (_cache.has(key)) return _cache.get(key);
+  const result = await fn();
+  _cache.set(key, result);
+  return result;
 };
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,17 +56,8 @@ const store = new FileStore({
   root: `${process.cwd()}/node_modules/.cache/xtom-com-markdown-cache/`
 });
 
-const _cache = new Map();
-const asyncCache = async <T>(key: string, fn: () => Promise<T>): Promise<T> => {
-  if (_cache.has(key)) return _cache.get(key);
-  const result = await fn();
-  _cache.set(key, result);
-  return result;
-};
-
-export const getContentById = async (id: string): Promise<{ props: ContentProps } | { notFound: true }> => {
-  Log.info(id);
-
+export const getContentBySegments = async (segments: string[]): Promise<{ props: ContentProps } | { notFound: true }> => {
+  const id = segments.length === 0 ? 'index' : (segments.join('/') || 'index');
   let raw;
   try {
     raw = await fsPromises.readFile(path.resolve(contentsPath, `${id}.mdx`), { encoding: 'utf-8' });

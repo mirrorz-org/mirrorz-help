@@ -3,6 +3,7 @@ import Nav from './nav';
 import { useRouter } from 'next/router';
 import DocumentationWrapper from './documentation-wrapper';
 import type { ToC } from '@/lib/server/parse-markdown';
+import ToCList from './toc';
 
 const styles = style9.create({
   container: {
@@ -74,9 +75,9 @@ export function Layout({ children, toc = [] }: React.PropsWithChildren<LayoutPro
         </article>
       </main>
       <div className={styles('toc')}>
-        <p>
-          {JSON.stringify(toc)}
-        </p>
+        {toc.length > 0 && (
+          <ToCList key={asPath} toc={toc} />
+        )}
       </div>
     </div>
   );

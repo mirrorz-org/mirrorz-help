@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import DocumentationWrapper from './documentation-wrapper';
 import type { ToC } from '@/lib/server/parse-markdown';
 import ToCList from './toc';
+import Footer from './footer';
 
 const styles = style9.create({
   container: {
@@ -73,6 +74,7 @@ export function Layout({ children, toc = [] }: React.PropsWithChildren<LayoutPro
             {children}
           </DocumentationWrapper>
         </article>
+        <Footer />
       </main>
       <div className={styles('toc')}>
         {toc.length > 0 && (

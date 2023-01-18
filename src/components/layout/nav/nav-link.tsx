@@ -26,9 +26,15 @@ const styles = style9.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderTopRightRadius: '8px',
+    borderBottomRightRadius: '8px',
+    borderTopLeftRadius: '8px',
+    borderBottomLeftRadius: '8px',
     '@media screen and (min-width: 840px)': {
       borderTopRightRadius: '8px',
-      borderBottomRightRadius: '8px'
+      borderBottomRightRadius: '8px',
+      borderTopLeftRadius: 0,
+      borderBottomLeftRadius: 0
     },
     ':hover': {
       backgroundColor: 'var(--bg-hover)'

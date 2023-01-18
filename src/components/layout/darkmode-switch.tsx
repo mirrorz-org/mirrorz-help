@@ -21,18 +21,32 @@ const styles = style9.create({
     color: 'var(--text-primary)'
   },
   icon_wrapper_prefix: {
-    left: '12px'
+    left: '6px',
+    '@media screen and (min-width: 840px)': {
+      left: '12px'
+    }
   },
   icon_wrapper_suffix: {
-    right: '12px'
+    right: '6px',
+    '@media screen and (min-width: 840px)': {
+      right: '12px'
+    }
   },
   icon: {
-    width: '16px',
-    height: '16px'
+    width: '14px',
+    height: '14px',
+    '@media screen and (min-width: 840px)': {
+      width: '16px',
+      height: '16px'
+    }
   },
   select: {
-    paddingLeft: '36px',
-    paddingRight: '36px',
+    paddingLeft: '24px',
+    paddingRight: '24px',
+    '@media screen and (min-width: 840px)': {
+      paddingLeft: '36px',
+      paddingRight: '36px'
+    },
     fontSize: '14px',
     height: '32px',
     cursor: 'pointer',

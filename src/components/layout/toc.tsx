@@ -1,24 +1,34 @@
 import type { ToC } from '@/lib/server/parse-markdown';
 import style9 from 'style9';
 import { useTocHighlight } from '../../hooks/use-toc-highlight';
+import IconToC from '../icons/toc';
 
 const styles = style9.create({
-  header: {
+  toc: {
     paddingTop: '22px',
     position: 'sticky',
     top: 0,
     right: 0
   },
-  header_title: {
+  header: {
+    display: 'flex',
+    width: '100%',
+    flexWrap: 'nowrap',
     marginBottom: '12px',
+    paddingLeft: '16px',
+    paddingRight: '16px'
+  },
+  header_icon: {
+    width: '20px',
+    height: '20px',
+    marginRight: '8px'
+  },
+  header_title: {
     textTransform: 'uppercase',
     letterSpacing: '0.02em',
     fontWeight: 700,
     fontSize: 13,
-    color: 'var(--text-secondary)',
-    paddingLeft: '16px',
-    paddingRight: '16px',
-    width: '100%'
+    color: 'var(--text-secondary)'
   },
   inner: {
     height: '100%',
@@ -66,17 +76,20 @@ interface ToCProps {
   toc: ToC[]
 }
 
-export default function ToCList({ toc }: ToCProps) {
+export default function ToCAside({ toc }: ToCProps) {
   const currentIndex = useTocHighlight();
   // Prevent ToC overflow
   const selectedIndex = currentIndex > toc.length - 1 ? toc.length - 1 : currentIndex;
 
   return (
-    <nav role="navigation" className={styles('header')}>
+    <nav role="navigation" className={styles('toc')}>
       {toc.length > 0 && (
-        <h2 className={styles('header_title')}>
-          On this page
-        </h2>
+        <div className={styles('header')}>
+          <IconToC className={styles('header_icon')} />
+          <p className={styles('header_title')}>
+            On this page
+          </p>
+        </div>
       )}
       <div className={styles('inner')}>
         <ul className={styles('list')}>

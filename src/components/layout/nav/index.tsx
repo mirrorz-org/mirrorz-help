@@ -11,6 +11,7 @@ import MirrorZLogo from '../../mirrorz-logo';
 import routesJson from '@/routes.json';
 import Sidebar from './sidebar';
 import DarkModeSwitch from '../darkmode-switch';
+import Search from '../../search';
 
 const styles = style9.create({
   container: {
@@ -111,8 +112,10 @@ const styles = style9.create({
     overflowY: 'scroll',
     backgroundColor: 'var(--bg-wash)',
     flexGrow: 1,
+    paddingLeft: '16px',
     '@media screen and (min-width: 840px)': {
-      width: '336px'
+      width: '336px',
+      paddingLeft: 0
     }
   },
   aside: {
@@ -172,7 +175,7 @@ export default function Nav() {
   // Also close the overlay if the window gets resized past mobile layout.
   // (This is also important because we don't want to keep the body locked!)
   useEffect(() => {
-    const media = window.matchMedia('(max-width: 1023px)');
+    const media = window.matchMedia('(max-width: 839px)');
     function closeIfNeeded() {
       if (!media.matches) {
         setIsOpen(false);
@@ -213,7 +216,7 @@ export default function Nav() {
         </div>
         {!isOpen && (
           <div className={styles('search_container_inside_nav')}>
-            <p>Search</p>
+            <Search />
           </div>
         )}
         {/* <div className="px-0 pt-2 w-full 2xl:max-w-xs hidden lg:flex items-center self-center border-b-0 lg:border-b border-border dark:border-border-dark">

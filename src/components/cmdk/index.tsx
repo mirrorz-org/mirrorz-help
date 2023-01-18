@@ -1,7 +1,13 @@
 /* eslint-disable */
 // Port from https://github.com/pacocoursey/cmdk/blob/605ae1304baff5ed6f7675d6028ad8dc0b93f0ca/cmdk/src/index.tsx
 
-import * as RadixDialog from '@radix-ui/react-dialog'
+import type * as RadixDialog from '@radix-ui/react-dialog'
+import {
+  Root as RadixDialogRoot,
+  Portal as RadixDialogPortal,
+  Overlay as RadixDialogOverlay,
+  Content as RadixDialogContent
+} from '@radix-ui/react-dialog'
 import {
   createContext,
   useContext,
@@ -11,10 +17,10 @@ import {
   useMemo,
   useRef,
   forwardRef,
-  useSyncExternalStore,
-  useLayoutEffect as useOrigLayoutEffect
+  useSyncExternalStore
 } from 'react'
 import commandScore from 'command-score'
+import useLayoutEffect from '@/hooks/use-isomorphic-effect'
 
 type Children = { children?: React.ReactNode }
 type DivProps = React.HTMLAttributes<HTMLDivElement>
@@ -824,14 +830,14 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>((props, forwardedRef) => 
     ...etc
   } = props
   return (
-    <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
-      <RadixDialog.Portal className={dialogPortalClassName} container={container}>
-        <RadixDialog.Overlay className={dialogOverlayClassName} cmdk-overlay="" />
-        <RadixDialog.Content className={dialogContentClassName} aria-label={props.label} cmdk-dialog="">
+    <RadixDialogRoot open={open} onOpenChange={onOpenChange}>
+      <RadixDialogPortal className={dialogPortalClassName} container={container}>
+        <RadixDialogOverlay className={dialogOverlayClassName} cmdk-overlay="" />
+        <RadixDialogContent className={dialogContentClassName} aria-label={props.label} cmdk-dialog="">
           <Command ref={forwardedRef} {...etc} />
-        </RadixDialog.Content>
-      </RadixDialog.Portal>
-    </RadixDialog.Root>
+        </RadixDialogContent>
+      </RadixDialogPortal>
+    </RadixDialogRoot>
   )
 })
 
@@ -920,8 +926,6 @@ function useAsRef<T>(data: T) {
 
   return ref
 }
-
-const useLayoutEffect = typeof window === 'undefined' ? useEffect : useOrigLayoutEffect
 
 function useLazyRef<T>(fn: () => T) {
   const ref = useRef<T>()

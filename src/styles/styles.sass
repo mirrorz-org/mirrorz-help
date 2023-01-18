@@ -11,6 +11,7 @@
   --bg-secondary: #EBECF0
   --bg-inline-code: rgba(153 161 179, 0.1)
   --border: #d1d5db
+  --border-secondary: #e4e4e7
   // scrollbar
   --scroller: rgba(0, 0, 0, 0.2)
   --scroll-thumb: rgba(0, 0, 0, 0.35)
@@ -18,6 +19,8 @@
   --anchor: #404756
   // navbar
   --nav-shadow: #{0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%)}
+  // overlay
+  --overlay: rgba(0, 0, 0, .4)
 
 @mixin darkVariable()
   // --primary: rgb(21, 101, 138)
@@ -26,14 +29,16 @@
   --text-link: #149ECA
   --bg-wash: #27272a
   --bg-hover: #333436
-  --bg-secondary: #404756
+  --bg-secondary: #3f3f46
   --bg-highlight: rgba(88, 175, 223, .1)
   // --bg-inline-code: #99A1B3
   --border: #4b5563
+  --border-secondary: #3f3f46
   // scrollbar
   --scroller: rgba(255, 255, 255, 0.2)
   --scroll-thumb: rgba(255, 255, 255, 0.35)
   --nav-shadow: #{0 1px 0 hsla(0, 0%, 100%, .1)}
+  --overlay: rgba(0, 0, 0, .6)
 
 html.dark
   @include darkVariable()

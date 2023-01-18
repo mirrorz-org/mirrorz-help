@@ -26,9 +26,11 @@
     ]
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.2",
     "@sukka/listdir": "^0.2.0",
     "body-scroll-lock": "^4.0.0-beta.0",
     "clsx": "^1.2.1",
+    "command-score": "^0.1.2",
     "next": "^13.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

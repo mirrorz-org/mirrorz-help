@@ -11,7 +11,7 @@ import MirrorZLogo from '../../mirrorz-logo';
 import routesJson from '@/routes.json';
 import Sidebar from './sidebar';
 import DarkModeSwitch from '../darkmode-switch';
-import Search from '../../search';
+import { SearchButtonInSideNav, SearchButtonOnMobile } from '../../search/button';
 
 const styles = style9.create({
   container: {
@@ -155,6 +155,8 @@ const styles = style9.create({
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
+  const handleOpen = useCallback(() => setIsOpen(isOpen => !isOpen), []);
+
   const scrollParentRef = useRef<HTMLDivElement>(null);
   const asPath = useRouter().asPath;
 
@@ -189,14 +191,14 @@ export default function Nav() {
   }, []);
 
   return (
-    <div
-      className={styles('container', isOpen && 'container_open')}>
+    <div className={styles('container', isOpen && 'container_open')}>
+
       <div className={styles('header')}>
         <div className={styles('header_inner')}>
           <button
             type="button"
             aria-label="Menu"
-            onClick={useCallback(() => setIsOpen(isOpen => !isOpen), [])}
+            onClick={handleOpen}
             className={styles('menu_button', isOpen && 'menu_button_open')}
           >
             {
@@ -216,14 +218,14 @@ export default function Nav() {
         </div>
         {!isOpen && (
           <div className={styles('search_container_inside_nav')}>
-            <Search />
+            <SearchButtonInSideNav />
           </div>
         )}
         {/* <div className="px-0 pt-2 w-full 2xl:max-w-xs hidden lg:flex items-center self-center border-b-0 lg:border-b border-border dark:border-border-dark">
           <p>Tab</p>
         </div> */}
         <div className={styles('search_container_on_mobile')}>
-          <p>Search</p>
+          <SearchButtonOnMobile />
           <DarkModeSwitch />
         </div>
       </div>

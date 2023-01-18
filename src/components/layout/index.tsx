@@ -5,6 +5,8 @@ import DocumentationWrapper from './documentation-wrapper';
 import type { ToC } from '@/lib/server/parse-markdown';
 import ToCAside from './toc';
 import Footer from './footer';
+import { useSearchHotKeys } from '../../hooks/use-search-hotkeys';
+import SearchCommandK from '../search/cmdk';
 
 const styles = style9.create({
   container: {
@@ -61,6 +63,7 @@ interface LayoutProps {
 
 export function Layout({ children, toc = [] }: React.PropsWithChildren<LayoutProps>) {
   const { asPath } = useRouter();
+  useSearchHotKeys();
 
   return (
     <div className={styles('container')}>
@@ -81,6 +84,7 @@ export function Layout({ children, toc = [] }: React.PropsWithChildren<LayoutPro
           <ToCAside key={asPath} toc={toc} />
         )}
       </div>
+      <SearchCommandK />
     </div>
   );
 }

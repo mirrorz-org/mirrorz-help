@@ -60,6 +60,8 @@ const styles = style9.create({
   }
 });
 
+export const navLinkBaseStyles = styles.base;
+
 export function SidebarLink({
   href,
   isActive = false,

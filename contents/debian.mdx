@@ -1,0 +1,33 @@
+Debian 的软件源配置文件是 `/etc/apt/sources.list`。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用 TUNA 的软件源镜像。
+
+如果遇到无法拉取 https 源的情况，请先使用 http 源并安装：
+
+```shell
+sudo apt install apt-transport-https ca-certificates
+```
+
+再使用 TUNA 的软件源镜像。
+
+<CodeBlock
+  menus={[
+    {
+      title: 'Debian 版本',
+      variableName: 'debianVersion',
+      items: [
+        ['sid', 'sid'],
+        ['testing', 'testing'],
+        ['bullseye', 'bullseye'],
+        ['buster', 'buster'],
+        ['stretch', 'stretch'],
+        ['jessie', 'jessie']
+      ]
+    }
+  ]}
+>
+
+```conf
+# 这里是注释
+deb {{protocol}}{{mirrorDomain}}{{mirrorPath}}/{{debianVersion}} main contrib non-free
+```
+
+</CodeBlock>

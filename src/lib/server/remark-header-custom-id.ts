@@ -11,7 +11,7 @@
 
 import { toString } from '@/compiled/mdast-util-to-string';
 import { visit } from '@/compiled/unist-util-visit';
-import { slug as toSlug } from 'github-slugger';
+import { slug as toSlug } from '@/compiled/github-slugger';
 
 function patch(context: any, key: string, value: any) {
   if (!context[key]) {

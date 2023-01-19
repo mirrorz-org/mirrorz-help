@@ -2,6 +2,8 @@ import { Blockquote, Paragraph } from './block';
 import { H1, H2, H3, H4, H5 } from './heading';
 import { Code, Divider, LI, OL, Strong, UL } from './inline';
 import Link from './link';
+import CodeBlock from './code-block';
+
 import type React from 'react';
 
 export const MDXComponents: Record<string, React.ComponentType<any>> = {
@@ -18,5 +20,6 @@ export const MDXComponents: Record<string, React.ComponentType<any>> = {
   ol: OL,
   ul: UL,
   li: LI,
-  hr: Divider
+  hr: Divider,
+  CodeBlock
 };

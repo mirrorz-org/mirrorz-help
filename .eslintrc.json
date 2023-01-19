@@ -1,7 +1,8 @@
 {
   "root": true,
   "ignorePatterns": [
-    "dist/**"
+    "dist/**",
+    "src/compiled/**"
   ],
   "extends": [
     "next"
@@ -44,6 +45,9 @@
       "extends": [
         "plugin:mdx/recommended"
       ],
+      "rules": {
+        "react/jsx-no-undef": "off"
+      },
       // optional, if you want to lint code blocks at the same time
       "settings": {
         "mdx/code-blocks": true

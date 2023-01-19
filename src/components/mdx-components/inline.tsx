@@ -7,7 +7,7 @@ const styles = style9.create({
   },
   code: {
     display: 'inline',
-    fontSize: 14,
+    fontSize: 15,
     color: 'var(--text-secondary)',
     overflowWrap: 'break-word',
     textDecoration: 'none'

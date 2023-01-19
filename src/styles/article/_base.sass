@@ -1,8 +1,8 @@
 @mixin base
-  *:first-child
+  & > *:first-child
     margin-top: 0
 
-  *:last-child
+  & > *:last-child
     margin-bottom: 0
 
   table
@@ -43,3 +43,6 @@
       margin: 0
       padding: 12px 16px
       background-color: transparent
+
+  :global(.enhanced-codeblock) pre
+    margin: 0

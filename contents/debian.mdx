@@ -9,10 +9,11 @@ sudo apt install apt-transport-https ca-certificates
 再使用 TUNA 的软件源镜像。
 
 <CodeBlock
+  isHttp={true}
   menus={[
     {
       title: 'Debian 版本',
-      variableName: 'debianVersion',
+      variableName: 'release_name',
       items: [
         ['sid', 'sid'],
         ['testing', 'testing'],
@@ -26,8 +27,17 @@ sudo apt install apt-transport-https ca-certificates
 >
 
 ```conf
-# 这里是注释
-deb {{protocol}}{{mirrorDomain}}{{mirrorPath}}/{{debianVersion}} main contrib non-free
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb {{http_protocol}}{{mirrorDomain}}{{mirrorPath}}/ {{release_name}} main contrib non-free
+# deb-src {{http_protocol}}{{mirrorDomain}}{{mirrorPath}}/ {{release_name}} main contrib non-free
+deb {{http_protocol}}{{mirrorDomain}}{{mirrorPath}}/ {{release_name}}-updates main contrib non-free
+# deb-src {{http_protocol}}{{mirrorDomain}}{{mirrorPath}}/ {{release_name}}-updates main contrib non-free
+
+deb {{http_protocol}}{{mirrorDomain}}{{mirrorPath}}/ {{release_name}}-backports main contrib non-free
+# deb-src {{http_protocol}}{{mirrorDomain}}{{mirrorPath}}/ {{release_name}}-backports main contrib non-free
+
+deb {{http_protocol}}{{mirrorDomain}}{{mirrorPath}}-security {{release_name}}-security main contrib non-free
+# deb-src {{http_protocol}}{{mirrorDomain}}{{mirrorPath}}-security {{release_name}}-security main contrib non-free
 ```
 
 </CodeBlock>

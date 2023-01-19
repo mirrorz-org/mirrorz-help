@@ -5,8 +5,9 @@ import DocumentationWrapper from './documentation-wrapper';
 import type { ToC } from '@/lib/server/parse-markdown';
 import ToCAside from './toc';
 import Footer from './footer';
-import { useSearchHotKeys } from '../../hooks/use-search-hotkeys';
+import { useSearchHotKeys } from '@/hooks/use-search-hotkeys';
 import SearchCommandK from '../search/cmdk';
+import Header from './header';
 
 const styles = style9.create({
   container: {
@@ -58,10 +59,12 @@ const styles = style9.create({
 });
 
 interface LayoutProps {
-  toc?: ToC[]
+  toc?: ToC[],
+  // TODO: better types
+  meta?: Record<string, string>
 }
 
-export function Layout({ children, toc = [] }: React.PropsWithChildren<LayoutProps>) {
+export function Layout({ children, meta, toc = [] }: React.PropsWithChildren<LayoutProps>) {
   const { asPath } = useRouter();
   useSearchHotKeys();
 
@@ -73,6 +76,7 @@ export function Layout({ children, toc = [] }: React.PropsWithChildren<LayoutPro
       <main className={styles('main')}>
         <div className={styles('main_spacer')} />
         <article className={styles('article')} key={asPath}>
+          {meta && <Header title={meta.title} />}
           <DocumentationWrapper>
             {children}
           </DocumentationWrapper>

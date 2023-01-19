@@ -5,14 +5,14 @@ import { Fragment, useMemo } from 'react';
 import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';
 
-export default function ContentPage({ content, toc }: ContentProps) {
+export default function ContentPage({ content, toc, meta }: ContentProps) {
   const parsedContent = useMemo(
     () => JSON.parse(content, reviveNodeOnClient),
     [content]
   );
 
   return (
-    <Layout toc={toc}>
+    <Layout meta={meta} toc={toc}>
       {parsedContent}
     </Layout>
   );

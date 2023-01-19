@@ -17,7 +17,7 @@ const styles = style9.create({
     }
   },
   inner: {
-    maxWidth: 1280,
+    maxWidth: '1280px',
     marginLeft: 'auto',
     marginRight: 'auto'
   }

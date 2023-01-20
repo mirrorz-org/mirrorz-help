@@ -70,8 +70,9 @@ export default function MirrorSelectMenu() {
             ? <option value="">Loading...</option>
             : (
               data?.[1][cname].map(mirror => {
+                const siteName = mirror.site.name ? `${mirror.site.abbr} - ${mirror.site.name}` : mirror.site.abbr;
                 return (
-                  <option key={mirror.baseUrl} value={mirror.site.abbr}>{mirror.site.abbr}</option>
+                  <option key={mirror.baseUrl} value={mirror.site.abbr}>{siteName}</option>
                 );
               })
             )

@@ -3,8 +3,8 @@ import CodeBlockMenu from './menus';
 import buildCode from './build-code';
 import { useMemo, useReducer } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
-import { useMirrorZData } from '../../../hooks/use-mirrorz-data';
-import { useCurrentCname } from '../../../contexts/current-cname';
+import { useMirrorZData } from '@/hooks/use-mirrorz-data';
+import { useCurrentCname } from '@/contexts/current-cname';
 
 interface Menu {
   title: string;
@@ -73,10 +73,7 @@ export default function CodeBlock({ menus, isHttpProtocol = true, code }: CodeBl
       <CodeBlockMenu menus={finalMenus} dispatch={dispatch} />
       <pre>
         <code>
-          {buildCode(
-            code,
-            { ...state, mirror: mirrorUrl }
-          )}
+          {buildCode(code, { ...state, mirror: mirrorUrl })}
         </code>
       </pre>
     </div>

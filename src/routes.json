@@ -29,6 +29,11 @@
     "file": "debian.mdx",
     "cname": "debian"
   },
+  "/epel/": {
+    "title": "EPEL 软件仓库镜像使用帮助",
+    "file": "epel.mdx",
+    "cname": "epel"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

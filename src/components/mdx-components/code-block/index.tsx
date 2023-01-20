@@ -5,6 +5,14 @@ import { useMemo, useReducer } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
+import LoadingOverlay from './overlay';
+import style9 from 'style9';
+
+const styles = style9.create({
+  code_wrapper: {
+    position: 'relative'
+  }
+});
 
 interface Menu {
   title: string;
@@ -71,11 +79,14 @@ export default function CodeBlock({ menus, isHttpProtocol = true, code }: CodeBl
   return (
     <div className={clsx('enhanced-codeblock')}>
       <CodeBlockMenu menus={finalMenus} dispatch={dispatch} />
-      <pre>
-        <code>
-          {buildCode(code, { ...state, mirror: mirrorUrl })}
-        </code>
-      </pre>
+      <div className={styles('code_wrapper')}>
+        {isLoading && <LoadingOverlay />}
+        <pre>
+          <code>
+            {buildCode(code, { ...state, mirror: mirrorUrl })}
+          </code>
+        </pre>
+      </div>
     </div>
   );
 }

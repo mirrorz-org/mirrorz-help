@@ -34,6 +34,11 @@
     "file": "epel.mdx",
     "cname": "epel"
   },
+  "/fedora/": {
+    "title": "Fedora 软件仓库镜像使用帮助",
+    "file": "fedora.mdx",
+    "cname": "fedora"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

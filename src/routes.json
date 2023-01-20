@@ -19,6 +19,11 @@
     "file": "centos-altarch.mdx",
     "cname": "centos-altarch"
   },
+  "/centos-vault/": {
+    "title": "CentOS Vault 软件仓库镜像使用帮助",
+    "file": "centos-vault.mdx",
+    "cname": "centos-vault"
+  },
   "/debian/": {
     "title": "Debian 软件仓库镜像使用帮助",
     "file": "debian.mdx",

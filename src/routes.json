@@ -9,6 +9,11 @@
     "file": "archlinuxarm.mdx",
     "cname": "archlinuxarm"
   },
+  "/centos/": {
+    "title": "CentOS 软件仓库镜像使用帮助",
+    "file": "centos.mdx",
+    "cname": "centos"
+  },
   "/debian/": {
     "title": "Debian 软件仓库镜像使用帮助",
     "file": "debian.mdx",

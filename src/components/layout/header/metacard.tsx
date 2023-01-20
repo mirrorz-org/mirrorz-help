@@ -17,7 +17,9 @@ const styles = style9.create({
   menu_wrapper: {
     display: 'flex',
     flexWrap: 'wrap',
-    alignItems: 'center'
+    alignItems: 'center',
+    // @ts-expect-error -- gap is known property
+    gap: '12px'
   }
 });
 

@@ -5,12 +5,12 @@ cname: 'archlinuxarm'
 
 编辑 `/etc/pacman.d/mirrorlist`， 在文件的最顶端添加：
 
-```
+```ini
 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/$arch/$repo
 ```
 
 更新软件包缓存：
 
-```
-sudo pacman -Syy
+```shell
+$ sudo pacman -Syy
 ```

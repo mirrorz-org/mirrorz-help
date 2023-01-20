@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { createContext, startTransition, useCallback, useContext, useEffect, useState } from 'react';
 
 import { noop } from '@/lib/shared/util';
 import { requestIdleCallback } from '@/lib/client/request-idle-callback';
@@ -69,7 +69,7 @@ export const DarkModeProvider = ({ children }: React.PropsWithChildren<unknown>)
   // There could be a mismatch between server (always auto) and client (custom settings)
   // So we render 'auto' first, then use layout effect to update the correct client settings (DOM not commit yet)
   useEffect(() => {
-    setTheme(initialThemeValue);
+    startTransition(() => setTheme(initialThemeValue));
   }, []);
 
   return (

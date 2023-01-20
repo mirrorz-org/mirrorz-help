@@ -1,12 +1,16 @@
 import clsx from 'clsx';
-import CodeBlockMenu from './menus';
-import buildCode from './build-code';
-import { memo, useMemo, useReducer } from 'react';
+import style9 from 'style9';
+
+import { memo, useDeferredValue, useMemo, useReducer } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
+
+import CodeBlockMenu from './menus';
+import ActualCode from './code';
 import LoadingOverlay from './overlay';
-import style9 from 'style9';
+
+import buildCode from './build-code';
 
 const styles = style9.create({
   code_wrapper: {
@@ -46,7 +50,7 @@ const reducer = (prevState: Record<string, string>, [key, value]: [string, strin
   };
 };
 
-function CodeBlock({ menus, isHttpProtocol = true, code }: CodeBlockProps) {
+function CodeBlock({ menus, isHttpProtocol = true, code, codeLanguage }: CodeBlockProps) {
   const finalMenus = useMemo(() => {
     if (isHttpProtocol) {
       if (menus) return [...menus, enableHttpMenu];
@@ -69,7 +73,7 @@ function CodeBlock({ menus, isHttpProtocol = true, code }: CodeBlockProps) {
   });
 
   const cname = useCurrentCname();
-  const currentSelectedMirror = useSelectedMirror();
+  const currentSelectedMirror = useDeferredValue(useSelectedMirror());
   const { data, isLoading } = useMirrorZData();
   const mirrorUrl = useMemo(() => {
     if (isLoading || !currentSelectedMirror) return '(Loading...)';
@@ -81,11 +85,7 @@ function CodeBlock({ menus, isHttpProtocol = true, code }: CodeBlockProps) {
       <CodeBlockMenu menus={finalMenus} dispatch={dispatch} />
       <div className={styles('code_wrapper')}>
         {isLoading && <LoadingOverlay />}
-        <pre>
-          <code>
-            {buildCode(code, { ...state, mirror: mirrorUrl })}
-          </code>
-        </pre>
+        <ActualCode code={buildCode(code, { ...state, mirror: mirrorUrl })} language={codeLanguage} />
       </div>
     </div>
   );

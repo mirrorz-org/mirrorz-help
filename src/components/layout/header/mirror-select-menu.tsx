@@ -7,12 +7,11 @@ import { useCurrentCname } from '@/contexts/current-cname';
 
 const styles = style9.create({
   select_wrapper: {
-    flexGrow: 1,
     position: 'relative',
-    marginLeft: '12px',
     display: 'flex',
     alignItems: 'center',
-    color: 'var(--text-primary)'
+    color: 'var(--text-primary)',
+    flexGrow: 1
   },
   select: {
     width: '100%',

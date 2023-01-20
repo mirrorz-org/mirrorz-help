@@ -5,9 +5,13 @@ cname: 'archlinux'
 
 编辑 `/etc/pacman.d/mirrorlist`， 在文件的最顶端添加：
 
+<CodeBlock>
+
 ```
-Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+Server = https://{{mirror}}/$repo/os/$arch
 ```
+
+</CodeBlock>
 
 更新软件包缓存：
 

@@ -96,6 +96,7 @@ const CurrentYear = () => {
   return <span>{year}</span>;
 };
 
+// TODO: finish footer
 function Footer() {
   return (
     <footer className={styles('outer')}>

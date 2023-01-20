@@ -99,12 +99,13 @@ export function Layout({ children, meta, toc = [], cname }: React.PropsWithChild
                 <article className={styles('article')} key={asPath}>
                   {meta && <Header title={meta.title} />}
                   {/**
-                * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
-                * No fallback UI so need to be careful not to suspend directly inside.
-                */}
+                    * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
+                    * No fallback UI so need to be careful not to suspend directly inside.
+                    */}
                   <Suspense fallback={null}>
                     <DocumentationWrapper>
                       {children}
+                      {/** TODO: contributor list (next.oi-wiki.org) & Edit on GitHub. See also MDN */}
                     </DocumentationWrapper>
                   </Suspense>
                 </article>

@@ -34,7 +34,8 @@
     "next": "^13.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "style9": "^0.16.1"
+    "style9": "^0.16.1",
+    "swr": "^2.0.1"
   },
   "devDependencies": {
     "@mdx-js/mdx": "^2.2.1",

@@ -8,6 +8,8 @@ import Footer from './footer';
 import { useSearchHotKeys } from '@/hooks/use-search-hotkeys';
 import SearchCommandK from '../search/cmdk';
 import Header from './header';
+import { CurrentCnameProvider } from '../../contexts/current-cname';
+import { SelectedMirrorProvider } from '../../contexts/current-selected-mirror';
 
 const styles = style9.create({
   container: {
@@ -61,34 +63,40 @@ const styles = style9.create({
 interface LayoutProps {
   toc?: ToC[],
   // TODO: better types
-  meta?: Record<string, string>
+  meta?: Record<string, string>,
+  cname?: string | null
 }
 
-export function Layout({ children, meta, toc = [] }: React.PropsWithChildren<LayoutProps>) {
+export function Layout({ children, meta, toc = [], cname }: React.PropsWithChildren<LayoutProps>) {
   const { asPath } = useRouter();
   useSearchHotKeys();
 
   return (
-    <div className={styles('container')}>
-      <div className={styles('sidenav_container')}>
-        <Nav />
-      </div>
-      <main className={styles('main')}>
-        <div className={styles('main_spacer')} />
-        <article className={styles('article')} key={asPath}>
-          {meta && <Header title={meta.title} />}
-          <DocumentationWrapper>
-            {children}
-          </DocumentationWrapper>
-        </article>
-        <Footer />
-      </main>
-      <div className={styles('toc')}>
-        {toc.length > 0 && (
-          <ToCAside key={asPath} toc={toc} />
-        )}
-      </div>
-      <SearchCommandK />
-    </div>
+    <CurrentCnameProvider cname={cname || null}>
+      {/** Always reset state after navigation */}
+      <SelectedMirrorProvider key={asPath} cname={cname || null}>
+        <div className={styles('container')}>
+          <div className={styles('sidenav_container')}>
+            <Nav />
+          </div>
+          <main className={styles('main')}>
+            <div className={styles('main_spacer')} />
+            <article className={styles('article')} key={asPath}>
+              {meta && <Header title={meta.title} />}
+              <DocumentationWrapper>
+                {children}
+              </DocumentationWrapper>
+            </article>
+            <Footer />
+          </main>
+          <div className={styles('toc')}>
+            {toc.length > 0 && (
+              <ToCAside key={asPath} toc={toc} />
+            )}
+          </div>
+          <SearchCommandK />
+        </div>
+      </SelectedMirrorProvider>
+    </CurrentCnameProvider>
   );
 }

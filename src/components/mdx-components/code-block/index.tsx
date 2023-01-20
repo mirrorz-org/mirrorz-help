@@ -2,6 +2,9 @@ import clsx from 'clsx';
 import CodeBlockMenu from './menus';
 import buildCode from './build-code';
 import { useMemo, useReducer } from 'react';
+import { useSelectedMirror } from '@/contexts/current-selected-mirror';
+import { useMirrorZData } from '../../../hooks/use-mirrorz-data';
+import { useCurrentCname } from '../../../contexts/current-cname';
 
 interface Menu {
   title: string;
@@ -57,12 +60,23 @@ export default function CodeBlock({ menus, isHttpProtocol = true, code }: CodeBl
     return obj;
   });
 
+  const cname = useCurrentCname();
+  const currentSelectedMirror = useSelectedMirror();
+  const { data, isLoading } = useMirrorZData();
+  const mirrorUrl = useMemo(() => {
+    if (isLoading || !currentSelectedMirror) return '(Loading...)';
+    return data?.[0][currentSelectedMirror]?.mirrors[cname].full || '(Loading...)';
+  }, [cname, currentSelectedMirror, data, isLoading]);
+
   return (
     <div className={clsx('enhanced-codeblock')}>
       <CodeBlockMenu menus={finalMenus} dispatch={dispatch} />
       <pre>
         <code>
-          {buildCode(code, state)}
+          {buildCode(
+            code,
+            { ...state, mirror: mirrorUrl }
+          )}
         </code>
       </pre>
     </div>

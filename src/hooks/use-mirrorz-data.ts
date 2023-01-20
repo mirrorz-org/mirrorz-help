@@ -14,6 +14,12 @@ const parseMirror = (site: Site, { cname, url, help, size, desc, upstream, statu
   note: site.note
 });
 
+const mirrorsArrayToObject = (site: Site, mirrors: Mirror[]) => mirrors.reduce((acc, cur) => {
+  const parsedMirror = parseMirror(site, cur);
+  acc[parsedMirror.cname] = parsedMirror;
+  return acc;
+}, {} as Record<string, ParsedMirror>);
+
 const fetcher = async () => {
   // TODO: support both mirrorz and cernet.edu.cn
   const pack: MirrorZLegacyPack = await (await fetch('https://mirrorz.org/static/json/legacy-pack.json')).json();
@@ -26,7 +32,7 @@ const fetcher = async () => {
       // TODO: implements MirrorZ extension D
       baseUrl: url.hostname + url.pathname,
       site,
-      mirrors: mirrors.map(mirror => parseMirror(site, mirror))
+      mirrors: mirrorsArrayToObject(site, mirrors)
     };
     return acc;
   }, {} as ParsedMirrorZLegacy);
@@ -44,7 +50,7 @@ const fetcher = async () => {
     return acc;
   }, {} as CnameToMirrorZ);
 
-  return [parsedMirrorZLegacy, cnameToMirrorZ];
+  return [parsedMirrorZLegacy, cnameToMirrorZ] as const;
 };
 
 export const useMirrorZData = () => useSWRImmutable('parsed-mirrorz-legacy-data', fetcher);

@@ -36,6 +36,7 @@ export interface ContentProps {
   meta: {
     [key: string]: any;
   };
+  cname: string;
 }
 
 const fromHrefToSegments = (href: string) => {
@@ -148,7 +149,8 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
     props: {
       toc,
       content: JSON.stringify(reactTree, stringifyNodeOnServer),
-      meta
+      meta,
+      cname: meta.cname
     }
   };
   // Cache it on the disk.

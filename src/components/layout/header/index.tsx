@@ -1,4 +1,5 @@
 import style9 from 'style9';
+import MetaCard from './metacard';
 
 interface PageHeadingProps {
   title: string;
@@ -22,7 +23,7 @@ const styles = style9.create({
   },
   container: {
     maxWidth: '1280px',
-    marginLeft: 'auto',
+    marginLeft: 0,
     '@media screen and (min-width: 1280px)': {
       marginRight: 'auto'
     }
@@ -50,7 +51,7 @@ export default function Header({
 }: PageHeadingProps) {
   return (
     <div className={styles('wrapper')}>
-      <div className="max-w-4xl ml-0 2xl:mx-auto">
+      <div className={styles('container')}>
         <h1 className={styles('h1')}>
           {title}
         </h1>
@@ -59,6 +60,7 @@ export default function Header({
             {description}
           </p>
         )}
+        <MetaCard />
       </div>
     </div>
   );

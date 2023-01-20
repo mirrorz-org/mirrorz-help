@@ -47,7 +47,9 @@ export interface ParsedMirrorZLegacy {
   [abbr: string]: {
     site: Site,
     baseUrl: string,
-    mirrors: ParsedMirror[]
+    mirrors: {
+      [cname: string]: ParsedMirror
+    }
   }
 }
 

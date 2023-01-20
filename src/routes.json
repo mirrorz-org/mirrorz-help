@@ -13,5 +13,10 @@
     "title": "Debian 软件仓库镜像使用帮助",
     "file": "debian.mdx",
     "cname": "debian"
+  },
+  "/ubuntu/": {
+    "title": "Ubuntu 软件仓库镜像使用帮助",
+    "file": "ubuntu.mdx",
+    "cname": "ubuntu"
   }
 }

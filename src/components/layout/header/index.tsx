@@ -1,5 +1,6 @@
 import style9 from 'style9';
 import MetaCard from './metacard';
+import { memo } from 'react';
 
 interface PageHeadingProps {
   title: string;
@@ -45,7 +46,7 @@ const styles = style9.create({
   }
 });
 
-export default function Header({
+function Header({
   title,
   description
 }: PageHeadingProps) {
@@ -65,3 +66,5 @@ export default function Header({
     </div>
   );
 }
+
+export default memo(Header);

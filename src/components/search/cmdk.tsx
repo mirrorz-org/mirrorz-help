@@ -1,5 +1,5 @@
 import { Command } from '../cmdk';
-import { startTransition, useCallback } from 'react';
+import { memo, startTransition, useCallback } from 'react';
 import { useSearchOpen, useSetSearchOpen } from '@/contexts/search';
 import style9 from 'style9';
 
@@ -108,7 +108,7 @@ const styles = style9.create({
 });
 
 // TODO: We can replace it with full-text search in the future
-export default function SearchCommandK() {
+function SearchCommandK() {
   const open = useSearchOpen();
   const setOpen = useSetSearchOpen();
 
@@ -157,3 +157,5 @@ export default function SearchCommandK() {
     </Command.Dialog>
   );
 }
+
+export default memo(SearchCommandK);

@@ -1,5 +1,6 @@
 import style9 from 'style9';
 import MirrorSelectMenu from './mirror-select-menu';
+import { memo } from 'react';
 
 const styles = style9.create({
   main: {
@@ -20,7 +21,7 @@ const styles = style9.create({
   }
 });
 
-export default function MetaCard() {
+function MetaCard() {
   return (
     <div
       className={styles('main')}
@@ -32,3 +33,5 @@ export default function MetaCard() {
     </div>
   );
 }
+
+export default memo(MetaCard);

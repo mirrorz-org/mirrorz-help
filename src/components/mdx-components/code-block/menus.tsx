@@ -1,6 +1,6 @@
 import style9 from 'style9';
 import IconChevronUpDown from '../../icons/chevron-up-down';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 
 export interface Menu {
   title: string;
@@ -66,7 +66,7 @@ interface CodeBlockMenuProps {
   dispatch: React.Dispatch<[string, string]>;
 }
 
-export default function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
+function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
   const handleChange: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => {
     const { name, value } = e.target;
     dispatch([name, value]);
@@ -94,3 +94,5 @@ export default function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
     </div>
   );
 }
+
+export default memo(CodeBlockMenu);

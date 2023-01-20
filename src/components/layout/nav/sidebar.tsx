@@ -2,12 +2,13 @@ import type { RoutesJson } from '@/types/routesJson';
 import { usePendingRoute } from '@/hooks/use-pending-route';
 import { useRouter } from 'next/router';
 import { SidebarLink } from './nav-link';
+import { memo } from 'react';
 
 interface SidebarProps {
   routes: RoutesJson
 }
 
-export default function Sidebar({ routes }: SidebarProps) {
+function Sidebar({ routes }: SidebarProps) {
   const pendingRoute = usePendingRoute();
   const cleanedPath = useRouter().asPath.split(/[?#]/)[0];
 
@@ -33,3 +34,5 @@ export default function Sidebar({ routes }: SidebarProps) {
     </ul>
   );
 }
+
+export default memo(Sidebar);

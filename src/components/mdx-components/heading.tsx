@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import * as React from 'react';
+import { memo } from 'react';
 import { typescriptHappyForwardRef } from '@/lib/client/forwardref-with-as';
 import style9 from 'style9';
 import type { StyleWithAtRulesAndFalsy } from '@/types/style9';
@@ -121,26 +121,26 @@ const headingStyles = style9.create({
 });
 
 const h1Xstyle = [headingStyles.h1];
-export const H1 = (props: HeadingProps<'h1'>) => (
+export const H1 = memo((props: HeadingProps<'h1'>) => (
   <Heading as="h1" xstyle={h1Xstyle} {...props} />
-);
+));
 
 const h2Xstyle = [headingStyles.h2];
-export const H2 = (props: HeadingProps<'h2'>) => (
+export const H2 = memo((props: HeadingProps<'h2'>) => (
   <Heading as="h2" xstyle={h2Xstyle} {...props} />
-);
+));
 
 const h3Xstyle = [headingStyles.h3];
-export const H3 = (props: HeadingProps<'h3'>) => (
+export const H3 = memo((props: HeadingProps<'h3'>) => (
   <Heading as="h3" xstyle={h3Xstyle} {...props} />
-);
+));
 
 const h4Xstyle = [headingStyles.h4];
-export const H4 = (props: HeadingProps<'h4'>) => (
+export const H4 = memo((props: HeadingProps<'h4'>) => (
   <Heading as="h4" xstyle={h4Xstyle} {...props} />
-);
+));
 
 const h5Xstyle = [headingStyles.h5];
-export const H5 = (props: HeadingProps<'h5'>) => (
+export const H5 = memo((props: HeadingProps<'h5'>) => (
   <Heading as="h5" xstyle={h5Xstyle} {...props} />
-);
+));

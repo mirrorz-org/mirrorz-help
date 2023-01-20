@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
@@ -153,7 +153,7 @@ const styles = style9.create({
   }
 });
 
-export default function Nav() {
+function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = useCallback(() => setIsOpen(isOpen => !isOpen), []);
 
@@ -253,3 +253,5 @@ export default function Nav() {
     </div>
   );
 }
+
+export default memo(Nav);

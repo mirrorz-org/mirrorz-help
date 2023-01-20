@@ -70,7 +70,7 @@ const DarkModeIcon = memo((props: { mode: ColorScheme }) => {
   return <IconDisplay className={styles('icon')} />;
 });
 
-export default function DarkModeSwitch() {
+function DarkModeSwitch() {
   const id = useId();
   const darkMode = useDarkMode();
   const setDarkMode = useSetDarkMode();
@@ -105,3 +105,5 @@ export default function DarkModeSwitch() {
     </div>
   );
 }
+
+export default memo(DarkModeSwitch);

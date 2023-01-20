@@ -2,6 +2,7 @@ import type { ToC } from '@/lib/server/parse-markdown';
 import style9 from 'style9';
 import { useTocHighlight } from '../../hooks/use-toc-highlight';
 import IconToC from '../icons/toc';
+import { memo } from 'react';
 
 const styles = style9.create({
   toc: {
@@ -76,7 +77,7 @@ interface ToCProps {
   toc: ToC[]
 }
 
-export default function ToCAside({ toc }: ToCProps) {
+function ToCAside({ toc }: ToCProps) {
   const currentIndex = useTocHighlight();
   // Prevent ToC overflow
   const selectedIndex = currentIndex > toc.length - 1 ? toc.length - 1 : currentIndex;
@@ -125,3 +126,5 @@ export default function ToCAside({ toc }: ToCProps) {
     </nav>
   );
 }
+
+export default memo(ToCAside);

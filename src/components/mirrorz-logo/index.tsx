@@ -1,4 +1,6 @@
-export default function MirrorZLogo(props: JSX.IntrinsicElements['svg']) {
+import { memo } from 'react';
+
+function MirrorZLogo(props: JSX.IntrinsicElements['svg']) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" id="ISO" version="1.1" viewBox="0 0 2279 2279" {...props}>
       <defs id="defs4" />
@@ -13,3 +15,5 @@ export default function MirrorZLogo(props: JSX.IntrinsicElements['svg']) {
     </svg>
   );
 }
+
+export default memo(MirrorZLogo);

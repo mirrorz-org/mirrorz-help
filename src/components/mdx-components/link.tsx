@@ -1,6 +1,7 @@
 import style9 from 'style9';
 import ExternalLink from '../external-link';
 import NextLink from 'next/link';
+import { memo } from 'react';
 
 const styles = style9.create({
   base: {
@@ -19,7 +20,7 @@ const styles = style9.create({
   }
 });
 
-export default function Link({ href, ...props }: Omit<JSX.IntrinsicElements['a'], 'className' | 'ref'>) {
+function Link({ href, ...props }: Omit<JSX.IntrinsicElements['a'], 'className' | 'ref'>) {
   if (!href) {
     return <a href={href} className={styles('base')} {...props} />;
   }
@@ -28,3 +29,5 @@ export default function Link({ href, ...props }: Omit<JSX.IntrinsicElements['a']
   }
   return <NextLink href={href} className={styles('base')} {...props} />;
 }
+
+export default memo(Link);

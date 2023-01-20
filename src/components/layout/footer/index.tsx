@@ -1,5 +1,5 @@
 import MirrorZLogo from '@/components/mirrorz-logo';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import style9 from 'style9';
 
 const styles = style9.create({
@@ -96,7 +96,7 @@ const CurrentYear = () => {
   return <span>{year}</span>;
 };
 
-export default function Footer() {
+function Footer() {
   return (
     <footer className={styles('outer')}>
       <div className={styles('wrapper')}>
@@ -118,3 +118,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default memo(Footer);

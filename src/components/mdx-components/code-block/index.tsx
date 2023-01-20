@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import CodeBlockMenu from './menus';
 import buildCode from './build-code';
-import { useMemo, useReducer } from 'react';
+import { memo, useMemo, useReducer } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
@@ -46,7 +46,7 @@ const reducer = (prevState: Record<string, string>, [key, value]: [string, strin
   };
 };
 
-export default function CodeBlock({ menus, isHttpProtocol = true, code }: CodeBlockProps) {
+function CodeBlock({ menus, isHttpProtocol = true, code }: CodeBlockProps) {
   const finalMenus = useMemo(() => {
     if (isHttpProtocol) {
       if (menus) return [...menus, enableHttpMenu];
@@ -90,3 +90,5 @@ export default function CodeBlock({ menus, isHttpProtocol = true, code }: CodeBl
     </div>
   );
 }
+
+export default memo(CodeBlock);

@@ -1,8 +1,7 @@
-import { createContext, useCallback, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 import { noop } from '@/lib/shared/util';
 import { requestIdleCallback } from '@/lib/client/request-idle-callback';
-import useLayoutEffect from '../hooks/use-isomorphic-effect';
 
 const darkModeStorageKey = 'user-color-scheme';
 
@@ -64,11 +63,12 @@ export const useSetDarkMode = () => {
 };
 
 export const DarkModeProvider = ({ children }: React.PropsWithChildren<unknown>) => {
+  const [theme, setTheme] = useState<ColorScheme>('auto');
+
   // We are showing the current theme value directly in the initial DOM (in a <select>)
   // There could be a mismatch between server (always auto) and client (custom settings)
   // So we render 'auto' first, then use layout effect to update the correct client settings (DOM not commit yet)
-  const [theme, setTheme] = useState<ColorScheme>('auto');
-  useLayoutEffect(() => {
+  useEffect(() => {
     setTheme(initialThemeValue);
   }, []);
 

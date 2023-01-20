@@ -1,4 +1,6 @@
-export default function ExternalLink({ href, ...props }: JSX.IntrinsicElements['a']) {
+import { memo } from 'react';
+
+function ExternalLink({ href, ...props }: JSX.IntrinsicElements['a']) {
   return (
     <a
       href={href}
@@ -8,3 +10,5 @@ export default function ExternalLink({ href, ...props }: JSX.IntrinsicElements['
     />
   );
 }
+
+export default memo(ExternalLink);

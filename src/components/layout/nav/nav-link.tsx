@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import Link from 'next/link';
 import style9 from 'style9';
 
@@ -62,12 +62,12 @@ const styles = style9.create({
 
 export const navLinkBaseStyles = styles.base;
 
-export function SidebarLink({
+export const SidebarLink = memo(({
   href,
   isActive = false,
   title,
   isPending
-}: SidebarLinkProps) {
+}: SidebarLinkProps) => {
   const ref = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -89,4 +89,4 @@ export function SidebarLink({
       {title}
     </Link>
   );
-}
+});

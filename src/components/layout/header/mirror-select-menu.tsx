@@ -1,6 +1,6 @@
 import style9 from 'style9';
 import IconChevronUpDown from '@/components/icons/chevron-up-down';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelectedMirror, useSetSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
@@ -46,7 +46,7 @@ const styles = style9.create({
   }
 });
 
-export default function MirrorSelectMenu() {
+function MirrorSelectMenu() {
   const selectedMirror = useSelectedMirror();
   const setSelectedMirror = useSetSelectedMirror();
 
@@ -84,3 +84,5 @@ export default function MirrorSelectMenu() {
     </div>
   );
 }
+
+export default memo(MirrorSelectMenu);

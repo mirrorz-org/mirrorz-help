@@ -1,6 +1,6 @@
 import style9 from 'style9';
 import IconSearch from '../icons/search';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useSetSearchOpen } from '../../contexts/search';
 
 const styles = style9.create({
@@ -93,7 +93,7 @@ function Kbd(props: JSX.IntrinsicElements['kbd']) {
   );
 }
 
-export function SearchButtonOnMobile() {
+export const SearchButtonOnMobile = memo(() => {
   const setSearchOpen = useSetSearchOpen();
   const handleOpen = useCallback(() => {
     setSearchOpen(true);
@@ -109,9 +109,9 @@ export function SearchButtonOnMobile() {
       <IconSearch className={styles('icon_as_button')} />
     </button>
   );
-}
+});
 
-export function SearchButtonInSideNav() {
+export const SearchButtonInSideNav = memo(() => {
   const setSearchOpen = useSetSearchOpen();
   const handleOpen = useCallback(() => {
     setSearchOpen(true);
@@ -130,4 +130,4 @@ export function SearchButtonInSideNav() {
       </span>
     </button>
   );
-}
+});

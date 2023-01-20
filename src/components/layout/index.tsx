@@ -10,6 +10,7 @@ import SearchCommandK from '../search/cmdk';
 import Header from './header';
 import { CurrentCnameProvider } from '../../contexts/current-cname';
 import { SelectedMirrorProvider } from '../../contexts/current-selected-mirror';
+import { Suspense } from 'react';
 
 const styles = style9.create({
   container: {
@@ -77,22 +78,42 @@ export function Layout({ children, meta, toc = [], cname }: React.PropsWithChild
       <SelectedMirrorProvider key={asPath} cname={cname || null}>
         <div className={styles('container')}>
           <div className={styles('sidenav_container')}>
-            <Nav />
+            {/**
+              * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
+              *
+              * By adding more Suspense boundaries, React will use this as a signal to hydrate them asynchronously instead of doing everything in a single pass. This would reduce long tasks during hydration.
+              * It's a bit risky because if something suspends, we'll render null. But we don't have anything suspending directly inside these trees. If we add something, we'll need to give it its own Suspense to prevent triggering these.
+              */}
+            <Suspense fallback={null}>
+              <Nav />
+            </Suspense>
           </div>
           <main className={styles('main')}>
             <div className={styles('main_spacer')} />
             <article className={styles('article')} key={asPath}>
               {meta && <Header title={meta.title} />}
-              <DocumentationWrapper>
-                {children}
-              </DocumentationWrapper>
+              {/**
+                * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
+                * No fallback UI so need to be careful not to suspend directly inside.
+                */}
+              <Suspense fallback={null}>
+                <DocumentationWrapper>
+                  {children}
+                </DocumentationWrapper>
+              </Suspense>
             </article>
             <Footer />
           </main>
           <div className={styles('toc')}>
-            {toc.length > 0 && (
-              <ToCAside key={asPath} toc={toc} />
-            )}
+            {/**
+              * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
+              * No fallback UI so need to be careful not to suspend directly inside.
+              */}
+            <Suspense fallback={null}>
+              {toc.length > 0 && (
+                <ToCAside key={asPath} toc={toc} />
+              )}
+            </Suspense>
           </div>
           <SearchCommandK />
         </div>

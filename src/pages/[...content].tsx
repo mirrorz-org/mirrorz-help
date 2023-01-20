@@ -12,7 +12,7 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
   );
 
   return (
-    <Layout meta={meta} toc={toc} cname={cname}>
+    <Layout meta={meta as any} toc={toc} cname={cname}>
       {parsedContent}
     </Layout>
   );

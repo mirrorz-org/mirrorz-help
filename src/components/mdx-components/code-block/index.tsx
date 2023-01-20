@@ -11,6 +11,7 @@ import ActualCode from './code';
 import LoadingOverlay from './overlay';
 
 import buildCode from './build-code';
+import { useMirrorHttpsEnabled } from '../../../contexts/mirror-enable-https';
 
 const styles = style9.create({
   code_wrapper: {
@@ -33,15 +34,6 @@ interface CodeBlockProps {
   codeMeta?: string;
 }
 
-const enableHttpMenu: Menu = {
-  title: '是否启用 HTTPS',
-  variableName: 'http_protocol',
-  items: [
-    ['HTTPS', 'https://'],
-    ['HTTP', 'http://']
-  ]
-};
-
 const reducer = (prevState: Record<string, string>, [key, value]: [string, string]) => {
   if (prevState[key] === value) return prevState;
   return {
@@ -50,17 +42,9 @@ const reducer = (prevState: Record<string, string>, [key, value]: [string, strin
   };
 };
 
-function CodeBlock({ menus, isHttpProtocol = true, code, codeLanguage }: CodeBlockProps) {
-  const finalMenus = useMemo(() => {
-    if (isHttpProtocol) {
-      if (menus) return [...menus, enableHttpMenu];
-      return [enableHttpMenu];
-    }
-    return menus || [];
-  }, [isHttpProtocol, menus]);
-
+function CodeBlock({ menus = [], isHttpProtocol = true, code, codeLanguage }: CodeBlockProps) {
   const [state, dispatch] = useReducer(reducer, null, _ => {
-    const obj = finalMenus.reduce((acc, menu) => {
+    const obj = menus.reduce((acc, menu) => {
       acc[menu.variableName] = menu.items[0][1];
       return acc;
     }, {} as Record<string, string>);
@@ -72,6 +56,7 @@ function CodeBlock({ menus, isHttpProtocol = true, code, codeLanguage }: CodeBlo
     return obj;
   });
 
+  const httpsEnabled = useMirrorHttpsEnabled();
   const cname = useCurrentCname();
   const currentSelectedMirror = useDeferredValue(useSelectedMirror());
   const { data, isLoading } = useMirrorZData();
@@ -80,12 +65,20 @@ function CodeBlock({ menus, isHttpProtocol = true, code, codeLanguage }: CodeBlo
     return data?.[0][currentSelectedMirror]?.mirrors[cname].full || '(Loading...)';
   }, [cname, currentSelectedMirror, data, isLoading]);
 
+  const finalCode = useMemo(() => {
+    const variable: Record<string, string> = { ...state, mirror: mirrorUrl };
+    if (isHttpProtocol) {
+      variable.http_protocol = httpsEnabled ? 'https://' : 'http://';
+    }
+    return buildCode(code, variable);
+  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, state]);
+
   return (
     <div className={clsx('enhanced-codeblock')}>
-      <CodeBlockMenu menus={finalMenus} dispatch={dispatch} />
+      <CodeBlockMenu menus={menus} dispatch={dispatch} />
       <div className={styles('code_wrapper')}>
         {isLoading && <LoadingOverlay />}
-        <ActualCode code={buildCode(code, { ...state, mirror: mirrorUrl })} language={codeLanguage} />
+        <ActualCode code={finalCode} language={codeLanguage} />
       </div>
     </div>
   );

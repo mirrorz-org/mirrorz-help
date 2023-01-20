@@ -4,47 +4,7 @@ import { memo, useCallback } from 'react';
 import { useSelectedMirror, useSetSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
-
-const styles = style9.create({
-  select_wrapper: {
-    flexGrow: 1,
-    position: 'relative',
-    marginLeft: '12px',
-    display: 'flex',
-    alignItems: 'center',
-    color: 'var(--text-primary)'
-  },
-  select: {
-    width: '100%',
-    display: 'inline-flex',
-    paddingLeft: '8px',
-    paddingRight: '22px',
-    fontSize: '14px',
-    height: '32px',
-    cursor: 'pointer',
-    appearance: 'none',
-    lineHeight: 1.5,
-    borderRadius: '8px',
-    border: '1px solid var(--border)',
-    backgroundColor: 'var(--bg-wash)',
-    color: 'var(--text-primary)'
-  },
-  icon_wrapper: {
-    display: 'inline-flex',
-    position: 'absolute',
-    pointerEvents: 'none',
-    color: 'var(--text-primary)',
-    right: '4px'
-  },
-  icon: {
-    width: '14px',
-    height: '14px',
-    '@media screen and (min-width: 840px)': {
-      width: '16px',
-      height: '16px'
-    }
-  }
-});
+import { iconWrapperXStyle, selectWrapperXStyle, selectXStyle, iconXStyle } from './select-style';
 
 function MirrorSelectMenu() {
   const selectedMirror = useSelectedMirror();
@@ -58,9 +18,9 @@ function MirrorSelectMenu() {
   const { isLoading, data } = useMirrorZData();
 
   return (
-    <div className={styles('select_wrapper')}>
+    <div className={style9(selectWrapperXStyle)}>
       <select
-        className={styles('select')}
+        className={style9(selectXStyle)}
         value={selectedMirror || undefined}
         onChange={handleChange}
         disabled={isLoading}
@@ -78,8 +38,8 @@ function MirrorSelectMenu() {
             )
         }
       </select>
-      <span className={styles('icon_wrapper')}>
-        <IconChevronUpDown className={styles('icon')} />
+      <span className={style9(iconWrapperXStyle)}>
+        <IconChevronUpDown className={style9(iconXStyle)} />
       </span>
     </div>
   );

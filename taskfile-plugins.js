@@ -14,8 +14,6 @@ bundleRequire.resolve = (request, options) => Module._resolveFilename(request, m
 module.exports = function (task, _utils) {
   // eslint-disable-next-line require-yield -- taskr plugin
   task.plugin('ncc', {}, function* (file, options) {
-    _utils.log(options.externals);
-
     if (options.externals && options.packageName) {
       options.externals = { ...options.externals };
       delete options.externals[options.packageName];

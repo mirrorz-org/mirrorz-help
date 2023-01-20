@@ -1,0 +1,12 @@
+@import "_github_light"
+@import "_github_dark"
+
+.hljs_container
+  @include githublight()
+
+  :global(html.dark)
+    @include githubdark()
+
+  @media (prefers-color-scheme: dark)
+    :global(:not(.light):root)
+      @include githubdark()

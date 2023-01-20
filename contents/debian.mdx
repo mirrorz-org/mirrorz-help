@@ -8,7 +8,7 @@ cname: 'debian'
 Debian Buster 以上版本默认支持 HTTPS 源。如果遇到无法拉取 HTTPS 源的情况，请先使用 HTTP 源并安装：
 
 ```shell
-sudo apt install apt-transport-https ca-certificates
+$ sudo apt install apt-transport-https ca-certificates
 ```
 
 <CodeBlock
@@ -29,7 +29,7 @@ sudo apt install apt-transport-https ca-certificates
   ]}
 >
 
-```conf
+```properties
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 deb {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free
 # deb-src {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free

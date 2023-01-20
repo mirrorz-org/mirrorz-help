@@ -14,6 +14,11 @@
     "file": "centos.mdx",
     "cname": "centos"
   },
+  "/centos-altarch/": {
+    "title": "CentOS altarch 软件仓库镜像使用帮助",
+    "file": "centos-altarch.mdx",
+    "cname": "centos-altarch"
+  },
   "/debian/": {
     "title": "Debian 软件仓库镜像使用帮助",
     "file": "debian.mdx",

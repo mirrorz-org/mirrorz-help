@@ -15,11 +15,9 @@ cname: 'centos'
 
 以上步骤可以被下方的命令一步完成
 
-<CodeBlock
-  isHttp={true}
->
+<CodeBlock>
 
-```
+```shell
 # 对于 CentOS 7
 sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
          -e 's|^#baseurl=http://mirror.centos.org/centos|baseurl={{http_protocol}}{{mirror}}|g' \
@@ -41,6 +39,6 @@ sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
 
 最后，更新软件包缓存
 
-```
+```shell
 sudo yum makecache
 ```

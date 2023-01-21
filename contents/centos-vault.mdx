@@ -16,9 +16,7 @@ cname: 'centos-vault'
 
 以上步骤可以被下方的命令完成
 
-<CodeBlock
-  isHttp={true}
->
+<CodeBlock>
 
 ```
 # CentOS 8 之前
@@ -44,6 +42,6 @@ sudo sed -e "s|^mirrorlist=|#mirrorlist=|g" \
 
 最后，更新软件包缓存
 
-```
+```shell
 sudo yum makecache
 ```

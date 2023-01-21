@@ -1,0 +1,83 @@
+---
+title: GitLab Runner 软件仓库镜像使用帮助
+cname: 'gitlab-runner'
+---
+
+**注意: gitlab-runner 镜像支持 x86-64 和 ARM64(aarch64) 架构**
+
+### Debian/Ubuntu 用户
+
+首先信任 GitLab 的 GPG 公钥:
+
+```
+curl https://packages.gitlab.com/gpg.key 2> /dev/null | sudo apt-key add - &>/dev/null
+```
+
+再选择你的 Debian/Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/gitlab-runner.list`
+
+<CodeBlock
+  menus={[
+    {
+      title: '发行版',
+      variableName: 'os_name',
+      items: [
+        ['Debian', 'debian'],
+        ['Ubuntu', 'ubuntu'],
+      ]
+    },
+    {
+      title: '版本',
+      variableName: 'release_name',
+      items: [
+        ['Debian 11', 'bullseye'],
+        ['Debian 10', 'buster'],
+        ['Debian 9', 'stretch'],
+        ['Debian 8', 'jessie'],
+        ['Ubuntu 22.04 LTS', 'jammy'],
+        ['Ubuntu 20.04 LTS', 'focal'],
+        ['Ubuntu 18.04 LTS', 'bionic'],
+        ['Ubuntu 16.04 LTS', 'xenial'],
+      ]
+    }
+  ]}
+>
+
+```properties
+deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
+```
+
+</CodeBlock>
+
+
+安装 gitlab-runner:
+
+```
+sudo apt-get update
+sudo apt-get install gitlab-runner
+```
+
+### CentOS/RHEL
+
+新建 `/etc/yum.repos.d/gitlab-runner.repo`，内容为
+
+
+<CodeBlock>
+
+```
+[gitlab-runner]
+name=gitlab-runner
+baseurl={{http_protocol}}{{mirror}}/yum/el$releasever-$basearch/
+repo_gpgcheck=0
+gpgcheck=0
+enabled=1
+gpgkey=https://packages.gitlab.com/gpg.key
+```
+
+</CodeBlock>
+
+再执行
+
+```
+sudo yum makecache
+sudo yum install gitlab-runner
+```

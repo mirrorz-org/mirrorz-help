@@ -1,0 +1,117 @@
+---
+title: MongoDB 软件仓库镜像使用帮助
+cname: 'mongodb'
+---
+
+MongoDB 镜像自 MongoDB [官方仓库](https://repo.mongodb.org/)， 目前有 RHEL/CentOS, Ubuntu, Debian 的镜像，支持 amd64, i386, arm64 架构。
+
+更详细的内容，可以参考 [官方文档](https://docs.mongodb.org/master/administration/install-on-linux/)
+
+### Debian/Ubuntu 用户
+
+首先信任 MongoDB 的 GPG 公钥:
+
+<CodeBlock
+  menus={[
+    {
+      title: 'MongoDB 版本号',
+      variableName: 'version',
+      items: [
+        ['6.0', '6.0'],
+        ['5.0', '5.0'],
+        ['4.4', '4.4'],
+        ['4.2', '4.2'],
+      ]
+    }
+  ]}
+>
+
+```bash
+wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | sudo apt-key add -
+```
+
+</CodeBlock>
+
+再选择你的 Debian / Ubuntu 版本（注意「发行版」「版本」「部件」需同时选择 Debian 或 Ubuntu），文本框中内容写进 `/etc/apt/sources.list.d/mongodb.list`
+
+<CodeBlock
+  menus={[
+    {
+      title: '发行版',
+      variableName: 'os_name',
+      items: [
+        ['Debian', 'debian'],
+        ['Ubuntu', 'ubuntu'],
+      ]
+    },
+    {
+      title: '版本',
+      variableName: 'release_name',
+      items: [
+        ['Debian 11', 'bullseye'],
+        ['Debian 10', 'buster'],
+        ['Debian 9', 'stretch'],
+        ['Debian 8', 'jessie'],
+        ['Ubuntu 22.04 LTS', 'jammy'],
+        ['Ubuntu 20.04 LTS', 'focal'],
+        ['Ubuntu 18.04 LTS', 'bionic'],
+        ['Ubuntu 16.04 LTS', 'xenial'],
+      ]
+    },
+    {
+      title: '部件',
+      variableName: 'component_name',
+      items: [
+        ['Debian', 'main'],
+        ['Ubuntu', 'multiverse'],
+      ]
+    },
+    {
+      title: 'MongoDB 版本号',
+      variableName: 'version',
+      items: [
+        ['6.0', '6.0'],
+        ['5.0', '5.0'],
+        ['4.4', '4.4'],
+        ['4.2', '4.2'],
+      ]
+    }
+  ]}
+>
+
+```properties
+deb {{http_protocol}}{{mirror}}/apt/{{os_name}} {{release_name}}/mongodb-org/{{version}} {{component_name}}
+```
+
+</CodeBlock>
+
+安装 `mongodb-org` 即可
+
+```
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+```
+
+### RHEL/CentOS 用户
+
+
+新建 `/etc/yum.repos.d/mongodb.repo`，内容为
+
+<CodeBlock>
+
+```ini
+[mongodb-org]
+name=MongoDB Repository
+baseurl={{http_protocol}}{{mirror}}/yum/el$releasever/
+gpgcheck=0
+enabled=1
+```
+
+</CodeBlock>
+
+刷新缓存并安装 `mongodb-org` 即可。
+
+```
+sudo yum makecache
+sudo yum install mongodb-org
+```

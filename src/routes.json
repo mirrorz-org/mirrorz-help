@@ -194,6 +194,11 @@
     "file": "mariadb.mdx",
     "cname": "mariadb"
   },
+  "/mongodb/": {
+    "title": "MongoDB 镜像使用帮助",
+    "file": "mongodb.mdx",
+    "cname": "mongodb"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

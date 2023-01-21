@@ -13,12 +13,6 @@ import LoadingOverlay from './overlay';
 import buildCode from './build-code';
 import { useMirrorHttpsEnabled } from '../../../contexts/mirror-enable-https';
 
-const styles = style9.create({
-  code_wrapper: {
-    position: 'relative'
-  }
-});
-
 interface Menu {
   title: string;
   variableName: string,
@@ -33,6 +27,15 @@ interface CodeBlockProps {
   codeLanguage?: string;
   codeMeta?: string;
 }
+
+const styles = style9.create({
+  container: {
+    margin: '24px 0'
+  },
+  code_wrapper: {
+    position: 'relative'
+  }
+});
 
 const reducer = (prevState: Record<string, string>, [key, value]: [string, string]) => {
   if (prevState[key] === value) return prevState;
@@ -74,7 +77,7 @@ function CodeBlock({ menus = [], isHttpProtocol = true, code, codeLanguage }: Co
   }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, state]);
 
   return (
-    <div className={clsx('enhanced-codeblock')}>
+    <div className={clsx('enhanced-codeblock', styles('container'))}>
       <CodeBlockMenu menus={menus} dispatch={dispatch} />
       <div className={styles('code_wrapper')}>
         {isLoading && <LoadingOverlay />}

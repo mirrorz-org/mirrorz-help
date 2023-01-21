@@ -5,7 +5,6 @@ import { Fragment, Suspense, useMemo } from 'react';
 import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';
 
-// TODO: HMR for content page
 export default function ContentPage({ content, toc, meta, cname }: ContentProps) {
   const parsedContent = useMemo(
     () => JSON.parse(content, reviveNodeOnClient),

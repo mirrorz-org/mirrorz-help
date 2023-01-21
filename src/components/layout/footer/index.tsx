@@ -1,89 +1,92 @@
 import MirrorZLogo from '@/components/mirrorz-logo';
-import { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import style9 from 'style9';
+import ExternalLink from '../../external-link';
+import NextLink from 'next/link';
 
 const styles = style9.create({
-  outer: {
+  footer: {
+    color: 'var(--text-secondary)',
     paddingTop: '48px',
-    marginTop: '48px',
     paddingBottom: '48px',
     paddingLeft: '20px',
     paddingRight: '20px',
-    borderTop: '1px solid var(--border)',
-    '@media screen and (min-width: 640px)': {
-      paddingLeft: '48px',
-      paddingRight: '48px'
-    },
     '@media screen and (min-width: 840px)': {
+      paddingLeft: '48px',
+      paddingRight: '48px',
       paddingTop: '64px',
       paddingBottom: '64px'
     }
   },
-  wrapper: {
-    maxWidth: '1280px',
-    margin: 'auto'
+  copyright: {
+    fontSize: 14,
+    marginTop: '16px'
   },
-  container: {
+  inner: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(8, minmax(0, 1fr))',
-    gap: '24px',
-    '@media screen and (min-width: 840px)': {
-      // @ts-expect-error -- missing in csstypes
-      gap: '0px'
+    columnGap: '48px',
+    rowGap: '32px',
+    maxWidth: '1280px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+    '@media screen and (min-width: 640px)': {
+      gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
+    },
+    '@media screen and (min-width: 1536px)': {
+      gridTemplateColumns: 'repeat(5, minmax(0, 1fr))'
     }
   },
-  main_wrapper: {
-    gridColumnStart: 'span 8',
-    gridColumnEnd: 'span 8',
-    '@media screen and (min-width: 840px)': {
-      gridColumnStart: 'span 2',
-      gridColumnEnd: 'span 2'
-    }
-  },
-  main: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    // @ts-expect-error -- missing in csstypes
-    gap: '24px',
-    paddingTop: '24px',
-    paddingBottom: '24px',
-    paddingLeft: '12px',
-    paddingRight: '12px',
-    '@media screen and (min-width: 840px)': {
-      display: 'block',
-      paddingTop: 0,
-      paddingBottom: 0
-    }
-  },
-  logo: {
+  mirrorz_logo: {
     width: '64px',
     height: '64px',
-    margin: 'auto'
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: '8px'
+  },
+  logo_section: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   logo_text: {
-    marginTop: '12px',
-    textAlign: 'center',
-    fontSize: 18,
-    letterSpacing: '0.02em',
-    fontWeight: 700
+    fontWeight: 700,
+    fontSize: 16
   },
-  content_wrapper: {
-    gridColumnStart: 'span 8',
-    gridColumnEnd: 'span 8',
-    '@media screen and (min-width: 840px)': {
-      gridColumnStart: 'span 6',
-      gridColumnEnd: 'span 6'
-    }
-  },
-  copyright: {
+  footer_main: {
+    justifyItems: 'start',
+    width: '160px',
     display: 'flex',
-    justifyContent: 'space-between',
-    paddingTop: '16px',
-    paddingBottom: '32px',
-    '@media screen and (min-width: 840px)': {
-      paddingLeft: '64px'
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    textAlign: 'left',
+    gridColumnStart: 'span 2',
+    gridColumnEnd: 'span 2',
+    '@media screen and (min-width: 640px)': {
+      gridColumnStart: 'span 1',
+      gridColumnEnd: 'span 1'
     }
+  },
+  footer_header: {
+    color: 'var(--text-primary)',
+    fontSize: 18,
+    fontWeight: 700,
+    marginBottom: '8px'
+  },
+  footer_link: {
+    fontSize: 14,
+    lineHeight: '30px',
+    color: 'var(--text-secondary)',
+    transitionProperty: 'color',
+    transitionDuration: '200ms',
+    transitionTimingFunction: 'ease',
+    ':hover': {
+      color: 'var(--text-link)'
+    }
+  },
+  social: {
+    color: 'var(--text-primary)'
   }
 });
 
@@ -96,24 +99,54 @@ const CurrentYear = () => {
   return <span>{year}</span>;
 };
 
+const Header = ({ children }: React.PropsWithChildren<unknown>) => (
+  <div className={styles('footer_header')}>{children}</div>
+);
+
+const FooterLink = ({ href, ...props }: Omit<JSX.IntrinsicElements['a'], 'ref'>) => {
+  if (!href) {
+    return <div className={styles('footer_link')}>{props.children}</div>;
+  }
+
+  if (href.startsWith('https://')) {
+    return (
+      <div>
+        <ExternalLink href={href} className={styles('footer_link')} {...props} />
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <NextLink href={href} className={styles('footer_link')} {...props} />
+    </div>
+  );
+};
+
 // TODO: finish footer
 function Footer() {
   return (
-    <footer className={styles('outer')}>
-      <div className={styles('wrapper')}>
-        <div className={styles('container')}>
-          <div className={styles('main_wrapper')}>
-            <div className={styles('main')}>
-              <MirrorZLogo className={styles('logo')} />
+    <footer className={styles('footer')}>
+      <div className={styles('inner')}>
+        <div className={styles('footer_main')}>
+          <div className={styles('logo_section')}>
+            <ExternalLink href="https://mirrorz.org/">
+              <MirrorZLogo className={styles('mirrorz_logo')} />
               <p className={styles('logo_text')}>MirrorZ Project</p>
-            </div>
+            </ExternalLink>
           </div>
-          <div className={styles('content_wrapper')}>
-            {/* <div className="grid grid-cols-2 gap-6 pb-16 sm:grid-cols-3 md:pl-16" /> */}
-            <div className={styles('copyright')}>
-              <span>&copy; MirrorZ <CurrentYear /></span>
-            </div>
+          <div className={styles('copyright')}>
+            &copy; <CurrentYear />
           </div>
+        </div>
+        <div className="flex flex-col">
+          <Header>More</Header>
+          <FooterLink href="https://mirrorz.org/">
+            MirrorZ
+          </FooterLink>
+          <FooterLink href="https://github.com/mirrorz/">
+            GitHub
+          </FooterLink>
         </div>
       </div>
     </footer>

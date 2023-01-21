@@ -189,6 +189,11 @@
     "file": "lxc-images.mdx",
     "cname": "lxc-images"
   },
+  "/mariadb/": {
+    "title": "MariaDB 镜像使用帮助",
+    "file": "mariadb.mdx",
+    "cname": "mariadb"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

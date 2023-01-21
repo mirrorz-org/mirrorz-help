@@ -184,6 +184,11 @@
     "file": "linux-firmware.git.mdx",
     "cname": "linux-firmware.git"
   },
+  "/lxc-images/": {
+    "title": "LXC Images 镜像使用帮助",
+    "file": "lxc-images.mdx",
+    "cname": "lxc-images"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

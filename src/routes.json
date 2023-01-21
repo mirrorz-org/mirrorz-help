@@ -104,6 +104,11 @@
     "file": "fedora.mdx",
     "cname": "fedora"
   },
+  "/flutter-sdk.git/": {
+    "title": "Flutter SDK 镜像使用帮助",
+    "file": "flutter-sdk.git.mdx",
+    "cname": "flutter-sdk.git"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

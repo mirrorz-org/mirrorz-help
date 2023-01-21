@@ -1,0 +1,36 @@
+---
+title: binutils-gdb.git 软件仓库镜像使用帮助
+cname: 'binutils-gdb.git'
+---
+
+如需克隆 Binutils 等项目的代码，使用
+
+<CodeBlock>
+
+```bash
+git clone {{http_protocol}}{{mirror}}
+```
+
+</CodeBlock>
+
+若要将 mirror 加入已有代码库，可在已有仓库中运行
+
+<CodeBlock>
+
+```bash
+git remote add mirror {{http_protocol}}{{mirror}}
+```
+
+</CodeBlock>
+
+或运行
+
+<CodeBlock>
+
+```bash
+git remote set-url origin {{http_protocol}}{{mirror}}
+```
+
+</CodeBlock>
+
+将默认上游设置为镜像站

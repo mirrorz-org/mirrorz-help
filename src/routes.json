@@ -29,6 +29,11 @@
     "file": "archlinuxcn.mdx",
     "cname": "archlinuxcn"
   },
+  "/binutils-gdb.git/": {
+    "title": "binutils-gdb.git 软件仓库镜像使用帮助",
+    "file": "binutils-gdb.git.mdx",
+    "cname": "binutils-gdb.git"
+  },
   "/centos/": {
     "title": "CentOS 软件仓库镜像使用帮助",
     "file": "centos.mdx",

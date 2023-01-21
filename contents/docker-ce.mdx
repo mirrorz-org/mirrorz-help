@@ -3,7 +3,7 @@ title: Docker CE 软件仓库镜像使用帮助
 cname: 'docker-ce'
 ---
 
-**注意: 本镜像只提供 Debian/Ubuntu/Fedora/CentOS/RHEL 的 docker 软件包，非 dockerhub**
+**注意：本镜像只提供 Debian/Ubuntu/Fedora/CentOS/RHEL 的 docker 软件包，非 dockerhub**
 
 ### 自动安装
 
@@ -30,19 +30,19 @@ wget -O- https://get.docker.com/ | sh
 
 以下内容根据 [官方文档](https://docs.docker.com/engine/install/debian/) 修改而来。
 
-如果你过去安装过 docker，先删掉:
+如果你过去安装过 docker，先删掉：
 
 ```bash
 sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
-首先安装依赖:
+首先安装依赖：
 
 ```bash
 sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
 ```
 
-信任 Docker 的 GPG 公钥并添加仓库:
+信任 Docker 的 GPG 公钥并添加仓库：
 
 <CodeBlock
   menus={[
@@ -89,7 +89,7 @@ sudo yum remove docker docker-client docker-client-latest docker-common docker-l
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 ```
 
-下载 repo 文件，并把软件仓库地址替换为镜像站:
+下载 repo 文件，并把软件仓库地址替换为镜像站：
 
 <CodeBlock
   menus={[
@@ -111,7 +111,7 @@ sudo sed -i 's+https://download.docker.com+{{http_protocol}}{{mirror}}+' /etc/yu
 
 </CodeBlock>
 
-最后安装:
+最后安装：
 
 ```bash
 sudo yum makecache fast

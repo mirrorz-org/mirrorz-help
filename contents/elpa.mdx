@@ -13,7 +13,7 @@ ELPA 是 Emacs 内建包管理器 `package.el` 的软件源，镜像站支持了
 
 </CodeBlock>
 
-根据你的需求，设置 package-archives ，比如用 GNU ELPA 和 MELPA：
+根据你的需求，设置 package-archives，比如用 GNU ELPA 和 MELPA：
 
 <CodeBlock>
 
@@ -83,7 +83,7 @@ Cask 用户
 - `gnu` 一般是必备的，其它的 elpa 中的包会依赖 `gnu` 中的包
 - `nongnu` 建议启用，类似于 `melpa` 但是 Emacs 官方维护的
 - `melpa` 滚动升级，收录了的包的数量最大
-- `stable-melpa` 依据源码的 Tag （Git）升级，数量比 `melpa` 少，因为很多包作者根本不打 Tag
+- `stable-melpa` 依据源码的 Tag（Git）升级，数量比 `melpa` 少，因为很多包作者根本不打 Tag
 - `org` 仅仅为了 `org-plus-contrib` 这一个包，org 重度用户使用
 - `gnu-devel` 收录 `gnu` 中的包的开发中版本，一般不必启用（与 `gnu` 的关系类似于 `melpa` 与 `stable-melpa` 的关系）
 - `nongnu-devel` 收录 `nongnu` 中的包的开发中版本，一般不必启用
@@ -96,9 +96,9 @@ Cask 用户
 URL Bug
 =======
 
-各个仓库的URL末尾一定要加`/`，否则会无法拉取，提示`Failed to download melpa archive`。
+各个仓库的 URL 末尾一定要加`/`，否则会无法拉取，提示`Failed to download melpa archive`。
 
-事实上，末尾没有`/`的话，emacs会去尝试取以下链接:
+事实上，末尾没有`/`的话，emacs 会去尝试取以下链接：
 
 <CodeBlock>
 
@@ -118,4 +118,4 @@ URL Bug
 
 </CodeBlock>
 
-这个是emacs自己的bug。在 https://github.com/melpa/melpa/issues/2139 中有描述。
+这个是 emacs 自己的 bug。在 https://github.com/melpa/melpa/issues/2139 中有描述。

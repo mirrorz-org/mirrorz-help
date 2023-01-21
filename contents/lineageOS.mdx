@@ -3,11 +3,11 @@ title: LineageOS 源码仓库镜像使用帮助
 cname: 'lineageOS'
 ---
 
-**注意: 本镜像是 lineageOS 源代码的镜像，如果是希望下载lineage的rom，请访问 https://help.mirrorz.org/lineage-rom/ 。**
+**注意：本镜像是 lineageOS 源代码的镜像，如果是希望下载 lineage 的 rom，请访问 https://help.mirrorz.org/lineage-rom/ 。**
 
 ### 过程摘录
 
-下载 repo 工具:
+下载 repo 工具：
 
 <CodeBlock>
 
@@ -20,16 +20,16 @@ chmod a+x ~/bin/repo
 
 </CodeBlock>
 
-或者使用[git-repo镜像](https://help.mirrorz.org/git-repo/)
+或者使用[git-repo 镜像](https://help.mirrorz.org/git-repo/)
 
-建立工作目录:
+建立工作目录：
 
 ```bash
 mkdir WORKING_DIRECTORY
 cd WORKING_DIRECTORY
 ```
 
-初始化仓库:
+初始化仓库：
 
 TODO: fix tuna redirect help
 
@@ -41,7 +41,7 @@ repo init -u {{http_protocol}}{{mirror}}/LineageOS/android.git -b cm-14.1
 
 </CodeBlock>
 
-(如果已经有从github同步的lineageOS源代码，可以从这里直接开始）
+（如果已经有从 github 同步的 lineageOS 源代码，可以从这里直接开始）
 
 打开`.repo/manifests/default.xml`，将
 
@@ -103,4 +103,4 @@ repo sync
 
 ### 异常处理
 	
-1. 部分仓库例如`Lineage_framework_base`同步的时候会出现bundle错误，这时候可以使用命令`repo sync --no-clone-bundle`进行同步就没有问题了
+1. 部分仓库例如`Lineage_framework_base`同步的时候会出现 bundle 错误，这时候可以使用命令`repo sync --no-clone-bundle`进行同步就没有问题了

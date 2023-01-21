@@ -1,0 +1,66 @@
+---
+title: Proxmox 软件仓库镜像使用帮助
+cname: 'proxmox'
+---
+
+新建 `/etc/apt/sources.list.d/pve-no-subscription.list`，内容为：
+
+<CodeBlock
+  menus={[
+    {
+      title: '版本',
+      variableName: 'release_name',
+      items: [
+        ['Debian 11', 'bullseye'],
+        ['Debian 10', 'buster'],
+        ['Debian 9', 'stretch'],
+        ['Debian 8', 'jessie'],
+      ]
+    }
+  ]}
+>
+
+```properties
+deb {{http_protocol}}{{mirror}}/debian {{release_name}} pve-no-subscription
+```
+
+</CodeBlock>
+
+ISO安装文件下载
+
+<CodeBlock>
+
+```
+{{http_protocol}}{{mirror}}/iso/
+```
+
+</CodeBlock>
+
+### CT Templates
+
+如果你需要加速 Proxmox 网页端下载 CT Templates，可以替换 CT Templates 的源。
+
+具体方法：将 `/usr/share/perl5/PVE/APLInfo.pm` 文件中默认的源地址 `http://download.proxmox.com`
+替换为
+
+<CodeBlock>
+
+```
+{{http_protocol}}{{mirror}}
+```
+
+</CodeBlock>
+
+
+可以使用如下命令修改：
+
+<CodeBlock>
+
+```bash
+cp /usr/share/perl5/PVE/APLInfo.pm /usr/share/perl5/PVE/APLInfo.pm_back
+sed -i 's|http://download.proxmox.com|{{http_protocol}}{{mirror}}|g' /usr/share/perl5/PVE/APLInfo.pm
+```
+
+</CodeBlock>
+
+针对 `/usr/share/perl5/PVE/APLInfo.pm` 文件的修改，重启后生效。

@@ -229,6 +229,11 @@
     "file": "packagist.mdx",
     "cname": "packagist"
   },
+  "/proxmox/": {
+    "title": "Proxmox 软件仓库镜像使用帮助",
+    "file": "proxmox.mdx",
+    "cname": "proxmox"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

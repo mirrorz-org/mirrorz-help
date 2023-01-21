@@ -74,6 +74,16 @@
     "file": "debian.mdx",
     "cname": "debian"
   },
+  "/docker-ce/": {
+    "title": "Docker CE 软件仓库镜像使用帮助",
+    "file": "docker-ce.mdx",
+    "cname": "docker-ce"
+  },
+  "/elpa/": {
+    "title": "ELPA 软件仓库镜像使用帮助",
+    "file": "elpa.mdx",
+    "cname": "elpa"
+  },
   "/epel/": {
     "title": "EPEL 软件仓库镜像使用帮助",
     "file": "epel.mdx",

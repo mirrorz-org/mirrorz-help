@@ -159,6 +159,11 @@
     "file": "lineageOS.mdx",
     "cname": "lineageOS"
   },
+  "/lineage-rom/": {
+    "title": "Lineage ROM 镜像使用帮助",
+    "file": "lineage-rom.mdx",
+    "cname": "lineage-rom"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

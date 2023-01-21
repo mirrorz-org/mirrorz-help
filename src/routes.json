@@ -24,6 +24,11 @@
     "file": "archlinuxarm.mdx",
     "cname": "archlinuxarm"
   },
+  "/archlinuxcn/": {
+    "title": "Arch Linux CN 软件仓库镜像使用帮助",
+    "file": "archlinuxcn.mdx",
+    "cname": "archlinuxcn"
+  },
   "/centos/": {
     "title": "CentOS 软件仓库镜像使用帮助",
     "file": "centos.mdx",

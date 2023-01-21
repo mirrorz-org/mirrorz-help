@@ -173,3 +173,27 @@ git config --global url.{{http_protocol}}{{mirror}}/.insteadof https://android.g
 Server does not provide clone.bundle; ignoring.` 怎么办？
 	- 无视即可。
 	- 参见：https://github.com/tuna/issues/issues/936
+
+### LineageOS 中对于 AOSP 的替换
+
+打开`.repo/manifests/default.xml`，将
+
+<CodeBlock>
+
+```xml
+  <remote  name="aosp"
+           fetch="https://android.googlesource.com"
+```
+
+</CodeBlock>
+
+改成
+
+<CodeBlock>
+
+```xml
+  <remote  name="aosp"
+           fetch="{{http_protocol}}{{mirror}}"
+```
+
+</CodeBlock>

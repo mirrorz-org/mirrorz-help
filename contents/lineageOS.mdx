@@ -1,0 +1,106 @@
+---
+title: LineageOS 源码仓库镜像使用帮助
+cname: 'lineageOS'
+---
+
+**注意: 本镜像是 lineageOS 源代码的镜像，如果是希望下载lineage的rom，请访问 https://help.mirrorz.org/lineage-rom/ 。**
+
+### 过程摘录
+
+下载 repo 工具:
+
+<CodeBlock>
+
+```bash
+mkdir ~/bin
+PATH=~/bin:$PATH
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+chmod a+x ~/bin/repo
+```
+
+</CodeBlock>
+
+或者使用[git-repo镜像](https://help.mirrorz.org/git-repo/)
+
+建立工作目录:
+
+```bash
+mkdir WORKING_DIRECTORY
+cd WORKING_DIRECTORY
+```
+
+初始化仓库:
+
+TODO: fix tuna redirect help
+
+<CodeBlock>
+
+```bash
+repo init -u {{http_protocol}}{{mirror}}/LineageOS/android.git -b cm-14.1
+```
+
+</CodeBlock>
+
+(如果已经有从github同步的lineageOS源代码，可以从这里直接开始）
+
+打开`.repo/manifests/default.xml`，将
+
+<CodeBlock>
+
+```xml
+  <remote  name="github"
+           fetch=".."
+           review="review.lineageos.org" />
+
+```
+
+</CodeBlock>
+
+改成
+
+<CodeBlock>
+
+```xml
+  <remote  name="github"
+           fetch="https://github.com/" />
+
+  <remote  name="lineage"
+           fetch="{{http_protocol}}{{mirror}}/"
+           review="review.lineageos.org" />
+```
+
+</CodeBlock>
+
+替换 AOSP 请参考 [AOSP 帮助](https://help.mirrorz.org/AOSP/) 中「LineageOS 中对于 AOSP 的替换」一节
+
+将
+
+<CodeBlock>
+
+```xml
+  <default revision="..."
+           remote="github"
+```
+
+</CodeBlock>
+
+改成
+
+<CodeBlock>
+
+```xml
+  <default revision="..."
+           remote="lineage"
+```
+
+</CodeBlock>
+
+同步源码树（以后只需执行这条命令来同步）：
+
+```
+repo sync
+```
+
+### 异常处理
+	
+1. 部分仓库例如`Lineage_framework_base`同步的时候会出现bundle错误，这时候可以使用命令`repo sync --no-clone-bundle`进行同步就没有问题了

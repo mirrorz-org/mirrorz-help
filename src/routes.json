@@ -154,6 +154,11 @@
     "file": "kubernetes.mdx",
     "cname": "kubernetes"
   },
+  "/lineageOS/": {
+    "title": "LineageOS 源码仓库镜像使用帮助",
+    "file": "lineageOS.mdx",
+    "cname": "lineageOS"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

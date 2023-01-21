@@ -6,18 +6,13 @@ import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
 
+import type { Menu, MenuValue } from './menus';
 import CodeBlockMenu from './menus';
 import ActualCode from './code';
 import LoadingOverlay from './overlay';
 
 import buildCode from './build-code';
 import { useMirrorHttpsEnabled } from '../../../contexts/mirror-enable-https';
-
-interface Menu {
-  title: string;
-  variableName: string,
-  items: [displayName: string, value: string][];
-}
 
 interface CodeBlockProps {
   isHttpProtocol?: boolean;
@@ -37,27 +32,48 @@ const styles = style9.create({
   }
 });
 
-const reducer = (prevState: Record<string, string>, [key, value]: [string, string]) => {
-  if (prevState[key] === value) return prevState;
+const reducer = (prevState: Record<string, string>, [key, value]: [string | undefined, MenuValue]) => {
+  if (typeof value === 'string') {
+    if (key) {
+      if (prevState[key] === value) return prevState;
+
+      return {
+        ...prevState,
+        [key]: value
+      };
+    }
+    return prevState;
+  }
+
   return {
     ...prevState,
-    [key]: value
+    ...value
   };
 };
 
-function CodeBlock({ menus = [], isHttpProtocol = true, code, codeLanguage }: CodeBlockProps) {
-  const [state, dispatch] = useReducer(reducer, null, _ => {
-    const obj = menus.reduce((acc, menu) => {
-      acc[menu.variableName] = menu.items[0][1];
-      return acc;
-    }, {} as Record<string, string>);
-
-    if (!isHttpProtocol) {
-      obj.http_protocol = '';
+const createInitialState = ([menus, isHttpProtocol]: [menus: Menu[], isHttpProtocol: boolean]): Record<string, string> => {
+  const obj = menus.reduce((acc, menu) => {
+    // TODO: prefer object variable in the future
+    const value = menu.items[0][1];
+    if (typeof value === 'string') {
+      if (menu.variableName) {
+        acc[menu.variableName] = value;
+      }
+    } else {
+      acc = { ...acc, ...value };
     }
+    return acc;
+  }, {} as Record<string, string>);
 
-    return obj;
-  });
+  if (!isHttpProtocol) {
+    obj.http_protocol = '';
+  }
+
+  return obj;
+};
+
+function CodeBlock({ menus = [], isHttpProtocol = true, code, codeLanguage }: CodeBlockProps) {
+  const [state, dispatch] = useReducer(reducer, [menus, isHttpProtocol], createInitialState);
 
   const httpsEnabled = useMirrorHttpsEnabled();
   const cname = useCurrentCname();

@@ -84,23 +84,22 @@ function CodeBlock({ menus = [], isHttpProtocol = true, code, codeLanguage }: Co
     return data?.[0][currentSelectedMirror]?.mirrors[cname].full || '(Loading...)';
   }, [cname, currentSelectedMirror, data, isLoading]);
 
-  const finalCode = useMemo(() => {
+  return useMemo(() => {
     const variable: Record<string, string> = { ...state, mirror: mirrorUrl };
     if (isHttpProtocol) {
       variable.http_protocol = httpsEnabled ? 'https://' : 'http://';
     }
-    return buildCode(code, variable);
-  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, state]);
-
-  return (
-    <div className={clsx('enhanced-codeblock', styles('container'))}>
-      <CodeBlockMenu menus={menus} dispatch={dispatch} />
-      <div className={styles('code_wrapper')}>
-        {isLoading && <LoadingOverlay />}
-        <ActualCode code={finalCode} language={codeLanguage} />
+    const finalCode = buildCode(code, variable);
+    return (
+      <div className={clsx('enhanced-codeblock', styles('container'))}>
+        <CodeBlockMenu menus={menus} dispatch={dispatch} />
+        <div className={styles('code_wrapper')}>
+          {isLoading && <LoadingOverlay />}
+          <ActualCode code={finalCode} language={codeLanguage} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }, [code, codeLanguage, httpsEnabled, isHttpProtocol, isLoading, menus, mirrorUrl, state]);
 }
 
 export default memo(CodeBlock);

@@ -17,17 +17,17 @@ cname: 'Adoptium'
 
 ### Debian/Ubuntu 用户
 
-首先请安装依赖:
+首先请安装依赖：
 ```shell
 apt-get update && apt-get install -y wget apt-transport-https
 ```
 
-然后信任 GPG 公钥:
+然后信任 GPG 公钥：
 ```shell
 wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo tee /etc/apt/keyrings/adoptium.asc
 ```
 
-随后执行以下命令来添加 apt 存储库:
+随后执行以下命令来添加 apt 存储库：
 
 <CodeBlock>
 
@@ -47,7 +47,7 @@ sudo apt-get update
 
 ### CentOS/RHEL/Fedora 用户
 
-执行以下命令来添加 rpm 存储库:
+执行以下命令来添加 rpm 存储库：
 
 <CodeBlock>
 

@@ -3,15 +3,15 @@ title: CentOS 软件仓库镜像使用帮助
 cname: 'centos'
 ---
 
-**请注意，CentOS 8 （非 Stream 版）已提前进入 EOL 停止服务阶段，因此镜像已被官方移动。如果您正在寻找关于这些系统的镜像，请参考 centos-vault 的帮助。**
+**请注意，CentOS 8（非 Stream 版）已提前进入 EOL 停止服务阶段，因此镜像已被官方移动。如果您正在寻找关于这些系统的镜像，请参考 centos-vault 的帮助。**
 
 该文件夹只提供 CentOS 7 与 8，架构仅为 `x86_64` ，如果需要较早版本的 CentOS，请参考 centos-vault 的帮助，若需要其他架构，请参考 centos-altarch 的帮助。
 
 建议先备份 `/etc/yum.repos.d/` 内的文件。
 
 然后编辑 `/etc/yum.repos.d/` 中的相应文件，在 `mirrorlist=` 开头行前面加 `#` 注释掉；并将 `baseurl=` 开头行取消注释（如果被注释的话）。
-对于 CentOS 7 ，请把 `mirror.centos.org/centos` 替换为 `{{mirror}}`。
-对于 CentOS 8 ，请把 `mirror.centos.org/$contentdir` 替换为 `{{mirror}}`。
+对于 CentOS 7，请把 `mirror.centos.org/centos` 替换为 `{{mirror}}`。
+对于 CentOS 8，请把 `mirror.centos.org/$contentdir` 替换为 `{{mirror}}`。
 
 以上步骤可以被下方的命令一步完成
 

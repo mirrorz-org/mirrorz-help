@@ -64,6 +64,11 @@
     "file": "crates.io-index.git.mdx",
     "cname": "crates.io-index.git"
   },
+  "/cygwin/": {
+    "title": "Cygwin 软件仓库镜像使用帮助",
+    "file": "cygwin.mdx",
+    "cname": "cygwin"
+  },
   "/debian/": {
     "title": "Debian 软件仓库镜像使用帮助",
     "file": "debian.mdx",

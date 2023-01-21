@@ -134,6 +134,11 @@
     "file": "glibc.git.mdx",
     "cname": "glibc.git"
   },
+  "/hackage/": {
+    "title": "Hackage 软件仓库镜像使用帮助",
+    "file": "hackage.mdx",
+    "cname": "hackage"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

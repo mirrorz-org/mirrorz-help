@@ -11,7 +11,7 @@ EPEL(Extra Packages for Enterprise Linux)是由Fedora Special Interest Group维�
 
 首先从CentOS Extras这个源里安装epel-release：
 
-```
+```shell
 yum install epel-release
 ```
 
@@ -23,7 +23,7 @@ yum install epel-release
 
 <CodeBlock>
 
-```
+```shell
 sed -e 's!^metalink=!#metalink=!g' \
     -e 's!^#baseurl=!baseurl=!g' \
     -e 's!http://download\.fedoraproject\.org/pub/epel!{{http_protocol}}{{mirror}}!g' \
@@ -37,7 +37,7 @@ sed -e 's!^metalink=!#metalink=!g' \
 
 <CodeBlock>
 
-```
+```ini
 [epel]
 name=Extra Packages for Enterprise Linux 7 - $basearch
 baseurl={{http_protocol}}{{mirror}}/7/$basearch

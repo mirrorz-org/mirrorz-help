@@ -1,0 +1,80 @@
+---
+title: GitLab CE 软件仓库镜像使用帮助
+cname: 'gitlab-ce'
+---
+
+**注意：gitlab-ce 镜像仅支持 x86-64 架构**
+
+### Debian/Ubuntu 用户
+
+首先信任 GitLab 的 GPG 公钥：
+
+```bash
+curl https://packages.gitlab.com/gpg.key 2> /dev/null | sudo apt-key add - &>/dev/null
+```
+
+再选择你的 Debian/Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/gitlab-ce.list`
+
+<CodeBlock
+  menus={[
+    {
+      title: '发行版',
+      variableName: 'os_name',
+      items: [
+        ['Debian', 'debian'],
+        ['Ubuntu', 'ubuntu'],
+      ]
+    },
+    {
+      title: '版本',
+      variableName: 'release_name',
+      items: [
+        ['Debian 11', 'bullseye'],
+        ['Debian 10', 'buster'],
+        ['Debian 9', 'stretch'],
+        ['Debian 8', 'jessie'],
+        ['Ubuntu 22.04 LTS', 'jammy'],
+        ['Ubuntu 20.04 LTS', 'focal'],
+        ['Ubuntu 18.04 LTS', 'bionic'],
+        ['Ubuntu 16.04 LTS', 'xenial'],
+      ]
+    }
+  ]}
+>
+
+```properties
+deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
+```
+
+</CodeBlock>
+
+安装 gitlab-ce:
+
+```bash
+sudo apt-get update
+sudo apt-get install gitlab-ce
+```
+
+### RHEL/CentOS 用户
+
+
+新建 `/etc/yum.repos.d/gitlab-ce.repo`，内容为
+
+<CodeBlock>
+
+```ini
+[gitlab-ce]
+name=Gitlab CE Repository
+baseurl={{http_protocol}}{{mirror}}/yum/el$releasever/
+gpgcheck=0
+enabled=1
+```
+
+</CodeBlock>
+
+再执行
+
+```bash
+sudo yum makecache
+sudo yum install gitlab-ce
+```

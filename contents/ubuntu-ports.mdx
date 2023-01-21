@@ -1,0 +1,42 @@
+---
+title: Ubuntu Ports 软件仓库镜像使用帮助
+cname: 'ubuntu-ports'
+---
+
+Ubuntu 的软件源配置文件是 `/etc/apt/sources.list`。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用选择的软件源镜像。
+
+<CodeBlock
+  menus={[
+    {
+      title: 'Ubuntu 版本',
+      variableName: 'release_name',
+      items: [
+        ['22.04 LTS', 'jammy'],
+        ['22.10', 'kinetic'],
+        ['20.04 LTS', 'focal'],
+        ['18.04 LTS', 'bionic'],
+        ['16.04 LTS', 'xenial'],
+        ['14.04 LTS', 'trusty'],
+      ]
+    }
+  ]}
+>
+
+```properties
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb {{http_protocol}}{{mirror}}/ {{release_name}} main restricted universe multiverse
+# deb-src {{http_protocol}}{{mirror}}/ {{release_name}} main restricted universe multiverse
+deb {{http_protocol}}{{mirror}}/ {{release_name}}-updates main restricted universe multiverse
+# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-updates main restricted universe multiverse
+deb {{http_protocol}}{{mirror}}/ {{release_name}}-backports main restricted universe multiverse
+# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main restricted universe multiverse
+deb {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted universe multiverse
+# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted universe multiverse
+
+
+# 预发布软件源，不建议启用
+# deb {{http_protocol}}{{mirror}}/ {{release_name}}-proposed main restricted universe multiverse
+# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-proposed main restricted universe multiverse
+```
+
+</CodeBlock>

@@ -1,0 +1,53 @@
+---
+title: Chef 软件仓库镜像使用帮助
+cname: 'chef'
+---
+
+Chef 是一套自动化运维工具。
+
+### Debian/Ubuntu 用户
+
+再选择你的 Debian/Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/chef.list`
+
+<CodeBlock
+  menus={[
+    {
+      title: 'Ubuntu/Debian 版本',
+      variableName: 'release_name',
+      items: [
+        ['Ubuntu 20.04 LTS', 'focal'],
+        ['Ubuntu 18.04 LTS', 'bionic'],
+        ['Ubuntu 16.04 LTS', 'xenial'],
+        ['Ubuntu 14.04 LTS', 'trusty'],
+        ['Debian bullseye', 'bullseye'],
+        ['Debian buster', 'buster'],
+        ['Debian stretch', 'stretch'],
+        ['Debian jessie', 'jessie']
+      ]
+    }
+  ]}
+>
+
+```properties
+deb {{http_protocol}}{{mirror}}/apt/stable {{release_name}} main
+```
+
+</CodeBlock>
+
+
+### RHEL/CentOS 用户
+
+新建 `/etc/yum.repos.d/chef.repo`，内容为：
+
+<CodeBlock>
+
+```ini
+[chef-stable]
+name=chef-stable
+baseurl={{http_protocol}}{{mirror}}/yum/stable/stable-el$releasever-x86_64/
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.chef.io/chef.asc
+```
+
+</CodeBlock>

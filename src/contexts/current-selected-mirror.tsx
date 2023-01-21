@@ -15,9 +15,12 @@ export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChild
   // When data is finally loaded, but there is no default mirror provided, we set the first mirror as default
   // TODO: use mirror from URL query when available
   if (data && cname && selectedMirror === null) {
-    startTransition(() => {
-      setSelectedMirror(data[1][cname][0].site.abbr);
-    });
+    const select = data[1][cname]?.[0].site.abbr;
+    if (select) {
+      startTransition(() => {
+        setSelectedMirror(select);
+      });
+    }
   }
 
   return (

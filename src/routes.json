@@ -120,9 +120,14 @@
     "cname": "gitlab-ce"
   },
   "/gitlab-runner/": {
-    "title": "GitLab Runner  软件仓库使用帮助",
+    "title": "GitLab Runner 软件仓库使用帮助",
     "file": "gitlab-runner.mdx",
     "cname": "gitlab-runner"
+  },
+  "/git-repo/": {
+    "title": "Git Repo 软件仓库使用帮助",
+    "file": "git-repo.mdx",
+    "cname": "git-repo"
   },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",

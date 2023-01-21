@@ -199,6 +199,11 @@
     "file": "mongodb.mdx",
     "cname": "mongodb"
   },
+  "/msys2/": {
+    "title": "MSYS2 软件仓库镜像使用帮助",
+    "file": "msys2.mdx",
+    "cname": "msys2"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

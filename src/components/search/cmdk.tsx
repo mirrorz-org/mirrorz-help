@@ -43,7 +43,7 @@ const styles = style9.create({
       borderBottomLeftRadius: '8px',
       borderBottomRightRadius: '8px'
     },
-    top: '20%',
+    top: '10%',
     left: '50%',
     backgroundColor: 'var(--bg-wash)',
     overflow: 'hidden',

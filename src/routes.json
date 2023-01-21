@@ -209,6 +209,11 @@
     "file": "mysql.mdx",
     "cname": "mysql"
   },
+  "/nodejs-release/": {
+    "title": "NodeJS Release 软件仓库镜像使用帮助",
+    "file": "nodejs-release.mdx",
+    "cname": "nodejs-release"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

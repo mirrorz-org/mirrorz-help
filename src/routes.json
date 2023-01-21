@@ -114,6 +114,11 @@
     "file": "gcc.git.mdx",
     "cname": "gcc.git"
   },
+  "/gitlab-ce/": {
+    "title": "GitLab CE 软件仓库使用帮助",
+    "file": "gitlab-ce.mdx",
+    "cname": "gitlab-ce"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

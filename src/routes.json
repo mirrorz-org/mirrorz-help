@@ -204,6 +204,11 @@
     "file": "msys2.mdx",
     "cname": "msys2"
   },
+  "/mysql/": {
+    "title": "MySQL 软件仓库镜像使用帮助",
+    "file": "mysql.mdx",
+    "cname": "mysql"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

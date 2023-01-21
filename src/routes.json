@@ -94,6 +94,11 @@
     "file": "epel.mdx",
     "cname": "epel"
   },
+  "/fdroid/": {
+    "title": "F-Droid 软件仓库镜像使用帮助",
+    "file": "fdroid.mdx",
+    "cname": "fdroid"
+  },
   "/fedora/": {
     "title": "Fedora 软件仓库镜像使用帮助",
     "file": "fedora.mdx",

@@ -36,11 +36,18 @@ const styles = style9.create({
     backgroundColor: 'var(--bg-wash)',
     paddingTop: 0,
     paddingRight: '20px',
+    borderStyle: 'solid',
+    borderColor: 'var(--border-secondary)',
     '@media screen and (min-width: 840px)': {
       display: 'block',
       paddingTop: '16px',
-      paddingLeft: '20px'
+      paddingLeft: '20px',
+      paddingBottom: '16px',
+      borderBottomWidth: '1px'
     }
+  },
+  header_open: {
+    borderBottomWidth: '1px'
   },
   header_inner: {
     display: 'flex',
@@ -144,7 +151,7 @@ const styles = style9.create({
     width: '100%',
     flexGrow: 1,
     paddingRight: 0,
-    paddingTop: '24px',
+    paddingTop: '12px',
     '@media screen and (min-width: 840px)': {
       height: 'auto',
       paddingRight: '20px',
@@ -192,8 +199,7 @@ function Nav() {
 
   return (
     <div className={styles('container', isOpen && 'container_open')}>
-
-      <div className={styles('header')}>
+      <div className={styles('header', isOpen && 'header_open')}>
         <div className={styles('header_inner')}>
           <button
             type="button"

@@ -3,7 +3,7 @@ title: Homebrew 软件仓库镜像使用帮助
 cname: 'homebrew'
 ---
 
-**注：该镜像是 Homebrew / Linuxbrew 源程序以及 formula / cask 索引的镜像（即 `brew update` 时所更新内容）。本镜像站同时提供相应的二进制预编译包的镜像，请参考 [Homebrew bottles 镜像使用帮助](https://help.mirrorz.org/homebrew-bottles/)**
+**注：该镜像是 Homebrew / Linuxbrew 源程序以及 formula / cask 索引的镜像（即 `brew update` 时所更新内容）。镜像站同时提供相应的二进制预编译包的镜像，请参考 [Homebrew bottles 镜像使用帮助](https://help.mirrorz.org/homebrew-bottles/)**
 
 镜像站提供了 https://github.com/Homebrew 组织下的以下 `repo`：`brew`, `homebrew-core`, `homebrew-cask`, `homebrew-cask-fonts`, `homebrew-cask-drivers`, `homebrew-cask-versions`, `homebrew-command-not-found`, `install`。
 
@@ -28,14 +28,14 @@ export HOMEBREW_CORE_GIT_REMOTE="{{http_protocol}}{{mirror}}/homebrew-core.git"
 
 </CodeBlock>
 
-并前往[Homebrew bottles 镜像使用帮助](https://help.mirrorz.org/homebrew-bottles/)设置好 `HOMEBREW_BOTTLE_DOMAIN`
+并前往[Homebrew bottles 镜像使用帮助](https://help.mirrorz.org/homebrew-bottles/)中「临时替换」一节设置好 `HOMEBREW_BOTTLE_DOMAIN`
 
 最后，在终端运行以下命令以安装 Homebrew / Linuxbrew：
 
 <CodeBlock>
 
 ```bash
-# 从本镜像下载安装脚本并安装 Homebrew / Linuxbrew
+# 从镜像下载安装脚本并安装 Homebrew / Linuxbrew
 git clone --depth=1 {{http_protocol}}{{mirror}}/install.git brew-install
 /bin/bash brew-install/install.sh
 rm -rf brew-install

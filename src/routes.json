@@ -144,6 +144,11 @@
     "file": "homebrew.mdx",
     "cname": "homebrew"
   },
+  "/homebrew-bottles/": {
+    "title": "Homebrew Bottles 软件仓库镜像使用帮助",
+    "file": "homebrew-bottles.mdx",
+    "cname": "homebrew-bottles"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

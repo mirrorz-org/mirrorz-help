@@ -7,6 +7,11 @@ import ini from 'highlight.js/lib/languages/ini';
 import properties from 'highlight.js/lib/languages/properties';
 import bash from 'highlight.js/lib/languages/bash';
 import shell from 'highlight.js/lib/languages/shell';
+import yaml from 'highlight.js/lib/languages/yaml';
+import lisp from 'highlight.js/lib/languages/lisp';
+import julia from 'highlight.js/lib/languages/julia';
+import nix from 'highlight.js/lib/languages/nix';
+
 import clsx from 'clsx';
 
 lowlight.registerLanguage('markdown', md);
@@ -26,6 +31,15 @@ lowlight.registerAlias({ bash: ['sh', 'zsh', 'fish'] });
 lowlight.registerLanguage('console', shell);
 lowlight.registerAlias({ console: ['shell'] });
 
+lowlight.registerLanguage('yaml', yaml);
+lowlight.registerAlias({ yaml: ['yml'] });
+
+lowlight.registerLanguage('lisp', lisp);
+
+lowlight.registerLanguage('julia', julia);
+
+lowlight.registerLanguage('nix', nix);
+
 const alias: Record<string, string> = {
   mdown: 'markdown',
   mkdn: 'markdown',
@@ -37,7 +51,11 @@ const alias: Record<string, string> = {
   zsh: 'bash',
   fish: 'bash',
 
-  console: 'shell'
+  console: 'shell',
+
+  yml: 'yaml',
+
+  text: 'plain'
 };
 
 interface LowlightProps {

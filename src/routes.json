@@ -224,6 +224,11 @@
     "file": "openwrt.mdx",
     "cname": "openwrt"
   },
+  "/packagist/": {
+    "title": "Packagist 软件仓库镜像使用帮助",
+    "file": "packagist.mdx",
+    "cname": "packagist"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

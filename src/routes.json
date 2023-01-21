@@ -219,6 +219,11 @@
     "file": "OpenMediaVault.mdx",
     "cname": "OpenMediaVault"
   },
+  "/openwrt/": {
+    "title": "OpenWRT 软件仓库镜像使用帮助",
+    "file": "openwrt.mdx",
+    "cname": "openwrt"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

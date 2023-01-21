@@ -12,7 +12,7 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
   );
 
   return (
-    <Layout meta={meta as any} toc={toc} cname={cname}>
+    <Layout meta={meta as any} toc={toc} cname={cname} isContent>
       {/**
         * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
         * No fallback UI so need to be careful not to suspend directly inside.

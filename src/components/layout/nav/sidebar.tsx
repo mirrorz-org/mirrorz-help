@@ -1,6 +1,7 @@
 import type { RoutesJson } from '@/types/routesJson';
 import { usePendingRoute } from '@/hooks/use-pending-route';
-import { useRouter } from 'next/router';
+import { usePathname } from '@/hooks/use-current-pathname';
+
 import { SidebarLink } from './nav-link';
 import { memo } from 'react';
 
@@ -10,7 +11,7 @@ interface SidebarProps {
 
 function Sidebar({ routes }: SidebarProps) {
   const pendingRoute = usePendingRoute();
-  const cleanedPath = useRouter().asPath.split(/[?#]/)[0];
+  const cleanedPath = usePathname();
 
   return (
     <ul>

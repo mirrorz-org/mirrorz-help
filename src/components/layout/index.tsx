@@ -16,6 +16,7 @@ import { SelectedMirrorProvider } from '@/contexts/current-selected-mirror';
 import { MirrorEnableHttpsProvider } from '@/contexts/mirror-enable-https';
 import type { MetaFromFrontMatters } from '../../types/front-matter';
 import { FrontMatterProvider } from '../../contexts/current-frontmatters';
+import MetadataCard from '../page-meta';
 
 const styles = style9.create({
   container: {
@@ -69,10 +70,11 @@ const styles = style9.create({
 interface LayoutProps {
   toc?: ToC[],
   meta?: MetaFromFrontMatters,
-  cname?: string | null
+  cname?: string | null,
+  isContent?: boolean
 }
 
-export function Layout({ children, meta, toc = [], cname }: React.PropsWithChildren<LayoutProps>) {
+export function Layout({ children, meta, toc = [], cname, isContent = false }: React.PropsWithChildren<LayoutProps>) {
   const { asPath } = useRouter();
   useSearchHotKeys();
 
@@ -101,6 +103,7 @@ export function Layout({ children, meta, toc = [], cname }: React.PropsWithChild
                   <DocumentationWrapper>
                     {children}
                     {/** TODO: contributor list (next.oi-wiki.org) & Edit on GitHub. See also MDN */}
+                    {isContent && <MetadataCard filename="" />}
                   </DocumentationWrapper>
                 </article>
                 <Footer />

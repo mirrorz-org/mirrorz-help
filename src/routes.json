@@ -84,6 +84,11 @@
     "file": "elpa.mdx",
     "cname": "elpa"
   },
+  "/elrepo/": {
+    "title": "ELRepo 软件仓库镜像使用帮助",
+    "file": "elrepo.mdx",
+    "cname": "elrepo"
+  },
   "/epel/": {
     "title": "EPEL 软件仓库镜像使用帮助",
     "file": "epel.mdx",

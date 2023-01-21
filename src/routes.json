@@ -54,6 +54,11 @@
     "file": "chef.mdx",
     "cname": "chef"
   },
+  "/CocoaPods/": {
+    "title": "CocoaPods 软件仓库镜像使用帮助",
+    "file": "CocoaPods.mdx",
+    "cname": "CocoaPods"
+  },
   "/debian/": {
     "title": "Debian 软件仓库镜像使用帮助",
     "file": "debian.mdx",

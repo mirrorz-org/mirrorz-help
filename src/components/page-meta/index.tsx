@@ -12,7 +12,7 @@ const styles = style9.create({
     backgroundColor: 'var(--bg-secondary)',
     borderRadius: '8px',
     color: 'var(--text-primary)',
-    marginTop: '24px',
+    marginTop: '36px',
     marginBottom: '24px'
   },
   p: {
@@ -22,7 +22,13 @@ const styles = style9.create({
     }
   },
   link: {
-    color: 'var(--text-link)'
+    color: 'var(--text-link)',
+    borderBottomWidth: '1px',
+    borderBottomColor: 'transparent',
+    borderBottomStyle: 'solid',
+    ':hover': {
+      borderBottomColor: 'var(--text-link)'
+    }
   },
   bold: {
     fontWeight: 700

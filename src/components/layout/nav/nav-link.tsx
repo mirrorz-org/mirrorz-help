@@ -83,7 +83,7 @@ export const SidebarLink = memo(({
       href={href}
       ref={ref}
       title={title}
-      target={href.startsWith('https://') ? '_blank' : ''}
+      target={href.startsWith('https://') ? '_blank' : undefined}
       className={styles('base', isActive ? 'active' : 'inactive', isPending && 'pending')}
     >
       {title}

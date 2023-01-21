@@ -3,8 +3,8 @@ import style9 from 'style9';
 
 const styles = style9.create({
   icon: {
-    width: '48px',
-    height: '48px',
+    width: '24px',
+    height: '24px',
     zIndex: 1001
   },
   outer: {

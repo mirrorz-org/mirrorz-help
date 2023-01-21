@@ -18,8 +18,6 @@ module.exports = function (task, _utils) {
       options.externals = { ...options.externals };
       delete options.externals[options.packageName];
     }
-    const precompiled = options.precompiled !== false;
-    delete options.precompiled;
 
     return ncc(join(__dirname, file.dir, file.base), {
       filename: file.base,
@@ -44,8 +42,7 @@ module.exports = function (task, _utils) {
           this,
           options.packageName,
           file.base,
-          options.bundleName,
-          precompiled
+          options.bundleName
         );
       }
 
@@ -67,7 +64,7 @@ module.exports = function (task, _utils) {
 // This function writes a minimal `package.json` file for a compiled package.
 // It defines `name`, `main`, `author`, and `license`. It also defines `types`.
 // n.b. types intended for development usage only.
-function writePackageManifest(packageName, main, bundleName, precompiled) {
+function writePackageManifest(packageName, main, bundleName) {
   // some newer packages fail to include package.json in the exports
   // so we can't reliably use require.resolve here
   let packagePath;
@@ -83,7 +80,7 @@ function writePackageManifest(packageName, main, bundleName, precompiled) {
 
   const compiledPackagePath = join(
     __dirname,
-    `${!precompiled ? 'dist/' : ''}src/compiled/${bundleName || packageName}`
+    `src/compiled/${bundleName || packageName}`
   );
 
   const potentialLicensePath = join(dirname(packagePath), './LICENSE');

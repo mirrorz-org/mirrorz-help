@@ -16,17 +16,18 @@ const styles = style9.create({
     paddingLeft: '24px',
     marginTop: '12px',
     marginBottom: '24px',
-    listStyleType: 'decimal outside'
+    listStyleType: 'decimal',
+    listStylePosition: 'outside'
   },
   ul: {
     paddingLeft: '24px',
     marginTop: '12px',
     marginBottom: '24px',
-    listStyleType: 'disc outside'
+    listStyleType: 'disc',
+    listStylePosition: 'outside'
   },
   li: {
-    lineHeight: 1.625,
-    listStyleType: 'unset'
+    lineHeight: 1.625
   },
   hr: {
     marginTop: '24px',

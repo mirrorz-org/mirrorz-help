@@ -149,6 +149,11 @@
     "file": "homebrew-bottles.mdx",
     "cname": "homebrew-bottles"
   },
+  "/kubernetes/": {
+    "title": "Kubernetes 软件仓库镜像使用帮助",
+    "file": "kubernetes.mdx",
+    "cname": "kubernetes"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

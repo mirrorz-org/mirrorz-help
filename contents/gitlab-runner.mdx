@@ -9,7 +9,7 @@ cname: 'gitlab-runner'
 
 首先信任 GitLab 的 GPG 公钥:
 
-```
+```bash
 curl https://packages.gitlab.com/gpg.key 2> /dev/null | sudo apt-key add - &>/dev/null
 ```
 
@@ -51,7 +51,7 @@ deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
 
 安装 gitlab-runner:
 
-```
+```bash
 sudo apt-get update
 sudo apt-get install gitlab-runner
 ```
@@ -63,7 +63,7 @@ sudo apt-get install gitlab-runner
 
 <CodeBlock>
 
-```
+```ini
 [gitlab-runner]
 name=gitlab-runner
 baseurl={{http_protocol}}{{mirror}}/yum/el$releasever-$basearch/
@@ -77,7 +77,7 @@ gpgkey=https://packages.gitlab.com/gpg.key
 
 再执行
 
-```
+```bash
 sudo yum makecache
 sudo yum install gitlab-runner
 ```

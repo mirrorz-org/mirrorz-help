@@ -9,7 +9,7 @@ cname: 'gitlab-ce'
 
 首先信任 GitLab 的 GPG 公钥:
 
-```
+```bash
 curl https://packages.gitlab.com/gpg.key 2> /dev/null | sudo apt-key add - &>/dev/null
 ```
 
@@ -50,7 +50,7 @@ deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
 
 安装 gitlab-ce:
 
-```
+```bash
 sudo apt-get update
 sudo apt-get install gitlab-ce
 ```
@@ -62,7 +62,7 @@ sudo apt-get install gitlab-ce
 
 <CodeBlock>
 
-```
+```ini
 [gitlab-ce]
 name=Gitlab CE Repository
 baseurl={{http_protocol}}{{mirror}}/yum/el$releasever/
@@ -74,7 +74,7 @@ enabled=1
 
 再执行
 
-```
+```bash
 sudo yum makecache
 sudo yum install gitlab-ce
 ```

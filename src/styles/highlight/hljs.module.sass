@@ -4,9 +4,11 @@
 .hljs_container
   @include githublight()
 
-  :global(html.dark)
+:global(html.dark)
+  .hljs_container
     @include githubdark()
 
-  @media (prefers-color-scheme: dark)
-    :global(:not(.light):root)
+@media (prefers-color-scheme: dark)
+  :global(:not(.light):root)
+    .hljs_container
       @include githubdark()

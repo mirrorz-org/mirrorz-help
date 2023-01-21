@@ -10,7 +10,7 @@
     "cname": "anaconda"
   },
   "/AOSP/": {
-    "title": "AOSP 软件仓库镜像使用帮助",
+    "title": "AOSP 镜像使用帮助",
     "file": "AOSP.mdx",
     "cname": "AOSP"
   },
@@ -30,7 +30,7 @@
     "cname": "archlinuxcn"
   },
   "/binutils-gdb.git/": {
-    "title": "binutils-gdb.git 软件仓库镜像使用帮助",
+    "title": "GDB Git 镜像使用帮助",
     "file": "binutils-gdb.git.mdx",
     "cname": "binutils-gdb.git"
   },
@@ -108,6 +108,11 @@
     "title": "Flutter SDK 镜像使用帮助",
     "file": "flutter-sdk.git.mdx",
     "cname": "flutter-sdk.git"
+  },
+  "/gcc.git/": {
+    "title": "GCC Git 镜像使用帮助",
+    "file": "gcc.git.mdx",
+    "cname": "gcc.git"
   },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",

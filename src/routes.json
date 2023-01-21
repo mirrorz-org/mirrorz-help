@@ -49,6 +49,11 @@
     "file": "centos-vault.mdx",
     "cname": "centos-vault"
   },
+  "/chef/": {
+    "title": "Chef 软件仓库镜像使用帮助",
+    "file": "chef.mdx",
+    "cname": "chef"
+  },
   "/debian/": {
     "title": "Debian 软件仓库镜像使用帮助",
     "file": "debian.mdx",

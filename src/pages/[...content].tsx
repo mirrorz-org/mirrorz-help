@@ -1,7 +1,7 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { ContentProps } from '../lib/server/parse-markdown';
 import { getAvaliableSegments, getContentBySegments } from '../lib/server/parse-markdown';
-import { Fragment, useMemo } from 'react';
+import { Fragment, Suspense, useMemo } from 'react';
 import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';
 
@@ -14,7 +14,13 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
 
   return (
     <Layout meta={meta as any} toc={toc} cname={cname}>
-      {parsedContent}
+      {/**
+        * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
+        * No fallback UI so need to be careful not to suspend directly inside.
+        */}
+      <Suspense fallback={null}>
+        {parsedContent}
+      </Suspense>
     </Layout>
   );
 }

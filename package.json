@@ -7,7 +7,7 @@
     "src/compiled"
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "node ./scripts/better-next-dev.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -52,6 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "@vercel/ncc": "^0.36.0",
+    "chokidar": "^3.5.3",
     "critters": "^0.0.16",
     "eslint": "^8.32.0",
     "eslint-config-next": "^13.1.3-canary.0",
@@ -60,6 +61,7 @@
     "eslint-plugin-mdx": "^2.0.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.32.1",
+    "express": "^4.18.2",
     "find-up": "5.0.0",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",

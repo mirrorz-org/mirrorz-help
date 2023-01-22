@@ -259,6 +259,11 @@
     "file": "raspberrypi.mdx",
     "cname": "raspberrypi"
   },
+  "/repo-ck/": {
+    "title": "Repo-ck 软件仓库镜像使用帮助",
+    "file": "repo-ck.mdx",
+    "cname": "repo-ck"
+  },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",

@@ -269,6 +269,11 @@
     "file": "riscv-toolchains.mdx",
     "cname": "riscv-toolchains"
   },
+  "/ros/": {
+    "title": "ROS 软件仓库镜像使用帮助",
+    "file": "ros.mdx",
+    "cname": "ros"
+  },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",

@@ -3,7 +3,7 @@ title: Ubuntu 软件仓库镜像使用帮助
 cname: 'ubuntu'
 ---
 
-本镜像仅包含 32/64 位 x86 架构处理器的软件包，在 ARM(arm64, armhf)、PowerPC(ppc64el)、RISC-V(riscv64) 和 S390x 等架构的设备上（对应官方源为 ports.ubuntu.com）请使用 [ubuntu-ports 镜像](https://help.mirrorz.org/ubuntu-ports/)。
+本镜像仅包含 32/64 位 x86 架构处理器的软件包，在 ARM(arm64, armhf)、PowerPC(ppc64el)、RISC-V(riscv64) 和 S390x 等架构的设备上（对应官方源为 ports.ubuntu.com）请使用 [ubuntu-ports 镜像](/ubuntu-ports/)。
 
 Ubuntu 的软件源配置文件是 `/etc/apt/sources.list`。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用选择的软件源镜像。
 
@@ -11,14 +11,27 @@ Ubuntu 的软件源配置文件是 `/etc/apt/sources.list`。将系统自带的�
   menus={[
     {
       title: 'Ubuntu 版本',
-      variableName: 'release_name',
       items: [
-        ['22.04 LTS', 'jammy'],
-        ['22.10', 'kinetic'],
-        ['20.04 LTS', 'focal'],
-        ['18.04 LTS', 'bionic'],
-        ['16.04 LTS', 'xenial'],
-        ['14.04 LTS', 'trusty'],
+        ['22.04 LTS', { release_name: 'jammy' }],
+        ['22.10', { release_name: 'kinetic' }],
+        ['20.04 LTS', { release_name: 'focal' }],
+        ['18.04 LTS', { release_name: 'bionic' }],
+        ['16.04 LTS', { release_name: 'xenial' }],
+        ['14.04 LTS', { release_name: 'trusty' }],
+      ]
+    },
+    {
+      title: '启用 proposed',
+      items: [
+        ['否', { enable_proposed: '# ' }],
+        ['是', { enable_proposed: '' }],
+      ]
+    },
+    {
+      title: '启用源码镜像',
+      items: [
+        ['否', { enable_source: '# ' }],
+        ['是', { enable_source: '' }],
       ]
     }
   ]}
@@ -27,18 +40,18 @@ Ubuntu 的软件源配置文件是 `/etc/apt/sources.list`。将系统自带的�
 ```properties
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 deb {{http_protocol}}{{mirror}}/ {{release_name}} main restricted universe multiverse
-# deb-src {{http_protocol}}{{mirror}}/ {{release_name}} main restricted universe multiverse
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}} main restricted universe multiverse
 deb {{http_protocol}}{{mirror}}/ {{release_name}}-updates main restricted universe multiverse
-# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-updates main restricted universe multiverse
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-updates main restricted universe multiverse
 deb {{http_protocol}}{{mirror}}/ {{release_name}}-backports main restricted universe multiverse
-# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main restricted universe multiverse
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main restricted universe multiverse
 deb {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted universe multiverse
-# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted universe multiverse
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted universe multiverse
 
 
 # 预发布软件源，不建议启用
-# deb {{http_protocol}}{{mirror}}/ {{release_name}}-proposed main restricted universe multiverse
-# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-proposed main restricted universe multiverse
+{{enable_proposed}}deb {{http_protocol}}{{mirror}}/ {{release_name}}-proposed main restricted universe multiverse
+{{enable_proposed}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-proposed main restricted universe multiverse
 ```
 
 </CodeBlock>

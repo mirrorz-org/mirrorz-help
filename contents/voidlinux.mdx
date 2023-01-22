@@ -1,0 +1,30 @@
+---
+title: Void Linux 软件仓库镜像使用帮助
+cname: 'voidlinux'
+---
+
+使用如下命令替换为本镜像：
+
+<CodeBlock>
+
+```bash
+mkdir -p /etc/xbps.d
+cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
+sed -i 's|https://repo-default.voidlinux.org|{{http_protocol}}{{mirror}}|g' /etc/xbps.d/*-repository-*.conf
+```
+
+</CodeBlock>
+
+若报错可尝试
+
+<CodeBlock>
+
+```bash
+sed -i 's|https://alpha.de.repo.voidlinux.org|{{http_protocol}}{{mirror}}|g' /etc/xbps.d/*-repository-*.conf
+```
+
+</CodeBlock>
+
+之后可用 `xbps-query -L` 检查是否正确替换。
+
+参考[官方教程](https://docs.voidlinux.org/xbps/repositories/mirrors/changing.html)。

@@ -11,33 +11,23 @@ cname: 'mysql'
   menus={[
     {
       title: '发行版',
-      variableName: 'os_name',
       items: [
-        ['Debian', 'debian'],
-        ['Ubuntu', 'ubuntu'],
-      ]
-    },
-    {
-      title: '版本',
-      variableName: 'release_name',
-      items: [
-        ['Debian 11', 'bullseye'],
-        ['Debian 10', 'buster'],
-        ['Debian 9', 'stretch'],
-        ['Debian 8', 'jessie'],
-        ['Ubuntu 22.04 LTS', 'jammy'],
-        ['Ubuntu 20.04 LTS', 'focal'],
-        ['Ubuntu 18.04 LTS', 'bionic'],
-        ['Ubuntu 16.04 LTS', 'xenial'],
+        ['Debian 11', { os_name: 'debian', release_name: 'bullseye' }],
+        ['Debian 10', { os_name: 'debian', release_name: 'buster' }],
+        ['Debian 9', { os_name: 'debian', release_name: 'stretch' }],
+        ['Debian 8', { os_name: 'debian', release_name: 'jessie' }],
+        ['Ubuntu 22.04 LTS', { os_name: 'ubuntu', release_name: 'jammy' }],
+        ['Ubuntu 20.04 LTS', { os_name: 'ubuntu', release_name: 'focal' }],
+        ['Ubuntu 18.04 LTS', { os_name: 'ubuntu', release_name: 'bionic' }],
+        ['Ubuntu 16.04 LTS', { os_name: 'ubuntu', release_name: 'xenial' }],
       ]
     },
     {
       title: 'MySQL 版本号',
-      variableName: 'version',
       items: [
-        ['8.0', '8.0'],
-        ['5.7', '5.7'],
-        ['5.6', '5.6'],
+        ['8.0', { version: '8.0' }],
+        ['5.7', { version: '5.7' }],
+        ['5.6', { version: '5.6' }],
       ]
     }
   ]}
@@ -61,21 +51,19 @@ deb {{http_protocol}}{{mirror}}/apt/{{os_name}} {{release_name}} mysql-{{version
 <CodeBlock
   menus={[
     {
-      title: '版本',
-      variableName: 'release_name',
+      title: '发行版',
       items: [
-        ['CentOS/RHEL 7', 'el7'],
-        ['CentOS/RHEL 8', 'el8'],
-        ['CentOS/RHEL 6', 'el6'],
+        ['CentOS/RHEL 7', { release_name: 'el7' }],
+        ['CentOS/RHEL 8', { release_name: 'el8' }],
+        ['CentOS/RHEL 6', { release_name: 'el6' }],
       ]
     },
     {
       title: 'MySQL 版本号',
-      variableName: 'version',
       items: [
-        ['8.0', '8.0'],
-        ['5.7', '5.7'],
-        ['5.6', '5.6'],
+        ['8.0', { version: '8.0' }],
+        ['5.7', { version: '5.7' }],
+        ['5.6', { version: '5.6' }],
       ]
     }
   ]}

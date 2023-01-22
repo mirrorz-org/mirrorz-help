@@ -11,7 +11,7 @@ Open Media Vault 是一款基于 Debian 的 NAS 操作系统，本站提供 Open
 
 登录到已经部署的 Open Media Vault 使用如下命令可以替换 Open Media Vault 镜像源。
 
-其中的非 OpenMediaVault 部分的镜像站需要分别在 [Debian 帮助](https://help.mirrorz.org/debian/)，[Docker CE 帮助](https://help.mirrorz.org/docker-ce/)，和 [Proxmox 帮助](https://help.mirrorz.org/proxmox/) 中构造。
+其中的非 OpenMediaVault 部分的镜像站需要分别在 [Debian 帮助](/debian/)，[Docker CE 帮助](/docker-ce/)，和 [Proxmox 帮助](/proxmox/) 中构造。
 
 <CodeBlock>
 
@@ -44,26 +44,23 @@ omv-salt stage run all
   menus={[
     {
       title: '版本',
-      variableName: 'release_name',
       items: [
-        ['6.0', 'shaitan'],
-        ['5.0', 'usul'],
+        ['6.0', { release_name: 'shaitan' }],
+        ['5.0', { release_name: 'usul' }],
       ]
     },
     {
       title: '启用 proposed',
-      variableName: 'enable_proposed',
       items: [
-        ['是', ''],
-        ['否', '# '],
+        ['否', { enable_proposed: '# ' }],
+        ['是', { enable_proposed: '' }],
       ]
     },
     {
       title: '启用 partner',
-      variableName: 'enable_partner',
       items: [
-        ['是', ''],
-        ['否', '# '],
+        ['否', { enable_partner: '# ' }],
+        ['是', { enable_partner: '' }],
       ]
     }
   ]}

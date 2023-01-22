@@ -1,0 +1,44 @@
+---
+title: ROS2 软件仓库镜像使用帮助
+cname: 'ros2'
+---
+
+输入如下命令，下载 ROS 的 GPG Key：
+
+<CodeBlock>
+
+```bash
+sudo apt install curl gnupg2
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
+```
+
+</CodeBlock>
+
+<CodeBlock
+  menus={[
+    {
+      title: '发行版',
+      items: [
+        ['Ubuntu 22.04 LTS', { release_name: 'jammy' }],
+        ['Ubuntu 20.04 LTS', { release_name: 'focal' }],
+        ['Ubuntu 18.04 LTS', { release_name: 'bionic' }],
+        ['Debian 11 (bullseye)', { release_name: 'bullseye' }],
+        ['Debian 10 (buster)', { release_name: 'buster' }],
+      ]
+    }
+  ]}
+>
+
+```bash
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] {{http_protocol}}{{mirror}}/ubuntu {{release_name}} main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+sudo apt update
+```
+
+</CodeBlock>
+
+Reference: https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
+
+### rosdep
+
+参考 [ROS Distro 帮助](/rosdistro/)

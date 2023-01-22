@@ -48,10 +48,9 @@ sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-pr
   menus={[
     {
       title: '发行版',
-      variableName: 'deb_release',
       items: [
-        ['Debian', 'debian'],
-        ['Ubuntu', 'ubuntu'],
+        ['Debian', { deb_release: 'debian' }],
+        ['Ubuntu', { deb_release: 'ubuntu' }],
       ]
     }
   ]}
@@ -95,10 +94,9 @@ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
   menus={[
     {
       title: '发行版',
-      variableName: 'yum_release',
       items: [
-        ['CentOS/RHEL', 'centos'],
-        ['Fedora', 'fedora'],
+        ['CentOS/RHEL', { yum_release: 'centos' }],
+        ['Fedora', { yum_release: 'fedora' }],
       ]
     }
   ]}

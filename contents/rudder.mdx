@@ -1,0 +1,70 @@
+---
+title: Rudder 软件仓库镜像使用帮助
+cname: 'rudder'
+---
+
+### Debian/Ubuntu 用户
+
+
+选择你的 Debian/Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/rudder.list`
+
+<CodeBlock
+  menus={[
+    {
+      title: '发行版',
+      items: [
+        ['Debian 10', { release_name: 'buster' }],
+        ['Debian 9', { release_name: 'stretch' }],
+        ['Debian 8', { release_name: 'jessie' }],
+        ['Ubuntu 20.04 LTS', { release_name: 'focal' }],
+        ['Ubuntu 18.04 LTS', { release_name: 'bionic' }],
+        ['Ubuntu 16.04 LTS', { release_name: 'xenial' }],
+        ['Ubuntu 14.04 LTS', { release_name: 'trusty' }],
+      ]
+    },
+    {
+      title: 'Rudder 版本号',
+      items: [
+        ['6.0', { version: '6.0' }],
+        ['5.0', { version: '5.0' }],
+        ['4.3', { version: '4.3' }],
+      ]
+    }
+  ]}
+>
+
+```properties
+deb {{http_protocol}}{{mirror}}/apt/{{version}} {{release_name}} main
+```
+
+</CodeBlock>
+
+
+
+### RHEL/CentOS 用户
+
+新建 `/etc/yum.repos.d/rudder.repo`，内容为：
+
+<CodeBlock
+  menus={[
+    {
+      title: 'Rudder 版本号',
+      items: [
+        ['6.0', { version: '6.0' }],
+        ['5.0', { version: '5.0' }],
+        ['4.3', { version: '4.3' }],
+      ]
+    }
+  ]}
+>
+
+```
+[Rudder_{{version}}]
+name=Rudder {{version}}
+baseurl={{http_protocol}}{{mirror}}/rpm/rudder{{version}}-RHEL_$releasever/
+enabled=1
+gpgcheck=1
+gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub
+```
+
+</CodeBlock>

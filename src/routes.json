@@ -4,6 +4,11 @@
     "file": "Adoptium.mdx",
     "cname": "Adoptium"
   },
+  "/alpine/": {
+    "title": "Alpine 软件仓库镜像使用帮助",
+    "file": "alpine.mdx",
+    "cname": "alpine"
+  },
   "/anaconda/": {
     "title": "Anaconda 软件仓库镜像使用帮助",
     "file": "anaconda.mdx",
@@ -34,6 +39,11 @@
     "file": "binutils-gdb.git.mdx",
     "cname": "binutils-gdb.git"
   },
+  "/bioconductor/": {
+    "title": "Bioconductor 软件仓库镜像使用帮助",
+    "file": "bioconductor.mdx",
+    "cname": "bioconductor"
+  },
   "/centos/": {
     "title": "CentOS 软件仓库镜像使用帮助",
     "file": "centos.mdx",
@@ -59,10 +69,20 @@
     "file": "CocoaPods.mdx",
     "cname": "CocoaPods"
   },
+  "/CRAN/": {
+    "title": "CRAN 镜像使用帮助",
+    "file": "CRAN.mdx",
+    "cname": "CRAN"
+  },
   "/crates.io-index.git/": {
     "title": "Rust crates.io 索引镜像使用帮助",
     "file": "crates.io-index.git.mdx",
     "cname": "crates.io-index.git"
+  },
+  "/CTAN/": {
+    "title": "CTAN 镜像使用帮助",
+    "file": "CTAN.mdx",
+    "cname": "CTAN"
   },
   "/cygwin/": {
     "title": "Cygwin 软件仓库镜像使用帮助",
@@ -113,6 +133,11 @@
     "title": "GCC Git 镜像使用帮助",
     "file": "gcc.git.mdx",
     "cname": "gcc.git"
+  },
+  "/github-raw/": {
+    "title": "GitHub RAW 使用帮助",
+    "file": "github-raw.mdx",
+    "cname": "github-raw"
   },
   "/gitlab-ce/": {
     "title": "GitLab CE 软件仓库使用帮助",
@@ -234,6 +259,86 @@
     "file": "proxmox.mdx",
     "cname": "proxmox"
   },
+  "/pybombs/": {
+    "title": "PyBOMBS 软件仓库镜像使用帮助",
+    "file": "pybombs.mdx",
+    "cname": "pybombs"
+  },
+  "/pypi/": {
+    "title": "PyPI 软件仓库镜像使用帮助",
+    "file": "pypi.mdx",
+    "cname": "pypi"
+  },
+  "/qemu.git/": {
+    "title": "QEMU Git 镜像使用帮助",
+    "file": "pypi.mdx",
+    "cname": "qemu.git"
+  },
+  "/raspbian/": {
+    "title": "Raspbian 软件仓库镜像使用帮助",
+    "file": "raspbian.mdx",
+    "cname": "raspbian"
+  },
+  "/raspberrypi/": {
+    "title": "Raspberrypi 软件仓库镜像使用帮助",
+    "file": "raspberrypi.mdx",
+    "cname": "raspberrypi"
+  },
+  "/repo-ck/": {
+    "title": "Repo-ck 软件仓库镜像使用帮助",
+    "file": "repo-ck.mdx",
+    "cname": "repo-ck"
+  },
+  "/riscv-toolchains/": {
+    "title": "RISC-V 工具链镜像使用帮助",
+    "file": "riscv-toolchains.mdx",
+    "cname": "riscv-toolchains"
+  },
+  "/ros/": {
+    "title": "ROS 软件仓库镜像使用帮助",
+    "file": "ros.mdx",
+    "cname": "ros"
+  },
+  "/ros2/": {
+    "title": "ROS2 软件仓库镜像使用帮助",
+    "file": "ros2.mdx",
+    "cname": "ros2"
+  },
+  "/ros2/": {
+    "title": "ROS2 软件仓库镜像使用帮助",
+    "file": "ros2.mdx",
+    "cname": "ros2"
+  },
+  "/rosdistro/": {
+    "title": "ROS Distro 镜像使用帮助",
+    "file": "rosdistro.mdx",
+    "cname": "rosdistro"
+  },
+  "/rpmfusion/": {
+    "title": "RPMFusion 软件仓库镜像使用帮助",
+    "file": "rpmfusion.mdx",
+    "cname": "rpmfusion"
+  },
+  "/rubygems/": {
+    "title": "Ruby Gems 镜像使用帮助",
+    "file": "rubygems.mdx",
+    "cname": "rubygems"
+  },
+  "/rudder/": {
+    "title": "Rudder 软件仓库镜像使用帮助",
+    "file": "rudder.mdx",
+    "cname": "rudder"
+  },
+  "/stackage/": {
+    "title": "Stackage 软件仓库镜像使用帮助",
+    "file": "stackage.mdx",
+    "cname": "stackage"
+  },
+  "/termux/": {
+    "title": "Termux 软件仓库镜像使用帮助",
+    "file": "termux.mdx",
+    "cname": "termux"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",
@@ -243,5 +348,15 @@
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",
     "cname": "ubuntu-ports"
+  },
+  "/virtualbox/": {
+    "title": "VirtualBox 软件仓库镜像使用帮助",
+    "file": "virtualbox.mdx",
+    "cname": "virtualbox"
+  },
+  "/voidlinux/": {
+    "title": "Void Linux 软件仓库镜像使用帮助",
+    "file": "voidlinux.mdx",
+    "cname": "voidlinux"
   }
 }

@@ -1,0 +1,36 @@
+---
+title: GitHub RAW 镜像使用帮助
+cname: 'github-raw'
+---
+
+GitHub RAW 镜像仅为其他镜像服务。
+
+### rosdep init
+
+主内容在 [ROS Distro 帮助](/rosdistro/) 中。
+
+<CodeBlock>
+
+```bash
+# 手动模拟 rosdep init
+sudo mkdir -p /etc/ros/rosdep/sources.list.d/
+sudo curl -o /etc/ros/rosdep/sources.list.d/20-default.list {{http_protocol}}{{mirror}}/ros/rosdistro/master/rosdep/sources.list.d/20-default.list
+```
+
+</CodeBlock>
+
+### stackage global-hints-cache.yaml
+
+主内容在 [Stackage 帮助](/stackage/) 中。
+
+手动下载
+
+<CodeBlock>
+
+```
+{{http_protocol}}{{mirror}}/fpco/stackage-content/master/stack/global-hints.yaml
+```
+
+</CodeBlock>
+
+到 `~/.stack/pantry/global-hints-cache.yaml`（在 Windows 下是 `%APPDATA%\stack\pantry\global-hints-cache.yaml`）。注意文件名不同。这是由于 `stack` 暂时不支持配置该文件的上游地址。该文件需要在每当第一次用到新版本的 GHC 时更新。

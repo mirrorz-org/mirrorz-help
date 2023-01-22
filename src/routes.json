@@ -234,6 +234,11 @@
     "file": "proxmox.mdx",
     "cname": "proxmox"
   },
+  "/pybombs/": {
+    "title": "PyBOMBS 软件仓库镜像使用帮助",
+    "file": "pybombs.mdx",
+    "cname": "pybombs"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

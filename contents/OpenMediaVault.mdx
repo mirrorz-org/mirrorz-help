@@ -44,26 +44,23 @@ omv-salt stage run all
   menus={[
     {
       title: '版本',
-      variableName: 'release_name',
       items: [
-        ['6.0', 'shaitan'],
-        ['5.0', 'usul'],
+        ['6.0', { release_name: 'shaitan' }],
+        ['5.0', { release_name: 'usul' }],
       ]
     },
     {
       title: '启用 proposed',
-      variableName: 'enable_proposed',
       items: [
-        ['是', ''],
-        ['否', '# '],
+        ['否', { enable_proposed: '# ' }],
+        ['是', { enable_proposed: '' }],
       ]
     },
     {
       title: '启用 partner',
-      variableName: 'enable_partner',
       items: [
-        ['是', ''],
-        ['否', '# '],
+        ['否', { enable_partner: '# ' }],
+        ['是', { enable_partner: '' }],
       ]
     }
   ]}

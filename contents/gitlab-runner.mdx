@@ -19,24 +19,15 @@ curl https://packages.gitlab.com/gpg.key 2> /dev/null | sudo apt-key add - &>/de
   menus={[
     {
       title: '发行版',
-      variableName: 'os_name',
       items: [
-        ['Debian', 'debian'],
-        ['Ubuntu', 'ubuntu'],
-      ]
-    },
-    {
-      title: '版本',
-      variableName: 'release_name',
-      items: [
-        ['Debian 11', 'bullseye'],
-        ['Debian 10', 'buster'],
-        ['Debian 9', 'stretch'],
-        ['Debian 8', 'jessie'],
-        ['Ubuntu 22.04 LTS', 'jammy'],
-        ['Ubuntu 20.04 LTS', 'focal'],
-        ['Ubuntu 18.04 LTS', 'bionic'],
-        ['Ubuntu 16.04 LTS', 'xenial'],
+        ['Debian 11', { os_name: 'debian', release_name: 'bullseye' }],
+        ['Debian 10', { os_name: 'debian', release_name: 'buster' }],
+        ['Debian 9', { os_name: 'debian', release_name: 'stretch' }],
+        ['Debian 8', { os_name: 'debian', release_name: 'jessie' }],
+        ['Ubuntu 22.04 LTS', { os_name: 'ubuntu', release_name: 'jammy' }],
+        ['Ubuntu 20.04 LTS', { os_name: 'ubuntu', release_name: 'focal' }],
+        ['Ubuntu 18.04 LTS', { os_name: 'ubuntu', release_name: 'bionic' }],
+        ['Ubuntu 16.04 LTS', { os_name: 'ubuntu', release_name: 'xenial' }],
       ]
     }
   ]}

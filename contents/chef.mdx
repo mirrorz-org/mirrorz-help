@@ -13,16 +13,15 @@ Chef 是一套自动化运维工具。
   menus={[
     {
       title: 'Ubuntu/Debian 版本',
-      variableName: 'release_name',
       items: [
-        ['Ubuntu 20.04 LTS', 'focal'],
-        ['Ubuntu 18.04 LTS', 'bionic'],
-        ['Ubuntu 16.04 LTS', 'xenial'],
-        ['Ubuntu 14.04 LTS', 'trusty'],
-        ['Debian bullseye', 'bullseye'],
-        ['Debian buster', 'buster'],
-        ['Debian stretch', 'stretch'],
-        ['Debian jessie', 'jessie']
+        ['Ubuntu 20.04 LTS', { release_name: 'focal' }],
+        ['Ubuntu 18.04 LTS', { release_name: 'bionic' }],
+        ['Ubuntu 16.04 LTS', { release_name: 'xenial' }],
+        ['Ubuntu 14.04 LTS', { release_name: 'trusty' }],
+        ['Debian 11 (bullseye)', { release_name: 'bullseye' }],
+        ['Debian 10 (buster)', { release_name: 'buster' }],
+        ['Debian 9 (stretch)', { release_name: 'stretch' }],
+        ['Debian 8 (jessie)', { release_name: 'jessie' }]
       ]
     }
   ]}

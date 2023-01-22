@@ -15,12 +15,11 @@ MongoDB 镜像自 MongoDB [官方仓库](https://repo.mongodb.org/)， 目前有
   menus={[
     {
       title: 'MongoDB 版本号',
-      variableName: 'version',
       items: [
-        ['6.0', '6.0'],
-        ['5.0', '5.0'],
-        ['4.4', '4.4'],
-        ['4.2', '4.2'],
+        ['6.0', { version: '6.0' }],
+        ['5.0', { version: '5.0' }],
+        ['4.4', { version: '4.4' }],
+        ['4.2', { version: '4.2' }],
       ]
     }
   ]}
@@ -32,7 +31,7 @@ wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | sudo apt-
 
 </CodeBlock>
 
-再选择你的 Debian / Ubuntu 版本（注意「发行版」「版本」「部件」需同时选择 Debian 或 Ubuntu），文本框中内容写进 `/etc/apt/sources.list.d/mongodb.list`
+再选择你的 Debian / Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/mongodb.list`
 
 <CodeBlock
   menus={[
@@ -51,12 +50,11 @@ wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | sudo apt-
     },
     {
       title: 'MongoDB 版本号',
-      variableName: 'version',
       items: [
-        ['6.0', '6.0'],
-        ['5.0', '5.0'],
-        ['4.4', '4.4'],
-        ['4.2', '4.2'],
+        ['6.0', { version: '6.0' }],
+        ['5.0', { version: '5.0' }],
+        ['4.4', { version: '4.4' }],
+        ['4.2', { version: '4.2' }],
       ]
     }
   ]}

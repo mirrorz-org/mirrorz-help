@@ -15,14 +15,20 @@ $ sudo apt install apt-transport-https ca-certificates
   menus={[
     {
       title: 'Debian 版本',
-      variableName: 'release_name',
       items: [
-        ['sid', 'sid'],
-        ['testing', 'testing'],
-        ['bullseye', 'bullseye'],
-        ['buster', 'buster'],
-        ['stretch', 'stretch'],
-        ['jessie', 'jessie']
+        ['Debian 11 (bullseye)', { release_name: 'bullseye' }],
+        ['sid', { release_name: 'sid' }],
+        ['testing', { release_name: 'testing' }],
+        ['Debian 10 (buster)', { release_name: 'buster' }],
+        ['Debian 9 (stretch)', { release_name: 'stretch' }],
+        ['Debian 8 (jessie)', { release_name: 'jessie' }]
+      ]
+    },
+    {
+      title: '启用源码镜像',
+      items: [
+        ['否', { enable_source: '# ' }],
+        ['是', { enable_source: '' }],
       ]
     }
   ]}
@@ -31,15 +37,15 @@ $ sudo apt install apt-transport-https ca-certificates
 ```properties
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 deb {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free
-# deb-src {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free
 deb {{http_protocol}}{{mirror}}/ {{release_name}}-updates main contrib non-free
-# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-updates main contrib non-free
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-updates main contrib non-free
 
 deb {{http_protocol}}{{mirror}}/ {{release_name}}-backports main contrib non-free
-# deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main contrib non-free
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main contrib non-free
 
 deb {{http_protocol}}{{mirror}}-security {{release_name}}-security main contrib non-free
-# deb-src {{http_protocol}}{{mirror}}-security {{release_name}}-security main contrib non-free
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}-security {{release_name}}-security main contrib non-free
 ```
 
 </CodeBlock>

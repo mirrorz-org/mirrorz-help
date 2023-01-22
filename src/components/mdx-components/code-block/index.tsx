@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import style9 from 'style9';
 
-import { memo, useDeferredValue, useMemo, useReducer } from 'react';
+import { memo, useMemo, useReducer } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
@@ -51,8 +51,8 @@ const reducer = (prevState: Record<string, string>, [key, value]: [string | unde
   };
 };
 
-const createInitialState = ([menus, isHttpProtocol]: [menus: Menu[], isHttpProtocol: boolean]): Record<string, string> => {
-  const obj = menus.reduce((acc, menu) => {
+const createInitialState = (menus: Menu[]): Record<string, string> => {
+  return menus.reduce((acc, menu) => {
     // TODO: prefer object variable in the future
     const value = menu.items[0][1];
     if (typeof value === 'string') {
@@ -64,42 +64,40 @@ const createInitialState = ([menus, isHttpProtocol]: [menus: Menu[], isHttpProto
     }
     return acc;
   }, {} as Record<string, string>);
-
-  if (!isHttpProtocol) {
-    obj.http_protocol = '';
-  }
-
-  return obj;
 };
 
 function CodeBlock({ menus = [], isHttpProtocol = true, code, codeLanguage }: CodeBlockProps) {
-  const [state, dispatch] = useReducer(reducer, [menus, isHttpProtocol], createInitialState);
+  const [variableState, dispatch] = useReducer(reducer, menus, createInitialState);
 
   const httpsEnabled = useMirrorHttpsEnabled();
   const cname = useCurrentCname();
-  const currentSelectedMirror = useDeferredValue(useSelectedMirror());
   const { data, isLoading } = useMirrorZData();
+  const currentSelectedMirror = useSelectedMirror();
+
   const mirrorUrl = useMemo(() => {
     if (isLoading || !currentSelectedMirror) return '(Loading...)';
     return data?.[0][currentSelectedMirror]?.mirrors[cname].full || '(Loading...)';
   }, [cname, currentSelectedMirror, data, isLoading]);
 
-  return useMemo(() => {
-    const variable: Record<string, string> = { ...state, mirror: mirrorUrl };
+  const finalCode = useMemo(() => {
+    const variable: Record<string, string> = { ...variableState, mirror: mirrorUrl };
     if (isHttpProtocol) {
       variable.http_protocol = httpsEnabled ? 'https://' : 'http://';
+    } else {
+      variable.http_protocol = '';
     }
-    const finalCode = buildCode(code, variable);
-    return (
-      <div className={clsx('enhanced-codeblock', styles('container'))}>
-        <CodeBlockMenu menus={menus} dispatch={dispatch} />
-        <div className={styles('code_wrapper')}>
-          {isLoading && <LoadingOverlay />}
-          <ActualCode code={finalCode} language={codeLanguage} />
-        </div>
+    return buildCode(code, variable);
+  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, variableState]);
+
+  return (
+    <div className={clsx('enhanced-codeblock', styles('container'))}>
+      <CodeBlockMenu menus={menus} dispatch={dispatch} />
+      <div className={styles('code_wrapper')}>
+        {(isLoading || !currentSelectedMirror) && <LoadingOverlay />}
+        <ActualCode code={finalCode} language={codeLanguage} />
       </div>
-    );
-  }, [code, codeLanguage, httpsEnabled, isHttpProtocol, isLoading, menus, mirrorUrl, state]);
+    </div>
+  );
 }
 
 export default memo(CodeBlock);

@@ -20,6 +20,7 @@ const styles = style9.create({
     }
   },
   anchor_link: {
+    display: 'inline-block',
     // Prevent the anchor from overflowing to its own line
     width: 0,
     height: 0

@@ -114,7 +114,6 @@ function SearchCommandK() {
 
   const router = useRouter();
   const handleSelect = useCallback((_: string, href: string) => {
-    console.log(href);
     if (href) {
       startTransition(() => {
         router.push(href);

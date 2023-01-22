@@ -36,7 +36,8 @@ const tasks = [
   fromEsmToCjs('remark-external-links'),
   fromEsmToCjs('github-slugger'),
   fromEsmToCjs('mdast-util-to-string'),
-  fromEsmToCjs('unist-util-visit')
+  fromEsmToCjs('unist-util-visit'),
+  fromEsmToCjs('satori')
 ];
 
 module.exports.write_compiled_ts_declaration = async function write_compiled_ts_declaration(task, _opts) {

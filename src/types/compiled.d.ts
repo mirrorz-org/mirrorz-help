@@ -37,3 +37,8 @@ declare module '@/compiled/unist-util-visit' {
   import * as p from 'unist-util-visit';
   export = p;
 }
+
+declare module '@/compiled/satori' {
+  import * as p from 'satori';
+  export = p;
+}

@@ -32,19 +32,8 @@ const styles = style9.create({
   }
 });
 
-const reducer = (prevState: Record<string, string>, [key, value]: [string | undefined, MenuValue]) => {
-  if (typeof value === 'string') {
-    if (key) {
-      if (prevState[key] === value) return prevState;
-
-      return {
-        ...prevState,
-        [key]: value
-      };
-    }
-    return prevState;
-  }
-
+const reducer = (prevState: Record<string, string>, value: MenuValue) => {
+  // TODO: use immer
   return {
     ...prevState,
     ...value
@@ -53,15 +42,8 @@ const reducer = (prevState: Record<string, string>, [key, value]: [string | unde
 
 const createInitialState = (menus: Menu[]): Record<string, string> => {
   return menus.reduce((acc, menu) => {
-    // TODO: prefer object variable in the future
     const value = menu.items[0][1];
-    if (typeof value === 'string') {
-      if (menu.variableName) {
-        acc[menu.variableName] = value;
-      }
-    } else {
-      acc = { ...acc, ...value };
-    }
+    acc = { ...acc, ...value };
     return acc;
   }, {} as Record<string, string>);
 };

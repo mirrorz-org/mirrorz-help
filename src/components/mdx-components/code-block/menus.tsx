@@ -2,10 +2,9 @@ import style9 from 'style9';
 import IconChevronUpDown from '../../icons/chevron-up-down';
 import { memo, useCallback, useMemo } from 'react';
 
-export type MenuValue = string | Record<string, string>;
+export type MenuValue = Record<string, string>;
 export interface Menu {
   title: string;
-  variableName?: string,
   items: [displayName: string, value: MenuValue][];
 }
 
@@ -64,7 +63,7 @@ const styles = style9.create({
 
 interface CodeBlockMenuProps {
   menus: Menu[];
-  dispatch: React.Dispatch<[string, MenuValue]>;
+  dispatch: React.Dispatch<MenuValue>;
 }
 
 function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
@@ -79,8 +78,8 @@ function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
   }, [menus]);
 
   const handleChange: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => {
-    const { name, value } = e.currentTarget;
-    dispatch([name, valueMap[value]]);
+    const { value } = e.currentTarget;
+    dispatch(valueMap[value]);
   }, [dispatch, valueMap]);
 
   return (
@@ -90,7 +89,7 @@ function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
           <div className={styles('menu')} key={menu.title}>
             <span>{menu.title}</span>
             <div className={styles('select_wrapper')}>
-              <select name={menu.variableName} className={styles('select')} onChange={handleChange}>
+              <select className={styles('select')} onChange={handleChange}>
                 {menu.items.map((item, optionIndex) => {
                   const value = `${menuIndex}_${optionIndex}`;
                   const key = `${menu.title}_${value}`;

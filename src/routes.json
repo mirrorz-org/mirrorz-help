@@ -309,6 +309,11 @@
     "file": "stackage.mdx",
     "cname": "stackage"
   },
+  "/termux/": {
+    "title": "Termux 软件仓库镜像使用帮助",
+    "file": "termux.mdx",
+    "cname": "termux"
+  },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",

@@ -1,361 +1,427 @@
 {
   "/Adoptium/": {
-    "title": "Adoptium 软件仓库镜像使用帮助",
+    "title": "Adoptium 软件仓库",
+    "fullTitle": "Adoptium 软件仓库镜像使用帮助",
     "file": "Adoptium.mdx",
     "cname": "Adoptium"
   },
   "/alpine/": {
-    "title": "Alpine 软件仓库镜像使用帮助",
+    "title": "Alpine 软件仓库",
+    "fullTitle": "Alpine 软件仓库镜像使用帮助",
     "file": "alpine.mdx",
     "cname": "alpine"
   },
   "/anaconda/": {
-    "title": "Anaconda 软件仓库镜像使用帮助",
+    "title": "Anaconda 软件仓库",
+    "fullTitle": "Anaconda 软件仓库镜像使用帮助",
     "file": "anaconda.mdx",
     "cname": "anaconda"
   },
   "/AOSP/": {
-    "title": "AOSP 镜像使用帮助",
+    "title": "AOSP",
+    "fullTitle": "AOSP 镜像使用帮助",
     "file": "AOSP.mdx",
     "cname": "AOSP"
   },
   "/archlinux/": {
-    "title": "Arch Linux 软件仓库镜像使用帮助",
+    "title": "Arch Linux 软件仓库",
+    "fullTitle": "Arch Linux 软件仓库镜像使用帮助",
     "file": "archlinux.mdx",
     "cname": "archlinux"
   },
   "/archlinuxarm/": {
-    "title": "Arch Linux ARM 软件仓库镜像使用帮助",
+    "title": "Arch Linux ARM 软件仓库",
+    "fullTitle": "Arch Linux ARM 软件仓库镜像使用帮助",
     "file": "archlinuxarm.mdx",
     "cname": "archlinuxarm"
   },
   "/archlinuxcn/": {
-    "title": "Arch Linux CN 软件仓库镜像使用帮助",
+    "title": "Arch Linux CN 软件仓库",
+    "fullTitle": "Arch Linux CN 软件仓库镜像使用帮助",
     "file": "archlinuxcn.mdx",
     "cname": "archlinuxcn"
   },
   "/binutils-gdb.git/": {
-    "title": "GDB Git 镜像使用帮助",
+    "title": "GDB Git",
+    "fullTitle": "GDB Git 镜像使用帮助",
     "file": "binutils-gdb.git.mdx",
     "cname": "binutils-gdb.git"
   },
   "/bioconductor/": {
-    "title": "Bioconductor 软件仓库镜像使用帮助",
+    "title": "Bioconductor 软件仓库",
+    "fullTitle": "Bioconductor 软件仓库镜像使用帮助",
     "file": "bioconductor.mdx",
     "cname": "bioconductor"
   },
   "/centos/": {
-    "title": "CentOS 软件仓库镜像使用帮助",
+    "title": "CentOS 软件仓库",
+    "fullTitle": "CentOS 软件仓库镜像使用帮助",
     "file": "centos.mdx",
     "cname": "centos"
   },
   "/centos-altarch/": {
-    "title": "CentOS altarch 软件仓库镜像使用帮助",
+    "title": "CentOS altarch 软件仓库",
+    "fullTitle": "CentOS altarch 软件仓库镜像使用帮助",
     "file": "centos-altarch.mdx",
     "cname": "centos-altarch"
   },
   "/centos-vault/": {
-    "title": "CentOS Vault 软件仓库镜像使用帮助",
+    "title": "CentOS Vault 软件仓库",
+    "fullTitle": "CentOS Vault 软件仓库镜像使用帮助",
     "file": "centos-vault.mdx",
     "cname": "centos-vault"
   },
   "/chef/": {
-    "title": "Chef 软件仓库镜像使用帮助",
+    "title": "Chef 软件仓库",
+    "fullTitle": "Chef 软件仓库镜像使用帮助",
     "file": "chef.mdx",
     "cname": "chef"
   },
   "/CocoaPods/": {
-    "title": "CocoaPods 软件仓库镜像使用帮助",
+    "title": "CocoaPods 软件仓库",
+    "fullTitle": "CocoaPods 软件仓库镜像使用帮助",
     "file": "CocoaPods.mdx",
     "cname": "CocoaPods"
   },
   "/CRAN/": {
-    "title": "CRAN 镜像使用帮助",
+    "title": "CRAN",
+    "fullTitle": "CRAN 镜像使用帮助",
     "file": "CRAN.mdx",
     "cname": "CRAN"
   },
   "/crates.io-index.git/": {
-    "title": "Rust crates.io 索引镜像使用帮助",
+    "title": "Rust crates.io 索引",
+    "fullTitle": "Rust crates.io 索引镜像使用帮助",
     "file": "crates.io-index.git.mdx",
     "cname": "crates.io-index.git"
   },
   "/CTAN/": {
-    "title": "CTAN 镜像使用帮助",
+    "title": "CTAN",
+    "fullTitle": "CTAN 镜像使用帮助",
     "file": "CTAN.mdx",
     "cname": "CTAN"
   },
   "/cygwin/": {
-    "title": "Cygwin 软件仓库镜像使用帮助",
+    "title": "Cygwin 软件仓库",
+    "fullTitle": "Cygwin 软件仓库镜像使用帮助",
     "file": "cygwin.mdx",
     "cname": "cygwin"
   },
   "/debian/": {
-    "title": "Debian 软件仓库镜像使用帮助",
+    "title": "Debian 软件仓库",
+    "fullTitle": "Debian 软件仓库镜像使用帮助",
     "file": "debian.mdx",
     "cname": "debian"
   },
   "/docker-ce/": {
-    "title": "Docker CE 软件仓库镜像使用帮助",
+    "title": "Docker CE 软件仓库",
+    "fullTitle": "Docker CE 软件仓库镜像使用帮助",
     "file": "docker-ce.mdx",
     "cname": "docker-ce"
   },
   "/elpa/": {
-    "title": "ELPA 软件仓库镜像使用帮助",
+    "title": "ELPA 软件仓库",
+    "fullTitle": "ELPA 软件仓库镜像使用帮助",
     "file": "elpa.mdx",
     "cname": "elpa"
   },
   "/elrepo/": {
-    "title": "ELRepo 软件仓库镜像使用帮助",
+    "title": "ELRepo 软件仓库",
+    "fullTitle": "ELRepo 软件仓库镜像使用帮助",
     "file": "elrepo.mdx",
     "cname": "elrepo"
   },
   "/epel/": {
-    "title": "EPEL 软件仓库镜像使用帮助",
+    "title": "EPEL 软件仓库",
+    "fullTitle": "EPEL 软件仓库镜像使用帮助",
     "file": "epel.mdx",
     "cname": "epel"
   },
   "/fdroid/": {
-    "title": "F-Droid 软件仓库镜像使用帮助",
+    "title": "F-Droid 软件仓库",
+    "fullTitle": "F-Droid 软件仓库镜像使用帮助",
     "file": "fdroid.mdx",
     "cname": "fdroid"
   },
   "/fedora/": {
-    "title": "Fedora 软件仓库镜像使用帮助",
+    "title": "Fedora 软件仓库",
+    "fullTitle": "Fedora 软件仓库镜像使用帮助",
     "file": "fedora.mdx",
     "cname": "fedora"
   },
   "/flutter-sdk.git/": {
-    "title": "Flutter SDK 镜像使用帮助",
+    "title": "Flutter SDK",
+    "fullTitle": "Flutter SDK 镜像使用帮助",
     "file": "flutter-sdk.git.mdx",
     "cname": "flutter-sdk.git"
   },
   "/gcc.git/": {
-    "title": "GCC Git 镜像使用帮助",
+    "title": "GCC Git",
+    "fullTitle": "GCC Git 镜像使用帮助",
     "file": "gcc.git.mdx",
     "cname": "gcc.git"
   },
   "/github-raw/": {
-    "title": "GitHub RAW 使用帮助",
+    "title": "GitHub RAW",
+    "fullTitle": "GitHub RAW 使用帮助",
     "file": "github-raw.mdx",
     "cname": "github-raw"
   },
   "/gitlab-ce/": {
-    "title": "GitLab CE 软件仓库使用帮助",
+    "title": "GitLab CE 软件仓库",
+    "fullTitle": "GitLab CE 软件仓库使用帮助",
     "file": "gitlab-ce.mdx",
     "cname": "gitlab-ce"
   },
   "/gitlab-runner/": {
-    "title": "GitLab Runner 软件仓库使用帮助",
+    "title": "GitLab Runner 软件仓库",
+    "fullTitle": "GitLab Runner 软件仓库使用帮助",
     "file": "gitlab-runner.mdx",
     "cname": "gitlab-runner"
   },
   "/git-repo/": {
-    "title": "Git Repo 软件仓库使用帮助",
+    "title": "Git Repo 软件仓库",
+    "fullTitle": "Git Repo 软件仓库使用帮助",
     "file": "git-repo.mdx",
     "cname": "git-repo"
   },
   "/glibc.git/": {
-    "title": "GNU C Lib Git 镜像使用帮助",
+    "title": "GNU C Lib Git",
+    "fullTitle": "GNU C Lib Git 镜像使用帮助",
     "file": "glibc.git.mdx",
     "cname": "glibc.git"
   },
   "/hackage/": {
-    "title": "Hackage 软件仓库镜像使用帮助",
+    "title": "Hackage 软件仓库",
+    "fullTitle": "Hackage 软件仓库镜像使用帮助",
     "file": "hackage.mdx",
     "cname": "hackage"
   },
   "/homebrew/": {
-    "title": "Homebrew 软件仓库镜像使用帮助",
+    "title": "Homebrew 软件仓库",
+    "fullTitle": "Homebrew 软件仓库镜像使用帮助",
     "file": "homebrew.mdx",
     "cname": "homebrew"
   },
   "/homebrew-bottles/": {
-    "title": "Homebrew Bottles 软件仓库镜像使用帮助",
+    "title": "Homebrew Bottles 软件仓库",
+    "fullTitle": "Homebrew Bottles 软件仓库镜像使用帮助",
     "file": "homebrew-bottles.mdx",
     "cname": "homebrew-bottles"
   },
   "/kubernetes/": {
-    "title": "Kubernetes 软件仓库镜像使用帮助",
+    "title": "Kubernetes 软件仓库",
+    "fullTitle": "Kubernetes 软件仓库镜像使用帮助",
     "file": "kubernetes.mdx",
     "cname": "kubernetes"
   },
   "/lineageOS/": {
-    "title": "LineageOS 源码仓库镜像使用帮助",
+    "title": "LineageOS 源码仓库",
+    "fullTitle": "LineageOS 源码仓库镜像使用帮助",
     "file": "lineageOS.mdx",
     "cname": "lineageOS"
   },
   "/lineage-rom/": {
-    "title": "Lineage ROM 镜像使用帮助",
+    "title": "Lineage ROM",
+    "fullTitle": "Lineage ROM 镜像使用帮助",
     "file": "lineage-rom.mdx",
     "cname": "lineage-rom"
   },
   "/linux.git/": {
-    "title": "Linux Git 镜像使用帮助",
+    "title": "Linux Git",
+    "fullTitle": "Linux Git 镜像使用帮助",
     "file": "linux.git.mdx",
     "cname": "linux.git"
   },
   "/linux-stable.git/": {
-    "title": "Linux Stable Git 镜像使用帮助",
+    "title": "Linux Stable Git",
+    "fullTitle": "Linux Stable Git 镜像使用帮助",
     "file": "linux-stable.git.mdx",
     "cname": "linux-stable.git"
   },
   "/linux-next.git/": {
-    "title": "Linux Next Git 镜像使用帮助",
+    "title": "Linux Next Git",
+    "fullTitle": "Linux Next Git 镜像使用帮助",
     "file": "linux-next.git.mdx",
     "cname": "linux-next.git"
   },
   "/linux-firmware.git/": {
-    "title": "Linux Firmware Git 镜像使用帮助",
+    "title": "Linux Firmware Git",
+    "fullTitle": "Linux Firmware Git 镜像使用帮助",
     "file": "linux-firmware.git.mdx",
     "cname": "linux-firmware.git"
   },
   "/lxc-images/": {
-    "title": "LXC Images 镜像使用帮助",
+    "title": "LXC Images",
+    "fullTitle": "LXC Images 镜像使用帮助",
     "file": "lxc-images.mdx",
     "cname": "lxc-images"
   },
   "/mariadb/": {
-    "title": "MariaDB 镜像使用帮助",
+    "title": "MariaDB",
+    "fullTitle": "MariaDB 镜像使用帮助",
     "file": "mariadb.mdx",
     "cname": "mariadb"
   },
   "/mongodb/": {
-    "title": "MongoDB 镜像使用帮助",
+    "title": "MongoDB",
+    "fullTitle": "MongoDB 镜像使用帮助",
     "file": "mongodb.mdx",
     "cname": "mongodb"
   },
   "/msys2/": {
-    "title": "MSYS2 软件仓库镜像使用帮助",
+    "title": "MSYS2 软件仓库",
+    "fullTitle": "MSYS2 软件仓库镜像使用帮助",
     "file": "msys2.mdx",
     "cname": "msys2"
   },
   "/mysql/": {
-    "title": "MySQL 软件仓库镜像使用帮助",
+    "title": "MySQL 软件仓库",
+    "fullTitle": "MySQL 软件仓库镜像使用帮助",
     "file": "mysql.mdx",
     "cname": "mysql"
   },
   "/nodejs-release/": {
-    "title": "NodeJS Release 软件仓库镜像使用帮助",
+    "title": "NodeJS Release 软件仓库",
+    "fullTitle": "NodeJS Release 软件仓库镜像使用帮助",
     "file": "nodejs-release.mdx",
     "cname": "nodejs-release"
   },
   "/OpenMediaVault/": {
-    "title": "OpenMediaVault 软件仓库镜像使用帮助",
+    "title": "OpenMediaVault 软件仓库",
+    "fullTitle": "OpenMediaVault 软件仓库镜像使用帮助",
     "file": "OpenMediaVault.mdx",
     "cname": "OpenMediaVault"
   },
   "/openwrt/": {
-    "title": "OpenWRT 软件仓库镜像使用帮助",
+    "title": "OpenWRT 软件仓库",
+    "fullTitle": "OpenWRT 软件仓库镜像使用帮助",
     "file": "openwrt.mdx",
     "cname": "openwrt"
   },
   "/packagist/": {
-    "title": "Packagist 软件仓库镜像使用帮助",
+    "title": "Packagist 软件仓库",
+    "fullTitle": "Packagist 软件仓库镜像使用帮助",
     "file": "packagist.mdx",
     "cname": "packagist"
   },
   "/proxmox/": {
-    "title": "Proxmox 软件仓库镜像使用帮助",
+    "title": "Proxmox 软件仓库",
+    "fullTitle": "Proxmox 软件仓库镜像使用帮助",
     "file": "proxmox.mdx",
     "cname": "proxmox"
   },
   "/pybombs/": {
-    "title": "PyBOMBS 软件仓库镜像使用帮助",
+    "title": "PyBOMBS 软件仓库",
+    "fullTitle": "PyBOMBS 软件仓库镜像使用帮助",
     "file": "pybombs.mdx",
     "cname": "pybombs"
   },
   "/pypi/": {
-    "title": "PyPI 软件仓库镜像使用帮助",
+    "title": "PyPI 软件仓库",
+    "fullTitle": "PyPI 软件仓库镜像使用帮助",
     "file": "pypi.mdx",
     "cname": "pypi"
   },
   "/qemu.git/": {
-    "title": "QEMU Git 镜像使用帮助",
+    "title": "QEMU Git",
+    "fullTitle": "QEMU Git 镜像使用帮助",
     "file": "pypi.mdx",
     "cname": "qemu.git"
   },
   "/raspbian/": {
-    "title": "Raspbian 软件仓库镜像使用帮助",
+    "title": "Raspbian 软件仓库",
+    "fullTitle": "Raspbian 软件仓库镜像使用帮助",
     "file": "raspbian.mdx",
     "cname": "raspbian"
   },
   "/raspberrypi/": {
-    "title": "Raspberrypi 软件仓库镜像使用帮助",
+    "title": "Raspberrypi 软件仓库",
+    "fullTitle": "Raspberrypi 软件仓库镜像使用帮助",
     "file": "raspberrypi.mdx",
     "cname": "raspberrypi"
   },
   "/repo-ck/": {
-    "title": "Repo-ck 软件仓库镜像使用帮助",
+    "title": "Repo-ck 软件仓库",
+    "fullTitle": "Repo-ck 软件仓库镜像使用帮助",
     "file": "repo-ck.mdx",
     "cname": "repo-ck"
   },
   "/riscv-toolchains/": {
-    "title": "RISC-V 工具链镜像使用帮助",
+    "title": "RISC-V 工具链",
+    "fullTitle": "RISC-V 工具链镜像使用帮助",
     "file": "riscv-toolchains.mdx",
     "cname": "riscv-toolchains"
   },
   "/ros/": {
-    "title": "ROS 软件仓库镜像使用帮助",
+    "title": "ROS 软件仓库",
+    "fullTitle": "ROS 软件仓库镜像使用帮助",
     "file": "ros.mdx",
     "cname": "ros"
   },
   "/ros2/": {
-    "title": "ROS2 软件仓库镜像使用帮助",
-    "file": "ros2.mdx",
-    "cname": "ros2"
-  },
-  "/ros2/": {
-    "title": "ROS2 软件仓库镜像使用帮助",
+    "title": "ROS2 软件仓库",
+    "fullTitle": "ROS2 软件仓库镜像使用帮助",
     "file": "ros2.mdx",
     "cname": "ros2"
   },
   "/rosdistro/": {
-    "title": "ROS Distro 镜像使用帮助",
+    "title": "ROS Distro",
+    "fullTitle": "ROS Distro 镜像使用帮助",
     "file": "rosdistro.mdx",
     "cname": "rosdistro"
   },
   "/rpmfusion/": {
-    "title": "RPMFusion 软件仓库镜像使用帮助",
+    "title": "RPMFusion 软件仓库",
+    "fullTitle": "RPMFusion 软件仓库镜像使用帮助",
     "file": "rpmfusion.mdx",
     "cname": "rpmfusion"
   },
   "/rubygems/": {
-    "title": "Ruby Gems 镜像使用帮助",
+    "title": "Ruby Gems",
+    "fullTitle": "Ruby Gems 镜像使用帮助",
     "file": "rubygems.mdx",
     "cname": "rubygems"
   },
   "/rudder/": {
-    "title": "Rudder 软件仓库镜像使用帮助",
+    "title": "Rudder 软件仓库",
+    "fullTitle": "Rudder 软件仓库镜像使用帮助",
     "file": "rudder.mdx",
     "cname": "rudder"
   },
   "/stackage/": {
-    "title": "Stackage 软件仓库镜像使用帮助",
+    "title": "Stackage 软件仓库",
+    "fullTitle": "Stackage 软件仓库镜像使用帮助",
     "file": "stackage.mdx",
     "cname": "stackage"
   },
   "/termux/": {
-    "title": "Termux 软件仓库镜像使用帮助",
+    "title": "Termux 软件仓库",
+    "fullTitle": "Termux 软件仓库镜像使用帮助",
     "file": "termux.mdx",
     "cname": "termux"
   },
   "/ubuntu/": {
-    "title": "Ubuntu 软件仓库镜像使用帮助",
+    "title": "Ubuntu 软件仓库",
+    "fullTitle": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",
     "cname": "ubuntu"
   },
   "/ubuntu-ports/": {
-    "title": "Ubuntu Ports 软件仓库镜像使用帮助",
+    "title": "Ubuntu Ports 软件仓库",
+    "fullTitle": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",
     "cname": "ubuntu-ports"
   },
   "/virtualbox/": {
-    "title": "VirtualBox 软件仓库镜像使用帮助",
+    "title": "VirtualBox 软件仓库",
+    "fullTitle": "VirtualBox 软件仓库镜像使用帮助",
     "file": "virtualbox.mdx",
     "cname": "virtualbox"
   },
   "/voidlinux/": {
-    "title": "Void Linux 软件仓库镜像使用帮助",
+    "title": "Void Linux 软件仓库",
+    "fullTitle": "Void Linux 软件仓库镜像使用帮助",
     "file": "voidlinux.mdx",
     "cname": "voidlinux"
   }

@@ -4,6 +4,11 @@
     "file": "Adoptium.mdx",
     "cname": "Adoptium"
   },
+  "/alpine/": {
+    "title": "Alpine 软件仓库镜像使用帮助",
+    "file": "alpine.mdx",
+    "cname": "alpine"
+  },
   "/anaconda/": {
     "title": "Anaconda 软件仓库镜像使用帮助",
     "file": "anaconda.mdx",

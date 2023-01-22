@@ -60,6 +60,6 @@ app.prepare().then(() => {
   // fire it up
   server.listen(port, (err) => {
     if (err) throw err;
-    Log.info(`> Ready on http://${hostname}:${port}`);
+    Log.ready(`started server http://${hostname}:${port}`);
   });
 });

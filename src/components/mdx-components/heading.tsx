@@ -37,6 +37,43 @@ const styles = style9.create({
   },
   inline_block: {
     display: 'inline-block'
+  },
+  h1: {
+    fontSize: 32,
+    fontWeight: 600,
+    lineHeight: '2.5rem'
+  },
+  h2: {
+    fontSize: 24,
+    lineHeight: '2rem',
+    color: 'var(--text-primary)',
+    fontWeight: 600,
+    marginTop: '24px',
+    marginBottom: '16px',
+    letterSpacing: '0.02em'
+  },
+  h3: {
+    fontSize: 20,
+    lineHeight: '2rem',
+    color: 'var(--text-primary)',
+    fontWeight: 600,
+    marginTop: '24px',
+    marginBottom: '16px',
+    letterSpacing: '0.02em'
+  },
+  h4: {
+    fontSize: 18,
+    fontWeight: 600,
+    lineHeight: '1.5rem',
+    marginTop: '24px',
+    marginBottom: '16px'
+  },
+  h5: {
+    fontSize: 16,
+    fontWeight: 600,
+    lineHeight: '1.5rem',
+    marginTop: '24px',
+    marginBottom: '16px'
   }
 });
 
@@ -81,67 +118,27 @@ export const Heading = typescriptHappyForwardRef(<T extends 'h1' | 'h2' | 'h3' |
   );
 });
 
-const headingStyles = style9.create({
-  h1: {
-    fontSize: 32,
-    fontWeight: 600,
-    lineHeight: '2.5rem'
-  },
-  h2: {
-    fontSize: 24,
-    lineHeight: '2rem',
-    color: 'var(--text-primary)',
-    fontWeight: 600,
-    marginTop: '24px',
-    marginBottom: '16px',
-    letterSpacing: '0.02em'
-  },
-  h3: {
-    fontSize: 20,
-    lineHeight: '2rem',
-    color: 'var(--text-primary)',
-    fontWeight: 600,
-    marginTop: '24px',
-    marginBottom: '16px',
-    letterSpacing: '0.02em'
-  },
-  h4: {
-    fontSize: 18,
-    fontWeight: 600,
-    lineHeight: '1.5rem',
-    marginTop: '24px',
-    marginBottom: '16px'
-  },
-  h5: {
-    fontSize: 16,
-    fontWeight: 600,
-    lineHeight: '1.5rem',
-    marginTop: '24px',
-    marginBottom: '16px'
-  }
-});
-
-const h1Xstyle = [headingStyles.h1];
+const h1Xstyle = [styles.h1];
 export const H1 = memo((props: HeadingProps<'h1'>) => (
   <Heading as="h1" xstyle={h1Xstyle} {...props} />
 ));
 
-const h2Xstyle = [headingStyles.h2];
+const h2Xstyle = [styles.h2];
 export const H2 = memo((props: HeadingProps<'h2'>) => (
   <Heading as="h2" xstyle={h2Xstyle} {...props} />
 ));
 
-const h3Xstyle = [headingStyles.h3];
+const h3Xstyle = [styles.h3];
 export const H3 = memo((props: HeadingProps<'h3'>) => (
   <Heading as="h3" xstyle={h3Xstyle} {...props} />
 ));
 
-const h4Xstyle = [headingStyles.h4];
+const h4Xstyle = [styles.h4];
 export const H4 = memo((props: HeadingProps<'h4'>) => (
   <Heading as="h4" xstyle={h4Xstyle} {...props} />
 ));
 
-const h5Xstyle = [headingStyles.h5];
+const h5Xstyle = [styles.h5];
 export const H5 = memo((props: HeadingProps<'h5'>) => (
   <Heading as="h5" xstyle={h5Xstyle} {...props} />
 ));

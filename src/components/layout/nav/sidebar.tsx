@@ -2,7 +2,7 @@ import type { RoutesJson } from '@/types/routesJson';
 import { usePendingRoute } from '@/hooks/use-pending-route';
 import { usePathname } from '@/hooks/use-current-pathname';
 
-import { SidebarLink } from './nav-link';
+import SidebarLink from './nav-link';
 import { memo } from 'react';
 
 interface SidebarProps {

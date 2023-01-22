@@ -60,9 +60,7 @@ const styles = style9.create({
   }
 });
 
-export const navLinkBaseStyles = styles.base;
-
-export const SidebarLink = memo(({
+const SidebarLink = ({
   href,
   isActive = false,
   title,
@@ -89,4 +87,6 @@ export const SidebarLink = memo(({
       {title}
     </Link>
   );
-});
+};
+
+export default memo(SidebarLink);

@@ -24,7 +24,7 @@ function Link({ href, ...props }: Omit<JSX.IntrinsicElements['a'], 'className' |
   if (!href) {
     return <a href={href} className={styles('base')} {...props} />;
   }
-  if (href.startsWith('https://')) {
+  if (href.startsWith('https://') || href.startsWith('http://')) {
     return <ExternalLink href={href} className={styles('base')} {...props} />;
   }
   return <NextLink href={href} className={styles('base')} {...props} />;

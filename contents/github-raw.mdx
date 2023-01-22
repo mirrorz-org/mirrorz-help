@@ -1,0 +1,20 @@
+---
+title: GitHub RAW 镜像使用帮助
+cname: 'github-raw'
+---
+
+GitHub RAW 镜像仅为其他镜像服务。
+
+### rosdep init
+
+主内容在 [ROS Distro 帮助](/rosdistro/) 中。
+
+<CodeBlock>
+
+```bash
+# 手动模拟 rosdep init
+sudo mkdir -p /etc/ros/rosdep/sources.list.d/
+sudo curl -o /etc/ros/rosdep/sources.list.d/20-default.list {{http_protocol}}{{mirror}}/ros/rosdistro/master/rosdep/sources.list.d/20-default.list
+```
+
+</CodeBlock>

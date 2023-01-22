@@ -114,6 +114,11 @@
     "file": "gcc.git.mdx",
     "cname": "gcc.git"
   },
+  "/github-raw/": {
+    "title": "GitHub RAW 使用帮助",
+    "file": "github-raw.mdx",
+    "cname": "github-raw"
+  },
   "/gitlab-ce/": {
     "title": "GitLab CE 软件仓库使用帮助",
     "file": "gitlab-ce.mdx",
@@ -278,6 +283,16 @@
     "title": "ROS2 软件仓库镜像使用帮助",
     "file": "ros2.mdx",
     "cname": "ros2"
+  },
+  "/ros2/": {
+    "title": "ROS2 软件仓库镜像使用帮助",
+    "file": "ros2.mdx",
+    "cname": "ros2"
+  },
+  "/rosdistro/": {
+    "title": "ROS Distro 镜像使用帮助",
+    "file": "rosdistro.mdx",
+    "cname": "rosdistro"
   },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",

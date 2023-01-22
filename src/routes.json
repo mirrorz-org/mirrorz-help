@@ -314,9 +314,19 @@
     "file": "termux.mdx",
     "cname": "termux"
   },
+  "/ubuntu/": {
+    "title": "Ubuntu 软件仓库镜像使用帮助",
+    "file": "ubuntu.mdx",
+    "cname": "ubuntu"
+  },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",
     "cname": "ubuntu-ports"
+  },
+  "/voidlinux/": {
+    "title": "Void Linux 软件仓库镜像使用帮助",
+    "file": "voidlinux.mdx",
+    "cname": "voidlinux"
   }
 }

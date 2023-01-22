@@ -75,6 +75,11 @@ const styles = style9.create({
       paddingLeft: '48px',
       paddingRight: '48px'
     }
+  },
+  content_inner: {
+    maxWidth: '1280px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   }
 });
 
@@ -119,7 +124,11 @@ export function Layout({ children, meta, toc = [], cname, isContent = false }: R
                             {children}
                           </DocumentationWrapper>
                         )
-                        : children}
+                        : (
+                          <div className={styles('content_inner')}>
+                            {children}
+                          </div>
+                        )}
 
                       {isContent && <MetadataCard />}
                     </div>

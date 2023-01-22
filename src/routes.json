@@ -295,14 +295,19 @@
     "cname": "rosdistro"
   },
   "/rpmfusion/": {
-    "title": "RPMFusion 镜像使用帮助",
+    "title": "RPMFusion 软件仓库镜像使用帮助",
     "file": "rpmfusion.mdx",
     "cname": "rpmfusion"
   },
   "/rudder/": {
-    "title": "Rudder 镜像使用帮助",
+    "title": "Rudder 软件仓库镜像使用帮助",
     "file": "rudder.mdx",
     "cname": "rudder"
+  },
+  "/stackage/": {
+    "title": "Stackage 软件仓库镜像使用帮助",
+    "file": "stackage.mdx",
+    "cname": "stackage"
   },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",

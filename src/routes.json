@@ -294,6 +294,11 @@
     "file": "rosdistro.mdx",
     "cname": "rosdistro"
   },
+  "/rpmfusion/": {
+    "title": "RPMFusion 镜像使用帮助",
+    "file": "rpmfusion.mdx",
+    "cname": "rpmfusion"
+  },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",

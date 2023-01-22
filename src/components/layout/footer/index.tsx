@@ -85,6 +85,10 @@ const styles = style9.create({
       color: 'var(--text-link)'
     }
   },
+  footer_section_base: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
   social: {
     color: 'var(--text-primary)'
   }
@@ -139,10 +143,23 @@ function Footer() {
             &copy; <CurrentYear />
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className={styles('footer_section_base')}>
+          {/** TODO: GitHub Issue URL builder + Contributing Guide */}
+          <Header>Contributing</Header>
+          <FooterLink href="#">
+            Code of Conduct (WIP)
+          </FooterLink>
+          <FooterLink href="#">
+            Report an Issue
+          </FooterLink>
+          <FooterLink href="#">
+            Contributing Guide (WIP)
+          </FooterLink>
+        </div>
+        <div className={styles('footer_section_base')}>
           <Header>More</Header>
           <FooterLink href="https://mirrorz.org/">
-            MirrorZ
+            MirrorZ Homepage
           </FooterLink>
           <FooterLink href="https://github.com/mirrorz/">
             GitHub

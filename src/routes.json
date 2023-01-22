@@ -239,6 +239,11 @@
     "file": "pybombs.mdx",
     "cname": "pybombs"
   },
+  "/pypi/": {
+    "title": "PyPI 软件仓库镜像使用帮助",
+    "file": "pypi.mdx",
+    "cname": "pypi"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",

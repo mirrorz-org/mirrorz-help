@@ -304,6 +304,11 @@
     "file": "rpmfusion.mdx",
     "cname": "rpmfusion"
   },
+  "/rubygems/": {
+    "title": "Ruby Gems 镜像使用帮助",
+    "file": "rubygems.mdx",
+    "cname": "rubygems"
+  },
   "/rudder/": {
     "title": "Rudder 软件仓库镜像使用帮助",
     "file": "rudder.mdx",

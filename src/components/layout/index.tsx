@@ -64,6 +64,17 @@ const styles = style9.create({
   },
   article: {
     overflowWrap: 'break-word'
+  },
+  content_wrapper: {
+    paddingLeft: 0
+  },
+  content_container: {
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    '@media screen and (min-width: 640px)': {
+      paddingLeft: '48px',
+      paddingRight: '48px'
+    }
   }
 });
 
@@ -99,12 +110,20 @@ export function Layout({ children, meta, toc = [], cname, isContent = false }: R
               <main className={styles('main')}>
                 <div className={styles('main_spacer')} />
                 <article className={styles('article')} key={asPath}>
-                  {meta && <Header title={meta.title} />}
-                  <DocumentationWrapper>
-                    {children}
-                    {/** TODO: contributor list (next.oi-wiki.org) & Edit on GitHub. See also MDN */}
-                    {isContent && <MetadataCard filename="" />}
-                  </DocumentationWrapper>
+                  {isContent && meta && <Header title={meta.title} />}
+                  <div className={styles('content_wrapper')}>
+                    <div className={styles('content_container')}>
+                      {isContent
+                        ? (
+                          <DocumentationWrapper>
+                            {children}
+                          </DocumentationWrapper>
+                        )
+                        : children}
+
+                      {isContent && <MetadataCard />}
+                    </div>
+                  </div>
                 </article>
                 <Footer />
               </main>

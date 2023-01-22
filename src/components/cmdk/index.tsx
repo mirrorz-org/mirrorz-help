@@ -48,7 +48,7 @@ type ItemProps = Children &
     /** Whether this item is currently disabled. */
     disabled?: boolean
     /** Event handler for when this item is selected, either via click or keyboard selection. */
-    onSelect?: (value: string) => void
+    onSelect?: (lowerCaseValue: string, originValue: string) => void
     /**
      * A unique value for this item.
      * If no value is provided, it will be inferred from `children` or the rendered `textContent`. If your `textContent` changes between renders, you _must_ provide a stable, unique `value`.
@@ -640,7 +640,7 @@ const Item = forwardRef<HTMLDivElement, ItemProps>((props, forwardedRef) => {
 
   function onSelect() {
     // @ts-expect-error -- port
-    propsRef.current.onSelect?.(value.current)
+    propsRef.current.onSelect?.(value.current, props.value)
   }
 
   function select() {

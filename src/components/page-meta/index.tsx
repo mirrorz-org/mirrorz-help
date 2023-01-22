@@ -35,11 +35,7 @@ const styles = style9.create({
   }
 });
 
-interface MetadataCardProps {
-  filename: string
-}
-
-export default function MetadataCard(_props: MetadataCardProps) {
+export default function MetadataCard() {
   const meta = useRouteMeta();
 
   if (!meta) return null;

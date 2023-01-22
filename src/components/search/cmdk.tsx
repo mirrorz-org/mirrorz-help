@@ -113,7 +113,7 @@ function SearchCommandK() {
   const setOpen = useSetSearchOpen();
 
   const router = useRouter();
-  const handleSelect = useCallback((href: string) => {
+  const handleSelect = useCallback((_: string, href: string) => {
     if (href) {
       startTransition(() => {
         router.push(href);
@@ -140,7 +140,6 @@ function SearchCommandK() {
         {/* {isLoading && <Command.Loading>Hang on…</Command.Loading>} */}
 
         <Command.Empty className={styles('empty')}>No results found.</Command.Empty>
-
         {
           data.map(([href, route]) => (
             <Command.Item

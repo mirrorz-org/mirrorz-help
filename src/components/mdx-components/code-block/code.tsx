@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, memo } from 'react';
 
 const Lowlight = lazy(() => import('./highlight'));
 
@@ -7,7 +7,7 @@ interface ActualCodeProps {
   language: string | undefined;
 }
 
-export default function ActualCode({ code, language }: ActualCodeProps) {
+function ActualCode({ code, language }: ActualCodeProps) {
   const fallback = (
     <pre>
       <code>
@@ -26,3 +26,5 @@ export default function ActualCode({ code, language }: ActualCodeProps) {
     </Suspense>
   );
 }
+
+export default memo(ActualCode);

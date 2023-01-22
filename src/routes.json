@@ -274,6 +274,11 @@
     "file": "ros.mdx",
     "cname": "ros"
   },
+  "/ros2/": {
+    "title": "ROS2 软件仓库镜像使用帮助",
+    "file": "ros2.mdx",
+    "cname": "ros2"
+  },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",

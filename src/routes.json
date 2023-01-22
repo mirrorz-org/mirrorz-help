@@ -39,6 +39,11 @@
     "file": "binutils-gdb.git.mdx",
     "cname": "binutils-gdb.git"
   },
+  "/bioconductor/": {
+    "title": "Bioconductor 软件仓库镜像使用帮助",
+    "file": "bioconductor.mdx",
+    "cname": "bioconductor"
+  },
   "/centos/": {
     "title": "CentOS 软件仓库镜像使用帮助",
     "file": "centos.mdx",

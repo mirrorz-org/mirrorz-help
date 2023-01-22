@@ -299,6 +299,11 @@
     "file": "rpmfusion.mdx",
     "cname": "rpmfusion"
   },
+  "/rudder/": {
+    "title": "Rudder 镜像使用帮助",
+    "file": "rudder.mdx",
+    "cname": "rudder"
+  },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",

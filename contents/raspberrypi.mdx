@@ -1,0 +1,28 @@
+---
+title: Raspberrypi 软件仓库镜像使用帮助
+cname: 'raspberrypi'
+---
+
+主要参考 [Raspbian 帮助](https://help.mirrorz.org/raspbian/)
+
+编辑 `/etc/apt/sources.list.d/raspi.list` 文件。
+
+<CodeBlock
+  menus={[
+    {
+      title: '选择你的 Raspbian 对应的 Debian 版本',
+      items: [
+        ['Debian 11 (bullseye)', { release_name: 'bullseye' }],
+        ['Debian 10 (buster)', { release_name: 'buster' }],
+        ['Debian 9 (stretch)', { release_name: 'stretch' }],
+      ]
+    },
+  ]}
+>
+
+
+```properties
+deb {{http_protocol}}{{mirror}}/ {{release_name}} main
+```
+
+</CodeBlock>

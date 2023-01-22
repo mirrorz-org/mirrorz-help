@@ -249,10 +249,15 @@
     "file": "pypi.mdx",
     "cname": "qemu.git"
   },
-  "/ubuntu/": {
-    "title": "Ubuntu 软件仓库镜像使用帮助",
-    "file": "ubuntu.mdx",
-    "cname": "ubuntu"
+  "/raspbian/": {
+    "title": "Raspbian 软件仓库镜像使用帮助",
+    "file": "raspbian.mdx",
+    "cname": "raspbian"
+  },
+  "/raspberrypi/": {
+    "title": "Raspberrypi 软件仓库镜像使用帮助",
+    "file": "raspberrypi.mdx",
+    "cname": "raspberrypi"
   },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",

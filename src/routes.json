@@ -79,6 +79,11 @@
     "file": "crates.io-index.git.mdx",
     "cname": "crates.io-index.git"
   },
+  "/CTAN/": {
+    "title": "CTAN 镜像使用帮助",
+    "file": "CTAN.mdx",
+    "cname": "CTAN"
+  },
   "/cygwin/": {
     "title": "Cygwin 软件仓库镜像使用帮助",
     "file": "cygwin.mdx",

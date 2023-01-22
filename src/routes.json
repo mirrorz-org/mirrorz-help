@@ -329,6 +329,11 @@
     "file": "ubuntu-ports.mdx",
     "cname": "ubuntu-ports"
   },
+  "/virtualbox/": {
+    "title": "VirtualBox 软件仓库镜像使用帮助",
+    "file": "virtualbox.mdx",
+    "cname": "virtualbox"
+  },
   "/voidlinux/": {
     "title": "Void Linux 软件仓库镜像使用帮助",
     "file": "voidlinux.mdx",

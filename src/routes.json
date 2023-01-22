@@ -264,6 +264,11 @@
     "file": "repo-ck.mdx",
     "cname": "repo-ck"
   },
+  "/riscv-toolchains/": {
+    "title": "RISC-V 工具链镜像使用帮助",
+    "file": "riscv-toolchains.mdx",
+    "cname": "riscv-toolchains"
+  },
   "/ubuntu-ports/": {
     "title": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",

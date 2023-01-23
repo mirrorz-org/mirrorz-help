@@ -167,6 +167,12 @@
     "file": "epel.mdx",
     "cname": "epel"
   },
+  "/erlang-solutions/": {
+    "title": "Erlang Solutions 软件仓库",
+    "fullTitle": "Erlang Solutions 软件仓库镜像使用帮助",
+    "file": "erlang-solutions.mdx",
+    "cname": "erlang-solutions"
+  },
   "/fdroid/": {
     "title": "F-Droid 软件仓库",
     "fullTitle": "F-Droid 软件仓库镜像使用帮助",

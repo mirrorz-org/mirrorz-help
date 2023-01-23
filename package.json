@@ -41,8 +41,8 @@
     "highlight.js": "^11.7.0",
     "lowlight": "^2.8.0",
     "next": "^13.1.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.0-next-ee8509801-20230117",
+    "react-dom": "^18.3.0-next-ee8509801-20230117",
     "style9": "^0.16.1",
     "swr": "^2.0.1"
   },
@@ -87,6 +87,10 @@
     "taskr": "^1.1.0",
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.1"
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom"
   },
   "engines": {
     "node": ">=16"

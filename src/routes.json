@@ -413,6 +413,12 @@
     "file": "OpenMediaVault.mdx",
     "cname": "OpenMediaVault"
   },
+  "/opensuse/": {
+    "title": "openSUSE 软件仓库",
+    "fullTitle": "openSUSE 软件仓库镜像使用帮助",
+    "file": "opensuse.mdx",
+    "cname": "opensuse"
+  },
   "/openwrt/": {
     "title": "OpenWRT 软件仓库",
     "fullTitle": "OpenWRT 软件仓库镜像使用帮助",

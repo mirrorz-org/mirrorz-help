@@ -12,6 +12,7 @@ import { MDXComponents } from '@/components/mdx-components';
 import { Children } from 'react';
 
 import type React from 'react';
+import type { MetaFromFrontMatters } from '@/types/front-matter';
 
 import { compile as compileMdx } from '@/compiled/@mdx-js/mdx';
 import remarkGfm from '@/compiled/remark-gfm';
@@ -33,9 +34,7 @@ export interface ToC {
 export interface ContentProps {
   content: any;
   toc: ToC[];
-  meta: {
-    [key: string]: any;
-  };
+  meta: MetaFromFrontMatters;
   cname: string;
 }
 
@@ -149,7 +148,7 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
     props: {
       toc,
       content: JSON.stringify(reactTree, stringifyNodeOnServer),
-      meta,
+      meta: meta as MetaFromFrontMatters,
       cname: meta.cname
     }
   };

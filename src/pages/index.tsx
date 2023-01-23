@@ -11,6 +11,7 @@ import IconCentOS from '../components/icons/brands/centos';
 import IconGentoo from '../components/icons/brands/gentoo';
 import IconPython from '../components/icons/brands/python';
 import Link from 'next/link';
+import SeoHead from '../components/seo/head';
 
 const styles = style9.create({
   main: {
@@ -120,75 +121,78 @@ const styles = style9.create({
 // TODO: SEO
 export default function HomePage() {
   return (
-    <Layout>
-      <div className={styles('main')}>
-        <MirrorzLogo className={styles('mirrorz_logo')} />
-        <div className={styles('title_wrapper')}>
-          <h1 className={styles('title')}>
-            MirrorZ Help
-          </h1>
-          <div className={styles('badge')}>
-            Alpha
+    <>
+      <SeoHead />
+      <Layout>
+        <div className={styles('main')}>
+          <MirrorzLogo className={styles('mirrorz_logo')} />
+          <div className={styles('title_wrapper')}>
+            <h1 className={styles('title')}>
+              MirrorZ Help
+            </h1>
+            <div className={styles('badge')}>
+              Alpha
+            </div>
           </div>
         </div>
-      </div>
-      <section>
-        <p className={styles('paragraph')}>
-          MirrorZ Help 致力于成为一个开源、开放、且持续更新的开源软件镜像的帮助文档整合站点，旨在帮助高校间推广开源软件的使用。
-        </p>
-        <h2 className={styles('h2')}>热门文档</h2>
-        <div className={styles('featured_docs')}>
-          <Link href="/ubuntu/" className={styles('card')}>
-            <IconUbuntu className={styles('brand_icon')} />
-            <h3 className={styles('card_title')}>
-              Ubuntu 软件仓库镜像使用帮助
-            </h3>
-          </Link>
-          <Link href="/debian/" className={styles('card')}>
-            <IconDebian className={styles('brand_icon')} />
-            <h3 className={styles('card_title')}>
-              Debian 软件仓库镜像使用帮助
-            </h3>
-          </Link>
-          <Link href="/archlinux/" className={styles('card')}>
-            <IconArchLinux className={styles('brand_icon')} />
-            <h3 className={styles('card_title')}>
-              Arch Linux 软件仓库镜像使用帮助
-            </h3>
-          </Link>
-          <Link href="/fedora/" className={styles('card')}>
-            <IconFedora className={styles('brand_icon')} />
-            <h3 className={styles('card_title')}>
-              Fedora 软件仓库镜像使用帮助
-            </h3>
-          </Link>
-          <Link href="/opensuse/" className={styles('card')}>
-            <IconOpenSUSE className={styles('brand_icon')} />
-            <h3 className={styles('card_title')}>
-              OpenSUSE 软件仓库镜像使用帮助
-            </h3>
-          </Link>
-          <Link href="/centos/" className={styles('card')}>
-            <IconCentOS className={styles('brand_icon')} />
-            <h3 className={styles('card_title')}>
-              CentOS 软件仓库镜像使用帮助
-            </h3>
-          </Link>
-          <Link href="/gentoo/" className={styles('card')}>
-            <IconGentoo className={styles('brand_icon')} />
-            <h3 className={styles('card_title')}>
-              Gentoo 软件仓库镜像使用帮助
-            </h3>
-          </Link>
-          <Link href="/pypi/" className={styles('card')}>
-            <IconPython className={styles('brand_icon')} />
-            <h3 className={styles('card_title')}>
-              PyPI 软件仓库镜像使用帮助
-            </h3>
-          </Link>
-        </div>
-      </section>
-      {/** TODO: Logo Cloud Section */}
-    </Layout>
+        <section>
+          <p className={styles('paragraph')}>
+            MirrorZ Help 致力于成为一个开源、开放、且持续更新的开源软件镜像的帮助文档整合站点，旨在帮助高校间推广开源软件的使用。
+          </p>
+          <h2 className={styles('h2')}>热门文档</h2>
+          <div className={styles('featured_docs')}>
+            <Link href="/ubuntu/" className={styles('card')}>
+              <IconUbuntu className={styles('brand_icon')} />
+              <h3 className={styles('card_title')}>
+                Ubuntu 软件仓库镜像使用帮助
+              </h3>
+            </Link>
+            <Link href="/debian/" className={styles('card')}>
+              <IconDebian className={styles('brand_icon')} />
+              <h3 className={styles('card_title')}>
+                Debian 软件仓库镜像使用帮助
+              </h3>
+            </Link>
+            <Link href="/archlinux/" className={styles('card')}>
+              <IconArchLinux className={styles('brand_icon')} />
+              <h3 className={styles('card_title')}>
+                Arch Linux 软件仓库镜像使用帮助
+              </h3>
+            </Link>
+            <Link href="/fedora/" className={styles('card')}>
+              <IconFedora className={styles('brand_icon')} />
+              <h3 className={styles('card_title')}>
+                Fedora 软件仓库镜像使用帮助
+              </h3>
+            </Link>
+            <Link href="/opensuse/" className={styles('card')}>
+              <IconOpenSUSE className={styles('brand_icon')} />
+              <h3 className={styles('card_title')}>
+                OpenSUSE 软件仓库镜像使用帮助
+              </h3>
+            </Link>
+            <Link href="/centos/" className={styles('card')}>
+              <IconCentOS className={styles('brand_icon')} />
+              <h3 className={styles('card_title')}>
+                CentOS 软件仓库镜像使用帮助
+              </h3>
+            </Link>
+            <Link href="/gentoo/" className={styles('card')}>
+              <IconGentoo className={styles('brand_icon')} />
+              <h3 className={styles('card_title')}>
+                Gentoo 软件仓库镜像使用帮助
+              </h3>
+            </Link>
+            <Link href="/pypi/" className={styles('card')}>
+              <IconPython className={styles('brand_icon')} />
+              <h3 className={styles('card_title')}>
+                PyPI 软件仓库镜像使用帮助
+              </h3>
+            </Link>
+          </div>
+        </section>
+        {/** TODO: Logo Cloud Section */}
+      </Layout>
+    </>
   );
 }

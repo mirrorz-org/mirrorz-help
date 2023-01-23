@@ -2,6 +2,7 @@ import style9 from 'style9';
 import { Layout } from '../components/layout';
 import { Paragraph } from '../components/mdx-components/block';
 import Link from 'next/link';
+import SeoHead from '../components/seo/head';
 
 const styles = style9.create({
   main: {
@@ -40,19 +41,24 @@ const styles = style9.create({
 
 export default function ServerErrorPage() {
   return (
-    <Layout>
-      <div className={styles('main')}>
-        <h1 className={styles('title')}>500 Internal Server Error</h1>
-        <article className={styles('content')}>
-          <Paragraph>
-            服务器在处理你的请求时发生了错误。
-          </Paragraph>
-          <Paragraph>
-            {/** TODO: GitHub Issue URL builder + Issue Template */}
-            你也可以 <Link href="#" className={styles('link')}>通过 GitHub Issue 反馈这个问题</Link>，或者 <Link href="/" className={styles('link')}>返回首页</Link>。
-          </Paragraph>
-        </article>
-      </div>
-    </Layout>
+    <>
+      <SeoHead
+        title="500 Internal Server Error"
+      />
+      <Layout>
+        <div className={styles('main')}>
+          <h1 className={styles('title')}>500 Internal Server Error</h1>
+          <article className={styles('content')}>
+            <Paragraph>
+              服务器在处理你的请求时发生了错误。
+            </Paragraph>
+            <Paragraph>
+              {/** TODO: GitHub Issue URL builder + Issue Template */}
+              你也可以 <Link href="#" className={styles('link')}>通过 GitHub Issue 反馈这个问题</Link>，或者 <Link href="/" className={styles('link')}>返回首页</Link>。
+            </Paragraph>
+          </article>
+        </div>
+      </Layout>
+    </>
   );
 }

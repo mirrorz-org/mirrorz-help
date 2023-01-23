@@ -9,7 +9,7 @@ import { fileExists } from 'next/dist/lib/file-exists';
 
 import routesJson from '@/routes.json';
 
-const outputRoot = path.join(process.cwd(), 'public', 'og');
+const outputRoot = path.join(process.cwd(), 'public', 'og-help.mirrorz.org');
 
 const lockFile = fsPromises.readFile(path.join(process.cwd(), 'package-lock.json'), { encoding: 'utf-8' });
 const templateSourceCode = fsPromises.readFile(path.join(process.cwd(), 'src', 'opengraph', 'template.tsx'), { encoding: 'utf-8' });
@@ -116,7 +116,7 @@ async function generateOpengraph<T = any>({
   }
 
   // Default OpenGraph
-  const defaultOgPath = path.join(outputRoot, 'opengraph-default.png');
+  const defaultOgPath = path.join(outputRoot, 'default.png');
   await fsPromises.writeFile(
     defaultOgPath,
     await generateOpengraph({
@@ -135,7 +135,7 @@ async function generateOpengraph<T = any>({
       return null;
     }
 
-    const outputPath = path.join(outputRoot, `opengraph-${routeMeta.cname}.png`);
+    const outputPath = path.join(outputRoot, `${routeMeta.cname}.png`);
 
     return fsPromises.writeFile(
       outputPath,

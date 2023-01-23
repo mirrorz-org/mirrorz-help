@@ -1,0 +1,31 @@
+---
+title: Elastic Stack 软件仓库镜像使用帮助
+cname: 'elasticstack'
+---
+
+[Elasticsearch](https://www.elastic.co/cn/what-is/elasticsearch) 是位于 Elastic Stack 核心的分布式搜索和分析引擎。
+
+请参考[elasticsearch 官方安装教程](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html)。
+
+以 Debian/Ubuntu 安装为例，举例如下：
+
+<CodeBlock
+  menus={[
+    {
+      title: '版本',
+      items: [
+        ['8.x', { version: '8.x' }],
+        ['7.x', { version: '7.x' }],
+        ['6.x', { version: '6.x' }],
+      ]
+    },
+  ]}
+>
+
+```bash
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] {{http_protocol}}{{mirror}}/{{version}}/apt/ stable main" | sudo tee /etc/apt/sources.list.d/elastic-{{version}}.list
+sudo apt-get update && sudo apt-get install elasticsearch
+```
+
+</CodeBlock>

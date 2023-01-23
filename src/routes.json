@@ -83,6 +83,12 @@
     "file": "centos-vault.mdx",
     "cname": "centos-vault"
   },
+  "/ceph/": {
+    "title": "Ceph 软件仓库",
+    "fullTitle": "Ceph 软件仓库镜像使用帮助",
+    "file": "ceph.mdx",
+    "cname": "ceph"
+  },
   "/chef/": {
     "title": "Chef 软件仓库",
     "fullTitle": "Chef 软件仓库镜像使用帮助",

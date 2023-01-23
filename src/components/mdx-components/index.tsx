@@ -5,6 +5,7 @@ import Link from './link';
 import CodeBlock from './code-block';
 
 import type React from 'react';
+import { Tabs, TabItem } from './tabs';
 
 export const MDXComponents: Record<string, React.ComponentType<any>> = {
   a: Link,
@@ -21,5 +22,7 @@ export const MDXComponents: Record<string, React.ComponentType<any>> = {
   ul: UL,
   li: LI,
   hr: Divider,
-  CodeBlock
+  CodeBlock,
+  Tabs,
+  TabItem
 };

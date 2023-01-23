@@ -161,6 +161,24 @@
     "file": "gcc.git.mdx",
     "cname": "gcc.git"
   },
+  "/gentoo/": {
+    "title": "Gentoo",
+    "fullTitle": "Gentoo 软件仓库使用帮助",
+    "file": "gentoo.mdx",
+    "cname": "gentoo"
+  },
+  "/gentoo-portage/": {
+    "title": "Gentoo Portage",
+    "fullTitle": "Gentoo Portage 软件仓库使用帮助",
+    "file": "gentoo-portage.mdx",
+    "cname": "gentoo-portage"
+  },
+  "/gentoo-portage.git/": {
+    "title": "Gentoo Portage Git",
+    "fullTitle": "Gentoo Portage Git 使用帮助",
+    "file": "gentoo-portage.git.mdx",
+    "cname": "gentoo-portage.git"
+  },
   "/github-raw/": {
     "title": "GitHub RAW",
     "fullTitle": "GitHub RAW 使用帮助",
@@ -190,6 +208,12 @@
     "fullTitle": "GNU C Lib Git 镜像使用帮助",
     "file": "glibc.git.mdx",
     "cname": "glibc.git"
+  },
+  "/gnu/": {
+    "title": "GNU 软件仓库",
+    "fullTitle": "GNU 软件仓库镜像使用帮助",
+    "file": "gnu.mdx",
+    "cname": "gnu"
   },
   "/hackage/": {
     "title": "Hackage 软件仓库",

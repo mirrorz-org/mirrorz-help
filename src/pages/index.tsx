@@ -12,6 +12,7 @@ import IconGentoo from '../components/icons/brands/gentoo';
 import IconPython from '../components/icons/brands/python';
 import Link from 'next/link';
 import SeoHead from '../components/seo/head';
+import JsonLD from '../components/seo/json-ld';
 
 const styles = style9.create({
   main: {
@@ -193,6 +194,7 @@ export default function HomePage() {
         </section>
         {/** TODO: Logo Cloud Section */}
       </Layout>
+      <JsonLD />
     </>
   );
 }

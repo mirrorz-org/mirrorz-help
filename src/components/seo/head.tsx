@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { useDarkMode } from '../../contexts/darkmode';
-import { usePathname } from '../../hooks/use-current-pathname';
+import { useDarkMode } from '@/contexts/darkmode';
 import { useMemo } from 'react';
+import { usePermalink } from '@/hooks/use-permalink';
 
 interface SeoHeadProps {
   title?: string,
@@ -16,7 +16,7 @@ interface SeoHeadProps {
 
 export default function SeoHead({
   title,
-  siteName,
+  siteName = 'MirrorZ Help',
   description,
   noindex = false,
   nofollow = false,
@@ -28,8 +28,7 @@ export default function SeoHead({
     height: 630
   }
 }: SeoHeadProps) {
-  const finalSiteName = siteName || 'MirrorZ Help';
-  const finalTitle = title ? `${title} - ${finalSiteName}` : finalSiteName;
+  const finalTitle = title ? `${title} - ${siteName}` : siteName;
   const finalDescription = useMemo(
     () => [
       title,
@@ -47,8 +46,7 @@ export default function SeoHead({
     [nofollow, noindex]
   );
   const darkMode = useDarkMode();
-  const cleanedPath = usePathname();
-  const permalink = useMemo(() => new URL(cleanedPath, 'https://help.mirrorz.org').toString(), [cleanedPath]);
+  const permalink = usePermalink('help.mirrorz.org');
 
   return (
     <Head>

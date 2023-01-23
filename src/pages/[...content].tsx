@@ -5,6 +5,7 @@ import { Fragment, useMemo } from 'react';
 import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';
 import SeoHead from '../components/seo/head';
+import JsonLD from '../components/seo/json-ld';
 
 export default function ContentPage({ content, toc, meta, cname }: ContentProps) {
   const parsedContent = useMemo(
@@ -26,6 +27,7 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
       <Layout meta={meta as any} toc={toc} cname={cname} isContent>
         {parsedContent}
       </Layout>
+      <JsonLD isContent title={meta.title} ogImage={`https://help.mirrorz.org/og-help.mirrorz.org/${cname}.png`} />
     </>
   );
 }

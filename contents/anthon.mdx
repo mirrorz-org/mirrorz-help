@@ -1,0 +1,46 @@
+---
+title: Anthon 软件仓库镜像使用帮助
+cname: 'anthon'
+---
+
+AOSC OS 是一个由[安同开源社区](https://aosc.io) 开发的半滚动 Linux 发行版，支持多种处理器架构。
+
+### 自动替换
+
+AOSC OS 内置 `apt-gen-list` 工具来切换社区提供的可用镜像源。
+
+列出可用镜像源，执行：
+
+```bash
+sudo apt-gen-list list-mirrors
+```
+
+要启用某一镜像源，执行：
+
+```bash
+sudo apt-gen-list add-mirror {mirror}
+```
+
+其中 `{mirror}` 替换为所列出的简称。
+
+要仅启用某一源，执行：
+
+```bash
+sudo apt-gen-list set-mirror {mirror}
+```
+
+其中 `{mirror}` 替换为所列出的简称。
+
+关于 `apt-gen-list` 的语义和详细用法，请执行 `apt-gen-list help` 查看帮助。
+
+### 手动修改
+
+修改 `/etc/apt/sources.list`，内容为
+
+<CodeBlock>
+
+```properties
+deb {{http_protocol}}{{mirror}}/debs stable main
+```
+
+</CodeBlock>

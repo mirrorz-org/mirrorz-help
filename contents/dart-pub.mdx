@@ -1,0 +1,33 @@
+---
+title: Dart Pub 软件仓库镜像使用帮助
+cname: 'dart-pub'
+---
+
+[Pub](https://pub.dartlang.org/) 是 Dart 官方的包管理器。跨平台的前端应开发
+框架 [Flutter](https://flutter.dev/) 也基于 Dart 并且可以使用大部分 Pub 中的
+库。
+
+如果希望通过 pub 镜像安装软件，只需要设置 [PUB_HOSTED_URL](https://www.dartlang.org/tools/pub/environment-variables)
+
+以 bash 为例，临时使用镜像来安装依赖：
+
+<CodeBlock>
+
+```bash
+export PUB_HOSTED_URL="{{http_protocol}}{{mirror}}" # pub: pub get 
+export PUB_HOSTED_URL="{{http_protocol}}{{mirror}}" # flutter: flutter packages get 
+```
+
+</CodeBlock>
+
+若希望长期使用镜像：
+
+<CodeBlock>
+
+```bash
+echo 'export PUB_HOSTED_URL="{{http_protocol}}{{mirror}}"' >> ~/.bashrc
+```
+
+</CodeBlock>
+
+Flutter 镜像使用方法参见 [Flutter 镜像安装帮助](/flutter/)。

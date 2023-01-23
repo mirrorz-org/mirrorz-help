@@ -1,0 +1,90 @@
+---
+title: Influxdata 软件仓库镜像使用帮助
+cname: 'influxdata'
+---
+
+本目录是 `influxdb` ， `telegraf` 等时序型数据库的相关组件的镜像软件源。
+
+### Debian / Ubuntu 用户
+
+首先信任来自 [influxdata](https://docs.influxdata.com/telegraf/v1.18/introduction/installation/) 的PGP公钥：
+
+```shell
+curl -s https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+```
+
+将下方文本框中的内容写入 `/etc/apt/sources.list.d/influxdb.list`
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/influxdb.list"
+  menus={[
+    {
+      title: '发行版',
+      items: [
+        ['Debian 11', { os_name: 'debian', release_name: 'bullseye' }],
+        ['Debian 10', { os_name: 'debian', release_name: 'buster' }],
+        ['Debian 9', { os_name: 'debian', release_name: 'stretch' }],
+        ['Debian 8', { os_name: 'debian', release_name: 'jessie' }],
+        ['Ubuntu 22.04 LTS', { os_name: 'ubuntu', release_name: 'jammy' }],
+        ['Ubuntu 20.04 LTS', { os_name: 'ubuntu', release_name: 'focal' }],
+        ['Ubuntu 18.04 LTS', { os_name: 'ubuntu', release_name: 'bionic' }],
+        ['Ubuntu 16.04 LTS', { os_name: 'ubuntu', release_name: 'xenial' }],
+      ]
+    },
+  ]}
+>
+
+```properties
+deb {{http_protocol}}{{mirror}}/{{os_name}}/ {{release_name}} stable
+```
+
+</CodeBlock>
+
+
+即可安装相关软件，如：
+
+```bash
+sudo apt install influxdb
+```
+
+### Centos / Redhat 用户
+
+新建 `/etc/yum.repos.d/influxdb.repo`，内容为
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/influxdb.repo"
+  menus={[
+    {
+      title: '发行版',
+      items: [
+        ['CentOS/RHEL 7 (x86_64)', { release_name: 'el7-x86_64' }],
+      ]
+    },
+  ]}
+>
+
+```ini
+[influxdb]
+name = InfluxDB Repository - RHEL $releasever
+baseurl={{http_protocol}}{{mirror}}/yum/{{release_name}}
+enabled=1
+gpgcheck=1
+gpgkey={{http_protocol}}{{mirror}}/influxdb.key
+```
+
+</CodeBlock>
+
+
+再执行
+
+```bash
+sudo yum makecache
+```
+
+即可安装相关软件，如：
+
+```bash
+sudo yum install influxdb
+```

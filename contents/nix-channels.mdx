@@ -1,0 +1,76 @@
+---
+title: Nix Channels 镜像使用帮助
+cname: 'nix-channels'
+---
+
+### Nixpkgs binary cache
+
+目前 nix-darwin 的 binary cache 并不工作，请使用官方源。
+
+以优先选择镜像，备选源站为例，选择以下配置之一：
+
+- 单独安装的 Nix：编辑配置文件添加或修改如下项（通常系统配置在 `/etc/nix/nix.conf`，用户配置在 `~/.config/nix/nix.conf`）：
+
+    <CodeBlock>
+
+    ```
+    substituters = {{http_protocol}}{{mirror}}/store https://cache.nixos.org/
+    ```
+
+    </CodeBlock>
+
+- NixOS 21.11 及之前的版本在 `configuration.nix` 中使用如下配置（https://cache.nixos.org 会被自动添加）
+
+    <CodeBlock>
+
+    ```nix
+    nix.binaryCaches = [ "{{http_protocol}}{{mirror}}/store" ];
+    ```
+
+    </CodeBlock>
+
+- NixOS 22.05 及之后的版本在 `configuration.nix` 中使用如下配置（https://cache.nixos.org 会被自动添加）：
+
+    <CodeBlock>
+
+    ```nix
+    nix.settings.substituters = [ "{{http_protocol}}{{mirror}}/store" ];
+    ```
+
+    </CodeBlock>
+
+### Nixpkgs channel
+
+单独安装的 Nix 替换 `nixpkgs-unstable` 命令如下：
+
+<CodeBlock>
+
+```bash
+nix-channel --add {{http_protocol}}{{mirror}}/nixpkgs-unstable nixpkgs
+nix-channel --update
+```
+
+</CodeBlock>
+
+替换 NixOS channel 命令如下（以 root 执行）：
+
+<CodeBlock
+  menus={[
+    {
+      title: '系统版本',
+      items: [
+        ['22.11', { version: '22.11' }],
+        ['unstable', { version: 'unstable' }],
+        ['22.05', { version: '22.05' }],
+        ['22.11', { version: '21.11' }],
+      ]
+    }
+  ]}
+>
+
+```bash
+nix-channel --add {{http_protocol}}{{mirror}}/nixos-{{version}} nixos
+nix-channel --update
+```
+
+</CodeBlock>

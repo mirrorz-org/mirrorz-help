@@ -1,0 +1,41 @@
+---
+title: Arch4edu 软件仓库镜像使用帮助
+cname: 'arch4edu'
+---
+
+Arch4edu 是面向高校用户推出的非官方软件仓库，
+支持 Arch Linux 和 Arch Linux ARM，
+主要包含高校用户常用的科研、教学及开发软件。
+
+### 使用方法
+
+* 导入 GPG key
+
+```
+pacman-key --recv-keys 7931B6D628C8D3BA
+pacman-key --finger 7931B6D628C8D3BA
+pacman-key --lsign-key 7931B6D628C8D3BA
+```
+
+* 在 `/etc/pacman.conf` 文件末尾添加以下内容：
+
+<CodeBlock>
+
+```ini
+[arch4edu]
+Server = {{http_protocol}}{{mirror}}/$arch
+```
+
+</CodeBlock>
+
+* [**不推荐**] 不导入 GPG key，并直接在 `/etc/pacman.conf` 文件末尾添加以下内容：
+
+<CodeBlock>
+
+```ini
+[arch4edu]
+SigLevel = Never
+Server = {{http_protocol}}{{mirror}}/$arch
+```
+
+</CodeBlock>

@@ -269,6 +269,12 @@
     "file": "homebrew-bottles.mdx",
     "cname": "homebrew-bottles"
   },
+  "/kicad/": {
+    "title": "KiCad 软件仓库",
+    "fullTitle": "KiCad 软件仓库镜像使用帮助",
+    "file": "kicad.mdx",
+    "cname": "kicad"
+  },
   "/kubernetes/": {
     "title": "Kubernetes 软件仓库",
     "fullTitle": "Kubernetes 软件仓库镜像使用帮助",

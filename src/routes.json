@@ -227,6 +227,12 @@
     "file": "gnu.mdx",
     "cname": "gnu"
   },
+  "/grafana/": {
+    "title": "Grafana 软件仓库",
+    "fullTitle": "Grafana 软件仓库镜像使用帮助",
+    "file": "grafana.mdx",
+    "cname": "grafana"
+  },
   "/hackage/": {
     "title": "Hackage 软件仓库",
     "fullTitle": "Hackage 软件仓库镜像使用帮助",

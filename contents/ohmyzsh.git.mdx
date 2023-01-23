@@ -1,0 +1,29 @@
+---
+title: ohmyzsh Git 镜像使用帮助
+cname: 'ohmyzsh.git'
+---
+
+### 安装
+
+在本地克隆后获取安装脚本。
+
+<CodeBlock>
+
+```bash
+git clone {{http_protocol}}{{mirror}}
+cd ohmyzsh/tools
+REMOTE={{http_protocol}}{{mirror}} sh install.sh
+```
+
+</CodeBlock>
+
+### 切换已有 ohmyzsh 至镜像源
+
+<CodeBlock>
+
+```bash
+git -C $ZSH remote set-url origin {{http_protocol}}{{mirror}}
+git -C $ZSH pull
+```
+
+</CodeBlock>

@@ -215,6 +215,12 @@
     "file": "github-raw.mdx",
     "cname": "github-raw"
   },
+  "/github-release/": {
+    "title": "GitHub Release",
+    "fullTitle": "GitHub Release 使用帮助",
+    "file": "github-release.mdx",
+    "cname": "github-release"
+  },
   "/gitlab-ce/": {
     "title": "GitLab CE 软件仓库",
     "fullTitle": "GitLab CE 软件仓库使用帮助",
@@ -328,6 +334,12 @@
     "fullTitle": "Linux Firmware Git 镜像使用帮助",
     "file": "linux-firmware.git.mdx",
     "cname": "linux-firmware.git"
+  },
+  "/llvm-project.git/": {
+    "title": "LLVM Project Git",
+    "fullTitle": "LLVM Project Git 镜像使用帮助",
+    "file": "llvm-project.git.mdx",
+    "cname": "llvm-project.git"
   },
   "/lxc-images/": {
     "title": "LXC Images",

@@ -622,5 +622,11 @@
     "fullTitle": "Void Linux 软件仓库镜像使用帮助",
     "file": "voidlinux.mdx",
     "cname": "voidlinux"
+  },
+  "/wine-builds/": {
+    "title": "Wine Builds 软件仓库",
+    "fullTitle": "Wine Builds 软件仓库镜像使用帮助",
+    "file": "wine-builds.mdx",
+    "cname": "wine-builds"
   }
 }

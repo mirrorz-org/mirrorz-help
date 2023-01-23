@@ -51,7 +51,7 @@ export const remarkExtractCodeFromEnhancedCodeBlock = () => {
 export const remarkProcessNormalCodeBlock = () => {
   return function transformer(tree: any) {
     visit(tree, 'code', (node, index, parent) => {
-      if (!(parent.type === 'mdxJsxFlowElement' && parent.name === 'CodeBlock') && node.lang) {
+      if (!(parent.type === 'mdxJsxFlowElement' && parent.name === 'CodeBlock')) {
         const code = toString(node);
         const newNode = {
           type: 'mdxJsxFlowElement',
@@ -61,15 +61,17 @@ export const remarkProcessNormalCodeBlock = () => {
               type: 'mdxJsxAttribute',
               name: 'code',
               value: code
-            },
-            {
-              type: 'mdxJsxAttribute',
-              name: 'language',
-              value: node.lang
             }
           ],
           children: []
         };
+        if (node.lang) {
+          newNode.attributes.push({
+            type: 'mdxJsxAttribute',
+            name: 'language',
+            value: node.lang
+          });
+        }
         if (node.meta) {
           newNode.attributes.push({
             type: 'mdxJsxAttribute',

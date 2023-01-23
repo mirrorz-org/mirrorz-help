@@ -32,13 +32,10 @@ const styles = style9.create({
   }
 });
 
-const reducer = (prevState: Record<string, string>, value: MenuValue) => {
-  // TODO: use immer
-  return {
-    ...prevState,
-    ...value
-  };
-};
+const reducer = (prevState: Record<string, string>, value: MenuValue) => ({
+  ...prevState,
+  ...value
+});
 
 const createInitialState = (menus: Menu[]): Record<string, string> => {
   return menus.reduce((acc, menu) => {

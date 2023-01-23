@@ -119,7 +119,6 @@ const styles = style9.create({
   }
 });
 
-// TODO: SEO
 export default function HomePage() {
   return (
     <>

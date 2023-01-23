@@ -13,9 +13,10 @@ import Header from './header';
 import { CurrentCnameProvider } from '@/contexts/current-cname';
 import { SelectedMirrorProvider } from '@/contexts/current-selected-mirror';
 import { MirrorEnableHttpsProvider } from '@/contexts/mirror-enable-https';
-import type { MetaFromFrontMatters } from '../../types/front-matter';
-import { FrontMatterProvider } from '../../contexts/current-frontmatters';
+import { FrontMatterProvider } from '@/contexts/current-frontmatters';
 import MetadataCard from '../page-meta';
+
+import type { MetaFromFrontMatters } from '@/types/front-matter';
 
 const SearchCommandK = lazy(() => import('../search/cmdk'));
 

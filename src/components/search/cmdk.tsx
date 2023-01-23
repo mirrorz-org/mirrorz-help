@@ -113,7 +113,7 @@ function SearchCommandK() {
   const setOpen = useSetSearchOpen();
 
   const router = useRouter();
-  const handleSelect = useCallback((_: string, href: string) => {
+  const handleSelect = useCallback((_: string, __: string, href?: string) => {
     if (href) {
       startTransition(() => {
         router.push(href);
@@ -143,7 +143,8 @@ function SearchCommandK() {
         {
           data.map(([href, route]) => (
             <Command.Item
-              value={href}
+              value={`${route.title} ${route.title}`}
+              identifier={href}
               key={href}
               className={styles('item')}
               onSelect={handleSelect}

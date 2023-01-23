@@ -275,6 +275,12 @@
     "file": "julia.mdx",
     "cname": "julia"
   },
+  "/julia-releases/": {
+    "title": "Julia Releases 软件仓库",
+    "fullTitle": "Julia Releases 软件仓库镜像使用帮助",
+    "file": "julia-releases.mdx",
+    "cname": "julia-releases"
+  },
   "/kicad/": {
     "title": "KiCad 软件仓库",
     "fullTitle": "KiCad 软件仓库镜像使用帮助",

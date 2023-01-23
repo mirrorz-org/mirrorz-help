@@ -32,6 +32,9 @@ const styles = style9.create({
   },
   code_wrapper: {
     position: 'relative'
+  },
+  p: {
+    marginBottom: '16px'
   }
 });
 
@@ -91,6 +94,9 @@ function CodeBlock({
           </TabItem>
           <TabItem value="快速配置" xstyle={[styles.code_wrapper]}>
             {(isLoading || !currentSelectedMirror) && <LoadingOverlay />}
+            <p className={styles('p')}>
+              如果你当前正在使用的终端 或 Shell 环境不支持复制粘贴时 Shell Escape，「快速配置」的代码可能在复制粘贴的过程中被破坏！
+            </p>
             <ActualCode code={buildCatEOF(finalCode, filepath)} language="bash" />
           </TabItem>
         </Tabs>

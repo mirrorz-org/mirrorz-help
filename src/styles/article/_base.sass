@@ -18,17 +18,14 @@
       margin-left: auto
       margin-right: auto
 
-  :not(:global(.lowlight)) pre
-    margin: 24px 0
-
   pre
     color: var(--prism)
     padding: 0
     overflow-wrap: normal
     border-radius: 8px
+    margin: 24px 0
     background: var(--bg-codeblock)
     box-shadow: var(--shadow-main)
-
     overflow: auto
     white-space: pre
     word-wrap: normal
@@ -51,3 +48,4 @@
 
   :global(.enhanced-codeblock) pre
     margin: 0
+    // box-shadow: none

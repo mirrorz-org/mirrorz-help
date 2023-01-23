@@ -21,6 +21,10 @@ const styles = style9.create({
     scrollbarWidth: 'none',
     overflowX: 'auto',
     overflowY: 'hidden',
+    marginLeft: '-12px',
+    marginRight: '-12px',
+    paddingLeft: '12px',
+    paddingRight: '12px',
     overscrollBehaviorX: 'contain',
     // @ts-expect-error -- special proeprty for IE & Edge
     msOverflowStyle: 'none'

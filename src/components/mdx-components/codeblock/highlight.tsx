@@ -1,12 +1,18 @@
 import { lowlight } from 'lowlight/lib/core';
-import { toH } from 'hast-to-hyperscript';
-import { createElement, useMemo } from 'react';
+import { useMemo } from 'react';
+
+/**
+ * This is a runtime version of React 17+ new JSX transform.
+ * So we are accessing those exports that "doesn't exist"
+ */
+// @ts-expect-error -- This is something really stupid
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { toJsxRuntime } from 'hast-util-to-jsx-runtime';
 
 import md from 'highlight.js/lib/languages/markdown';
 import ini from 'highlight.js/lib/languages/ini';
 import properties from 'highlight.js/lib/languages/properties';
 import bash from 'highlight.js/lib/languages/bash';
-import shell from 'highlight.js/lib/languages/shell';
 import yaml from 'highlight.js/lib/languages/yaml';
 import lisp from 'highlight.js/lib/languages/lisp';
 import julia from 'highlight.js/lib/languages/julia';
@@ -25,13 +31,7 @@ lowlight.registerAlias({ ini: ['toml', 'conf'] });
 lowlight.registerLanguage('properties', properties);
 
 lowlight.registerLanguage('bash', bash);
-lowlight.registerAlias({ bash: ['sh', 'zsh', 'fish'] });
-
-// in highlight.js, shell uses bash as its sublanguage.
-// "shell" accepts console session (you can use $ as prompts)
-// "bash" means file is written in shell (so no $ prompt)
-lowlight.registerLanguage('console', shell);
-lowlight.registerAlias({ console: ['shell'] });
+lowlight.registerAlias({ bash: ['sh', 'zsh', 'fish', 'shell'] });
 
 lowlight.registerLanguage('yaml', yaml);
 lowlight.registerAlias({ yaml: ['yml'] });
@@ -56,8 +56,8 @@ const alias: Record<string, string> = {
   sh: 'bash',
   zsh: 'bash',
   fish: 'bash',
-
-  console: 'shell',
+  shell: 'bash',
+  console: 'bash',
 
   yml: 'yaml',
 
@@ -70,7 +70,7 @@ interface LowlightProps {
 }
 
 export default function Lowlight({ code, language }: LowlightProps) {
-  const tree = useMemo(() => toH(createElement, lowlight.highlight(language, code)), [code, language]);
+  const tree = useMemo(() => toJsxRuntime(lowlight.highlight(language, code), { Fragment, jsx, jsxs }), [code, language]);
   return (
     <pre className={clsx('hljs', `language-${alias[language] || language}`)}>
       <code>

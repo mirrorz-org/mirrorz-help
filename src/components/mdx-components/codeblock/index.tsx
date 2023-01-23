@@ -2,12 +2,12 @@ import { Suspense, lazy, memo } from 'react';
 
 const Lowlight = lazy(() => import('./highlight'));
 
-interface ActualCodeProps {
+interface NormalCodeBlockProps {
   code: string;
   language: string | undefined;
 }
 
-function ActualCode({ code, language }: ActualCodeProps) {
+function SyntaxHighlight({ code, language }: NormalCodeBlockProps) {
   const fallback = (
     <pre>
       <code>
@@ -27,4 +27,4 @@ function ActualCode({ code, language }: ActualCodeProps) {
   );
 }
 
-export default memo(ActualCode);
+export default memo(SyntaxHighlight);

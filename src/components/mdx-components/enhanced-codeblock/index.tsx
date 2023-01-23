@@ -8,11 +8,12 @@ import { useCurrentCname } from '@/contexts/current-cname';
 
 import type { Menu, MenuValue } from './menus';
 import CodeBlockMenu from './menus';
-import ActualCode from './code';
+import ActualCode from '../codeblock';
 import LoadingOverlay from './overlay';
 
-import buildCode from './build-code';
-import { useMirrorHttpsEnabled } from '../../../contexts/mirror-enable-https';
+import { buildCode, buildCatEOF } from './build-code';
+import { useMirrorHttpsEnabled } from '@/contexts/mirror-enable-https';
+import { TabItem, Tabs } from '../../tabs';
 
 interface CodeBlockProps {
   isHttpProtocol?: boolean;
@@ -21,6 +22,8 @@ interface CodeBlockProps {
   code: string;
   codeLanguage?: string;
   codeMeta?: string;
+  enableQuickSetup?: boolean;
+  filepath?: string;
 }
 
 const styles = style9.create({
@@ -45,7 +48,14 @@ const createInitialState = (menus: Menu[]): Record<string, string> => {
   }, {} as Record<string, string>);
 };
 
-function CodeBlock({ menus = [], isHttpProtocol = true, code, codeLanguage }: CodeBlockProps) {
+function CodeBlock({
+  menus = [],
+  isHttpProtocol = true,
+  code,
+  codeLanguage,
+  enableQuickSetup = false,
+  filepath
+}: CodeBlockProps) {
   const [variableState, dispatch] = useReducer(reducer, menus, createInitialState);
 
   const httpsEnabled = useMirrorHttpsEnabled();
@@ -67,6 +77,24 @@ function CodeBlock({ menus = [], isHttpProtocol = true, code, codeLanguage }: Co
     }
     return buildCode(code, variable);
   }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, variableState]);
+
+  if (enableQuickSetup && filepath) {
+    return (
+      <div className={clsx('enhanced-codeblock', styles('container'))}>
+        {menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={dispatch} />}
+        <Tabs items={[filepath, '快速配置']}>
+          <TabItem value={filepath} xstyle={[styles.code_wrapper]}>
+            {(isLoading || !currentSelectedMirror) && <LoadingOverlay />}
+            <ActualCode code={finalCode} language={codeLanguage} />
+          </TabItem>
+          <TabItem value="快速配置" xstyle={[styles.code_wrapper]}>
+            {(isLoading || !currentSelectedMirror) && <LoadingOverlay />}
+            <ActualCode code={buildCatEOF(finalCode, filepath)} language="bash" />
+          </TabItem>
+        </Tabs>
+      </div>
+    );
+  }
 
   return (
     <div className={clsx('enhanced-codeblock', styles('container'))}>

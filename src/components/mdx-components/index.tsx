@@ -2,10 +2,10 @@ import { Blockquote, Paragraph } from './block';
 import { H1, H2, H3, H4, H5 } from './heading';
 import { Code, Divider, LI, OL, Strong, UL } from './inline';
 import Link from './link';
-import CodeBlock from './code-block';
+import SyntaxHighlight from './codeblock';
+import EnhancedCodeBlock from './enhanced-codeblock';
 
 import type React from 'react';
-import { Tabs, TabItem } from './tabs';
 
 export const MDXComponents: Record<string, React.ComponentType<any>> = {
   a: Link,
@@ -22,7 +22,6 @@ export const MDXComponents: Record<string, React.ComponentType<any>> = {
   ul: UL,
   li: LI,
   hr: Divider,
-  CodeBlock,
-  Tabs,
-  TabItem
+  CodeBlock: EnhancedCodeBlock,
+  SyntaxHighlight
 };

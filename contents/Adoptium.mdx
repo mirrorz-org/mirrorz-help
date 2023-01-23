@@ -49,23 +49,22 @@ sudo apt-get update
 
 执行以下命令来添加 rpm 存储库：
 
-<CodeBlock>
+<CodeBlock enableQuickSetup filepath="/etc/yum.repos.d/adoptium.repo">
 
-```shell
-cat <<EOF > /etc/yum.repos.d/adoptium.repo
+```ini
 [Adoptium]
 name=Adoptium
 baseurl={{http_protocol}}{{mirror}}/rpm/centos$releasever-$basearch/
 enabled=1
 gpgcheck=1
 gpgkey=https://packages.adoptium.net/artifactory/api/gpg/key/public
-EOF
 ```
 
 </CodeBlock>
 
 再执行
-```shell
+
+```bash
 sudo yum makecache
 ```
 

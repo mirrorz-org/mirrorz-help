@@ -4,6 +4,9 @@
 .hljs_container
   @include githublight()
 
+  :global(.language-shell .prompt_)
+    user-select: none
+
 :global(html.dark)
   .hljs_container
     @include githubdark()

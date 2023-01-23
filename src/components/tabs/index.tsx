@@ -7,6 +7,8 @@ import {
 import React, { useState } from 'react';
 import style9 from 'style9';
 
+import type { StyleWithAtRulesAndFalsy } from '@/types/style9';
+
 interface TabsProps {
   items: string[],
   defaultValue?: string
@@ -24,7 +26,6 @@ const styles = style9.create({
     msOverflowStyle: 'none'
   },
   list: {
-    marginTop: '16px',
     display: 'flex',
     width: 'max-content',
     minWidth: '100%',
@@ -90,9 +91,13 @@ export const Tabs = ({ children, items, defaultValue }: React.PropsWithChildren<
   );
 };
 
-export const TabItem = ({ children, value }: React.PropsWithChildren<{ value: string }>) => {
+export const TabItem = ({
+  children,
+  value,
+  xstyle = []
+}: React.PropsWithChildren<{ value: string, xstyle?: StyleWithAtRulesAndFalsy[] }>) => {
   return (
-    <TabsContent className={styles('tab')} value={value}>
+    <TabsContent className={style9(styles.tab, ...xstyle)} value={value}>
       {children}
     </TabsContent>
   );

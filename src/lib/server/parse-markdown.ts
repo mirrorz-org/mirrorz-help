@@ -19,7 +19,10 @@ import remarkGfm from '@/compiled/remark-gfm';
 import remarkUnwrapImages from '@/compiled/remark-unwrap-images';
 import remarkExternalLinks from '@/compiled/remark-external-links';
 import remarkHeaderCustomId from './remark-header-custom-id';
-import remarkExtractCodeFromCodeBlock from './remark-extract-code-from-codeblock';
+import {
+  remarkExtractCodeFromEnhancedCodeBlock,
+  remarkProcessNormalCodeBlock
+} from './remark-extract-code-from-codeblock';
 
 const { FileStore, stableHash } = metroCache as any;
 
@@ -56,7 +59,7 @@ const asyncCache = async <T>(key: string, fn: () => Promise<T>): Promise<T> => {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 2;
+const DISK_CACHE_BREAKER = 3;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -123,7 +126,7 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
 
   const jsxCode = await compileMdx(mdxWithFakeImports, {
     development: false,
-    remarkPlugins: [remarkExternalLinks, remarkUnwrapImages, remarkGfm, remarkHeaderCustomId, remarkExtractCodeFromCodeBlock],
+    remarkPlugins: [remarkExternalLinks, remarkUnwrapImages, remarkGfm, remarkHeaderCustomId, remarkProcessNormalCodeBlock, remarkExtractCodeFromEnhancedCodeBlock],
     rehypePlugins: []
   });
 

@@ -113,6 +113,12 @@
     "file": "cygwin.mdx",
     "cname": "cygwin"
   },
+  "/dart-pub/": {
+    "title": "Dart Pub 软件仓库",
+    "fullTitle": "Dart Pub 软件仓库镜像使用帮助",
+    "file": "dart-pub.mdx",
+    "cname": "dart-pub"
+  },
   "/debian/": {
     "title": "Debian 软件仓库",
     "fullTitle": "Debian 软件仓库镜像使用帮助",

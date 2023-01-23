@@ -431,6 +431,12 @@
     "file": "rudder.mdx",
     "cname": "rudder"
   },
+  "/rustup/": {
+    "title": "Rustup",
+    "fullTitle": "Rustup 镜像使用帮助",
+    "file": "rustup.mdx",
+    "cname": "rustup"
+  },
   "/stackage/": {
     "title": "Stackage 软件仓库",
     "fullTitle": "Stackage 软件仓库镜像使用帮助",

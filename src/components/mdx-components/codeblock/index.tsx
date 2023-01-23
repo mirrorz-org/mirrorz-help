@@ -15,7 +15,6 @@ interface NormalCodeBlockProps {
 const styles = style9.create({
   container: {
     position: 'relative',
-    marginTop: '24px',
     marginBottom: '24px'
   },
   button_group: {

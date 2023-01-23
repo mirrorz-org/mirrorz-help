@@ -461,6 +461,12 @@
     "file": "pypi.mdx",
     "cname": "qemu.git"
   },
+  "/qt/": {
+    "title": "Qt 软件仓库",
+    "fullTitle": "Qt 软件仓库镜像使用帮助",
+    "file": "qt.mdx",
+    "cname": "qt"
+  },
   "/qubesos/": {
     "title": "Qubes OS 软件仓库",
     "fullTitle": "Qubes OS 软件仓库镜像使用帮助",

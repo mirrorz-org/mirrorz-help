@@ -161,6 +161,12 @@
     "file": "fedora.mdx",
     "cname": "fedora"
   },
+  "/flutter/": {
+    "title": "Flutter 软件仓库",
+    "fullTitle": "Flutter 软件仓库镜像使用帮助",
+    "file": "flutter.mdx",
+    "cname": "flutter"
+  },
   "/flutter-sdk.git/": {
     "title": "Flutter SDK",
     "fullTitle": "Flutter SDK 镜像使用帮助",

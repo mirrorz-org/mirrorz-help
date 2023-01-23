@@ -15,11 +15,17 @@ git remote set-url origin {{http_protocol}}{{mirror}}
 
 将上游设置为镜像站。
 
-或者通过下面的命令，直接从 Master 构建渠道检出 Flutter 的 SDK： 
+或者通过下面的命令，直接从 Master 构建渠道检出 Flutter 的 SDK：
+
+<CodeBlock>
 
 ```
 git clone -b master {{http_protocol}}{{mirror}}
 ./flutter-sdk/bin/flutter --version
 ```
+
+</CodeBlock>
+
+您也可以替换上述代码中 `git clone -b` 之后的 `master` 为 `beta` 获取 Beta 渠道的构建、替换为 `dev` 获取 Dev 渠道的构建。
 
 Flutter 镜像使用方法参见 [Flutter 镜像安装帮助](/flutter/)。

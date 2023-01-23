@@ -323,6 +323,24 @@
     "file": "mysql.mdx",
     "cname": "mysql"
   },
+  "/nix/": {
+    "title": "Nix",
+    "fullTitle": "Nix 镜像使用帮助",
+    "file": "nix.mdx",
+    "cname": "nix"
+  },
+  "/nix-channels/": {
+    "title": "Nix Channels",
+    "fullTitle": "Nix Channels 镜像使用帮助",
+    "file": "nix-channels.mdx",
+    "cname": "nix-channels"
+  },
+  "/nixos-images/": {
+    "title": "NixOS Images",
+    "fullTitle": "NixOS Images 镜像使用帮助",
+    "file": "nixos-images.mdx",
+    "cname": "nixos-images"
+  },
   "/nodejs-release/": {
     "title": "NodeJS Release 软件仓库",
     "fullTitle": "NodeJS Release 软件仓库镜像使用帮助",

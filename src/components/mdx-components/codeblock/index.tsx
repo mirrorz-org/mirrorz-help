@@ -9,7 +9,7 @@ const Lowlight = lazy(() => import('./highlight'));
 
 interface NormalCodeBlockProps {
   code: string;
-  language: string | undefined;
+  language?: string | undefined;
 }
 
 const styles = style9.create({

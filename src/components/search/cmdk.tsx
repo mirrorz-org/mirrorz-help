@@ -20,7 +20,7 @@ const styles = style9.create({
     left: '0',
     bottom: '0',
     zIndex: 100,
-    backdropFilter: 'blur(6px)'
+    backdropFilter: 'blur(4px)'
   },
   root: {
     maxWidth: '640px',

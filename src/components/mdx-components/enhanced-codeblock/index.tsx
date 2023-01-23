@@ -78,10 +78,12 @@ function CodeBlock({
     return buildCode(code, variable);
   }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, variableState]);
 
+  const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={dispatch} />;
+
   if (enableQuickSetup && filepath) {
     return (
       <div className={clsx('enhanced-codeblock', styles('container'))}>
-        {menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={dispatch} />}
+        {codeBlockMenu}
         <Tabs items={[filepath, '快速配置']}>
           <TabItem value={filepath} xstyle={[styles.code_wrapper]}>
             {(isLoading || !currentSelectedMirror) && <LoadingOverlay />}
@@ -98,7 +100,7 @@ function CodeBlock({
 
   return (
     <div className={clsx('enhanced-codeblock', styles('container'))}>
-      <CodeBlockMenu menus={menus} dispatch={dispatch} />
+      {codeBlockMenu}
       <div className={styles('code_wrapper')}>
         {(isLoading || !currentSelectedMirror) && <LoadingOverlay />}
         <ActualCode code={finalCode} language={codeLanguage} />

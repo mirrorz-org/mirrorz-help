@@ -1,27 +1,28 @@
 /* eslint-disable camelcase -- cli */
-const { relative, resolve } = require('path');
+const path = require('path');
+const { sync: requireResolve } = require('resolve');
 
 const packages = [];
-const fromEsmToCjs = (packageName) => {
+const fromEsmToCjs = (packageName, overrideSource = null) => {
   const taskName = `ncc_${packageName.replaceAll('@', '__').replaceAll('-', '_').replaceAll('/', '_')}`;
 
-  const sourceDir = relative(__dirname, require.resolve(packageName));
+  const source = path.relative(__dirname, require.resolve(packageName));
   const targetDir = `src/compiled/${packageName}`;
   packages.push(packageName);
 
   module.exports[taskName] = async function build(task, _opts) {
     const externals = packages.reduce((prev, currentPackageName) => {
       if (currentPackageName !== packageName) {
-        prev[currentPackageName] = relative(
-          resolve(__dirname, targetDir),
-          resolve(__dirname, `src/compiled/${currentPackageName}`)
+        prev[currentPackageName] = path.relative(
+          path.resolve(__dirname, targetDir),
+          path.resolve(__dirname, `src/compiled/${currentPackageName}`)
         );
       }
       return prev;
     }, {});
 
     await task
-      .source(sourceDir)
+      .source(overrideSource || source)
       .ncc({ packageName, externals })
       .target(targetDir);
   };
@@ -37,7 +38,7 @@ const tasks = [
   fromEsmToCjs('github-slugger'),
   fromEsmToCjs('mdast-util-to-string'),
   fromEsmToCjs('unist-util-visit'),
-  fromEsmToCjs('satori')
+  fromEsmToCjs('satori', path.relative(__dirname, requireResolve('satori/dist/index.js')))
 ];
 
 module.exports.write_compiled_ts_declaration = async function write_compiled_ts_declaration(task, _opts) {

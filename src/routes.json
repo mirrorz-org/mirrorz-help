@@ -473,6 +473,12 @@
     "file": "packagist.mdx",
     "cname": "packagist"
   },
+  "/pkgsrc.git/": {
+    "title": "pkgsrc Git",
+    "fullTitle": "pkgsrc Git 镜像使用帮助",
+    "file": "pkgsrc.git.mdx",
+    "cname": "pkgsrc.git"
+  },
   "/postmarketOS/": {
     "title": "postmarketOS 软件仓库",
     "fullTitle": "postmarketOS 软件仓库镜像使用帮助",

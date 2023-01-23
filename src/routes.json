@@ -17,6 +17,12 @@
     "file": "anaconda.mdx",
     "cname": "anaconda"
   },
+  "/anthon/": {
+    "title": "Anthon 软件仓库",
+    "fullTitle": "Anthon 软件仓库镜像使用帮助",
+    "file": "anthon.mdx",
+    "cname": "anthon"
+  },
   "/AOSP/": {
     "title": "AOSP",
     "fullTitle": "AOSP 镜像使用帮助",

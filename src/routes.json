@@ -179,6 +179,12 @@
     "file": "gentoo-portage.git.mdx",
     "cname": "gentoo-portage.git"
   },
+  "/gentoo-portage-prefix/": {
+    "title": "Gentoo Portage Prefix macOS",
+    "fullTitle": "Gentoo Portage Prefix macOS 软件仓库使用帮助",
+    "file": "gentoo-portage-prefix.mdx",
+    "cname": "gentoo-portage-prefix"
+  },
   "/github-raw/": {
     "title": "GitHub RAW",
     "fullTitle": "GitHub RAW 使用帮助",

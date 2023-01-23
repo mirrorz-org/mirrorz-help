@@ -1,0 +1,11 @@
+.group {
+  opacity: 0;
+}
+
+.group:focus-within {
+  opacity: 1;
+}
+
+.parent:hover .group {
+  opacity: 1;
+}

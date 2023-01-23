@@ -4,6 +4,7 @@ import { Paragraph } from '../components/mdx-components/block';
 import Link from 'next/link';
 import { useSetSearchOpen } from '../contexts/search';
 import { useCallback } from 'react';
+import SeoHead from '../components/seo/head';
 
 const styles = style9.create({
   main: {
@@ -47,31 +48,37 @@ export default function NotFoundPage() {
   }, [setSearchOpen]);
 
   return (
-    <Layout>
-      <div className={styles('main')}>
-        <h1 className={styles('title')}>404 Page Not Found</h1>
-        <article className={styles('content')}>
-          <Paragraph>
-            你当前请求的页面不存在。
-          </Paragraph>
-          <Paragraph>
-            如果你正在寻找一个软件镜像的使用帮助，很有可能这篇文档还没有完成。
-          </Paragraph>
-          <Paragraph>
-            你可以尝试使用
-            {' '}
-            <button onClick={handleSearchButtonClick} className={styles('link')}>
-              搜索
-            </button>
-            {' '}
-            找到你想要查看的内容，或者 <Link href="/" className={styles('link')}>返回首页</Link>。
-          </Paragraph>
-          <Paragraph>
-            {/** TODO: GitHub Issue URL builder + Issue Template */}
-            你也可以 <Link href="#" className={styles('link')}>通过 GitHub Issue 反馈这个问题</Link>。
-          </Paragraph>
-        </article>
-      </div>
-    </Layout>
+    <>
+      <SeoHead
+        title="404 Not Found"
+        noindex
+      />
+      <Layout>
+        <div className={styles('main')}>
+          <h1 className={styles('title')}>404 Page Not Found</h1>
+          <article className={styles('content')}>
+            <Paragraph>
+              你当前请求的页面不存在。
+            </Paragraph>
+            <Paragraph>
+              如果你正在寻找一个软件镜像的使用帮助，很有可能这篇文档还没有完成。
+            </Paragraph>
+            <Paragraph>
+              你可以尝试使用
+              {' '}
+              <button onClick={handleSearchButtonClick} className={styles('link')}>
+                搜索
+              </button>
+              {' '}
+              找到你想要查看的内容，或者 <Link href="/" className={styles('link')}>返回首页</Link>。
+            </Paragraph>
+            <Paragraph>
+              {/** TODO: GitHub Issue URL builder + Issue Template */}
+              你也可以 <Link href="#" className={styles('link')}>通过 GitHub Issue 反馈这个问题</Link>。
+            </Paragraph>
+          </article>
+        </div>
+      </Layout>
+    </>
   );
 }

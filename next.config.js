@@ -1,7 +1,12 @@
 const withStyle9 = require('style9-webpack/next');
+const withBundleAnalyzer = process.env.ANALYZE === 'true'
+  ? require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true'
+  })
+  : (x) => x;
 
 /** @type {import('next').NextConfig} */
-module.exports = withStyle9({
+module.exports = withBundleAnalyzer(withStyle9({
   incrementalClassnames: false,
   minifyProperties: process.env.NODE_ENV === 'production'
 })({
@@ -16,4 +21,4 @@ module.exports = withStyle9({
       logLevel: 'warn'
     } : false
   }
-});
+}));

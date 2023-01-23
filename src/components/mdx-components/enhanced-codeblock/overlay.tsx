@@ -25,7 +25,8 @@ const styles = style9.create({
     left: 0,
     right: 0,
     zIndex: 1000,
-    backdropFilter: 'blur(4px)'
+    backdropFilter: 'blur(4px)',
+    backgroundColor: 'var(--bg-codeblock)/.2'
   }
 });
 

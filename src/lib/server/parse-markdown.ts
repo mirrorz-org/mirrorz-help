@@ -12,13 +12,17 @@ import { MDXComponents } from '@/components/mdx-components';
 import { Children } from 'react';
 
 import type React from 'react';
+import type { MetaFromFrontMatters } from '@/types/front-matter';
 
 import { compile as compileMdx } from '@/compiled/@mdx-js/mdx';
 import remarkGfm from '@/compiled/remark-gfm';
 import remarkUnwrapImages from '@/compiled/remark-unwrap-images';
 import remarkExternalLinks from '@/compiled/remark-external-links';
 import remarkHeaderCustomId from './remark-header-custom-id';
-import remarkExtractCodeFromCodeBlock from './remark-extract-code-from-codeblock';
+import {
+  remarkExtractCodeFromEnhancedCodeBlock,
+  remarkProcessNormalCodeBlock
+} from './remark-extract-code-from-codeblock';
 
 const { FileStore, stableHash } = metroCache as any;
 
@@ -33,9 +37,7 @@ export interface ToC {
 export interface ContentProps {
   content: any;
   toc: ToC[];
-  meta: {
-    [key: string]: any;
-  };
+  meta: MetaFromFrontMatters;
   cname: string;
 }
 
@@ -57,7 +59,7 @@ const asyncCache = async <T>(key: string, fn: () => Promise<T>): Promise<T> => {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 2;
+const DISK_CACHE_BREAKER = 3;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -103,9 +105,11 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
 
   const cached = await store.get(hash);
   if (cached) {
-    Log.info(
-      `[CMS] Reading compiled MDX for /${id} from ./node_modules/.cache/`
-    );
+    if (process.env.NODE_ENV !== 'production') {
+      Log.info(
+        `[CMS] Reading compiled MDX for /${id} from ./node_modules/.cache/`
+      );
+    }
     return cached;
   }
   Log.info(
@@ -122,7 +126,7 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
 
   const jsxCode = await compileMdx(mdxWithFakeImports, {
     development: false,
-    remarkPlugins: [remarkExternalLinks, remarkUnwrapImages, remarkGfm, remarkHeaderCustomId, remarkExtractCodeFromCodeBlock],
+    remarkPlugins: [remarkExternalLinks, remarkUnwrapImages, remarkGfm, remarkHeaderCustomId, remarkProcessNormalCodeBlock, remarkExtractCodeFromEnhancedCodeBlock],
     rehypePlugins: []
   });
 
@@ -149,7 +153,7 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
     props: {
       toc,
       content: JSON.stringify(reactTree, stringifyNodeOnServer),
-      meta,
+      meta: meta as MetaFromFrontMatters,
       cname: meta.cname
     }
   };

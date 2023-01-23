@@ -3,7 +3,7 @@ import * as Log from 'next/dist/build/output/log';
 import { toString } from '@/compiled/mdast-util-to-string';
 import { visit, SKIP } from '@/compiled/unist-util-visit';
 
-export default function remarkExtractCodeFromCodeBlock() {
+export const remarkExtractCodeFromEnhancedCodeBlock = () => {
   return function transformer(tree: any) {
     visit(tree, 'mdxJsxFlowElement', (node, index, parent) => {
       if (node.name === 'CodeBlock') {
@@ -46,4 +46,40 @@ export default function remarkExtractCodeFromCodeBlock() {
       }
     });
   };
-}
+};
+
+export const remarkProcessNormalCodeBlock = () => {
+  return function transformer(tree: any) {
+    visit(tree, 'code', (node, index, parent) => {
+      if (!(parent.type === 'mdxJsxFlowElement' && parent.name === 'CodeBlock') && node.lang) {
+        const code = toString(node);
+        const newNode = {
+          type: 'mdxJsxFlowElement',
+          name: 'SyntaxHighlight',
+          attributes: [
+            {
+              type: 'mdxJsxAttribute',
+              name: 'code',
+              value: code
+            },
+            {
+              type: 'mdxJsxAttribute',
+              name: 'language',
+              value: node.lang
+            }
+          ],
+          children: []
+        };
+        if (node.meta) {
+          newNode.attributes.push({
+            type: 'mdxJsxAttribute',
+            name: 'meta',
+            value: node.meta
+          });
+        }
+        parent.children.splice(index, 1, newNode);
+        return [SKIP, index];
+      }
+    });
+  };
+};

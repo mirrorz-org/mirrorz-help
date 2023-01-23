@@ -9,4 +9,4 @@ out
 coverage
 Thumb.db
 tailwind.config.js
-public/og
+public/og-*

@@ -1,5 +1,5 @@
 import style9 from 'style9';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 
 import Nav from './nav';
 import { useRouter } from 'next/router';
@@ -8,15 +8,17 @@ import type { ToC } from '@/lib/server/parse-markdown';
 import ToCAside from './toc';
 import Footer from './footer';
 import { useSearchHotKeys } from '@/hooks/use-search-hotkeys';
-import SearchCommandK from '../search/cmdk';
 import Header from './header';
 
 import { CurrentCnameProvider } from '@/contexts/current-cname';
 import { SelectedMirrorProvider } from '@/contexts/current-selected-mirror';
 import { MirrorEnableHttpsProvider } from '@/contexts/mirror-enable-https';
-import type { MetaFromFrontMatters } from '../../types/front-matter';
-import { FrontMatterProvider } from '../../contexts/current-frontmatters';
+import { FrontMatterProvider } from '@/contexts/current-frontmatters';
 import MetadataCard from '../page-meta';
+
+import type { MetaFromFrontMatters } from '@/types/front-matter';
+
+const SearchCommandK = lazy(() => import('../search/cmdk'));
 
 const styles = style9.create({
   container: {
@@ -147,7 +149,9 @@ export function Layout({ children, meta, toc = [], cname, isContent = false }: R
                   )}
                 </Suspense>
               </div>
-              <SearchCommandK />
+              <Suspense fallback={null}>
+                <SearchCommandK />
+              </Suspense>
             </div>
           </MirrorEnableHttpsProvider>
         </SelectedMirrorProvider>

@@ -485,6 +485,12 @@
     "file": "stackage.mdx",
     "cname": "stackage"
   },
+  "/solus/": {
+    "title": "Solus 软件仓库",
+    "fullTitle": "Solus 软件仓库镜像使用帮助",
+    "file": "solus.mdx",
+    "cname": "solus"
+  },
   "/termux/": {
     "title": "Termux 软件仓库",
     "fullTitle": "Termux 软件仓库镜像使用帮助",

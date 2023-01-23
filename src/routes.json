@@ -329,6 +329,12 @@
     "file": "julia-releases.mdx",
     "cname": "julia-releases"
   },
+  "/kali/": {
+    "title": "Kali 软件仓库",
+    "fullTitle": "Kali 软件仓库镜像使用帮助",
+    "file": "kali.mdx",
+    "cname": "kali"
+  },
   "/kicad/": {
     "title": "KiCad 软件仓库",
     "fullTitle": "KiCad 软件仓库镜像使用帮助",

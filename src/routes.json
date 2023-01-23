@@ -173,6 +173,12 @@
     "file": "elrepo.mdx",
     "cname": "elrepo"
   },
+  "/entware/": {
+    "title": "Entware 软件仓库",
+    "fullTitle": "Entware 软件仓库镜像使用帮助",
+    "file": "entware.mdx",
+    "cname": "entware"
+  },
   "/epel/": {
     "title": "EPEL 软件仓库",
     "fullTitle": "EPEL 软件仓库镜像使用帮助",

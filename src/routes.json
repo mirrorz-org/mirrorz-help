@@ -269,6 +269,12 @@
     "file": "homebrew-bottles.mdx",
     "cname": "homebrew-bottles"
   },
+  "/julia/": {
+    "title": "Julia 软件仓库",
+    "fullTitle": "Julia 软件仓库镜像使用帮助",
+    "file": "julia.mdx",
+    "cname": "julia"
+  },
   "/kicad/": {
     "title": "KiCad 软件仓库",
     "fullTitle": "KiCad 软件仓库镜像使用帮助",

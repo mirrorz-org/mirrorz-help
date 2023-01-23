@@ -102,9 +102,11 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
 
   const cached = await store.get(hash);
   if (cached) {
-    Log.info(
-      `[CMS] Reading compiled MDX for /${id} from ./node_modules/.cache/`
-    );
+    if (process.env.NODE_ENV !== 'production') {
+      Log.info(
+        `[CMS] Reading compiled MDX for /${id} from ./node_modules/.cache/`
+      );
+    }
     return cached;
   }
   Log.info(

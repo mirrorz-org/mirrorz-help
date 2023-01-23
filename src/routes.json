@@ -407,6 +407,12 @@
     "file": "pypi.mdx",
     "cname": "qemu.git"
   },
+  "/qubesos/": {
+    "title": "Qubes OS 软件仓库",
+    "fullTitle": "Qubes OS 软件仓库镜像使用帮助",
+    "file": "qubesos.mdx",
+    "cname": "qubesos"
+  },
   "/raspbian/": {
     "title": "Raspbian 软件仓库",
     "fullTitle": "Raspbian 软件仓库镜像使用帮助",

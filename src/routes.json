@@ -359,6 +359,12 @@
     "file": "linux-firmware.git.mdx",
     "cname": "linux-firmware.git"
   },
+  "/llvm-apt/": {
+    "title": "LLVM APT 软件仓库",
+    "fullTitle": "LLVM APT 软件仓库镜像使用帮助",
+    "file": "llvm-apt.mdx",
+    "cname": "llvm-apt"
+  },
   "/llvm-project.git/": {
     "title": "LLVM Project Git",
     "fullTitle": "LLVM Project Git 镜像使用帮助",

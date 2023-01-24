@@ -3,14 +3,26 @@ title: GNU 软件仓库镜像使用帮助
 cname: 'gnu'
 ---
 
-### GNU_URL
+### Gentoo
 
-本节供 Gentoo Prefix 使用
+本节供 [Gentoo 帮助](/gentoo/) 使用
 
 <CodeBlock>
 
 ```bash
 export GNU_URL="{{http_protocol}}{{mirror}}"
+```
+
+</CodeBlock>
+
+### pkgsrc
+
+本节供 [pkgsrc 帮助](/pkgsrc/)使用
+
+<CodeBlock>
+
+```
+MASTER_SITE_GNU= {{http_protocol}}{{mirror}}/
 ```
 
 </CodeBlock>

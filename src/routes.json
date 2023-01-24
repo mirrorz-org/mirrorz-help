@@ -485,6 +485,12 @@
     "file": "packagist.mdx",
     "cname": "packagist"
   },
+  "/pkgsrc/": {
+    "title": "pkgsrc 软件仓库",
+    "fullTitle": "pkgsrc 软件仓库镜像使用帮助",
+    "file": "pkgsrc.mdx",
+    "cname": "pkgsrc"
+  },
   "/pkgsrc.git/": {
     "title": "pkgsrc Git",
     "fullTitle": "pkgsrc Git 镜像使用帮助",

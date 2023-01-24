@@ -2,21 +2,20 @@ name: AutoCorrect
 
 on: [pull_request_target]
 
+permissions:
+  pull-requests: read
+  contents: read
+
 jobs:
   autocorrect:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
     - name: Check source code
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
 
-    - name: Run AutoCorrect
-      uses: huacnlee/autocorrect-action@main
-      with:
-        args: --lint --no-diff-bg-color $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }}}
-        
-    - name: Commit if changes detected
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Apply AutoCorrect fixes
+    - name: AutoCorrect check
+      run: |
+        curl -sSL https://git.io/JcGER | sudo bash
+        autocorrect --lint --no-diff-bg-color $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }})

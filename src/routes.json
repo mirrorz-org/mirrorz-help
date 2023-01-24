@@ -649,7 +649,7 @@
   },
   "/ubuntu-cloud-images/": {
     "title": "Ubuntu Cloud Images",
-    "fullTitle": "Ubuntu Cloud Images镜像使用帮助",
+    "fullTitle": "Ubuntu Cloud Images 镜像使用帮助",
     "file": "ubuntu-cloud-images.mdx",
     "cname": "ubuntu-cloud-images"
   },

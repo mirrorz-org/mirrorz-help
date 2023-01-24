@@ -76,13 +76,13 @@ function CodeBlock({
   }, [cname, currentSelectedMirror, data, isLoading]);
 
   const finalCode = useMemo(() => {
-    const variable: Record<string, string> = { ...variableState, mirror: mirrorUrl };
-    if (isHttpProtocol) {
-      variable.http_protocol = httpsEnabled ? 'https://' : 'http://';
-    } else {
-      variable.http_protocol = '';
-    }
-    variable.sudo = sudoEnabled ? 'sudo ' : '';
+    const variable: Record<string, string> = {
+      ...variableState,
+      mirror: mirrorUrl,
+      // eslint-disable-next-line no-nested-ternary -- it's ok
+      http_protocol: isHttpProtocol ? (httpsEnabled ? 'https://' : 'http://') : '',
+      sudo: sudoEnabled ? 'sudo ' : ''
+    };
     return buildCode(code, variable);
   }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variableState]);
 

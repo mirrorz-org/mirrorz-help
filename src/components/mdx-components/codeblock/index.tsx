@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Suspense, lazy, memo } from 'react';
+import { Suspense, lazy, memo, useMemo } from 'react';
 import style9 from 'style9';
 import { CopyToClipboard } from './copy-to-clipboard';
 
@@ -29,13 +29,13 @@ const styles = style9.create({
 });
 
 function SyntaxHighlight({ code, language }: NormalCodeBlockProps) {
-  const fallback = (
+  const fallback = useMemo(() => (
     <pre>
       <code>
         {code}
       </code>
     </pre>
-  );
+  ), [code]);
 
   return (
     <div className={clsx('lowlight', buttonGroupStyles.parent, styles('container'))}>

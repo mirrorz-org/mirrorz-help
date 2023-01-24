@@ -4,7 +4,7 @@ import style9 from 'style9';
 const styles = style9.create({
   wrapper: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
     alignItems: 'center',
     columnGap: '12px',
     rowGap: '12px'

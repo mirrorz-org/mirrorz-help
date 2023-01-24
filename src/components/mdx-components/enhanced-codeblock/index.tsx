@@ -10,10 +10,11 @@ import type { Menu, MenuValue } from './menus';
 import CodeBlockMenu from './menus';
 import ActualCode from '../codeblock';
 import LoadingOverlay from './overlay';
+import { TabItem, Tabs } from '../../tabs';
 
 import { buildCode, buildCatEOF } from './build-code';
 import { useMirrorHttpsEnabled } from '@/contexts/mirror-enable-https';
-import { TabItem, Tabs } from '../../tabs';
+import { useMirrorSudoEnabled } from '@/contexts/mirror-enable-sudo';
 
 interface CodeBlockProps {
   isHttpProtocol?: boolean;
@@ -23,6 +24,7 @@ interface CodeBlockProps {
   codeLanguage?: string;
   codeMeta?: string;
   enableQuickSetup?: boolean;
+  quickSetupNeedSudo?: boolean
   filepath?: string;
 }
 
@@ -57,11 +59,13 @@ function CodeBlock({
   code,
   codeLanguage,
   enableQuickSetup = false,
+  quickSetupNeedSudo = false,
   filepath
 }: CodeBlockProps) {
   const [variableState, dispatch] = useReducer(reducer, menus, createInitialState);
 
   const httpsEnabled = useMirrorHttpsEnabled();
+  const sudoEnabled = useMirrorSudoEnabled();
   const cname = useCurrentCname();
   const { data, isLoading } = useMirrorZData();
   const currentSelectedMirror = useSelectedMirror();
@@ -78,8 +82,9 @@ function CodeBlock({
     } else {
       variable.http_protocol = '';
     }
+    variable.sudo = sudoEnabled ? 'sudo ' : '';
     return buildCode(code, variable);
-  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, variableState]);
+  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variableState]);
 
   /** Validation */
   if (process.env.NODE_ENV !== 'production') {
@@ -102,10 +107,10 @@ function CodeBlock({
           </TabItem>
           <TabItem value="快速配置" xstyle={[styles.code_wrapper]}>
             <LoadingOverlay isLoading={(isLoading || !currentSelectedMirror)} />
-            <p className={styles('p')}>
-              如果你当前正在使用的终端 或 Shell 环境不支持复制粘贴时 Shell Escape，「快速配置」的代码可能在复制粘贴的过程中被破坏！
-            </p>
-            <ActualCode code={buildCatEOF(finalCode, filepath)} language="bash" />
+            <ActualCode
+              code={buildCatEOF(finalCode, filepath, quickSetupNeedSudo && sudoEnabled)}
+              language="bash"
+            />
           </TabItem>
         </Tabs>
       </div>

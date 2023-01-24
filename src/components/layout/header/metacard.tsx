@@ -1,7 +1,7 @@
 import style9 from 'style9';
 import MirrorSelectMenu from './mirror-select-menu';
 import { memo } from 'react';
-import HttpsCheckBox from './https-checkbox';
+import { HttpsSwitch, SudoSwitch } from './switch';
 import { useFrontMatters } from '@/contexts/current-frontmatters';
 
 const styles = style9.create({
@@ -25,6 +25,16 @@ const styles = style9.create({
     alignItems: 'center',
     // @ts-expect-error -- gap is known property
     gap: '12px'
+  },
+  switch_wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    rowGap: '24px',
+    alignItems: 'center',
+    columnGap: '24px'
+    // '@media screen and (min-width: 768px)': {
+    //   gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
+    // }
   }
 });
 
@@ -36,13 +46,10 @@ function MetaCard() {
         <p>选择镜像</p>
         <MirrorSelectMenu />
       </div>
-      {
-        (disable_https_select !== true) && (
-          <div className={styles('menu_wrapper')}>
-            <HttpsCheckBox />
-          </div>
-        )
-      }
+      <div className={styles('switch_wrapper')}>
+        {(disable_https_select !== true) && (<HttpsSwitch />)}
+        <SudoSwitch />
+      </div>
     </div>
   );
 }

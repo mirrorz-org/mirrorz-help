@@ -8,12 +8,13 @@ import ToCAside from './toc';
 import Footer from './footer';
 import { useSearchHotKeys } from '@/hooks/use-search-hotkeys';
 import Header from './header';
+import MetadataCard from '../page-meta';
 
 import { CurrentCnameProvider } from '@/contexts/current-cname';
 import { SelectedMirrorProvider } from '@/contexts/current-selected-mirror';
 import { MirrorEnableHttpsProvider } from '@/contexts/mirror-enable-https';
 import { FrontMatterProvider } from '@/contexts/current-frontmatters';
-import MetadataCard from '../page-meta';
+import { MirrorEnableSudoProvider } from '@/contexts/mirror-enable-sudo';
 
 import type { MetaFromFrontMatters } from '@/types/front-matter';
 
@@ -130,48 +131,50 @@ export function Layout({ children, meta, toc = [], cname, isContent = false }: R
         {/** Always reset state after navigation */}
         <SelectedMirrorProvider key={asPath} cname={cname || null}>
           <MirrorEnableHttpsProvider>
-            <div className={styles('container')}>
-              <div className={styles('sidenav_container')}>
-                {/**
+            <MirrorEnableSudoProvider>
+              <div className={styles('container')}>
+                <div className={styles('sidenav_container')}>
+                  {/**
                   * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
                   *
                   * By adding more Suspense boundaries, React will use this as a signal to hydrate them asynchronously instead of doing everything in a single pass. This would reduce long tasks during hydration.
                   * It's a bit risky because if something suspends, we'll render null. But we don't have anything suspending directly inside these trees. If we add something, we'll need to give it its own Suspense to prevent triggering these.
                   */}
-                <Suspense fallback={null}>
-                  <Nav />
-                </Suspense>
-              </div>
-              <main className={styles('main')}>
-                <div className={styles('main_spacer')} />
-
-                {isContent && meta && <Header title={meta.title} />}
-
-                <div className={styles('content_wrapper')}>
-                  <div className={styles('content_inner')}>
-                    {children}
-
-                    {isContent && <MetadataCard />}
-                  </div>
+                  <Suspense fallback={null}>
+                    <Nav />
+                  </Suspense>
                 </div>
+                <main className={styles('main')}>
+                  <div className={styles('main_spacer')} />
 
-                <Footer />
-              </main>
-              <div className={styles('toc')}>
-                {/**
+                  {isContent && meta && <Header title={meta.title} />}
+
+                  <div className={styles('content_wrapper')}>
+                    <div className={styles('content_inner')}>
+                      {children}
+
+                      {isContent && <MetadataCard />}
+                    </div>
+                  </div>
+
+                  <Footer />
+                </main>
+                <div className={styles('toc')}>
+                  {/**
                   * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
                   * No fallback UI so need to be careful not to suspend directly inside.
                   */}
+                  <Suspense fallback={null}>
+                    {toc.length > 0 && (
+                      <ToCAside key={asPath} toc={toc} />
+                    )}
+                  </Suspense>
+                </div>
                 <Suspense fallback={null}>
-                  {toc.length > 0 && (
-                    <ToCAside key={asPath} toc={toc} />
-                  )}
+                  <SearchCommandK />
                 </Suspense>
               </div>
-              <Suspense fallback={null}>
-                <SearchCommandK />
-              </Suspense>
-            </div>
+            </MirrorEnableSudoProvider>
           </MirrorEnableHttpsProvider>
         </SelectedMirrorProvider>
       </CurrentCnameProvider>

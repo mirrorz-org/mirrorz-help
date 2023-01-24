@@ -1,8 +1,8 @@
 import style9 from 'style9';
 import MirrorSelectMenu from './mirror-select-menu';
 import { memo } from 'react';
-import HttpsSelectMenu from './https-select-menu';
-import { useFrontMatters } from '../../../contexts/current-frontmatters';
+import HttpsCheckBox from './https-checkbox';
+import { useFrontMatters } from '@/contexts/current-frontmatters';
 
 const styles = style9.create({
   main: {
@@ -39,8 +39,7 @@ function MetaCard() {
       {
         (disable_https_select !== true) && (
           <div className={styles('menu_wrapper')}>
-            <p>是否启用 HTTPS</p>
-            <HttpsSelectMenu />
+            <HttpsCheckBox />
           </div>
         )
       }

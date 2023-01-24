@@ -11,23 +11,29 @@ AOSC OS 内置 `apt-gen-list` 工具来切换社区提供的可用镜像源。
 
 列出可用镜像源，执行：
 
+<CodeBlock>
 ```bash
-sudo apt-gen-list list-mirrors
+{{sudo}}apt-gen-list list-mirrors
 ```
+</CodeBlock>
 
 要启用某一镜像源，执行：
 
+<CodeBlock>
 ```bash
-sudo apt-gen-list add-mirror <mirror>
+{{sudo}}apt-gen-list add-mirror <mirror>
 ```
+</CodeBlock>
 
 其中 `{mirror}` 替换为所列出的简称。
 
 要仅启用某一源，执行：
 
+<CodeBlock>
 ```bash
-sudo apt-gen-list set-mirror <mirror>
+{{sudo}}apt-gen-list set-mirror <mirror>
 ```
+</CodeBlock>
 
 其中 `<mirror>` 替换为所列出的简称。
 

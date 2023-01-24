@@ -17,10 +17,4 @@ jobs:
 
     - name: Run AutoCorrect
       uses: huacnlee/autocorrect-action@main
-      with:
-        args: --lint --no-diff-bg-color $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }})
-        
-    - name: Commit if changes detected
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Apply AutoCorrect fixes
+      run: /usr/local/bin/autocorrect --lint --no-diff-bg-color $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }})

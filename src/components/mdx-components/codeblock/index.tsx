@@ -46,9 +46,7 @@ function SyntaxHighlight({ code, language }: NormalCodeBlockProps) {
             : fallback
         }
       </Suspense>
-      <div
-        className={clsx(styles('button_group'), buttonGroupStyles.group)}
-      >
+      <div className={clsx(styles('button_group'), buttonGroupStyles.group)}>
         <CopyToClipboard value={code} />
       </div>
     </div>

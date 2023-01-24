@@ -14,7 +14,6 @@ const styles = style9.create({
     borderRadius: '8px',
     color: 'var(--text-secondary)',
     marginTop: '24px',
-    marginBottom: '24px',
     display: 'flex',
     flexDirection: 'column',
     // @ts-expect-error -- gap is known property

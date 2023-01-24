@@ -6,7 +6,7 @@ const packages = [];
 const fromEsmToCjs = (packageName, overrideSource = null) => {
   const taskName = `ncc_${packageName.replaceAll('@', '__').replaceAll('-', '_').replaceAll('/', '_')}`;
 
-  const source = path.relative(__dirname, require.resolve(packageName));
+  const source = overrideSource || path.relative(__dirname, require.resolve(packageName));
   const targetDir = `src/compiled/${packageName}`;
   packages.push(packageName);
 
@@ -22,7 +22,7 @@ const fromEsmToCjs = (packageName, overrideSource = null) => {
     }, {});
 
     await task
-      .source(overrideSource || source)
+      .source(source)
       .ncc({ packageName, externals })
       .target(targetDir);
   };

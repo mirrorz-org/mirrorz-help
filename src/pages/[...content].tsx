@@ -6,6 +6,7 @@ import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';
 import SeoHead from '../components/seo/head';
 import JsonLD from '../components/seo/json-ld';
+import DocumentationWrapper from '../components/documentation-wrapper';
 
 export default function ContentPage({ content, toc, meta, cname }: ContentProps) {
   const parsedContent = useMemo(
@@ -25,7 +26,9 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
         }}
       />
       <Layout meta={meta as any} toc={toc} cname={cname} isContent>
-        {parsedContent}
+        <DocumentationWrapper>
+          {parsedContent}
+        </DocumentationWrapper>
       </Layout>
       <JsonLD isContent title={meta.title} ogImage={`https://help.mirrorz.org/og-help.mirrorz.org/${cname}.png`} />
     </>

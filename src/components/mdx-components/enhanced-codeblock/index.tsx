@@ -81,6 +81,14 @@ function CodeBlock({
     return buildCode(code, variable);
   }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, variableState]);
 
+  /** Validation */
+  if (process.env.NODE_ENV !== 'production') {
+    if (!code.includes('{{') && !enableQuickSetup) {
+      // eslint-disable-next-line no-console -- log message
+      console.warn('CodeBlock: If you don\' use {{variable}} syntax in your code, and don\'t use "enableQuickSetup", you don\'t have to use <CodeBlock />. The extraneous <CodeBlock /> has code starts with:', code.split('\n')[0]);
+    }
+  }
+
   const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={dispatch} />;
 
   if (enableQuickSetup && filepath) {
@@ -89,11 +97,11 @@ function CodeBlock({
         {codeBlockMenu}
         <Tabs items={[filepath, '快速配置']}>
           <TabItem value={filepath} xstyle={[styles.code_wrapper]}>
-            {(isLoading || !currentSelectedMirror) && <LoadingOverlay />}
+            <LoadingOverlay isLoading={(isLoading || !currentSelectedMirror)} />
             <ActualCode code={finalCode} language={codeLanguage} />
           </TabItem>
           <TabItem value="快速配置" xstyle={[styles.code_wrapper]}>
-            {(isLoading || !currentSelectedMirror) && <LoadingOverlay />}
+            <LoadingOverlay isLoading={(isLoading || !currentSelectedMirror)} />
             <p className={styles('p')}>
               如果你当前正在使用的终端 或 Shell 环境不支持复制粘贴时 Shell Escape，「快速配置」的代码可能在复制粘贴的过程中被破坏！
             </p>
@@ -108,7 +116,7 @@ function CodeBlock({
     <div className={clsx('enhanced-codeblock', styles('container'))}>
       {codeBlockMenu}
       <div className={styles('code_wrapper')}>
-        {(isLoading || !currentSelectedMirror) && <LoadingOverlay />}
+        <LoadingOverlay isLoading={(isLoading || !currentSelectedMirror)} />
         <ActualCode code={finalCode} language={codeLanguage} />
       </div>
     </div>

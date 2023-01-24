@@ -8,7 +8,6 @@ import IconClose from '../../icons/close';
 import style9 from 'style9';
 import MirrorZLogo from '../../mirrorz-logo';
 
-import routesJson from '@/routes.json';
 import Sidebar from './sidebar';
 import DarkModeSwitch from '../darkmode-switch';
 import { SearchButtonInSideNav, SearchButtonOnMobile } from '../../search/button';
@@ -252,7 +251,7 @@ function Nav() {
             role="navigation"
             className={styles('nav')}
           >
-            <Sidebar routes={routesJson} />
+            <Sidebar />
           </nav>
         </aside>
       </div>

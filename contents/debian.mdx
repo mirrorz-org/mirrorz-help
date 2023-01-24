@@ -33,6 +33,13 @@ sudo apt install apt-transport-https ca-certificates
         ['否', { enable_source: '# ' }],
         ['是', { enable_source: '' }],
       ]
+    },
+    {
+      title: '使用官方安全更新软件源',
+      items: [
+        ['是', { security_mirror: '# ', security_official: '' }],
+        ['否', { security_mirror: '', security_official: '# ' }],
+      ]
     }
   ]}
 >
@@ -48,13 +55,22 @@ deb {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free
 {{is_sid}}{{has_backports}}deb {{http_protocol}}{{mirror}}/ {{release_name}}-backports main contrib non-free
 {{is_sid}}{{has_backports}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main contrib non-free
 
-{{is_sid}}deb {{http_protocol}}{{mirror}}-security {{release_name}}{{security}} main contrib non-free
-{{is_sid}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}-security {{release_name}}{{security}} main contrib non-free
+{{security_mirror}}{{is_sid}}deb {{http_protocol}}{{mirror}}-security {{release_name}}{{security}} main contrib non-free
+{{security_mirror}}{{is_sid}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}-security {{release_name}}{{security}} main contrib non-free
+
+{{security_official}}{{is_sid}}deb {{http_protocol}}security.debian.org/debian-security {{release_name}}{{security}} main contrib non-free
+{{security_official}}{{is_sid}}{{enable_source}}deb-src {{http_protocol}}security.debian.org/debian-security {{release_name}}{{security}} main contrib non-free
 ```
 
 </CodeBlock>
 
-为了方便快速配置，此处一并附上了 debian-security 的配置，一般来说，镜像站会同时提供 debian-security，截至写文档时，DNUI、HIT 与 NYIST 缺乏该镜像，为了更精确的信息您可以前往[ Debian Security 帮助](/debian-security/) 确认。
+为了方便快速配置，此处一并附上了 debian-security 的配置，一般来说，镜像站会同时提供 debian-security，截至写文档时，DNUI、HIT 与 NYIST 未提供该镜像，为了更准确的信息您可以前往 [Debian Security 帮助](/debian-security/) 确认。
+
+不过，一般来说，为了更及时地获得安全更新，不推荐使用镜像站安全更新软件源，因为镜像站往往有同步延迟。参考 https://www.debian.org/security/faq.en.html#mirror
+
+> The purpose of security.debian.org is to make security updates available as quickly and easily as possible.
+>
+> Encouraging the use of unofficial mirrors would add extra complexity that is usually not needed and that can cause frustration if these mirrors are not kept up to date.
 
 ## OpenMediaVault
 

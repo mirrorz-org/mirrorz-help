@@ -1,4 +1,4 @@
-import { useRef, useEffect, memo } from 'react';
+import { memo, useCallback } from 'react';
 import Link from 'next/link';
 import style9 from 'style9';
 
@@ -66,20 +66,20 @@ const SidebarLink = ({
   title,
   isPending
 }: SidebarLinkProps) => {
-  const ref = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    if (isActive && ref && ref.current) {
-      if ('scrollIntoViewIfNeeded' in ref.current && typeof ref.current.scrollIntoViewIfNeeded === 'function') {
-        ref.current.scrollIntoViewIfNeeded();
-      }
-    }
-  }, [ref, isActive]);
-
   return (
     <Link
+      // Disable prefetch when in view (prevent unnecessary requests)
+      prefetch={false}
       href={href}
-      ref={ref}
+      ref={useCallback((el: HTMLAnchorElement | null) => {
+        if (el) {
+          if (isActive) {
+            if ('scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {
+              el.scrollIntoViewIfNeeded();
+            }
+          }
+        }
+      }, [isActive])}
       title={title}
       target={href.startsWith('https://') ? '_blank' : undefined}
       className={styles('base', isActive ? 'active' : 'inactive', isPending && 'pending')}

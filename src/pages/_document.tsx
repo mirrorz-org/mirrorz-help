@@ -40,11 +40,19 @@ window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function inject(...args) {
           // Only modify the original hooks when markComponentSuspended is present
           if (!hook || !hook.markComponentSuspended) return hook;
 
-          // Exclude markComponentSuspended from the hook
-          // This will break certain React DevTools features,
-          // but the render won't be blocked
-          const { markComponentSuspended, ...rest2 } = hook;
-          return rest2;
+          // Override the original markComponentSuspended from the hook
+          const { markComponentSuspended: orignalMarkComponentSuspended, ...rest2 } = hook;
+          return {
+            markComponentSuspended(fiber, wakeable, lanes) {
+              if (typeof wakeable.then === 'function') {
+                return orignalMarkComponentSuspended.call(this, fiber, wakeable, lanes);
+              } else {
+                // If "wakeable.then" is not a function, log a warning.
+                console.warn('React DevTools issue detected and mitigated!\\nSee https://github.com/facebook/react/issues/25994 for more information.', { fiber, wakeable, lanes });
+              }
+            },
+            ...rest2
+          };
         });
         originalInjectProfilingHooks.apply(this, newHooks);
       },

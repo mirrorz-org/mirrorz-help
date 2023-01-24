@@ -2,14 +2,18 @@ name: AutoCorrect
 
 on: [pull_request_target]
 
+permissions:
+  pull-requests: read
+  contents: read
+
 jobs:
   autocorrect:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
     - name: Check source code
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
 
     - name: Run AutoCorrect
       uses: huacnlee/autocorrect-action@main

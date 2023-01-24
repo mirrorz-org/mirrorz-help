@@ -7,12 +7,23 @@ cname: 'erlang-solutions'
 
 首先信任 erlang-solutions 的 GPG 公钥:
 
+<CodeBlock
+  menus={[
+    {
+      title: '发行版',
+      items: [
+        ['Debian', { os_name: 'debian' }],
+        ['Ubuntu', { os_name: 'ubuntu' }],
+      ]
+    },
+  ]}
+>
+
 ```bash
-# Debian 用户
-curl -s https://packages.erlang-solutions.com/debian/erlang_solutions.asc | sudo apt-key add -
-# Ubuntu 用户
-curl -s https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | sudo apt-key add -
+curl -s https://packages.erlang-solutions.com/{{os_name}}/erlang_solutions.asc | sudo apt-key add -
 ```
+
+</CodeBlock>
 
 再选择你的 Debian / Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/erlang-solutions.list`
 

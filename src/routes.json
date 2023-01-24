@@ -29,6 +29,12 @@
     "file": "AOSP.mdx",
     "cname": "AOSP"
   },
+  "/aosp-monthly/": {
+    "title": "AOSP Monthly",
+    "fullTitle": "AOSP Monthly 镜像使用帮助",
+    "file": "aosp-monthly.mdx",
+    "cname": "aosp-monthly"
+  },
   "/archlinux/": {
     "title": "Arch Linux 软件仓库",
     "fullTitle": "Arch Linux 软件仓库镜像使用帮助",

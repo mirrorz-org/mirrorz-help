@@ -34,6 +34,8 @@ wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | sudo apt-
 再选择你的 Debian / Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/mongodb.list`
 
 <CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/mongodb.list"
   menus={[
     {
       title: '发行版',
@@ -78,7 +80,10 @@ sudo apt-get install -y mongodb-org
 
 新建 `/etc/yum.repos.d/mongodb.repo`，内容为
 
-<CodeBlock>
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/mongodb.repo"
+>
 
 ```ini
 [mongodb-org]

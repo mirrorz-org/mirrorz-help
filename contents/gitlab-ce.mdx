@@ -16,6 +16,8 @@ curl https://packages.gitlab.com/gpg.key 2> /dev/null | sudo apt-key add - &>/de
 再选择你的 Debian/Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/gitlab-ce.list`
 
 <CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/gitlab-ce.list"
   menus={[
     {
       title: '发行版',
@@ -51,7 +53,10 @@ sudo apt-get install gitlab-ce
 
 新建 `/etc/yum.repos.d/gitlab-ce.repo`，内容为
 
-<CodeBlock>
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/gitlab-ce.repo"
+>
 
 ```ini
 [gitlab-ce]

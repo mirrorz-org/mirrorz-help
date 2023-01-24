@@ -10,6 +10,8 @@ Chef 是一套自动化运维工具。
 再选择你的 Debian/Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/chef.list`
 
 <CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/chef.list"
   menus={[
     {
       title: 'Ubuntu/Debian 版本',
@@ -38,7 +40,10 @@ deb {{http_protocol}}{{mirror}}/apt/stable {{release_name}} main
 
 新建 `/etc/yum.repos.d/chef.repo`，内容为：
 
-<CodeBlock>
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/chef.repo"
+>
 
 ```ini
 [chef-stable]

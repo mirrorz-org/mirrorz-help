@@ -6,6 +6,8 @@ cname: 'ros'
 新建 `/etc/apt/sources.list.d/ros-latest.list`，内容为：
 
 <CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/ros-latest.list"
   menus={[
     {
       title: '发行版',
@@ -31,14 +33,10 @@ deb {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}} main
 
 然后再输入如下命令，信任ROS的GPG Key，并更新索引：
 
-<CodeBlock>
-
 ```bash
 sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 sudo apt update
 ```
-
-</CodeBlock>
 
 ### rosdep
 

@@ -15,6 +15,7 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
 
-    - name: Run AutoCorrect
-      uses: huacnlee/autocorrect-action@main
-      run: /usr/local/bin/autocorrect --lint --no-diff-bg-color $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }})
+    - name: AutoCorrect check
+        run: |
+          curl -sSL https://git.io/JcGER | sudo bash
+          autocorrect --lint --no-diff-bg-color $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }})

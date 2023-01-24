@@ -3,7 +3,7 @@ name: AutoCorrect
 on: [pull_request_target]
 
 jobs:
-  greeting:
+  autocorrect:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write

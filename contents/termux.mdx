@@ -52,30 +52,38 @@ apt update && apt upgrade
 
 编辑 `$PREFIX/etc/apt/sources.list` 修改为如下内容
 
-<CodeBlock>
+<CodeBlock
+  enableQuickSetup
+  filepath="$PREFIX/etc/apt/sources.list"
+  menus={[
+    {
+      title: '启用 X11',
+      items: [
+        ['否', { enable_x11: '# ' }],
+        ['是', { enable_x11: '' }],
+      ]
+    },
+    {
+      title: '启用 root',
+      items: [
+        ['否', { enable_root: '# ' }],
+        ['是', { enable_root: '' }],
+      ]
+    },
+  ]}
+
+>
 
 ```properties
 # The termux repository mirror
 deb {{http_protocol}}{{mirror}}/apt/termux-main stable main
+{{enable_x11}}deb {{http_protocol}}{{mirror}}/apt/termux-x11 x11 main
+{{enable_root}}deb {{http_protocol}}{{mirror}}/apt/termux-root root stable
 ```
 
 </CodeBlock>
 
 请使用内置或安装在 Termux 里的文本编辑器，例如 `vi` / `vim` / `nano` 等，**不要使用 RE 管理器等其他具有 ROOT 权限的外部 APP** 来修改 Termux 的文件
-
-### 社区源
-
-镜像站还提供了如下社区维护的源，如需使用请自行添加：
-
-<CodeBlock>
-
-```
-{{http_protocol}}{{mirror}}/apt/termux-x11
-{{http_protocol}}{{mirror}}/apt/termux-root
-```
-
-</CodeBlock>
-
 
 ### 警告
 

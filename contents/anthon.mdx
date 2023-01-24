@@ -37,7 +37,10 @@ sudo apt-gen-list set-mirror <mirror>
 
 修改 `/etc/apt/sources.list`，内容为
 
-<CodeBlock>
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list"
+>
 
 ```properties
 deb {{http_protocol}}{{mirror}}/debs stable main

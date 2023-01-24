@@ -9,16 +9,12 @@ cname: 'lineageOS'
 
 下载 repo 工具：
 
-<CodeBlock>
-
 ```bash
 mkdir ~/bin
 PATH=~/bin:$PATH
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 ```
-
-</CodeBlock>
 
 或者使用[git-repo 镜像](/git-repo/)
 
@@ -45,16 +41,12 @@ repo init -u {{http_protocol}}{{mirror}}/LineageOS/android.git -b cm-14.1
 
 打开`.repo/manifests/default.xml`，将
 
-<CodeBlock>
-
 ```xml
   <remote  name="github"
            fetch=".."
            review="review.lineageos.org" />
 
 ```
-
-</CodeBlock>
 
 改成
 
@@ -75,29 +67,21 @@ repo init -u {{http_protocol}}{{mirror}}/LineageOS/android.git -b cm-14.1
 
 将
 
-<CodeBlock>
-
 ```xml
   <default revision="..."
            remote="github"
 ```
 
-</CodeBlock>
-
 改成
-
-<CodeBlock>
 
 ```xml
   <default revision="..."
            remote="lineage"
 ```
 
-</CodeBlock>
-
 同步源码树（以后只需执行这条命令来同步）：
 
-```
+```bash
 repo sync
 ```
 

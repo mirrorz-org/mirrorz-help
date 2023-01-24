@@ -67,11 +67,9 @@ remote-repo: mirror:{{http_protocol}}{{mirror}}
 
 修改`~/.stack/config.yaml`, 加上：
 
-TODO: yaml syntax highlight
-
 <CodeBlock>
 
-```
+```yaml
 package-indices:
   - download-prefix: {{http_protocol}}{{mirror}}/
     hackage-security:
@@ -99,7 +97,7 @@ package-indices:
 
 <CodeBlock>
 
-```
+```yaml
 package-indices:
   - name: mirror
     download-prefix: {{http_protocol}}{{mirror}}/package/

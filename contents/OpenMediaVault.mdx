@@ -43,6 +43,8 @@ omv-salt stage run all
 我们仅对 **Add the package repositories** 段落做出如下调整
 
 <CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/openmediavault.list"
   menus={[
     {
       title: '版本',
@@ -69,7 +71,6 @@ omv-salt stage run all
 >
 
 ```bash
-cat <<EOF > /etc/apt/sources.list.d/openmediavault.list
 deb {{http_protocol}}{{mirror}}/public {{release_name}} main
 deb {{http_protocol}}{{mirror}}/packages {{release_name}} main
 ## Uncomment the following line to add software from the proposed repository.
@@ -79,7 +80,6 @@ deb {{http_protocol}}{{mirror}}/packages {{release_name}} main
 ## developers as a service to OpenMediaVault users.
 {{enable_partner}}deb {{http_protocol}}{{mirror}}/public {{release_name}} partner
 {{enable_partner}}deb {{http_protocol}}{{mirror}}/packages {{release_name}} partner
-EOF
 ```
 
 </CodeBlock>

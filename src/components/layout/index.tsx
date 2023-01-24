@@ -3,7 +3,6 @@ import { Suspense, lazy } from 'react';
 
 import Nav from './nav';
 import { useRouter } from 'next/router';
-import DocumentationWrapper from './documentation-wrapper';
 import type { ToC } from '@/lib/server/parse-markdown';
 import ToCAside from './toc';
 import Footer from './footer';
@@ -48,7 +47,8 @@ const styles = style9.create({
     }
   },
   main: {
-    minWidth: 0
+    minWidth: 0,
+    overflowWrap: 'break-word'
   },
   main_spacer: {
     height: '64px',
@@ -66,24 +66,19 @@ const styles = style9.create({
       display: 'block'
     }
   },
-  article: {
-    overflowWrap: 'break-word'
-  },
   content_wrapper: {
     paddingLeft: 0
   },
-  content_container: {
+  content_inner: {
+    maxWidth: '1280px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     paddingLeft: '20px',
     paddingRight: '20px',
     '@media screen and (min-width: 640px)': {
       paddingLeft: '48px',
       paddingRight: '48px'
     }
-  },
-  content_inner: {
-    maxWidth: '1280px',
-    marginLeft: 'auto',
-    marginRight: 'auto'
   }
 });
 
@@ -149,26 +144,17 @@ export function Layout({ children, meta, toc = [], cname, isContent = false }: R
               </div>
               <main className={styles('main')}>
                 <div className={styles('main_spacer')} />
-                <article className={styles('article')} key={asPath}>
-                  {isContent && meta && <Header title={meta.title} />}
-                  <div className={styles('content_wrapper')}>
-                    <div className={styles('content_container')}>
-                      {isContent
-                        ? (
-                          <DocumentationWrapper>
-                            {children}
-                          </DocumentationWrapper>
-                        )
-                        : (
-                          <div className={styles('content_inner')}>
-                            {children}
-                          </div>
-                        )}
 
-                      {isContent && <MetadataCard />}
-                    </div>
+                {isContent && meta && <Header title={meta.title} />}
+
+                <div className={styles('content_wrapper')}>
+                  <div className={styles('content_inner')}>
+                    {children}
+
+                    {isContent && <MetadataCard />}
                   </div>
-                </article>
+                </div>
+
                 <Footer />
               </main>
               <div className={styles('toc')}>

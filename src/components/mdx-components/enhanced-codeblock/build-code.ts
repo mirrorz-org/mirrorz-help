@@ -8,5 +8,5 @@ export const buildCode = (code: string, variables: Record<string, string>) => {
 };
 
 export const buildCatEOF = (finalCode: string, filePath: string) => {
-  return `cat <<EOF > ${filePath}\n${finalCode}\nEOF`;
+  return `cat <<'EOF' > ${filePath}\n${finalCode}\nEOF`;
 };

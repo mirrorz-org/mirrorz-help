@@ -18,7 +18,8 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
-    "ncc-compiled": "taskr ncc"
+    "ncc-compiled": "taskr ncc",
+    "postinstall": "patch-package"
   },
   "repository": {
     "type": "git",
@@ -77,6 +78,7 @@
     "gray-matter": "^4.0.3",
     "mdast-util-to-string": "^3.1.0",
     "metro-cache": "^0.74.0",
+    "patch-package": "^6.5.1",
     "remark-external-links": "^9.0.1",
     "remark-gfm": "^3.0.1",
     "remark-unwrap-images": "^3.0.1",

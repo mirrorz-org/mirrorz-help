@@ -9,25 +9,28 @@ cname: 'elrepo'
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 ```
 
-接着，按照你的系统版本，如果是 RHEL-8 或者 CentOS-8 则运行：
+接着，按照你的系统版本，运行：
+
+<CodeBlock
+  menus={[
+    {
+      title: '发行版',
+      items: [
+        ['RHEL-7, SL-7, CentOS-7', { release_name: 'el7', version: '7' }],
+        ['RHEL-8, SL-8, CentOS-8', { release_name: 'el8', version: '8' }],
+        ['RHEL-6, SL-6, CentOS-6', { release_name: 'el6', version: '6' }],
+      ]
+    },
+  ]}
+>
 
 ```bash
-yum install https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm
+yum install https://www.elrepo.org/elrepo-release-{{version}}.{{release_name}}.elrepo.noarch.rpm
 ```
 
-RHEL-7, SL-7 或者 CentOS-7：
+</CodeBlock>
 
-```bash
-yum install https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
-```
-
-RHEL-6, SL-6 或者 CentOS-6：
-
-```bash
-yum install https://www.elrepo.org/elrepo-release-6.el6.elrepo.noarch.rpm
-```
-
-建议先备份 `/etc/yum.repos.d/elrepo.repo` ：
+接下来是换源，建议先备份 `/etc/yum.repos.d/elrepo.repo` ：
 
 ```
 sudo cp /etc/yum.repos.d/elrepo.repo /etc/yum.repos.d/elrepo.repo.bak
@@ -45,6 +48,6 @@ sudo cp /etc/yum.repos.d/elrepo.repo /etc/yum.repos.d/elrepo.repo.bak
 
 最后，更新软件包缓存
 
-```
+```bash
 sudo yum makecache
 ```

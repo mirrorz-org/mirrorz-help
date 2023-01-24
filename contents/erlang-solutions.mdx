@@ -1,0 +1,94 @@
+---
+title: Erlang Solutions 软件仓库镜像使用帮助
+cname: 'erlang-solutions'
+---
+
+### Debian/Ubuntu 用户
+
+首先信任 erlang-solutions 的 GPG 公钥：
+
+<CodeBlock
+  menus={[
+    {
+      title: '发行版',
+      items: [
+        ['Debian', { os_name: 'debian' }],
+        ['Ubuntu', { os_name: 'ubuntu' }],
+      ]
+    },
+  ]}
+>
+
+```bash
+curl -s https://packages.erlang-solutions.com/{{os_name}}/erlang_solutions.asc | sudo apt-key add -
+```
+
+</CodeBlock>
+
+再选择你的 Debian / Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/erlang-solutions.list`
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/erlang-solutions.list"
+  menus={[
+    {
+      title: '发行版',
+      items: [
+        ['Debian 11', { os_name: 'debian', release_name: 'bullseye' }],
+        ['Debian 10', { os_name: 'debian', release_name: 'buster' }],
+        ['Debian 9', { os_name: 'debian', release_name: 'stretch' }],
+        ['Debian 8', { os_name: 'debian', release_name: 'jessie' }],
+        ['Ubuntu 20.04 LTS', { os_name: 'ubuntu', release_name: 'focal' }],
+        ['Ubuntu 18.04 LTS', { os_name: 'ubuntu', release_name: 'bionic' }],
+        ['Ubuntu 16.04 LTS', { os_name: 'ubuntu', release_name: 'xenial' }],
+      ]
+    },
+  ]}
+>
+
+```properties
+deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} contrib
+```
+
+</CodeBlock>
+
+
+安装 `erlang` 即可
+
+```bash
+sudo apt-get update
+sudo apt-get install -y erlang
+```
+
+### CentOS 用户
+
+首先信任 erlang-solutions 的 GPG 公钥：
+
+```bash
+rpm --import https://packages.erlang-solutions.com/rpm/erlang_solutions.asc
+```
+
+新建 `/etc/yum.repos.d/erlang-solutions.repo`，内容为
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/erlang-solutions.repo"
+>
+
+```ini
+[erlang-solutions]
+name=CentOS $releasever - Erlang Solutions
+baseurl={{http_protocol}}{{mirror}}/centos/$releasever/
+gpgcheck=1
+gpgkey=https://packages.erlang-solutions.com/rpm/erlang_solutions.asc
+enabled=1
+```
+
+</CodeBlock>
+
+刷新缓存并安装 `erlang` 即可。
+
+```bash
+sudo yum makecache
+sudo yum install erlang
+```

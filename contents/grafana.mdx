@@ -19,6 +19,8 @@ sudo apt-get install -y apt-transport-https
 选择你希望安装的 Grafana 版本（与你的 Debian/Ubuntu 系统版本无关），文本框中内容写进 `/etc/apt/sources.list.d/grafana.list`
 
 <CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/grafana.list"
   menus={[
     {
       title: 'Grafana 版本',
@@ -48,7 +50,10 @@ sudo apt-get install grafana
 
 新建 `/etc/yum.repos.d/grafana.repo`，内容为
 
-<CodeBlock>
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/grafana.repo"
+>
 
 ```ini
 [grafana]
@@ -63,13 +68,9 @@ gpgcheck=0
 
 如果要避免安装 beta 版本，需要新增一行
 
-<CodeBlock>
-
 ```ini
 exclude=*beta*
 ```
-
-</CodeBlock>
 
 再执行
 

@@ -75,6 +75,8 @@ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key a
 再选择你的 Debian/Ubuntu 版本，将文本框中内容写进`/etc/apt/sources.list.d/virtualbox.list`
 
 <CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/virtualbox.list"
   menus={[
     {
       title: '发行版',
@@ -101,22 +103,21 @@ deb {{http_protocol}}{{mirror}}/apt/ {{release_name}} contrib
 
 安装 VirtualBox:
 
-<CodeBlock>
-
 ```bash
 sudo apt-get update
 sudo apt-get install virtualbox
 # 此时会列出具体可用版本，选择所需版本安装
 ```
 
-</CodeBlock>
-
 ### RHEL/CentOS 用户
 
 
 新建 `/etc/yum.repos.d/virtualbox.repo`，内容为
 
-<CodeBlock>
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/virtualbox.repo"
+>
 
 ```ini
 [virtualbox]
@@ -130,12 +131,8 @@ enabled=1
 
 刷新缓存并安装 `virtualbox` 即可。
 
-<CodeBlock>
-
 ```bash
 sudo yum makecache
 sudo yum search VirtualBox
 # 此时会列出具体可用版本，选择所需版本安装即可
 ```
-
-</CodeBlock>

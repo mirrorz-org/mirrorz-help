@@ -17,7 +17,10 @@ sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://pack
 
 新建 `/etc/apt/sources.list.d/kubernetes.list`，内容为
 
-<CodeBlock>
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/kubernetes.list"
+>
 
 ```properties
 deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] {{http_protocol}}{{mirror}}/apt kubernetes-xenial main
@@ -29,7 +32,10 @@ deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] {{http_protoc
 
 新建 `/etc/yum.repos.d/kubernetes.repo`，内容为：
 
-<CodeBlock>
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/kubernetes.repo"
+>
 
 ```ini
 [kubernetes]
@@ -40,6 +46,6 @@ enabled=1
 
 </CodeBlock>
 
-### Minikube
+## Minikube
 
 请到 minikube 镜像，即一些镜像站的 `/github-release/kubernetes/minikube/LatestRelease/` 路径下载。

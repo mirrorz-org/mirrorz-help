@@ -9,6 +9,8 @@ cname: 'rudder'
 选择你的 Debian/Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/rudder.list`
 
 <CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/rudder.list"
   menus={[
     {
       title: '发行版',
@@ -39,13 +41,13 @@ deb {{http_protocol}}{{mirror}}/apt/{{version}} {{release_name}} main
 
 </CodeBlock>
 
-
-
 ### RHEL/CentOS 用户
 
 新建 `/etc/yum.repos.d/rudder.repo`，内容为：
 
 <CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/rudder.repo"
   menus={[
     {
       title: 'Rudder 版本号',

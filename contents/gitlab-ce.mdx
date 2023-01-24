@@ -43,10 +43,12 @@ deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
 
 安装 gitlab-ce:
 
+<CodeBlock>
 ```bash
-sudo apt-get update
-sudo apt-get install gitlab-ce
+{{sudo}}apt-get update
+{{sudo}}apt-get install gitlab-ce
 ```
+</CodeBlock>
 
 ### RHEL/CentOS 用户
 
@@ -70,7 +72,9 @@ enabled=1
 
 再执行
 
+<CodeBlock>
 ```bash
-sudo yum makecache
-sudo yum install gitlab-ce
+{{sudo}}yum makecache
+{{sudo}}yum install gitlab-ce
 ```
+</CodeBlock>

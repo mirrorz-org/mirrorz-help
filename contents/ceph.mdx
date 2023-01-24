@@ -22,9 +22,9 @@ cname: 'ceph'
 <CodeBlock>
 
 ```shell
-wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
-sudo apt-add-repository 'deb {{http_protocol}}{{mirror}}/debian-octopus/ buster main'
-sudo apt update
+wget -q -O- 'https://download.ceph.com/keys/release.asc' | {{sudo}}apt-key add -
+{{sudo}}apt-add-repository 'deb {{http_protocol}}{{mirror}}/debian-octopus/ buster main'
+{{sudo}}apt update
 ```
 
 </CodeBlock>

@@ -41,7 +41,7 @@ sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/update/leap/$releasever/backpor
 
 </CodeBlock>
 
-Leap 15.3 注：若在安装时**没有**启用在线软件源， sle 源和 backports 源将在系统首次更新后引入，请确保系统在更新后仅启用了**六个**所需软件源。可使用 `zypper lr` 检查软件源状态，并使用 `zypper mr -d` 禁用多余的软件源。
+Leap 15.3 注：若在安装时**没有**启用在线软件源，sle 源和 backports 源将在系统首次更新后引入，请确保系统在更新后仅启用了**六个**所需软件源。可使用 `zypper lr` 检查软件源状态，并使用 `zypper mr -d` 禁用多余的软件源。
 
 ### openSUSE Tumbleweed 使用方法
 
@@ -68,7 +68,7 @@ sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/tumbleweed/repo/non-oss/' mirro
 sudo zypper ref
 ```
 
-Tumbleweed 注： Tumbleweed 安装后默认会启用 oss, non-oss, update, 3 个官方软件源，
+Tumbleweed 注：Tumbleweed 安装后默认会启用 oss, non-oss, update, 3 个官方软件源，
 其中 oss 及 non-oss 源用于发布 Tumbleweed 的每日构建快照，快照中已包含系统所需的全部软件包及更新。
 update 源仅用于推送临时安全补丁，如当日快照已发布但仍有临时安全补丁时，会首先推送至 update 源，并在次日合入下一版快照。
 由于 update 源存在较强的时效性，上游镜像并未同步 update 源，镜像源亦无法提供该源的镜像。

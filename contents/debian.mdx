@@ -55,3 +55,18 @@ deb {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free
 </CodeBlock>
 
 为了方便快速配置，此处一并附上了 debian-security 的配置，一般来说，镜像站会同时提供 debian-security，截至写文档时，DNUI、HIT 与 NYIST 缺乏该镜像，为了更精确的信息您可以前往[ Debian Security 帮助](/debian-security/) 确认。
+
+## OpenMediaVault
+
+本节供 [OpenMediaVault 帮助](/OpenMediaVault/)使用。
+
+<CodeBlock>
+
+```bash
+omv-env set OMV_APT_KERNEL_BACKPORTS_REPOSITORY_URL "{{http_protocol}}{{mirror}}"
+omv-env set OMV_APT_SECURITY_REPOSITORY_URL "{{http_protocol}}{{mirror}}-security"
+```
+
+</CodeBlock>
+
+关于 debian-security 可以参考上一节的说明。

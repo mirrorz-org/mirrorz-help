@@ -115,3 +115,15 @@ sudo sed -i 's+https://download.docker.com+{{http_protocol}}{{mirror}}+' /etc/yu
 sudo yum makecache fast
 sudo yum install docker-ce
 ```
+
+## OpenMediaVault
+
+本节供 [OpenMediaVault 帮助](/OpenMediaVault/)使用。
+
+<CodeBlock>
+
+```bash
+omv-env set OMV_DOCKER_APT_REPOSITORY_URL "{{http_protocol}}{{mirror}}/linux/debian"
+```
+
+</CodeBlock>

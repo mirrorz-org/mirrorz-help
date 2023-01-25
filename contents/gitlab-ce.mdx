@@ -9,9 +9,11 @@ cname: 'gitlab-ce'
 
 首先信任 GitLab 的 GPG 公钥：
 
+<CodeBlock>
 ```bash
-curl https://packages.gitlab.com/gpg.key 2> /dev/null | sudo apt-key add - &>/dev/null
+curl https://packages.gitlab.com/gpg.key 2> /dev/null | {{sudo}}apt-key add - &>/dev/null
 ```
+</CodeBlock>
 
 再选择你的 Debian/Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/gitlab-ce.list`
 
@@ -43,10 +45,12 @@ deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
 
 安装 gitlab-ce:
 
+<CodeBlock>
 ```bash
-sudo apt-get update
-sudo apt-get install gitlab-ce
+{{sudo}}apt-get update
+{{sudo}}apt-get install gitlab-ce
 ```
+</CodeBlock>
 
 ### RHEL/CentOS 用户
 
@@ -70,7 +74,9 @@ enabled=1
 
 再执行
 
+<CodeBlock>
 ```bash
-sudo yum makecache
-sudo yum install gitlab-ce
+{{sudo}}yum makecache
+{{sudo}}yum install gitlab-ce
 ```
+</CodeBlock>

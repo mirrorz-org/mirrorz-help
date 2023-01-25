@@ -18,32 +18,38 @@ cname: 'Adoptium'
 ### Debian/Ubuntu 用户
 
 首先请安装依赖：
+<CodeBlock>
 ```shell
-apt-get update && apt-get install -y wget apt-transport-https
+{{sudo}}apt-get update && {{sudo}}apt-get install -y wget apt-transport-https
 ```
+</CodeBlock>
 
 然后信任 GPG 公钥：
+<CodeBlock>
 ```shell
-wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo tee /etc/apt/keyrings/adoptium.asc
+wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | {{sudo}}tee /etc/apt/keyrings/adoptium.asc
 ```
+</CodeBlock>
 
 随后执行以下命令来添加 apt 存储库：
 
 <CodeBlock>
 
 ```shell
-echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] {{http_protocol}}{{mirror}}/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
+echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] {{http_protocol}}{{mirror}}/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | {{sudo}} tee /etc/apt/sources.list.d/adoptium.list
 ```
 
 </CodeBlock>
 
 
 再执行
+<CodeBlock>
 ```shell
-sudo apt-get update
+{{sudo}}apt-get update
 ```
+</CodeBlock>
 
-之后可以使用 `sudo apt-get install temurin-<version>-jdk` 安装软件包，例如 `temurin-17-jdk` 和 `temurin-8-jdk`。
+之后可以使用 `apt-get install temurin-<version>-jdk` 安装软件包，例如 `temurin-17-jdk` 和 `temurin-8-jdk`。
 
 ### CentOS/RHEL/Fedora 用户
 
@@ -64,8 +70,10 @@ gpgkey=https://packages.adoptium.net/artifactory/api/gpg/key/public
 
 再执行
 
+<CodeBlock>
 ```bash
-sudo yum makecache
+{{sudo}} yum makecache
 ```
+</CodeBlock>
 
-之后可以使用 `sudo yum install temurin-<version>-jdk` 安装软件包，例如 `temurin-17-jdk` 和 `temurin-8-jdk`。
+之后可以使用 `yum install temurin-<version>-jdk` 安装软件包，例如 `temurin-17-jdk` 和 `temurin-8-jdk`。

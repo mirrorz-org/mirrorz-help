@@ -6,8 +6,8 @@ cname: 'ros2'
 输入如下命令，下载 ROS 的 GPG Key：
 
 ```bash
-sudo apt install curl gnupg2
-sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
+{{sudo}}apt install curl gnupg2
+{{sudo}}curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
 ```
 
 <CodeBlock
@@ -26,9 +26,9 @@ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -
 >
 
 ```bash
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] {{http_protocol}}{{mirror}}/ubuntu {{release_name}} main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] {{http_protocol}}{{mirror}}/ubuntu {{release_name}} main" | {{sudo}}tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
-sudo apt update
+{{sudo}}apt update
 ```
 
 </CodeBlock>

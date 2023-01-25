@@ -19,13 +19,13 @@ cname: 'centos'
 
 ```shell
 # 对于 CentOS 7
-sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+{{sudo}}sed -e 's|^mirrorlist=|#mirrorlist=|g' \
          -e 's|^#baseurl=http://mirror.centos.org/centos|baseurl={{http_protocol}}{{mirror}}|g' \
          -i.bak \
          /etc/yum.repos.d/CentOS-*.repo
 
 # 对于 CentOS 8
-sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+{{sudo}}sed -e 's|^mirrorlist=|#mirrorlist=|g' \
          -e 's|^#baseurl=http://mirror.centos.org/$contentdir|baseurl={{http_protocol}}{{mirror}}|g' \
          -i.bak \
          /etc/yum.repos.d/CentOS-*.repo
@@ -39,6 +39,8 @@ sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
 
 最后，更新软件包缓存
 
+<CodeBlock>
 ```shell
-sudo yum makecache
+{{sudo}}yum makecache
 ```
+</CodeBlock>

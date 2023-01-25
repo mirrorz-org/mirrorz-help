@@ -14,7 +14,7 @@ cname: 'centos-altarch'
 <CodeBlock>
 
 ```shell
-sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+{{sudo}}sed -e 's|^mirrorlist=|#mirrorlist=|g' \
          -e 's|^#baseurl=http://mirror.centos.org/altarch/|baseurl={{http_protocol}}{{mirror}}/|g' \
          -e 's|^#baseurl=http://mirror.centos.org/$contentdir/|baseurl={{http_protocol}}{{mirror}}/|g' \
          -i.bak \
@@ -29,6 +29,8 @@ sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
 
 最后，更新软件包缓存
 
+<CodeBlock>
 ```shell
-sudo yum makecache
+{{sudo}}yum makecache
 ```
+</CodeBlock>

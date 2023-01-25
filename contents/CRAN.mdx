@@ -73,9 +73,9 @@ deb {{http_protocol}}{{mirror}}/bin/linux/{{os_name}} {{release_name}}-{{version
 
 ```bash
 # Debian 用户添加该公钥
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
+{{sudo}}apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 # Ubuntu 用户添加该公钥
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-sudo apt-get update
-sudo apt-get install r-base-dev
+{{sudo}}apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+{{sudo}}apt-get update
+{{sudo}}apt-get install r-base-dev
 ```

@@ -32,15 +32,19 @@ wget -O- https://get.docker.com/ | sh
 
 如果你过去安装过 docker，先删掉：
 
+<CodeBlock>
 ```bash
-sudo apt-get remove docker docker-engine docker.io containerd runc
+{{sudo}}apt-get remove docker docker-engine docker.io containerd runc
 ```
+</CodeBlock>
 
 首先安装依赖：
 
+<CodeBlock>
 ```bash
-sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+{{sudo}}apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
 ```
+</CodeBlock>
 
 信任 Docker 的 GPG 公钥并添加仓库：
 
@@ -57,20 +61,22 @@ sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-pr
 >
 
 ```bash
-curl -fsSL https://download.docker.com/linux/{{deb_release}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/{{deb_release}}/gpg | {{sudo}}gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{http_protocol}}{{mirror}}/linux/{{deb_release}} \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  $(lsb_release -cs) stable" | {{sudo}}tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
 </CodeBlock>
 
 最后安装
 
+<CodeBlock>
 ```bash
-sudo apt-get update
-sudo apt-get install docker-ce
+{{sudo}}apt-get update
+{{sudo}}apt-get install docker-ce
 ```
+</CodeBlock>
 
 ### Fedora/CentOS/RHEL
 
@@ -78,15 +84,19 @@ sudo apt-get install docker-ce
 
 如果你之前安装过 docker，请先删掉
 
+<CodeBlock>
 ```bash
-sudo yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine
+{{sudo}}yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine
 ```
+</CodeBlock>
 
 安装一些依赖
 
+<CodeBlock>
 ```bash
-sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+{{sudo}}yum install -y yum-utils device-mapper-persistent-data lvm2
 ```
+</CodeBlock>
 
 下载 repo 文件，并把软件仓库地址替换为镜像站：
 
@@ -104,17 +114,19 @@ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
 ```bash
 yum-config-manager --add-repo https://download.docker.com/linux/{{yum_release}}/docker-ce.repo
-sudo sed -i 's+https://download.docker.com+{{http_protocol}}{{mirror}}+' /etc/yum.repos.d/docker-ce.repo
+{{sudo}}sed -i 's+https://download.docker.com+{{http_protocol}}{{mirror}}+' /etc/yum.repos.d/docker-ce.repo
 ```
 
 </CodeBlock>
 
 最后安装：
 
+<CodeBlock>
 ```bash
-sudo yum makecache fast
-sudo yum install docker-ce
+{{sudo}}yum makecache fast
+{{sudo}}yum install docker-ce
 ```
+</CodeBlock>
 
 ## OpenMediaVault
 

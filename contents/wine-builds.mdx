@@ -7,15 +7,19 @@ cname: 'wine-builds'
 
 首先启用 32 位架构
 
+<CodeBlock>
 ```bash
-sudo dpkg --add-architecture i386
+{{sudo}}dpkg --add-architecture i386
 ```
+</CodeBlock>
 
 之后信任来自 https://dl.winehq.org/ 的公钥
 
+<CodeBlock>
 ```bash
-sudo wget -nc -O /usr/share/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+{{sudo}}wget -nc -O /usr/share/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
 ```
+</CodeBlock>
 
 新增 `/etc/apt/sources.list.d/winehq.list`，内容为
 
@@ -44,7 +48,9 @@ deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] {{http_pr
 
 通过以下命令安装 winehq
 
+<CodeBlock>
 ```bash
-sudo apt update
-sudo apt install --install-recommends winehq-stable
+{{sudo}}apt update
+{{sudo}}apt install --install-recommends winehq-stable
 ```
+</CodeBlock>

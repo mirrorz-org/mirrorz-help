@@ -36,7 +36,7 @@ deb {{http_protocol}}{{mirror}} kali-rolling main non-free contrib
 <CodeBlock>
 
 ```bash
-sudo sed -i "s@http://http.kali.org/kali@{{http_protocol}}{{mirror}}@g" /etc/apt/sources.list
+{{sudo}}sed -i "s@http://http.kali.org/kali@{{http_protocol}}{{mirror}}@g" /etc/apt/sources.list
 ```
 
 </CodeBlock>

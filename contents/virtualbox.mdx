@@ -62,15 +62,19 @@ cname: 'virtualbox'
 
 对于 Debian 8 和 Ubuntu 16.04 及以上：
 
+<CodeBlock>
 ```shell
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | {{sudo}}apt-key add -
 ```
+</CodeBlock>
 
 其他版本
 
+<CodeBlock>
 ```shell
-wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | {{sudo}}apt-key add -
 ```
+</CodeBlock>
 
 再选择你的 Debian/Ubuntu 版本，将文本框中内容写进`/etc/apt/sources.list.d/virtualbox.list`
 
@@ -104,8 +108,8 @@ deb {{http_protocol}}{{mirror}}/apt/ {{release_name}} contrib
 安装 VirtualBox:
 
 ```bash
-sudo apt-get update
-sudo apt-get install virtualbox
+{{sudo}}apt-get update
+{{sudo}}apt-get install virtualbox
 # 此时会列出具体可用版本，选择所需版本安装
 ```
 
@@ -132,7 +136,7 @@ enabled=1
 刷新缓存并安装 `virtualbox` 即可。
 
 ```bash
-sudo yum makecache
-sudo yum search VirtualBox
+{{sudo}}yum makecache
+{{sudo}}yum search VirtualBox
 # 此时会列出具体可用版本，选择所需版本安装即可
 ```

@@ -13,19 +13,21 @@ openSUSE 默认使用 [MirrorBrain](https://zh.opensuse.org/MirrorBrain) 技术�
 
 禁用官方软件源
 
+<CodeBlock>
 ```bash
-sudo zypper mr -da
+{{sudo}}zypper mr -da
 ```
+</CodeBlock>
 
 添加镜像源
 
 <CodeBlock>
 
 ```bash
-sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/distribution/leap/$releasever/repo/oss/' mirror-oss
-sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/distribution/leap/$releasever/repo/non-oss/' mirror-non-oss
-sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/update/leap/$releasever/oss/' mirror-update
-sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/update/leap/$releasever/non-oss/' mirror-update-non-oss
+{{sudo}}zypper ar -cfg '{{http_protocol}}{{mirror}}/distribution/leap/$releasever/repo/oss/' mirror-oss
+{{sudo}}zypper ar -cfg '{{http_protocol}}{{mirror}}/distribution/leap/$releasever/repo/non-oss/' mirror-non-oss
+{{sudo}}zypper ar -cfg '{{http_protocol}}{{mirror}}/update/leap/$releasever/oss/' mirror-update
+{{sudo}}zypper ar -cfg '{{http_protocol}}{{mirror}}/update/leap/$releasever/non-oss/' mirror-update-non-oss
 ```
 
 </CodeBlock>
@@ -35,8 +37,8 @@ Leap 15.3 用户还需添加 sle 和 backports 源
 <CodeBlock>
 
 ```bash
-sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/update/leap/$releasever/sle/' mirror-sle-update
-sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/update/leap/$releasever/backports/' mirror-backports-update
+{{sudo}}zypper ar -cfg '{{http_protocol}}{{mirror}}/update/leap/$releasever/sle/' mirror-sle-update
+{{sudo}}zypper ar -cfg '{{http_protocol}}{{mirror}}/update/leap/$releasever/backports/' mirror-backports-update
 ```
 
 </CodeBlock>
@@ -47,26 +49,30 @@ Leap 15.3 注：若在安装时**没有**启用在线软件源，sle 源和 back
 
 禁用官方软件源
 
+<CodeBlock>
 ```shell
-sudo zypper mr -da
+{{sudo}}zypper mr -da
 ```
+</CodeBlock>
 
 添加镜像源
 
 <CodeBlock>
 
 ```shell
-sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/tumbleweed/repo/oss/' mirror-oss
-sudo zypper ar -cfg '{{http_protocol}}{{mirror}}/tumbleweed/repo/non-oss/' mirror-non-oss
+{{sudo}}zypper ar -cfg '{{http_protocol}}{{mirror}}/tumbleweed/repo/oss/' mirror-oss
+{{sudo}}zypper ar -cfg '{{http_protocol}}{{mirror}}/tumbleweed/repo/non-oss/' mirror-non-oss
 ```
 
 </CodeBlock>
 
 刷新软件源
 
+<CodeBlock>
 ```shell
-sudo zypper ref
+{{sudo}}zypper ref
 ```
+</CodeBlock>
 
 Tumbleweed 注：Tumbleweed 安装后默认会启用 oss, non-oss, update, 3 个官方软件源，
 其中 oss 及 non-oss 源用于发布 Tumbleweed 的每日构建快照，快照中已包含系统所需的全部软件包及更新。

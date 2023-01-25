@@ -6,6 +6,7 @@ import path from 'path';
 import { promises as fsPromises } from 'fs';
 import * as Log from 'next/dist/build/output/log';
 import { fileExists } from 'next/dist/lib/file-exists';
+import pLimit from 'next/dist/compiled/p-limit';
 
 import routesJson from '@/routes.json';
 
@@ -33,12 +34,14 @@ interface GenerateOpengraphOptions<T> {
   template: (props: T) => JSX.Element;
   props: T;
   id: string;
+  outputPath: string;
 }
 
 async function generateOpengraph<T = any>({
   template,
   props,
-  id
+  id,
+  outputPath
 }: GenerateOpengraphOptions<T>) {
   const cacheKey = Buffer.from(
     stableHash({
@@ -55,7 +58,8 @@ async function generateOpengraph<T = any>({
     Log.info(
       `[OG] Reading open graph image "${id}" from ./node_modules/.cache/`
     );
-    return cached;
+
+    return fsPromises.writeFile(outputPath, cached);
   }
   Log.info(
     `[OG] Cache miss for open graph image "${id}" from ./node_modules/.cache/`
@@ -107,27 +111,28 @@ async function generateOpengraph<T = any>({
   }).render().asPng();
 
   await store.set(cacheKey, pngBuffer);
-  return pngBuffer;
+
+  return fsPromises.writeFile(outputPath, pngBuffer);
 }
 
 (async () => {
+  const limit = pLimit(10);
+
   if (!await fileExists(outputRoot, 'directory')) {
     await fsPromises.mkdir(outputRoot, { recursive: true });
   }
 
   // Default OpenGraph
   const defaultOgPath = path.join(outputRoot, 'default.png');
-  await fsPromises.writeFile(
-    defaultOgPath,
-    await generateOpengraph({
-      template: Default,
-      props: {
-        siteName: 'MirrorZ Help',
-        domain: 'help.mirrorz.org'
-      },
-      id: 'default'
-    })
-  );
+  await generateOpengraph({
+    template: Default,
+    props: {
+      siteName: 'MirrorZ Help',
+      domain: 'help.mirrorz.org'
+    },
+    id: 'default',
+    outputPath: defaultOgPath
+  });
 
   await Promise.all(Object.entries(routesJson).map(async ([routeHref, routeMeta]) => {
     if (!routeMeta.fullTitle.startsWith(routeMeta.title)) {
@@ -135,21 +140,17 @@ async function generateOpengraph<T = any>({
       return null;
     }
 
-    const outputPath = path.join(outputRoot, `${routeMeta.cname}.png`);
-
-    return fsPromises.writeFile(
-      outputPath,
-      await generateOpengraph({
-        template: Content,
-        props: {
-          siteName: 'MirrorZ Help',
-          path: routeHref,
-          titleLine1: routeMeta.title,
-          titleLine2: routeMeta.fullTitle.replace(routeMeta.title, '').trim(),
-          domain: 'help.mirrorz.org'
-        },
-        id: routeMeta.cname
-      })
-    );
+    return limit(() => generateOpengraph({
+      template: Content,
+      props: {
+        siteName: 'MirrorZ Help',
+        path: routeHref,
+        titleLine1: routeMeta.title,
+        titleLine2: routeMeta.fullTitle.replace(routeMeta.title, '').trim(),
+        domain: 'help.mirrorz.org'
+      },
+      id: routeMeta.cname,
+      outputPath: path.join(outputRoot, `${routeMeta.cname}.png`)
+    }));
   }));
 })();

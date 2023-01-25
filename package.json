@@ -23,9 +23,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SukkaW/help.mirrorz.org.git"
+    "url": "git+https://github.com/mirrorz-org/mirrorz-help.git"
   },
-  "author": "Sukka <https://skk.moe>",
   "license": "MIT",
   "taskr": {
     "requires": [

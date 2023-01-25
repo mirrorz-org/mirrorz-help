@@ -48,14 +48,13 @@ export default function MetadataCard() {
           在 GitHub Issue 反馈
         </ExternalLink>
       </p>
-      {/** TODO: Update URL when repo transferred from sukkaw/help.mirrorz.org to mirrorz/mirrorz-help */}
       {/** TODO: Contributing Guide */}
       <p className={styles('p')}>
         <span className={styles('bold')}>想完善这个页面？</span>
         <ExternalLink className={styles('link')} href="#">
           查看我们的贡献指南
         </ExternalLink>，
-        <ExternalLink className={styles('link')} href={`https://github.com/SukkaW/help.mirrorz.org/blob/master/contents/${meta.file}`}>
+        <ExternalLink className={styles('link')} href={`https://github.com/mirrorz-org/mirrorz-help/blob/master/contents/${meta.file}`}>
           在 GitHub 上查看此页的源代码
         </ExternalLink>
       </p>

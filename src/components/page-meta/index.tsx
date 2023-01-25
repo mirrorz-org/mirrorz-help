@@ -63,9 +63,8 @@ export default function MetadataCard() {
         <span className={styles('bold')}>
           本页面的全部内容在
           {' '}
-          <ExternalLink href="#" className={styles('link')}>
-            {/** TODO: License */}
-            大尾巴狐狸嗷呜嗷呜
+          <ExternalLink href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed" className={styles('link')}>
+            CC BY-NC-SA 4.0
           </ExternalLink>
           {' '}
           协议之条款下提供，附加条款亦可能应用。

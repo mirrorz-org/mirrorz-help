@@ -23,9 +23,9 @@ cname: 'elasticstack'
 >
 
 ```bash
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] {{http_protocol}}{{mirror}}/{{version}}/apt/ stable main" | sudo tee /etc/apt/sources.list.d/elastic-{{version}}.list
-sudo apt-get update && sudo apt-get install elasticsearch
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | {{sudo}}gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] {{http_protocol}}{{mirror}}/{{version}}/apt/ stable main" | {{sudo}}tee /etc/apt/sources.list.d/elastic-{{version}}.list
+{{sudo}}apt-get update && {{sudo}}apt-get install elasticsearch
 ```
 
 </CodeBlock>

@@ -25,7 +25,7 @@ cname: 'llvm-apt'
 # 下载脚本
 wget {{http_protocol}}{{mirror}}/llvm.sh
 chmod +x llvm.sh
-sudo ./llvm.sh {{version}} all -m {{http_protocol}}{{mirror}}
+{{sudo}}./llvm.sh {{version}} all -m {{http_protocol}}{{mirror}}
 ```
 
 </CodeBlock>
@@ -34,9 +34,11 @@ sudo ./llvm.sh {{version}} all -m {{http_protocol}}{{mirror}}
 
 首先信任来自 https://apt.llvm.org/ 的 PGP 公钥：
 
+<CodeBlock>
 ```bash
-wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | {{sudo}}apt-key add -
 ```
+</CodeBlock>
 
 新增 `/etc/apt/sources.list.d/llvm-apt.list`，内容为
 

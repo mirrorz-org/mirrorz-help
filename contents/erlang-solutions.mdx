@@ -20,7 +20,7 @@ cname: 'erlang-solutions'
 >
 
 ```bash
-curl -s https://packages.erlang-solutions.com/{{os_name}}/erlang_solutions.asc | sudo apt-key add -
+curl -s https://packages.erlang-solutions.com/{{os_name}}/erlang_solutions.asc | {{sudo}}apt-key add -
 ```
 
 </CodeBlock>
@@ -55,10 +55,12 @@ deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} contrib
 
 安装 `erlang` 即可
 
+<CodeBlock>
 ```bash
-sudo apt-get update
-sudo apt-get install -y erlang
+{{sudo}}apt-get update
+{{sudo}}apt-get install -y erlang
 ```
+</CodeBlock>
 
 ### CentOS 用户
 
@@ -88,7 +90,9 @@ enabled=1
 
 刷新缓存并安装 `erlang` 即可。
 
+<CodeBlock>
 ```bash
-sudo yum makecache
-sudo yum install erlang
+{{sudo}}yum makecache
+{{sudo}}yum install erlang
 ```
+</CodeBlock>

@@ -19,18 +19,18 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
       <SeoHead
         title={meta.title}
         ogType="article"
-        ogImage={{
-          url: `https://help.mirrorz.org/og-help.mirrorz.org/${cname}.png`,
-          width: 1200,
-          height: 630
-        }}
+        // ogImage={{
+        //   url: `https://help.mirrorz.org/og-help.mirrorz.org/${cname}.png`,
+        //   width: 1200,
+        //   height: 630
+        // }}
       />
       <Layout meta={meta as any} toc={toc} cname={cname} isContent>
         <DocumentationWrapper>
           {parsedContent}
         </DocumentationWrapper>
       </Layout>
-      <JsonLD isContent title={meta.title} ogImage={`https://help.mirrorz.org/og-help.mirrorz.org/${cname}.png`} />
+      <JsonLD isContent title={meta.title} />
     </>
   );
 }

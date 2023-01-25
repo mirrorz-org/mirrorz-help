@@ -1,4 +1,4 @@
-import { Content, Default } from '@/opengraph/template';
+import { Default } from '@/opengraph/template';
 import satori from '@/compiled/satori';
 import * as metroCache from 'metro-cache';
 import { Resvg } from '@resvg/resvg-js';
@@ -6,9 +6,9 @@ import path from 'path';
 import { promises as fsPromises } from 'fs';
 import * as Log from 'next/dist/build/output/log';
 import { fileExists } from 'next/dist/lib/file-exists';
-import pLimit from 'next/dist/compiled/p-limit';
+// import pLimit from 'next/dist/compiled/p-limit';
 
-import routesJson from '@/routes.json';
+// import routesJson from '@/routes.json';
 
 const outputRoot = path.join(process.cwd(), 'public', 'og-help.mirrorz.org');
 
@@ -116,8 +116,6 @@ async function generateOpengraph<T = any>({
 }
 
 (async () => {
-  const limit = pLimit(10);
-
   if (!await fileExists(outputRoot, 'directory')) {
     await fsPromises.mkdir(outputRoot, { recursive: true });
   }
@@ -134,23 +132,23 @@ async function generateOpengraph<T = any>({
     outputPath: defaultOgPath
   });
 
-  await Promise.all(Object.entries(routesJson).map(async ([routeHref, routeMeta]) => {
-    if (!routeMeta.fullTitle.startsWith(routeMeta.title)) {
-      Log.warn(`[Routes.json] Route ${routeHref} has a "fullTitle" that does not start with "title". Skipping.`);
-      return null;
-    }
+  // await Promise.all(Object.entries(routesJson).map(async ([routeHref, routeMeta]) => {
+  //   if (!routeMeta.fullTitle.startsWith(routeMeta.title)) {
+  //     Log.warn(`[Routes.json] Route ${routeHref} has a "fullTitle" that does not start with "title". Skipping.`);
+  //     return null;
+  //   }
 
-    return limit(() => generateOpengraph({
-      template: Content,
-      props: {
-        siteName: 'MirrorZ Help',
-        path: routeHref,
-        titleLine1: routeMeta.title,
-        titleLine2: routeMeta.fullTitle.replace(routeMeta.title, '').trim(),
-        domain: 'help.mirrorz.org'
-      },
-      id: routeMeta.cname,
-      outputPath: path.join(outputRoot, `${routeMeta.cname}.png`)
-    }));
-  }));
+  //   return limit(() => generateOpengraph({
+  //     template: Content,
+  //     props: {
+  //       siteName: 'MirrorZ Help',
+  //       path: routeHref,
+  //       titleLine1: routeMeta.title,
+  //       titleLine2: routeMeta.fullTitle.replace(routeMeta.title, '').trim(),
+  //       domain: 'help.mirrorz.org'
+  //     },
+  //     id: routeMeta.cname,
+  //     outputPath: path.join(outputRoot, `${routeMeta.cname}.png`)
+  //   }));
+  // }));
 })();

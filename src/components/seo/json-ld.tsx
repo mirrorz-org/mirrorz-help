@@ -18,7 +18,7 @@ export default function JsonLD({
   title,
   siteName = 'MirrorZ Help',
   isContent,
-  ogImage,
+  ogImage = 'https://help.mirrorz.org/og-help.mirrorz.org/default.png',
   ...rest
 }: JsonLDProps) {
   const jsonMain = useMemo(() => ({

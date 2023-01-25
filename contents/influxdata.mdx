@@ -9,9 +9,11 @@ cname: 'influxdata'
 
 首先信任来自 [influxdata](https://docs.influxdata.com/telegraf/v1.18/introduction/installation/) 的 PGP 公钥：
 
+<CodeBlock>
 ```shell
-curl -s https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+curl -s https://repos.influxdata.com/influxdb.key | {{sudo}}apt-key add -
 ```
+</CodeBlock>
 
 将下方文本框中的内容写入 `/etc/apt/sources.list.d/influxdb.list`
 
@@ -44,9 +46,11 @@ deb {{http_protocol}}{{mirror}}/{{os_name}}/ {{release_name}} stable
 
 即可安装相关软件，如：
 
+<CodeBlock>
 ```bash
-sudo apt install influxdb
+{{sudo}}apt install influxdb
 ```
+</CodeBlock>
 
 ### Centos / Redhat 用户
 
@@ -79,12 +83,16 @@ gpgkey={{http_protocol}}{{mirror}}/influxdb.key
 
 再执行
 
+<CodeBlock>
 ```bash
-sudo yum makecache
+{{sudo}}yum makecache
 ```
+</CodeBlock>
 
 即可安装相关软件，如：
 
+<CodeBlock>
 ```bash
-sudo yum install influxdb
+{{sudo}}yum install influxdb
 ```
+</CodeBlock>

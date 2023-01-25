@@ -11,9 +11,11 @@ Kubernetes 是用于自动部署，扩展和管理容器化应用程序的开源
 
 首先导入 gpg key：
 
+<CodeBlock>
 ```bash
-sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+{{sudo}}curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 ```
+<CodeBlock>
 
 新建 `/etc/apt/sources.list.d/kubernetes.list`，内容为
 

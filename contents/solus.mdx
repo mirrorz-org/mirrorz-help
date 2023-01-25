@@ -14,24 +14,26 @@ Solus 是一个界面美观，对新手友好的 Linux 发行版，使用 `eopkg
 <CodeBlock>
 
 ```
-sudo eopkg add-repo Mirror {{http_protocol}}{{mirror}}/packages/shannon/eopkg-index.xml.xz
+{{sudo}}eopkg add-repo Mirror {{http_protocol}}{{mirror}}/packages/shannon/eopkg-index.xml.xz
 ```
 
 </CodeBlock>
 
 此后，之行以下命令以启用 Mirror 源，禁用官方源
 
+<CodeBlock>
+```shell
+{{sudo}}eopkg enable-repo Mirror
+{{sudo}}eopkg disable-repo Solus
 ```
-sudo eopkg enable-repo Mirror
-sudo eopkg disable-repo Solus
-```
+</CodeBlock>
 
 或者用 Mirror 源直接覆盖官方源
 
 <CodeBlock>
 
 ```
-sudo eopkg add-repo Solus {{http_protocol}}{{mirror}}/packages/shannon/eopkg-index.xml.xz
+{{sudo}}eopkg add-repo Solus {{http_protocol}}{{mirror}}/packages/shannon/eopkg-index.xml.xz
 ```
 
 </CodeBlock>

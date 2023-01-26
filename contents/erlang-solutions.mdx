@@ -67,7 +67,7 @@ deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} contrib
 首先信任 erlang-solutions 的 GPG 公钥：
 
 ```bash
-rpm --import https://packages.erlang-solutions.com/rpm/erlang_solutions.asc
+{{sudo}}rpm --import https://packages.erlang-solutions.com/rpm/erlang_solutions.asc
 ```
 
 新建 `/etc/yum.repos.d/erlang-solutions.repo`，内容为

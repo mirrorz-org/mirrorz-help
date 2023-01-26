@@ -36,7 +36,7 @@ wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | {{sudo}
 <CodeBlock>
 
 ```shell
-echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] {{http_protocol}}{{mirror}}/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | {{sudo}} tee /etc/apt/sources.list.d/adoptium.list
+echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] {{http_protocol}}{{mirror}}/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | {{sudo}}tee /etc/apt/sources.list.d/adoptium.list
 ```
 
 </CodeBlock>
@@ -72,7 +72,7 @@ gpgkey=https://packages.adoptium.net/artifactory/api/gpg/key/public
 
 <CodeBlock>
 ```bash
-{{sudo}} yum makecache
+{{sudo}}yum makecache
 ```
 </CodeBlock>
 

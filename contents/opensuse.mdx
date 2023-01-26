@@ -45,6 +45,8 @@ Leap 15.3 用户还需添加 sle 和 backports 源
 
 Leap 15.3 注：若在安装时**没有**启用在线软件源，sle 源和 backports 源将在系统首次更新后引入，请确保系统在更新后仅启用了**六个**所需软件源。可使用 `zypper lr` 检查软件源状态，并使用 `zypper mr -d` 禁用多余的软件源。
 
+注：USTC 镜像站并未提供 `backports` 源。
+
 ### openSUSE Tumbleweed 使用方法
 
 禁用官方软件源
@@ -79,3 +81,22 @@ Tumbleweed 注：Tumbleweed 安装后默认会启用 oss, non-oss, update, 3 个
 update 源仅用于推送临时安全补丁，如当日快照已发布但仍有临时安全补丁时，会首先推送至 update 源，并在次日合入下一版快照。
 由于 update 源存在较强的时效性，上游镜像并未同步 update 源，镜像源亦无法提供该源的镜像。
 禁用 update 源并不会使系统缺失任何功能或安全更新，仅会导致极少数更新晚些推送，如有需求可以重新启用官方 update 源。
+
+## 图形界面下配置方法
+
+以 openSUSE Leap 15.3 为例：
+
+1. 打开 YaST；
+2. 点击 Software 分组中的 Software Repositories；
+3. 在打开的窗口上方的列表中点击 Main Repository，点击 Edit；
+4. 将 download.opensuse.org 替换为
+
+    <CodeBlock>
+    ```
+    {{mirror}}
+    ```
+    </CodeBlock>
+
+    点 OK；
+5. 再用同样的方法编辑 Non-OSS Repository, Main Update Repository, Update Repository (Non-Oss) 和 Update repository with updates from SUSE Linux Enterprise 15。
+

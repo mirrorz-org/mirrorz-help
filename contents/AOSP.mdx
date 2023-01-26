@@ -136,17 +136,61 @@ git config --global url.{{http_protocol}}{{mirror}}/.insteadof https://android.g
 
 </CodeBlock>
 
-### FAQ
+### 说明
+
+#### 通用
 
 1. 镜像的是什么？
 	- AOSP 的 git 仓库
-2. 为何不能通过浏览器访问？
-	- 暂时没有 gitweb, 而且反正是 git bare 仓库，没有可以直接看到的内容。
-	- 建议访问 https://cs.android.com 或 https://github.com/aosp-mirror 在线搜索及浏览 AOSP 源码。
-3. 出现 `curl: (22) The requested URL returned error: 404 Not Found
+2. Android 版本列表: https://source.android.com/source/build-numbers.html#source-code-tags-and-builds
+3. 镜像像站 tags 列表（部分镜像站可浏览）
+
+   <CodeBlock>
+   ```
+   {{http_protocol}}{{mirror}}/platform/manifest.git/refs/tags/
+   ```
+   </CodeBlock>
+4. 出现 `curl: (22) The requested URL returned error: 404 Not Found
 Server does not provide clone.bundle; ignoring.` 怎么办？
 	- 无视即可。
 	- 参见：https://github.com/tuna/issues/issues/936
+
+#### TUNA/BFSU
+
+1. 为何不能通过浏览器访问？
+	- 暂时没有 gitweb, 而且反正是 git bare 仓库，没有可以直接看到的内容。
+	- 建议访问 https://cs.android.com 或 https://github.com/aosp-mirror 在线搜索及浏览 AOSP 源码。
+
+#### USTC
+
+1. USTC 推荐使用 `git://` 协议，只有在无法使用 `git://` 推荐使用 `http://`。
+2. 由于硬盘 I/O 资源有限，Git 服务器每 IP 限制 5 个并发连接。
+   `repo sync` 命令默认使用 4 个并发连接，请勿使用 `-j`
+   参数增加并发连接数。
+
+### Brillo
+
+Brillo 项目的代码托管在 AOSP 项目中，镜像站镜像的是整个 AOSP
+项目，所以自然也能从本镜像下载 Brillo 项目代码。
+
+参考 Brillo 官方文档
+https://developers.google.com/brillo/docs/reference/downloads
+进行下载，将其中源码 manifest 地址 改为
+
+<CodeBlock>
+```
+{{http_protocol}}{{mirror}}/brillo/manifest
+```
+</CodeBlock>
+
+
+即 `repo init` 时，使用
+
+<CodeBlock>
+```
+repo init -u {{http_protocol}}{{mirror}}/brillo/manifest -b master
+```
+</CodeBlock>
 
 ## LineageOS 中对于 AOSP 的替换
 

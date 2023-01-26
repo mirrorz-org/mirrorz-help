@@ -467,6 +467,12 @@
     "file": "lxc-images.mdx",
     "cname": "lxc-images"
   },
+  "/mageia/": {
+    "title": "Mageia 软件仓库",
+    "fullTitle": "Mageia 软件仓库镜像使用帮助",
+    "file": "mageia.mdx",
+    "cname": "mageia"
+  },
   "/mariadb/": {
     "title": "MariaDB",
     "fullTitle": "MariaDB 镜像使用帮助",

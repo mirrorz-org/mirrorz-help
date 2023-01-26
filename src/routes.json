@@ -168,10 +168,16 @@
     "cname": "debian-security"
   },
   "/debian-cd/": {
-    "title": "Debian CD 软件仓库",
-    "fullTitle": "Debian CD 软件仓库镜像使用帮助",
+    "title": "Debian CD",
+    "fullTitle": "Debian CD 镜像使用帮助",
     "file": "debian-cd.mdx",
     "cname": "debian-cd"
+  },
+  "/debian-cdimage/": {
+    "title": "Debian CDImage",
+    "fullTitle": "Debian CDImage 镜像使用帮助",
+    "file": "debian-cdimage.mdx",
+    "cname": "debian-cdimage"
   },
   "/debiancn/": {
     "title": "Debian CN 软件仓库",

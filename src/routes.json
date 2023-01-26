@@ -473,6 +473,12 @@
     "file": "mageia.mdx",
     "cname": "mageia"
   },
+  "/manjaro/": {
+    "title": "Manjaro 软件仓库",
+    "fullTitle": "Manjaro 软件仓库镜像使用帮助",
+    "file": "manjaro.mdx",
+    "cname": "manjaro"
+  },
   "/mariadb/": {
     "title": "MariaDB",
     "fullTitle": "MariaDB 镜像使用帮助",

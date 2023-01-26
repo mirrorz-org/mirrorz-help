@@ -167,6 +167,12 @@
     "file": "debian-security.mdx",
     "cname": "debian-security"
   },
+  "/debian-cd/": {
+    "title": "Debian CD 软件仓库",
+    "fullTitle": "Debian CD 软件仓库镜像使用帮助",
+    "file": "debian-cd.mdx",
+    "cname": "debian-cd"
+  },
   "/debiancn/": {
     "title": "Debian CN 软件仓库",
     "fullTitle": "Debian CN 软件仓库镜像使用帮助",

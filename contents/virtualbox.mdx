@@ -107,11 +107,13 @@ deb {{http_protocol}}{{mirror}}/apt/ {{release_name}} contrib
 
 安装 VirtualBox:
 
+<CodeBlock>
 ```bash
 {{sudo}}apt-get update
 {{sudo}}apt-get install virtualbox
 # 此时会列出具体可用版本，选择所需版本安装
 ```
+</CodeBlock>
 
 ### RHEL/CentOS 用户
 
@@ -135,8 +137,10 @@ enabled=1
 
 刷新缓存并安装 `virtualbox` 即可。
 
+<CodeBlock>
 ```bash
 {{sudo}}yum makecache
 {{sudo}}yum search VirtualBox
 # 此时会列出具体可用版本，选择所需版本安装即可
 ```
+</CodeBlock>

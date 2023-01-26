@@ -1,0 +1,18 @@
+---
+title: PackMan 软件仓库镜像使用帮助
+cname: 'packman'
+---
+
+openSUSE 非官方社区软件源，主要收录允许自由分发但存在专利纠纷的软件，
+例如多媒体解码器等。
+
+### 使用说明
+
+以 openSUSE Leap 为例添加软件源：
+
+<CodeBlock>
+```bash
+{{sudo}}zypper ar -fcg {{http_protocol}}{{mirror}}/suse/openSUSE_Leap_\$releasever/ mirror-packman
+```
+</CodeBlock>
+

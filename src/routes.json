@@ -563,6 +563,12 @@
     "file": "packagist.mdx",
     "cname": "packagist"
   },
+  "/packman/": {
+    "title": "PackMan 软件仓库",
+    "fullTitle": "PackMan 软件仓库镜像使用帮助",
+    "file": "packman.mdx",
+    "cname": "packman"
+  },
   "/pkgsrc/": {
     "title": "pkgsrc 软件仓库",
     "fullTitle": "pkgsrc 软件仓库镜像使用帮助",

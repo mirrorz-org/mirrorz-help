@@ -1,7 +1,6 @@
 ---
 title: Arch Linux 软件仓库镜像使用帮助
 cname: 'archlinux'
-disable_https_select: true
 ---
 
 Pacman 以 `mirrorlist` 中 Server 的顺序作为优先级，因此添加镜像需要在文件的最顶端添加
@@ -13,7 +12,7 @@ Pacman 以 `mirrorlist` 中 Server 的顺序作为优先级，因此添加镜像
 <CodeBlock>
 
 ```ini
-Server = https://{{mirror}}/$repo/os/$arch
+Server = {{http_protocol}}{{mirror}}/$repo/os/$arch
 ```
 
 </CodeBlock>

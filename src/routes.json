@@ -167,6 +167,12 @@
     "file": "debian-security.mdx",
     "cname": "debian-security"
   },
+  "/debiancn/": {
+    "title": "Debian CN 软件仓库",
+    "fullTitle": "Debian CN 软件仓库镜像使用帮助",
+    "file": "debiancn.mdx",
+    "cname": "debiancn"
+  },
   "/docker-ce/": {
     "title": "Docker CE 软件仓库",
     "fullTitle": "Docker CE 软件仓库镜像使用帮助",

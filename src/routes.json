@@ -257,6 +257,24 @@
     "file": "flutter-sdk.git.mdx",
     "cname": "flutter-sdk.git"
   },
+  "/FreeBSD/": {
+    "title": "FreeBSD",
+    "fullTitle": "FreeBSD 镜像使用帮助",
+    "file": "FreeBSD.mdx",
+    "cname": "FreeBSD"
+  },
+  "/FreeBSD-pkg/": {
+    "title": "FreeBSD pkg",
+    "fullTitle": "FreeBSD pkg 镜像使用帮助",
+    "file": "FreeBSD-pkg.mdx",
+    "cname": "FreeBSD-pkg"
+  },
+  "/FreeBSD-ports/": {
+    "title": "FreeBSD ports",
+    "fullTitle": "FreeBSD ports 镜像使用帮助",
+    "file": "FreeBSD-ports.mdx",
+    "cname": "FreeBSD-ports"
+  },
   "/gcc.git/": {
     "title": "GCC Git",
     "fullTitle": "GCC Git 镜像使用帮助",

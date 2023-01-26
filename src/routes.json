@@ -419,6 +419,12 @@
     "file": "lineage-rom.mdx",
     "cname": "lineage-rom"
   },
+  "/linuxmint/": {
+    "title": "Linux Mint 软件仓库",
+    "fullTitle": "Linux Mint 软件仓库镜像使用帮助",
+    "file": "linuxmint.mdx",
+    "cname": "linuxmint"
+  },
   "/linux.git/": {
     "title": "Linux Git",
     "fullTitle": "Linux Git 镜像使用帮助",

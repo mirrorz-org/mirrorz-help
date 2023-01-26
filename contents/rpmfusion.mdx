@@ -5,7 +5,9 @@ cname: 'rpmfusion'
 
 ### 安装基础包
 
-首先安装提供基础配置文件和 GPG 密钥的 `rpmfusion-*.rpm`。Fedora 用户可使用如下命令：
+首先安装提供基础配置文件和 GPG 密钥的 `rpmfusion-*.rpm`。
+
+#### Fedora 用户
 
 <CodeBlock>
 ```shell
@@ -19,6 +21,28 @@ cname: 'rpmfusion'
 
 ```
 {{sudo}}yum install --nogpgcheck {{http_protocol}}{{mirror}}/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm {{http_protocol}}{{mirror}}/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+```
+
+</CodeBlock>
+
+#### CentOS/RHEL 用户
+
+<CodeBlock
+  menus={[
+    {
+      title: '发行版',
+      items: [
+        ['CentOS/RHEL 7', { version: '7' }],
+        ['CentOS/RHEL 6', { version: '6' }],
+        ['CentOS/RHEL 8', { version: '8' }],
+        ['CentOS/RHEL 9', { version: '9' }],
+      ]
+    },
+  ]}
+>
+
+```
+{{sudo}}yum localinstall --nogpgcheck {{http_protocol}}{{mirror}}/free/el/rpmfusion-free-release-{{version}}.noarch.rpm {{http_protocol}}{{mirror}}/nonfree/el/rpmfusion-nonfree-release-{{version}}.noarch.rpm
 ```
 
 </CodeBlock>

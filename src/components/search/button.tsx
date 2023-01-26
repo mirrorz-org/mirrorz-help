@@ -1,18 +1,19 @@
 import style9 from 'style9';
 import IconSearch from '../icons/search';
-import { memo, useCallback } from 'react';
-import { useSetSearchOpen } from '../../contexts/search';
+import { memo, startTransition, useCallback, useEffect, useState } from 'react';
+import { useSetSearchOpen } from '@/contexts/search';
+import { getOS } from '@/hooks/use-os';
 
 const styles = style9.create({
   kbd: {
     height: '20px',
-    width: '20px',
+    width: 'auto',
     border: '1px solid transparent',
     marginRight: '4px',
     backgroundColor: 'var(--bg-wash)',
     color: 'var(--text-shallow)',
     verticalAlign: 'middle',
-    padding: 0,
+    padding: '4px',
     display: 'inline-flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -86,10 +87,7 @@ const styles = style9.create({
 
 function Kbd(props: JSX.IntrinsicElements['kbd']) {
   return (
-    <kbd
-      className={styles('kbd')}
-      {...props}
-    />
+    <kbd className={styles('kbd')} {...props} />
   );
 }
 
@@ -111,6 +109,28 @@ export const SearchButtonOnMobile = memo(() => {
   );
 });
 
+const SearchButtonSuffix = () => {
+  const [icon, setIcon] = useState<string>('\u2318');
+
+  useEffect(() => {
+    startTransition(() => {
+      const os = getOS();
+      if (os === 'macos' || os === 'undetermined') {
+        setIcon('\u2318');
+      } else {
+        setIcon('Ctrl');
+      }
+    });
+  }, []);
+
+  return (
+    <span className={styles('suffix')}>
+      <Kbd>{icon}</Kbd>
+      <Kbd>K</Kbd>
+    </span>
+  );
+};
+
 export const SearchButtonInSideNav = memo(() => {
   const setSearchOpen = useSetSearchOpen();
   const handleOpen = useCallback(() => {
@@ -124,10 +144,7 @@ export const SearchButtonInSideNav = memo(() => {
     >
       <IconSearch className={styles('icon_in_button')} />
       Search
-      <span className={styles('suffix')}>
-        <Kbd>⌘</Kbd>
-        <Kbd>K</Kbd>
-      </span>
+      <SearchButtonSuffix />
     </button>
   );
 });

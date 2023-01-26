@@ -6,6 +6,7 @@ import IconSun from '../icons/sun';
 import IconMoon from '../icons/moon';
 import IconDisplay from '../icons/display';
 import IconChevronUpDown from '../icons/chevron-up-down';
+import clsx from 'clsx';
 
 const styles = style9.create({
   container: {
@@ -57,6 +58,9 @@ const styles = style9.create({
     border: '1px solid var(--border)',
     backgroundColor: 'var(--bg-wash)',
     color: 'var(--text-primary)'
+  },
+  dark_hack: {
+    display: 'none'
   }
 });
 
@@ -81,6 +85,11 @@ function DarkModeSwitch() {
 
   return (
     <div>
+      {/**
+        * Add a hidden element with className being "dark".
+        * This prevents critter from excluding .dark variable from inline css.
+        */}
+      <div className={clsx(styles('dark_hack'), 'dark')} />
       <label htmlFor={id}>
         <div className={styles('container')}>
           <span className={styles('icon_wrapper', 'icon_wrapper_prefix')}>

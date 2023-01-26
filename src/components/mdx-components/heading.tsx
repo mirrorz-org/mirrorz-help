@@ -1,4 +1,4 @@
-import { clsx } from 'clsx';
+import clsx from 'clsx';
 import { memo } from 'react';
 import { typescriptHappyForwardRef } from '@/lib/client/forwardref-with-as';
 import style9 from 'style9';

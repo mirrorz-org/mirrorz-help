@@ -3,7 +3,13 @@ title: Proxmox 软件仓库镜像使用帮助
 cname: 'proxmox'
 ---
 
-新建 `/etc/apt/sources.list.d/pve-no-subscription.list`，内容为：
+### Debian 软件源
+
+参考 [Debian 帮助](/debian/) 修改 `/etc/apt/sources.list`。
+
+### 软件源
+
+新建 `/etc/apt/sources.list.d/pve-no-subscription.list`（如果选择的不是 pve，需要使用另一个文件名），内容为：
 
 <CodeBlock
   enableQuickSetup
@@ -17,17 +23,28 @@ cname: 'proxmox'
         ['Debian 9', { release_name: 'stretch' }],
         ['Debian 8', { release_name: 'jessie' }]
       ]
-    }
+    },
+    {
+      title: '服务',
+      items: [
+        ['Proxmox Virtual Environment (PVE)', { service: 'pve' }],
+        ['Proxmox Backup Server (PBS)', { service: 'pbs' }],
+        ['Proxmox Backup Client (PBS-CLIENT)', { service: 'pbs-client' }],
+        ['Proxmox Mail Gateway (PMG)', { service: 'pmg' }],
+      ]
+    },
   ]}
 >
 
 ```properties
-deb {{http_protocol}}{{mirror}}/debian {{release_name}} pve-no-subscription
+deb {{http_protocol}}{{mirror}}/debian/{{service}} {{release_name}} {{service}}-no-subscription
 ```
 
 </CodeBlock>
 
-ISO 安装文件下载
+注意快速配置中的文件名需要根据需求而修改。
+
+### ISO 安装文件下载
 
 <CodeBlock>
 

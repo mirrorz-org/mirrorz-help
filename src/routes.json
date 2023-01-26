@@ -77,6 +77,12 @@
     "file": "bioconductor.mdx",
     "cname": "bioconductor"
   },
+  "/blackarch/": {
+    "title": "Black Arch 软件仓库",
+    "fullTitle": "Black Arch 软件仓库镜像使用帮助",
+    "file": "blackarch.mdx",
+    "cname": "blackarch"
+  },
   "/centos/": {
     "title": "CentOS 软件仓库",
     "fullTitle": "CentOS 软件仓库镜像使用帮助",
@@ -161,6 +167,30 @@
     "file": "debian-security.mdx",
     "cname": "debian-security"
   },
+  "/debian-cd/": {
+    "title": "Debian CD",
+    "fullTitle": "Debian CD 镜像使用帮助",
+    "file": "debian-cd.mdx",
+    "cname": "debian-cd"
+  },
+  "/debian-cdimage/": {
+    "title": "Debian CDImage",
+    "fullTitle": "Debian CDImage 镜像使用帮助",
+    "file": "debian-cdimage.mdx",
+    "cname": "debian-cdimage"
+  },
+  "/deb-multimedia/": {
+    "title": "Deb Multimedia 软件仓库",
+    "fullTitle": "Deb Multimedia 软件仓库镜像使用帮助",
+    "file": "deb-multimedia.mdx",
+    "cname": "deb-multimedia"
+  },
+  "/debiancn/": {
+    "title": "Debian CN 软件仓库",
+    "fullTitle": "Debian CN 软件仓库镜像使用帮助",
+    "file": "debiancn.mdx",
+    "cname": "debiancn"
+  },
   "/docker-ce/": {
     "title": "Docker CE 软件仓库",
     "fullTitle": "Docker CE 软件仓库镜像使用帮助",
@@ -226,6 +256,24 @@
     "fullTitle": "Flutter SDK 镜像使用帮助",
     "file": "flutter-sdk.git.mdx",
     "cname": "flutter-sdk.git"
+  },
+  "/FreeBSD/": {
+    "title": "FreeBSD",
+    "fullTitle": "FreeBSD 镜像使用帮助",
+    "file": "FreeBSD.mdx",
+    "cname": "FreeBSD"
+  },
+  "/FreeBSD-pkg/": {
+    "title": "FreeBSD pkg",
+    "fullTitle": "FreeBSD pkg 镜像使用帮助",
+    "file": "FreeBSD-pkg.mdx",
+    "cname": "FreeBSD-pkg"
+  },
+  "/FreeBSD-ports/": {
+    "title": "FreeBSD ports",
+    "fullTitle": "FreeBSD ports 镜像使用帮助",
+    "file": "FreeBSD-ports.mdx",
+    "cname": "FreeBSD-ports"
   },
   "/gcc.git/": {
     "title": "GCC Git",
@@ -371,6 +419,12 @@
     "file": "lineage-rom.mdx",
     "cname": "lineage-rom"
   },
+  "/linuxmint/": {
+    "title": "Linux Mint 软件仓库",
+    "fullTitle": "Linux Mint 软件仓库镜像使用帮助",
+    "file": "linuxmint.mdx",
+    "cname": "linuxmint"
+  },
   "/linux.git/": {
     "title": "Linux Git",
     "fullTitle": "Linux Git 镜像使用帮助",
@@ -412,6 +466,18 @@
     "fullTitle": "LXC Images 镜像使用帮助",
     "file": "lxc-images.mdx",
     "cname": "lxc-images"
+  },
+  "/mageia/": {
+    "title": "Mageia 软件仓库",
+    "fullTitle": "Mageia 软件仓库镜像使用帮助",
+    "file": "mageia.mdx",
+    "cname": "mageia"
+  },
+  "/manjaro/": {
+    "title": "Manjaro 软件仓库",
+    "fullTitle": "Manjaro 软件仓库镜像使用帮助",
+    "file": "manjaro.mdx",
+    "cname": "manjaro"
   },
   "/mariadb/": {
     "title": "MariaDB",
@@ -496,6 +562,12 @@
     "fullTitle": "Packagist 软件仓库镜像使用帮助",
     "file": "packagist.mdx",
     "cname": "packagist"
+  },
+  "/packman/": {
+    "title": "PackMan 软件仓库",
+    "fullTitle": "PackMan 软件仓库镜像使用帮助",
+    "file": "packman.mdx",
+    "cname": "packman"
   },
   "/pkgsrc/": {
     "title": "pkgsrc 软件仓库",

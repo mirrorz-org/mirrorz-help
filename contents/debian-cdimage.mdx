@@ -1,0 +1,28 @@
+---
+title: Debian CDImage 镜像使用帮助
+cname: 'debian-cdimage'
+---
+
+这是除了 [Debian CD](/debian-cd/) 之外 Debian 的另一部分补充用官方和准官方安装镜像的副本。
+其内容来自 http://cdimage.debian.org/cdimage/。
+
+部分镜像站并未进行完整的同步，保留了较实用的一部分内容。
+
+## 收录内容
+
+* 每周构建 testing 安装镜像 `weekly-builds`
+* 每周构建 testing LiveCD `weekly-live-builds`
+* 测试版 debian-installer 安装镜像与 LiveCD `*_di_*`
+* 含有非自由固件的准官方安装镜像 `unofficial/non-free`
+* 供 OpenStack 使用的 raw 镜像和 qcow2 镜像 `openstack`
+* 非正式发行架构（debian-ports）的安装镜像 `ports`
+
+## 使用说明
+
+<CodeBlock>
+```
+{{http_protocol}}{{mirror}}
+```
+</CodeBlock>
+
+选择您需要的镜像文件下载使用即可。文件同目录下有文件散列值和数字签名文件，请进行校验以确保文件完整性。

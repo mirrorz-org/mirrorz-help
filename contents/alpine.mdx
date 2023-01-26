@@ -17,6 +17,32 @@ sed -i 's#https\?://dl-cdn.alpinelinux.org#{{http_protocol}}{{mirror}}#g' /etc/a
 
 </CodeBlock>
 
+也可以直接编辑 `/etc/apk/repositories` 文件。以下是 v3.5 版本的参考配置：
+
+
+<CodeBlock>
+
+```
+{{http_protocol}}{{mirror}}/v3.5/main
+{{http_protocol}}{{mirror}}/v3.5/community
+```
+
+</CodeBlock>
+
+也可以使用 `latest-stable` 指向最新的稳定版本：
+
+
+<CodeBlock>
+
+```
+{{http_protocol}}{{mirror}}/latest-stable/main
+{{http_protocol}}{{mirror}}/latest-stable/community
+```
+
+</CodeBlock>
+
+更改完 `/etc/apk/repositories` 文件后请运行 `apk update` 更新索引以生效。
+
 ## postmarketOS
 
 本节供 [postmarketOS 帮助](/postmarketOS/)使用。

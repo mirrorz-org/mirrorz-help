@@ -1,0 +1,26 @@
+---
+title: Black Arch 软件仓库镜像使用帮助
+cname: 'blackarch'
+---
+
+BlackArch 是一款基于 ArchLinux 的为渗透测试及安全研究人员开发的发行版，相当于 Arch 版的 BackTrack/Kali。
+
+仓库地址：https://blackarch.org/blackarch/
+
+使用说明
+========
+
+在 `/etc/pacman.conf` 文件末尾添加两行：
+
+<CodeBlock>
+
+```ini
+[blackarch]
+Server = {{http_protocol}}{{mirror}}/$repo/os/$arch
+```
+
+</CodeBlock>
+
+然后请安装 ``blackarch-keyring`` 包以导入 GPG key。
+
+注：Black Arch 软件源仅包含其打包的工具等软件。如果需要更换 Arch Linux 基础系统的软件源，请查看 [Arch Linux 帮助](/archlinux/)。

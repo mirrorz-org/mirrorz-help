@@ -1,0 +1,58 @@
+---
+title: Deb Multimedia 软件仓库镜像使用帮助
+cname: 'deb-multimedia'
+---
+
+Debian 第三方多媒体软件源
+
+该项目以前的名字为 Debian Multimedia，现改名为 Deb Multimedia。注意这不是 Debian 官方项目，
+是为 deb-multimedia.org 的镜像， 与 Debian 官方的 Multimedia 小组的区别见
+https://wiki.debian.org/DebianMultimedia/FAQ
+
+在 `/etc/apt/sources.list` 中加入
+
+<CodeBlock
+  menus={[
+    {
+      title: 'Debian 版本',
+      items: [
+        ['Debian 11 (bullseye)', { release_name: 'bullseye', has_backports: '' }],
+        ['Debian 12 (bookworm)', { release_name: 'bookworm', has_backports: '# ' }],
+        ['sid', { release_name: 'sid', has_backports: '# ' }],
+        ['testing', { release_name: 'testing', has_backports: '# ' }],
+        ['Debian 10 (buster)', { release_name: 'buster', has_backports: '' }],
+        ['Debian 9 (stretch)', { release_name: 'stretch', has_backports: '' }],
+        ['Debian 8 (jessie)', { release_name: 'jessie', has_backports: '' }]
+      ]
+    },
+    {
+      title: '启用源码镜像',
+      items: [
+        ['否', { enable_source: '# ' }],
+        ['是', { enable_source: '' }],
+      ]
+    },
+  ]}
+>
+
+```properties
+deb {{http_protocol}}{{mirror}}/ {{release_name}} main non-free
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}} main non-free
+{{has_backports}}deb {{http_protocol}}{{mirror}}/ {{release_name}}-backports main
+{{has_backports}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main
+```
+
+</CodeBlock>
+
+更改完 `sources.list` 文件后请导入 deb-multimedia-keyring
+
+<CodeBlock>
+```bash
+wget {{http_protocol}}{{mirror}}/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb
+{{sudo}}dpkg -i deb-multimedia-keyring_2016.8.1_all.deb
+{{sudo}}apt-get update
+```
+</CodeBlock>
+
+然后更新索引以生效。
+

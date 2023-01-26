@@ -179,6 +179,12 @@
     "file": "debian-cdimage.mdx",
     "cname": "debian-cdimage"
   },
+  "/deb-multimedia/": {
+    "title": "Deb Multimedia 软件仓库",
+    "fullTitle": "Deb Multimedia 软件仓库镜像使用帮助",
+    "file": "deb-multimedia.mdx",
+    "cname": "deb-multimedia"
+  },
   "/debiancn/": {
     "title": "Debian CN 软件仓库",
     "fullTitle": "Debian CN 软件仓库镜像使用帮助",

@@ -168,7 +168,7 @@ export default function HomePage() {
             <Link href="/opensuse/" className={styles('card')}>
               <IconOpenSUSE className={styles('brand_icon')} />
               <h3 className={styles('card_title')}>
-                OpenSUSE 软件仓库镜像使用帮助
+                openSUSE 软件仓库镜像使用帮助
               </h3>
             </Link>
             <Link href="/centos/" className={styles('card')}>

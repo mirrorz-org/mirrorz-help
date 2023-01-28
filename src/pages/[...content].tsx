@@ -8,7 +8,7 @@ import SeoHead from '../components/seo/head';
 import JsonLD from '../components/seo/json-ld';
 import DocumentationWrapper from '../components/documentation-wrapper';
 
-export default function ContentPage({ content, toc, meta, cname }: ContentProps) {
+export default function ContentPage({ content, toc, meta, cname, lastupdate }: ContentProps) {
   const parsedContent = useMemo(
     () => JSON.parse(content, reviveNodeOnClient),
     [content]
@@ -25,7 +25,7 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
         //   height: 630
         // }}
       />
-      <Layout meta={meta as any} toc={toc} cname={cname} isContent>
+      <Layout meta={meta as any} toc={toc} cname={cname} isContent lastupdate={lastupdate}>
         <DocumentationWrapper>
           {parsedContent}
         </DocumentationWrapper>

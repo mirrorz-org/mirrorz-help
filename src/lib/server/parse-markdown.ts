@@ -2,6 +2,7 @@ import path from 'path';
 import fsPromises from 'fs/promises';
 import { default as matter } from 'gray-matter';
 import * as metroCache from 'metro-cache';
+import { fileExists } from 'next/dist/lib/file-exists';
 
 import routesJson from '@/routes.json';
 
@@ -23,6 +24,7 @@ import {
   remarkExtractCodeFromEnhancedCodeBlock,
   remarkProcessNormalCodeBlock
 } from './remark-extract-code-from-codeblock';
+import { getLastUpdatedTimestamp } from './get-last-updated-timestamp';
 
 const { FileStore, stableHash } = metroCache as any;
 
@@ -39,6 +41,7 @@ export interface ContentProps {
   toc: ToC[];
   meta: MetaFromFrontMatters;
   cname: string;
+  lastupdate: number;
 }
 
 const fromHrefToSegments = (href: string) => {
@@ -59,7 +62,7 @@ const asyncCache = async <T>(key: string, fn: () => Promise<T>): Promise<T> => {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 4;
+const DISK_CACHE_BREAKER = 5;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -69,26 +72,33 @@ const store = new FileStore({
 export const getContentBySegments = async (segments: string[]): Promise<{ props: ContentProps } | { notFound: true }> => {
   const id = segments.length === 0 ? 'index' : (segments.join('/') || 'index');
   let raw;
-  try {
-    raw = await fsPromises.readFile(path.resolve(contentsPath, `${id}.mdx`), { encoding: 'utf-8' });
-  } catch (e1: any) {
-    if ('code' in e1 && e1.code === 'ENOENT') {
-      try {
-        raw = await fsPromises.readFile(path.resolve(contentsPath, `${id}/index.mdx`), { encoding: 'utf-8' });
-      } catch (e2: any) {
-        if ('code' in e2 && e2.code === 'ENOENT') {
-          Log.warn('[CMS]', id, 'not found');
-          return {
-            notFound: true
-          };
-        }
-        throw e2;
-      }
+  let file = path.resolve(contentsPath, `${id}.mdx`);
+  if (!(await fileExists(file, 'file'))) {
+    file = path.resolve(contentsPath, `${id}/index.mdx`);
+    if (!(await fileExists(file, 'file'))) {
+      Log.warn('[CMS]', id, 'not found');
+      return {
+        notFound: true
+      };
     }
-    throw e1;
   }
 
-  const lockfile = await asyncCache('package-lock.json', () => fsPromises.readFile(path.join(process.cwd(), 'package-lock.json'), { encoding: 'utf-8' }));
+  try {
+    raw = await fsPromises.readFile(file, { encoding: 'utf-8' });
+  } catch (e: any) {
+    if ('code' in e && e.code === 'ENOENT') {
+      Log.warn('[CMS]', id, 'not found');
+      return {
+        notFound: true
+      };
+    }
+    throw e;
+  }
+
+  const [lockfile, lastupdate] = await Promise.all([
+    asyncCache('package-lock.json', () => fsPromises.readFile(path.join(process.cwd(), 'package-lock.json'), { encoding: 'utf-8' })),
+    getLastUpdatedTimestamp(file)
+  ]);
   const mdxComponentNames = Object.keys(MDXComponents);
 
   const hash = Buffer.from(
@@ -103,14 +113,21 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
     })
   );
 
-  const cached = await store.get(hash);
+  const cached: { props: ContentProps } | null = await store.get(hash);
   if (cached) {
     if (process.env.NODE_ENV !== 'production') {
       Log.info(
         `[CMS] Reading compiled MDX for /${id} from ./node_modules/.cache/`
       );
     }
-    return cached;
+
+    const { props } = cached;
+    return {
+      props: {
+        ...props,
+        lastupdate
+      }
+    };
   }
   Log.info(
     `[CMS] Cache miss for MDX for /${id} from ./node_modules/.cache/`
@@ -154,7 +171,8 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
       toc,
       content: JSON.stringify(reactTree, stringifyNodeOnServer),
       meta: meta as MetaFromFrontMatters,
-      cname: meta.cname
+      cname: meta.cname,
+      lastupdate
     }
   };
   // Cache it on the disk.

@@ -161,7 +161,7 @@ function Footer() {
           <FooterLink href="https://mirrorz.org/">
             MirrorZ Homepage
           </FooterLink>
-          <FooterLink href="https://github.com/mirrorz/">
+          <FooterLink href="https://github.com/mirrorz-org">
             GitHub
           </FooterLink>
         </div>

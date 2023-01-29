@@ -653,6 +653,12 @@
     "file": "riscv-toolchains.mdx",
     "cname": "riscv-toolchains"
   },
+  "/rocky/": {
+    "title": "Rocky Linux 软件仓库",
+    "fullTitle": "Rocky Linux 软件仓库镜像使用帮助",
+    "file": "rocky.mdx",
+    "cname": "rocky"
+  },
   "/ros/": {
     "title": "ROS 软件仓库",
     "fullTitle": "ROS 软件仓库镜像使用帮助",

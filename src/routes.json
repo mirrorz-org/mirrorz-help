@@ -635,6 +635,12 @@
     "file": "raspberrypi.mdx",
     "cname": "raspberrypi"
   },
+  "/raspberry-pi-os-images/": {
+    "title": "Raspberrypi OS Images",
+    "fullTitle": "Raspberrypi OS Images 镜像使用帮助",
+    "file": "raspberry-pi-os-images.mdx",
+    "cname": "raspberry-pi-os-images"
+  },
   "/repo-ck/": {
     "title": "Repo-ck 软件仓库",
     "fullTitle": "Repo-ck 软件仓库镜像使用帮助",

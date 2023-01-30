@@ -2,8 +2,6 @@ import style9 from 'style9';
 
 import { useRouteMeta } from '@/hooks/use-route-meta';
 import ExternalLink from '../external-link';
-import { useMemo, useState } from 'react';
-import useLayoutEffect from '@/hooks/use-isomorphic-effect';
 
 const styles = style9.create({
   main: {
@@ -18,7 +16,7 @@ const styles = style9.create({
     marginBottom: '24px'
   },
   p: {
-    marginBottom: '16px',
+    marginBottom: '20px',
     ':last-of-type': {
       marginBottom: 0
     }
@@ -37,38 +35,12 @@ const styles = style9.create({
   }
 });
 
-const LastUpdated = ({ time }: { time: number | Date }) => {
-  const date = useMemo(() => (typeof time === 'number' ? new Date(time) : time), [time]);
-  const isoString = useMemo(() => date.toISOString(), [date]);
-  const [timeString, setTimeString] = useState(isoString);
-
-  useLayoutEffect(() => {
-    setTimeString(date.toLocaleString('zh-CN'));
-  }, [date]);
-
-  return (
-    <time dateTime={isoString}>{timeString}</time>
-  );
-};
-
-interface MetadataCardProps {
-  lastupdate?: number | undefined
-}
-
-export default function MetadataCard({ lastupdate }: MetadataCardProps) {
+export default function MetadataCard() {
   const meta = useRouteMeta();
 
   if (!meta) return null;
   return (
     <div className={styles('main')}>
-      {/** TODO: only enable in production when we migrate to GitHub Actions (full clone required) */}
-      {process.env.NODE_ENV !== 'production' && lastupdate && (
-        <p className={styles('p')}>
-          <span className={styles('bold')}>本页面最近更新于</span>
-          {' '}
-          <LastUpdated time={lastupdate} />
-        </p>
-      )}
       <p className={styles('p')}>
         <span className={styles('bold')}>这个页面的内容有问题？</span>
         <ExternalLink href="#" className={styles('link')}>

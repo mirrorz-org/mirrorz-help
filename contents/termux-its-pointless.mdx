@@ -1,0 +1,27 @@
+---
+title: Termux Its Pointless 软件仓库镜像使用帮助
+cname: 'termux-its-pointless'
+---
+
+Termux 第三方软件源，包含 gcc、R 语言和许多游戏
+
+### 使用说明
+
+添加 apt 存储库
+
+```bash
+wget -qO- https://its-pointless.github.io/setup-pointless-repo.sh | bash
+```
+
+使用镜像
+
+<CodeBlock>
+```bash
+echo "deb {{http_protocol}}{{mirror}}/24 termux extras" > $PREFIX/etc/apt/sources.list.d/pointless.list
+```
+</CodeBlock>
+
+### 相关链接
+
+https://github.com/its-pointless/gcc_termux
+

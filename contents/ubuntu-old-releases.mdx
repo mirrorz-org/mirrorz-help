@@ -1,0 +1,109 @@
+---
+title: Ubuntu 旧版本软件仓库镜像使用帮助
+cname: 'ubuntu-old-releases'
+---
+
+Ubuntu 旧版本的软件源、镜像
+
+该仓库包含了所有 Ubuntu 以前发布过的软件仓库、镜像 ISO，但不包含 Ubuntu 衍生版的 ISO。
+
+### 软件源
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list"
+  menus={[
+    {
+      title: 'Ubuntu 版本',
+      items: [
+        ['21.10', { release_name: 'impish' }],
+        ['21.04', { release_name: 'hirsute' }],
+        ['20.10', { release_name: 'groovy' }],
+        ['19.10', { release_name: 'eoan' }],
+        ['19.04', { release_name: 'disco' }],
+        ['18.10', { release_name: 'cosmic' }],
+        ['17.10', { release_name: 'artful' }],
+        ['17.04', { release_name: 'zesty' }],
+        ['16.10', { release_name: 'yakkety' }],
+        ['15.10', { release_name: 'wily' }],
+        ['15.04', { release_name: 'vivid' }],
+        ['14.10', { release_name: 'utopic' }],
+        ['13.10', { release_name: 'saucy' }],
+        ['13.04', { release_name: 'raring' }],
+        ['12.10', { release_name: 'quantal' }],
+        ['12.04 LTS', { release_name: 'precise' }],
+        ['11.10', { release_name: 'oneiric' }],
+        ['11.04', { release_name: 'natty' }],
+        ['10.10', { release_name: 'maverick' }],
+        ['10.04 LTS', { release_name: 'lucid' }],
+        ['9.10', { release_name: 'karmic' }],
+        ['9.04', { release_name: 'jaunty' }],
+        ['8.10', { release_name: 'intrepid' }],
+        ['8.04 LTS', { release_name: 'hardy' }],
+        ['7.10', { release_name: 'gutsy' }],
+        ['7.04', { release_name: 'feisty' }],
+        ['6.10', { release_name: 'edgy' }],
+        ['6.06 LTS', { release_name: 'dapper' }],
+        ['5.10', { release_name: 'breezy' }],
+        ['5.04', { release_name: 'hoary' }],
+        ['4.10', { release_name: 'warty' }],
+      ]
+    },
+    {
+      title: '启用 proposed',
+      items: [
+        ['否', { enable_proposed: '# ' }],
+        ['是', { enable_proposed: '' }],
+      ]
+    },
+    {
+      title: '启用源码镜像',
+      items: [
+        ['否', { enable_source: '# ' }],
+        ['是', { enable_source: '' }],
+      ]
+    },
+  ]}
+>
+
+```properties
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}} main restricted universe multiverse
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}} main restricted universe multiverse
+deb {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}}-updates main restricted universe multiverse
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}}-updates main restricted universe multiverse
+deb {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}}-backports main restricted universe multiverse
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}}-backports main restricted universe multiverse
+deb {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}}-security main restricted universe multiverse
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}}-security main restricted universe multiverse
+
+# 预发布软件源，不建议启用
+{{enable_proposed}}deb {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}}-proposed main restricted universe multiverse
+{{enable_proposed}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ubuntu/ {{release_name}}-proposed main restricted universe multiverse
+```
+
+</CodeBlock>
+
+更多版本代号可参考 https://wiki.ubuntu.com/Releases
+
+### 镜像
+
+请前往
+
+<CodeBlock>
+```
+{{http_protocol}}{{mirror}}/releases/
+```
+</CodeBlock>
+
+下载。
+
+非 AMD64(x86_64), Intel x86 架构的镜像请前往
+
+<CodeBlock>
+```
+{{http_protocol}}{{mirror}}/releases/ports/releases/
+```
+</CodeBlock>
+
+下载。

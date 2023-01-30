@@ -113,6 +113,12 @@
     "file": "chef.mdx",
     "cname": "chef"
   },
+  "/clojars/": {
+    "title": "Clojars 软件仓库",
+    "fullTitle": "Clojars 软件仓库镜像使用帮助",
+    "file": "clojars.mdx",
+    "cname": "clojars"
+  },
   "/CocoaPods/": {
     "title": "CocoaPods 软件仓库",
     "fullTitle": "CocoaPods 软件仓库镜像使用帮助",
@@ -304,6 +310,12 @@
     "fullTitle": "Gentoo Portage Prefix macOS 软件仓库使用帮助",
     "file": "gentoo-portage-prefix.mdx",
     "cname": "gentoo-portage-prefix"
+  },
+  "/ghcup/": {
+    "title": "GHCup",
+    "fullTitle": "GHCup 使用帮助",
+    "file": "ghcup.mdx",
+    "cname": "ghcup"
   },
   "/github-raw/": {
     "title": "GitHub RAW",
@@ -635,6 +647,12 @@
     "file": "raspberrypi.mdx",
     "cname": "raspberrypi"
   },
+  "/raspberry-pi-os-images/": {
+    "title": "Raspberrypi OS Images",
+    "fullTitle": "Raspberrypi OS Images 镜像使用帮助",
+    "file": "raspberry-pi-os-images.mdx",
+    "cname": "raspberry-pi-os-images"
+  },
   "/repo-ck/": {
     "title": "Repo-ck 软件仓库",
     "fullTitle": "Repo-ck 软件仓库镜像使用帮助",
@@ -646,6 +664,12 @@
     "fullTitle": "RISC-V 工具链镜像使用帮助",
     "file": "riscv-toolchains.mdx",
     "cname": "riscv-toolchains"
+  },
+  "/rocky/": {
+    "title": "Rocky Linux 软件仓库",
+    "fullTitle": "Rocky Linux 软件仓库镜像使用帮助",
+    "file": "rocky.mdx",
+    "cname": "rocky"
   },
   "/ros/": {
     "title": "ROS 软件仓库",
@@ -689,6 +713,12 @@
     "file": "rustup.mdx",
     "cname": "rustup"
   },
+  "/scientificlinux/": {
+    "title": "Scientific Linux 软件仓库",
+    "fullTitle": "Scientific Linux 软件仓库镜像使用帮助",
+    "file": "scientificlinux.mdx",
+    "cname": "scientificlinux"
+  },
   "/stackage/": {
     "title": "Stackage 软件仓库",
     "fullTitle": "Stackage 软件仓库镜像使用帮助",
@@ -707,17 +737,35 @@
     "file": "termux.mdx",
     "cname": "termux"
   },
+  "/termux-its-pointless/": {
+    "title": "Termux Its Pointless 软件仓库",
+    "fullTitle": "Termux Its Pointless 软件仓库镜像使用帮助",
+    "file": "termux-its-pointless.mdx",
+    "cname": "termux-its-pointless"
+  },
   "/tlpretest/": {
     "title": "TeXLive Pretest 软件仓库",
     "fullTitle": "TeXLive Pretest 软件仓库镜像使用帮助",
     "file": "tlpretest.mdx",
     "cname": "tlpretest"
   },
+  "/trisquel/": {
+    "title": "Trisquel 软件仓库",
+    "fullTitle": "Trisquel 软件仓库镜像使用帮助",
+    "file": "trisquel.mdx",
+    "cname": "trisquel"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库",
     "fullTitle": "Ubuntu 软件仓库镜像使用帮助",
     "file": "ubuntu.mdx",
     "cname": "ubuntu"
+  },
+  "/ubuntu-old-releases/": {
+    "title": "Ubuntu 旧版本软件仓库",
+    "fullTitle": "Ubuntu 旧版本软件仓库镜像使用帮助",
+    "file": "ubuntu-old-releases.mdx",
+    "cname": "ubuntu-old-releases"
   },
   "/ubuntu-cloud-images/": {
     "title": "Ubuntu Cloud Images",

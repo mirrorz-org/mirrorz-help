@@ -5,6 +5,8 @@ cname: 'ubuntu'
 
 本镜像仅包含 32/64 位 x86 架构处理器的软件包，在 ARM(arm64, armhf)、PowerPC(ppc64el)、RISC-V(riscv64) 和 S390x 等架构的设备上（对应官方源为 ports.ubuntu.com）请使用 [ubuntu-ports 镜像](/ubuntu-ports/)。
 
+对于 Ubuntu 不再支持的版本，请参考 [Ubuntu 旧版本帮助](/ubuntu-old-releases/)。
+
 Ubuntu 的软件源配置文件是 `/etc/apt/sources.list`。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用选择的软件源镜像。
 
 <CodeBlock
@@ -23,6 +25,13 @@ Ubuntu 的软件源配置文件是 `/etc/apt/sources.list`。将系统自带的�
       ]
     },
     {
+      title: '使用官方安全更新软件源',
+      items: [
+        ['是', { security_mirror: '# ', security_official: '' }],
+        ['否', { security_mirror: '', security_official: '# ' }],
+      ]
+    },
+    {
       title: '启用 proposed',
       items: [
         ['否', { enable_proposed: '# ' }],
@@ -35,7 +44,7 @@ Ubuntu 的软件源配置文件是 `/etc/apt/sources.list`。将系统自带的�
         ['否', { enable_source: '# ' }],
         ['是', { enable_source: '' }],
       ]
-    }
+    },
   ]}
 >
 
@@ -47,9 +56,12 @@ deb {{http_protocol}}{{mirror}}/ {{release_name}}-updates main restricted univer
 {{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-updates main restricted universe multiverse
 deb {{http_protocol}}{{mirror}}/ {{release_name}}-backports main restricted universe multiverse
 {{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main restricted universe multiverse
-deb {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted universe multiverse
-{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted universe multiverse
 
+{{security_mirror}}deb {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted universe multiverse
+{{security_mirror}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted universe multiverse
+
+{{security_official}}deb http://security.ubuntu.com/ubuntu/ {{release_name}}-security main restricted universe multiverse
+{{security_official}}{{enable_source}}deb-src http://security.ubuntu.com/ubuntu/ {{release_name}}-security main restricted universe multiverse
 
 # 预发布软件源，不建议启用
 {{enable_proposed}}deb {{http_protocol}}{{mirror}}/ {{release_name}}-proposed main restricted universe multiverse
@@ -57,3 +69,5 @@ deb {{http_protocol}}{{mirror}}/ {{release_name}}-security main restricted unive
 ```
 
 </CodeBlock>
+
+因镜像站同步有延迟，可能会导致生产环境系统不能及时检查、安装上最新的安全更新，不建议替换 security 源。

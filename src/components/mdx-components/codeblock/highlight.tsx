@@ -20,6 +20,7 @@ import nix from 'highlight.js/lib/languages/nix';
 import xml from 'highlight.js/lib/languages/xml';
 import r from 'highlight.js/lib/languages/r';
 import powershell from 'highlight.js/lib/languages/powershell';
+import clojure from 'highlight.js/lib/languages/clojure';
 
 import clsx from 'clsx';
 
@@ -48,6 +49,8 @@ lowlight.registerLanguage('xml', xml);
 lowlight.registerLanguage('r', r);
 
 lowlight.registerLanguage('powershell', powershell);
+
+lowlight.registerLanguage('clojure', clojure);
 
 const alias: Record<string, string> = {
   mdown: 'markdown',

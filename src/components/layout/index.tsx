@@ -87,11 +87,10 @@ interface LayoutProps {
   toc?: ToC[],
   meta?: MetaFromFrontMatters,
   cname?: string | null,
-  isContent?: boolean,
-  lastupdate?: number
+  isContent?: boolean
 }
 
-export function Layout({ children, meta, toc = [], cname, isContent = false, lastupdate }: React.PropsWithChildren<LayoutProps>) {
+export function Layout({ children, meta, toc = [], cname, isContent = false }: React.PropsWithChildren<LayoutProps>) {
   const { asPath } = useRouter();
   useSearchHotKeys();
 
@@ -154,7 +153,7 @@ export function Layout({ children, meta, toc = [], cname, isContent = false, las
                     <div className={styles('content_inner')}>
                       {children}
 
-                      {isContent && <MetadataCard lastupdate={lastupdate} />}
+                      {isContent && <MetadataCard />}
                     </div>
                   </div>
 

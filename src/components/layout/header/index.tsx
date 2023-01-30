@@ -26,6 +26,7 @@ const styles = style9.create({
     maxWidth: '1280px',
     marginLeft: 0,
     '@media screen and (min-width: 1280px)': {
+      marginLeft: 'auto',
       marginRight: 'auto'
     }
   },

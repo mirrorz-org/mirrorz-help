@@ -1,0 +1,51 @@
+---
+title: Trisquel 软件仓库镜像使用帮助
+cname: 'trisquel'
+---
+
+Trisquel GNU/Linux 软件源。
+
+Trisquel 使用 APT 软件包管理系统，故其软件源使用方法与 Ubuntu 或 Debian 等相似。
+
+编辑 `/etc/apt/sources.list` 文件, 将文件内容替换为
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list"
+  menus={[
+    {
+      title: '版本',
+      items: [
+        ['10.0 LTS (nabia)', { release_name: 'nabia' }],
+        ['11.0 LTS (aramo)', { release_name: 'aramo' }],
+        ['9.0 LTS (etiona)', { release_name: 'etiona' }],
+      ]
+    },
+    {
+      title: '启用源码镜像',
+      items: [
+        ['否', { enable_source: '# ' }],
+        ['是', { enable_source: '' }],
+      ]
+    },
+  ]}
+>
+
+```properties
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb {{http_protocol}}{{mirror}}/ {{release_name}} main
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}} main
+deb {{http_protocol}}{{mirror}}/ {{release_name}}-security main
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-security main
+deb {{http_protocol}}{{mirror}}/ {{release_name}}-updates main
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-updates main
+deb {{http_protocol}}{{mirror}}/ {{release_name}}-backports main
+{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main
+```
+
+</CodeBlock>
+
+### 相关链接
+
+* 官方主页 https://trisquel.info/en
+* 文档 https://trisquel.info/en/wiki/documentation

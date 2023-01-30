@@ -737,6 +737,12 @@
     "file": "tlpretest.mdx",
     "cname": "tlpretest"
   },
+  "/trisquel/": {
+    "title": "Trisquel 软件仓库",
+    "fullTitle": "Trisquel 软件仓库镜像使用帮助",
+    "file": "trisquel.mdx",
+    "cname": "trisquel"
+  },
   "/ubuntu/": {
     "title": "Ubuntu 软件仓库",
     "fullTitle": "Ubuntu 软件仓库镜像使用帮助",

@@ -749,6 +749,12 @@
     "file": "ubuntu.mdx",
     "cname": "ubuntu"
   },
+  "/ubuntu-old-releases/": {
+    "title": "Ubuntu 旧版本软件仓库",
+    "fullTitle": "Ubuntu 旧版本软件仓库镜像使用帮助",
+    "file": "ubuntu-old-releases.mdx",
+    "cname": "ubuntu-old-releases"
+  },
   "/ubuntu-cloud-images/": {
     "title": "Ubuntu Cloud Images",
     "fullTitle": "Ubuntu Cloud Images 镜像使用帮助",

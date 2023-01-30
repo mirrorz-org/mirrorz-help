@@ -311,6 +311,12 @@
     "file": "gentoo-portage-prefix.mdx",
     "cname": "gentoo-portage-prefix"
   },
+  "/ghcup/": {
+    "title": "GHCup",
+    "fullTitle": "GHCup 使用帮助",
+    "file": "ghcup.mdx",
+    "cname": "ghcup"
+  },
   "/github-raw/": {
     "title": "GitHub RAW",
     "fullTitle": "GitHub RAW 使用帮助",

@@ -1,0 +1,46 @@
+---
+title: Scientific Linux 软件仓库镜像使用帮助
+cname: 'scientificlinux'
+---
+
+下载 sl-mirrors.repo 放入 `/etc/yum.repo.d/` 中。
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/yum.repos.d/sl-mirrors.repo"
+  menus={[
+    {
+      title: 'SL 版本',
+      items: [
+        ['SL7', { version: '7' }],
+      ]
+    },
+  ]}
+>
+```ini
+[sl]
+name=Scientific Linux $releasever - $basearch - mirrros
+baseurl={{http_protocol}}{{mirror}}/$releasever/$basearch/os/
+#mirrorlist=http://ftp.scientificlinux.org/linux/scientific/mirrorlist/sl-base-{{version}}.txt
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-sl file:///etc/pki/rpm-gpg/RPM-GPG-KEY-sl{{version}} file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cern
+
+[sl-security]
+name=Scientific Linux $releasever - $basearch - security updates - mirrors
+baseurl={{http_protocol}}{{mirror}}/$releasever/$basearch/updates/security/
+#mirrorlist=http://ftp.scientificlinux.org/linux/scientific/mirrorlist/sl-security-{{version}}.txt
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-sl file:///etc/pki/rpm-gpg/RPM-GPG-KEY-sl{{version}} file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cern
+
+[sl-source]
+name=Scientific Linux $releasever - Source - mirrors
+baseurl={{http_protocol}}{{mirror}}/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-sl file:///etc/pki/rpm-gpg/RPM-GPG-KEY-sl{{version}} file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cern
+```
+</CodeBlock>
+
+运行 `yum makecache` 生成缓存。

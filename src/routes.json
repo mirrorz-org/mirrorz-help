@@ -725,6 +725,12 @@
     "file": "termux.mdx",
     "cname": "termux"
   },
+  "/termux-its-pointless/": {
+    "title": "Termux Its Pointless 软件仓库",
+    "fullTitle": "Termux Its Pointless 软件仓库镜像使用帮助",
+    "file": "termux-its-pointless.mdx",
+    "cname": "termux-its-pointless"
+  },
   "/tlpretest/": {
     "title": "TeXLive Pretest 软件仓库",
     "fullTitle": "TeXLive Pretest 软件仓库镜像使用帮助",

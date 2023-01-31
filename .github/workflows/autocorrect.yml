@@ -1,6 +1,8 @@
 name: AutoCorrect
 
-on: [pull_request_target]
+on:
+  pull_request:
+    branches: [master]
 
 permissions:
   pull-requests: read
@@ -12,8 +14,6 @@ jobs:
     steps:
     - name: Check source code
       uses: actions/checkout@v3
-      with:
-        ref: ${{ github.head_ref }}
 
     - name: AutoCorrect check
       run: |

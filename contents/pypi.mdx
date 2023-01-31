@@ -1,6 +1,7 @@
 ---
 title: PyPI 软件仓库镜像使用帮助
 cname: 'pypi'
+disable_https_select: true
 ---
 
 PyPI 镜像在每次同步成功后间隔 5 分钟同步一次。
@@ -12,12 +13,13 @@ PyPI 镜像在每次同步成功后间隔 5 分钟同步一次。
 <CodeBlock>
 
 ```
-pip install -i {{http_protocol}}{{mirror}}/web/simple some-package
+pip install -i https://{{mirror}}/web/simple some-package
 ```
 
 </CodeBlock>
 
-注意，`simple` 不能少，是 `https` 而不是 `http`
+注意，`simple` 不能少。
+pip 要求使用 `https` ，因此需要 `https` 而不是 `http`
 
 #### 设为默认
 
@@ -27,7 +29,7 @@ pip install -i {{http_protocol}}{{mirror}}/web/simple some-package
 
 ```
 python -m pip install --upgrade pip
-pip config set global.index-url {{http_protocol}}{{mirror}}/web/simple
+pip config set global.index-url https://{{mirror}}/web/simple
 ```
 
 </CodeBlock>
@@ -37,7 +39,7 @@ pip config set global.index-url {{http_protocol}}{{mirror}}/web/simple
 <CodeBlock>
 
 ```
-python -m pip install -i {{http_protocol}}{{mirror}}/web/simple --upgrade pip
+python -m pip install -i https://{{mirror}}/web/simple --upgrade pip
 ```
 
 </CodeBlock>
@@ -57,7 +59,7 @@ pip config set global.extra-index-url "<url1> <url2>..."
 <CodeBlock>
 
 ```
-pip config set global.extra-index-url "{{http_protocol}}{{mirror}}/web/simple"
+pip config set global.extra-index-url "https://{{mirror}}/web/simple"
 ```
 
 </CodeBlock>
@@ -69,7 +71,7 @@ pip config set global.extra-index-url "{{http_protocol}}{{mirror}}/web/simple"
 <CodeBlock>
 
 ```
-pdm config pypi.url {{http_protocol}}{{mirror}}/web/simple
+pdm config pypi.url https://{{mirror}}/web/simple
 ```
 
 </CodeBlock>
@@ -81,7 +83,7 @@ pdm config pypi.url {{http_protocol}}{{mirror}}/web/simple
 <CodeBlock>
 
 ```
-poetry source add --default mirrors {{http_protocol}}{{mirror}}/web/simple/
+poetry source add --default mirrors https://{{mirror}}/web/simple/
 ```
 
 </CodeBlock>
@@ -91,7 +93,7 @@ poetry source add --default mirrors {{http_protocol}}{{mirror}}/web/simple/
 <CodeBlock>
 
 ```
-poetry source add --secondary mirrors {{http_protocol}}{{mirror}}/web/simple/
+poetry source add --secondary mirrors https://{{mirror}}/web/simple/
 ```
 
 </CodeBlock>

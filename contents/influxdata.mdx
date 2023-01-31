@@ -11,7 +11,7 @@ cname: 'influxdata'
 
 <CodeBlock>
 ```shell
-curl -s https://repos.influxdata.com/influxdb.key | {{sudo}}apt-key add -
+curl -s https://repos.influxdata.com/influxdata-archive_compat.key | {{sudo}}apt-key add -
 ```
 </CodeBlock>
 
@@ -75,7 +75,7 @@ name = InfluxDB Repository - RHEL $releasever
 baseurl={{http_protocol}}{{mirror}}/yum/{{release_name}}
 enabled=1
 gpgcheck=1
-gpgkey={{http_protocol}}{{mirror}}/influxdb.key
+gpgkey=https://repos.influxdata.com/influxdata-archive_compat.key
 ```
 
 </CodeBlock>

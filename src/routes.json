@@ -203,6 +203,12 @@
     "file": "docker-ce.mdx",
     "cname": "docker-ce"
   },
+  "/eclipse/": {
+    "title": "Eclipse 软件仓库",
+    "fullTitle": "Eclipse 软件仓库镜像使用帮助",
+    "file": "eclipse.mdx",
+    "cname": "eclipse"
+  },
   "/elasticstack/": {
     "title": "Elastic Stack 软件仓库",
     "fullTitle": "Elastic Stack 软件仓库镜像使用帮助",

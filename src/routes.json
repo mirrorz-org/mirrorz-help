@@ -419,6 +419,12 @@
     "file": "kicad.mdx",
     "cname": "kicad"
   },
+  "/kodi/": {
+    "title": "Kodi 软件仓库",
+    "fullTitle": "Kodi 软件仓库镜像使用帮助",
+    "file": "kodi.mdx",
+    "cname": "kodi"
+  },
   "/kubernetes/": {
     "title": "Kubernetes 软件仓库",
     "fullTitle": "Kubernetes 软件仓库镜像使用帮助",

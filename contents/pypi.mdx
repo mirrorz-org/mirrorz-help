@@ -6,14 +6,26 @@ disable_https_select: true
 
 PyPI 镜像在每次同步成功后间隔 5 分钟同步一次。
 
+**对于 PyPI 提供的 simple 接口，大部分镜像站在 `/web/simple` 提供；PKU 在 `/simple` 提供，请注意选择。**
+
 ### pip
 
 #### 临时使用
 
-<CodeBlock>
+<CodeBlock
+  menus={[
+    {
+      title: 'simple 链接',
+      items: [
+        ['/web/simple （常见）', { simple_url: '/web/simple' }],
+        ['/simple (PKU)', { simple_url: '/simple' }],
+      ]
+    }
+  ]}
+>
 
-```
-pip install -i https://{{mirror}}/web/simple some-package
+```bash
+pip install -i https://{{mirror}}{{simple_url}} some-package
 ```
 
 </CodeBlock>
@@ -25,21 +37,41 @@ pip 要求使用 `https` ，因此需要 `https` 而不是 `http`
 
 升级 pip 到最新的版本 (>=10.0.0) 后进行配置：
 
-<CodeBlock>
+<CodeBlock
+  menus={[
+    {
+      title: 'simple 链接',
+      items: [
+        ['/web/simple （常见）', { simple_url: '/web/simple' }],
+        ['/simple (PKU)', { simple_url: '/simple' }],
+      ]
+    }
+  ]}
+>
 
-```
+```bash
 python -m pip install --upgrade pip
-pip config set global.index-url https://{{mirror}}/web/simple
+pip config set global.index-url https://{{mirror}}{{simple_url}}
 ```
 
 </CodeBlock>
 
 如果您到 pip 默认源的网络连接较差，临时使用本镜像站来升级 pip：
 
-<CodeBlock>
+<CodeBlock
+  menus={[
+    {
+      title: 'simple 链接',
+      items: [
+        ['/web/simple （常见）', { simple_url: '/web/simple' }],
+        ['/simple (PKU)', { simple_url: '/simple' }],
+      ]
+    }
+  ]}
+>
 
-```
-python -m pip install -i https://{{mirror}}/web/simple --upgrade pip
+```bash
+python -m pip install -i https://{{mirror}}{{simple_url}} --upgrade pip
 ```
 
 </CodeBlock>
@@ -48,7 +80,7 @@ python -m pip install -i https://{{mirror}}/web/simple --upgrade pip
 
 如果您想配置多个镜像源平衡负载，可在已经替换 `index-url` 的情况下通过以下方式继续增加源站：
 
-```
+```bash
 pip config set global.extra-index-url "<url1> <url2>..."
 ```
 
@@ -56,10 +88,20 @@ pip config set global.extra-index-url "<url1> <url2>..."
 
 例如
 
-<CodeBlock>
+<CodeBlock
+  menus={[
+    {
+      title: 'simple 链接',
+      items: [
+        ['/web/simple （常见）', { simple_url: '/web/simple' }],
+        ['/simple (PKU)', { simple_url: '/simple' }],
+      ]
+    }
+  ]}
+>
 
-```
-pip config set global.extra-index-url "https://{{mirror}}/web/simple"
+```bash
+pip config set global.extra-index-url "https://{{mirror}}{{simple_url}}"
 ```
 
 </CodeBlock>
@@ -68,10 +110,20 @@ pip config set global.extra-index-url "https://{{mirror}}/web/simple"
 
 通过如下命令设置默认镜像：
 
-<CodeBlock>
+<CodeBlock
+  menus={[
+    {
+      title: 'simple 链接',
+      items: [
+        ['/web/simple （常见）', { simple_url: '/web/simple' }],
+        ['/simple (PKU)', { simple_url: '/simple' }],
+      ]
+    }
+  ]}
+>
 
-```
-pdm config pypi.url https://{{mirror}}/web/simple
+```bash
+pdm config pypi.url https://{{mirror}}{{simple_url}}
 ```
 
 </CodeBlock>
@@ -80,20 +132,40 @@ pdm config pypi.url https://{{mirror}}/web/simple
 
 通过以下命令设置默认镜像：
 
-<CodeBlock>
+<CodeBlock
+  menus={[
+    {
+      title: 'simple 链接',
+      items: [
+        ['/web/simple （常见）', { simple_url: '/web/simple' }],
+        ['/simple (PKU)', { simple_url: '/simple' }],
+      ]
+    }
+  ]}
+>
 
-```
-poetry source add --default mirrors https://{{mirror}}/web/simple/
+```bash
+poetry source add --default mirrors https://{{mirror}}{{simple_url}}
 ```
 
 </CodeBlock>
 
 通过以下命令设置次级镜像：
 
-<CodeBlock>
+<CodeBlock
+  menus={[
+    {
+      title: 'simple 链接',
+      items: [
+        ['/web/simple （常见）', { simple_url: '/web/simple' }],
+        ['/simple (PKU)', { simple_url: '/simple' }],
+      ]
+    }
+  ]}
+>
 
-```
-poetry source add --secondary mirrors https://{{mirror}}/web/simple/
+```bash
+poetry source add --secondary mirrors https://{{mirror}}{{simple_url}}
 ```
 
 </CodeBlock>

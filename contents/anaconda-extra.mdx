@@ -1,0 +1,23 @@
+---
+title: Anaconda Extra 软件仓库镜像使用帮助
+cname: 'anaconda-extra'
+---
+
+本节供 [Anaconda 帮助](/anaconda/)使用。
+
+<CodeBlock
+  menus={[
+    {
+      title: '第三方源',
+      items: [
+        ['nvidia', { channel: 'nvidia' }],
+      ]
+    },
+  ]}
+>
+
+```
+conda config --set custom_channels.{{channel}} {{http_protocol}}{{mirror}}/cloud/
+```
+
+</CodeBlock>

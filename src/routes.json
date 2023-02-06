@@ -65,6 +65,12 @@
     "file": "arch4edu.mdx",
     "cname": "arch4edu"
   },
+  "/armbian/": {
+    "title": "Armbian 软件仓库",
+    "fullTitle": "Armbian 软件仓库镜像使用帮助",
+    "file": "armbian.mdx",
+    "cname": "armbian"
+  },
   "/bazel-apt/": {
     "title": "Bazel APT 软件仓库",
     "fullTitle": "Bazel APT 软件仓库镜像使用帮助",

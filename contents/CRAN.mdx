@@ -3,19 +3,29 @@ title: CRAN 镜像使用帮助
 cname: 'CRAN'
 ---
 
+### 长期使用
+
 [CRAN](https://cran.r-project.org/) (The Comprehensive R Archive Network) 镜像源配置文件之一是 `.Rprofile` (linux 下位于 `~/.Rprofile` )。
 
 在文末添加如下语句：
 
 <CodeBlock>
-
 ```r
 options("repos" = c(CRAN="{{http_protocol}}{{mirror}}/"))
 ```
-
 </CodeBlock>
 
 打开 R 即可使用该 CRAN 镜像源安装 R 软件包。
+
+### 临时使用
+
+在安装时指定 repo。
+
+<CodeBlock>
+```r
+install.packages("lattice", repos="{{http_protocol}}{{mirror}}/")
+```
+</CodeBlock>
 
 ## Debian/Ubuntu 下添加 CRAN 镜像安装 R
 
@@ -71,6 +81,8 @@ deb {{http_protocol}}{{mirror}}/bin/linux/{{os_name}} {{release_name}}-{{version
 
 然后运行
 
+
+<CodeBlock>
 ```bash
 # Debian 用户添加该公钥
 {{sudo}}apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
@@ -79,3 +91,4 @@ deb {{http_protocol}}{{mirror}}/bin/linux/{{os_name}} {{release_name}}-{{version
 {{sudo}}apt-get update
 {{sudo}}apt-get install r-base-dev
 ```
+</CodeBlock>

@@ -3,9 +3,14 @@ title: Arch Linux ARM 软件仓库镜像使用帮助
 cname: 'archlinuxarm'
 ---
 
-编辑 `/etc/pacman.d/mirrorlist`，在文件的最顶端添加：
+### 软件源
 
-<CodeBlock>
+编辑 `/etc/pacman.d/mirrorlist`，在文件的最顶端添加以下配置；您可以同时注释掉其它所有镜像。
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/pacman.d/mirrorlist"
+>
 
 ```ini
 Server = {{http_protocol}}{{mirror}}/$arch/$repo
@@ -20,3 +25,13 @@ Server = {{http_protocol}}{{mirror}}/$arch/$repo
 {{sudo}}pacman -Syy
 ```
 </CodeBlock>
+
+### 系统镜像
+
+<CodeBlock>
+```
+{{http_protocol}}{{mirror}}
+```
+</CodeBlock>
+
+请访问 [https://archlinuxarm.org/platforms](https://archlinuxarm.org/platforms)，阅读硬件平台对应的安装指引并下载对应的系统镜像。

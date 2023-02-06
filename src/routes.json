@@ -17,6 +17,12 @@
     "file": "anaconda.mdx",
     "cname": "anaconda"
   },
+  "/anaconda-extra/": {
+    "title": "Anaconda Extra 软件仓库",
+    "fullTitle": "Anaconda Extra 软件仓库镜像使用帮助",
+    "file": "anaconda-extra.mdx",
+    "cname": "anaconda-extra"
+  },
   "/anthon/": {
     "title": "Anthon 软件仓库",
     "fullTitle": "Anthon 软件仓库镜像使用帮助",
@@ -58,6 +64,12 @@
     "fullTitle": "Arch4edu 软件仓库镜像使用帮助",
     "file": "arch4edu.mdx",
     "cname": "arch4edu"
+  },
+  "/armbian/": {
+    "title": "Armbian 软件仓库",
+    "fullTitle": "Armbian 软件仓库镜像使用帮助",
+    "file": "armbian.mdx",
+    "cname": "armbian"
   },
   "/bazel-apt/": {
     "title": "Bazel APT 软件仓库",
@@ -262,6 +274,12 @@
     "fullTitle": "Flutter 软件仓库镜像使用帮助",
     "file": "flutter.mdx",
     "cname": "flutter"
+  },
+  "/flutter_infra/": {
+    "title": "Flutter Infra 软件仓库",
+    "fullTitle": "Flutter Infra 软件仓库镜像使用帮助",
+    "file": "flutter_infra.mdx",
+    "cname": "flutter_infra"
   },
   "/flutter-sdk.git/": {
     "title": "Flutter SDK",

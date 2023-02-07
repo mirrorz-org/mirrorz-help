@@ -59,6 +59,12 @@
     "file": "archlinuxcn.mdx",
     "cname": "archlinuxcn"
   },
+  "/archriscv/": {
+    "title": "Arch Linux RISC-V 软件仓库",
+    "fullTitle": "Arch Linux RISC-V 软件仓库镜像使用帮助",
+    "file": "archriscv.mdx",
+    "cname": "archriscv"
+  },
   "/arch4edu/": {
     "title": "Arch4edu 软件仓库",
     "fullTitle": "Arch4edu 软件仓库镜像使用帮助",

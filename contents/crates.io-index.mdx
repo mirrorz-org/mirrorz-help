@@ -1,0 +1,24 @@
+---
+title: Rust crates.io 稀疏索引镜像使用帮助
+cname: 'crates.io-index'
+---
+
+编辑 `~/.cargo/config` 文件，添加以下内容：
+
+<CodeBlock>
+
+```toml
+[source.crates-io]
+replace-with = 'mirror'
+
+[source.mirror]
+registry = "sparse+{{http_protocol}}{{mirror}}/"
+```
+
+</CodeBlock>
+
+注：`sparse+` 表示在使用稀疏索引，链接末尾的 `/` 不能缺少。
+
+截至目前，可以通过 `cargo +nightly -Z sparse-registry update` 使用稀疏索引。
+
+cargo 1.68 版本开始支持稀疏索引：不再需要完整克隆 crates.io-index 仓库，可以加快获取包的速度。如果您的 cargo 版本大于等于 1.68，可以直接使用而不需要开启 nightly。

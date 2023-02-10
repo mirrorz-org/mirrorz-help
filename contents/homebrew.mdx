@@ -21,6 +21,7 @@ cname: 'homebrew'
 ```bash
 export HOMEBREW_BREW_GIT_REMOTE="{{http_protocol}}{{mirror}}/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="{{http_protocol}}{{mirror}}/homebrew-core.git"
+export HOMEBREW_INSTALL_FROM_API=1
 # export HOMEBREW_API_DOMAIN
 # export HOMEBREW_BOTTLE_DOMAIN
 # export HOMEBREW_PIP_INDEX_URL
@@ -32,8 +33,7 @@ export HOMEBREW_CORE_GIT_REMOTE="{{http_protocol}}{{mirror}}/homebrew-core.git"
 
 前往 [PyPI 镜像使用帮助](/pypi/)中「Homebrew」一节设置好 `HOMEBREW_PIP_INDEX_URL`。
 
-_注：自 `brew` 4.0 起，大部分用户无需再克隆 homebrew/core 仓库，故无需设置 `HOMEBREW_CORE_GIT_REMOTE` 环境变量。但若需要运行 `brew` 的开发命令或者 `brew` 安装在非官方支持的默认 prefix 位置，则仍需设置  `HOMEBREW_CORE_GIT_REMOTE` 环境变量。_
-
+_注：自 `brew` 4.0 起，`HOMEBREW_INSTALL_FROM_API` 会成为默认行为，无需设置；大部分用户无需再克隆 homebrew/core 仓库，故无需设置 `HOMEBREW_CORE_GIT_REMOTE` 环境变量。但若需要运行 `brew` 的开发命令或者 `brew` 安装在非官方支持的默认 prefix 位置，则仍需设置  `HOMEBREW_CORE_GIT_REMOTE` 环境变量；如果不想通过 API 安装，可以设置 `HOMEBREW_NO_INSTALL_FROM_API=1`。_
 
 最后，在终端运行以下命令以安装 Homebrew / Linuxbrew：
 

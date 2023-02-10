@@ -126,7 +126,7 @@ async function generateOpengraph<T = any>({
     template: Default,
     props: {
       siteName: 'MirrorZ Help',
-      domain: 'help.mirrorz.org'
+      domain: 'mirrors.help'
     },
     id: 'default',
     outputPath: defaultOgPath

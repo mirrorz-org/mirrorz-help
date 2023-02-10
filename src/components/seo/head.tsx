@@ -23,7 +23,7 @@ export default function SeoHead({
   twitterCardType = 'summary_large_image',
   ogType = 'website',
   ogImage = {
-    url: 'https://help.mirrorz.org/og-help.mirrorz.org/default.png',
+    url: 'https://mirrors.help/og-help.mirrorz.org/default.png',
     width: 1200,
     height: 630
   }
@@ -46,7 +46,7 @@ export default function SeoHead({
     [nofollow, noindex]
   );
   const darkMode = useDarkMode();
-  const permalink = usePermalink('help.mirrorz.org');
+  const permalink = usePermalink('mirrors.help');
 
   return (
     <Head>

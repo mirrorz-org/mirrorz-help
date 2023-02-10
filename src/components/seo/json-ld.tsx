@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 const sharedJsonLd = {
   '@context': 'http://schema.org',
-  logo: 'https://help.mirrorz.org/android-icon-192x192.png'
+  logo: 'https://mirrors.help/favicon/android-icon-192x192.png'
 };
 
 interface JsonLDProps extends Omit<JSX.IntrinsicElements['script'], 'type' | 'dangerouslySetInnerHTML' | 'children' | 'title'> {
@@ -18,7 +18,7 @@ export default function JsonLD({
   title,
   siteName = 'MirrorZ Help',
   isContent,
-  ogImage = 'https://help.mirrorz.org/og-help.mirrorz.org/default.png',
+  ogImage = 'https://mirrors.help/og-help.mirrorz.org/default.png',
   ...rest
 }: JsonLDProps) {
   const jsonMain = useMemo(() => ({
@@ -26,11 +26,11 @@ export default function JsonLD({
     // keywords: props.keywords.join(', '),
     description: 'MirrorZ Help 致力于成为一个开源、开放、且持续更新的开源软件镜像的帮助文档整合站点，旨在帮助高校间推广开源软件的使用。',
     '@type': 'WebSite',
-    url: 'https://help.mirrorz.org'
+    url: 'https://mirrors.help'
   }), []);
 
   const finalTitle = title ? `${title} - ${siteName}` : siteName;
-  const permalink = usePermalink('help.mirrorz.org');
+  const permalink = usePermalink('mirrors.help');
 
   const data = useMemo(() => {
     if (!isContent) return jsonMain;

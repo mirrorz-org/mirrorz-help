@@ -13,7 +13,7 @@ export const Content = ({
   siteName = 'MirrorZ Help',
   titleLine1,
   titleLine2,
-  domain = 'help.mirrorz.org',
+  domain = 'mirrors.help',
   path
 }: ContentProps) => {
   return (

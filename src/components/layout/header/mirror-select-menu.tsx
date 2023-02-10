@@ -6,6 +6,12 @@ import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
 import { iconWrapperXStyle, selectWrapperXStyle, selectXStyle, iconXStyle } from './select-style';
 
+const styles = style9.create({
+  select_wrapper: {
+    flex: '1'
+  }
+});
+
 function MirrorSelectMenu() {
   const selectedMirror = useSelectedMirror();
   const setSelectedMirror = useSetSelectedMirror();
@@ -18,7 +24,7 @@ function MirrorSelectMenu() {
   const { isLoading, data } = useMirrorZData();
 
   return (
-    <div className={style9(selectWrapperXStyle)}>
+    <div className={style9(selectWrapperXStyle, styles.select_wrapper)}>
       <select
         className={style9(selectXStyle)}
         value={selectedMirror || undefined}

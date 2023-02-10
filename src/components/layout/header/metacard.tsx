@@ -26,9 +26,6 @@ const styles = style9.create({
     // @ts-expect-error -- gap is known property
     gap: '12px'
   },
-  menu_title: {
-    flex: '1'
-  },
   switch_wrapper: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -46,7 +43,7 @@ function MetaCard() {
   return (
     <div className={styles('main')}>
       <div className={styles('menu_wrapper')}>
-        <p className={styles('menu_title')}>选择镜像</p>
+        <p>选择镜像</p>
         <MirrorSelectMenu />
       </div>
       <div className={styles('switch_wrapper')}>

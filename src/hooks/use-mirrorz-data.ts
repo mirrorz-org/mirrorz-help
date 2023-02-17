@@ -30,7 +30,13 @@ const mirrorsArrayToObject = (site: Site, mirrors: Mirror[]) => mirrors.reduce((
 
 const fetcher = async () => {
   // TODO: support both mirrorz and cernet.edu.cn
-  const pack: MirrorZLegacyPack = await (await fetch('https://mirrorz.org/static/json/legacy-pack.json')).json();
+  const res = await fetch('https://mirrorz.org/static/json/legacy-pack.json');
+
+  if (!res.ok && res.status === 403) {
+    throw new RedirectError('https://mirrors.help/');
+  }
+
+  const pack: MirrorZLegacyPack = await res.json();
 
   if ('redirect' in pack) {
     throw new RedirectError(`https://mirrors.help/#${pack.redirect}`);

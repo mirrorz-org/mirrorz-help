@@ -29,7 +29,11 @@ export interface MirrorZLegacy {
   mirrors: Mirror[]
 }
 
-export type MirrorZLegacyPack = MirrorZLegacy[];
+export interface MirrorZLegacyPackExtension {
+  redirect: string
+}
+
+export type MirrorZLegacyPack = MirrorZLegacy[] | MirrorZLegacyPackExtension;
 
 export interface ParsedMirror {
   cname: string;

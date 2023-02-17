@@ -2,6 +2,14 @@ import useSWRImmutable from 'swr/immutable';
 import type { CnameToMirrorZ, Mirror, MirrorZLegacyPack, ParsedMirror, ParsedMirrorZLegacy, Site } from '../types/mirrorz';
 import { absoluteUrlOrConcatWithBase, emptyOrAbsolutUrlOrConcatWithBase } from '../lib/client/utils';
 
+class RedirectError extends Error {
+  readonly redirect: string;
+  constructor(readonly input: string) {
+    super();
+    this.redirect = input;
+  }
+}
+
 const parseMirror = (site: Site, { cname, url, help, size, desc, upstream, status }: Mirror): ParsedMirror => ({
   cname,
   full: absoluteUrlOrConcatWithBase(url, site.url),
@@ -23,6 +31,10 @@ const mirrorsArrayToObject = (site: Site, mirrors: Mirror[]) => mirrors.reduce((
 const fetcher = async () => {
   // TODO: support both mirrorz and cernet.edu.cn
   const pack: MirrorZLegacyPack = await (await fetch('https://mirrorz.org/static/json/legacy-pack.json')).json();
+
+  if ('redirect' in pack) {
+    throw new RedirectError(`https://mirrors.help/#${pack.redirect}`);
+  }
 
   const parsedMirrorZLegacy = pack.reduce((acc, cur) => {
     const { site, mirrors } = cur;
@@ -53,4 +65,10 @@ const fetcher = async () => {
   return [parsedMirrorZLegacy, cnameToMirrorZ] as const;
 };
 
-export const useMirrorZData = () => useSWRImmutable('parsed-mirrorz-legacy-data', fetcher);
+export const useMirrorZData = () => useSWRImmutable('parsed-mirrorz-legacy-data', fetcher, {
+  onError(err) {
+    if (err instanceof RedirectError) {
+      window.location.assign(err.redirect);
+    }
+  }
+});

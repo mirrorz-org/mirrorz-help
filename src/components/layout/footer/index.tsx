@@ -3,6 +3,7 @@ import React, { memo, useEffect, useState } from 'react';
 import style9 from 'style9';
 import ExternalLink from '../../external-link';
 import NextLink from 'next/link';
+import { mirrorzUrl } from '@/lib/client/constant';
 
 const styles = style9.create({
   footer: {
@@ -134,7 +135,7 @@ function Footer() {
       <div className={styles('inner')}>
         <div className={styles('footer_main')}>
           <div className={styles('logo_section')}>
-            <ExternalLink href="https://mirrorz.org/">
+            <ExternalLink href={`https://${mirrorzUrl}/`}>
               <MirrorZLogo className={styles('mirrorz_logo')} />
               <p className={styles('logo_text')}>MirrorZ Project</p>
             </ExternalLink>
@@ -158,7 +159,7 @@ function Footer() {
         </div>
         <div className={styles('footer_section_base')}>
           <Header>More</Header>
-          <FooterLink href="https://mirrorz.org/">
+          <FooterLink href={`https://${mirrorzUrl}/`}>
             MirrorZ Homepage
           </FooterLink>
           <FooterLink href="https://github.com/mirrorz-org">

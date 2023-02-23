@@ -49,12 +49,17 @@ export default function SeoHead({
   const darkMode = useDarkMode();
   const permalink = usePermalink(siteHost);
 
+  const jsonEndpointOrigin = useMemo(() => {
+    const url = new URL(jsonEndpoint);
+    return url.origin;
+  }, []);
+
   return (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       <title key="title">{finalTitle}</title>
       <meta httpEquiv="x-dns-prefetch-control" content="on" />
-      <link key="preconnect" rel="preconnect" crossOrigin="anonymous" href="https://mirrorz.org" />
+      <link key="preconnect" rel="preconnect" crossOrigin="anonymous" href={jsonEndpointOrigin} />
 
       {/** Favicon */}
       <link key="favicon.svg" rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />

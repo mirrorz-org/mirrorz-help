@@ -8,3 +8,9 @@ https://help.mirrorz.org/
 npm i
 npm run dev
 ```
+
+## Deploy
+
+```bash
+npm run og:build && npm run build && npm run export
+```

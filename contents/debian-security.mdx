@@ -31,8 +31,8 @@ cname: 'debian-security'
 
 ```properties
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
-{{is_sid}}deb {{http_protocol}}{{mirror}}-security {{release_name}}{{security}} main contrib non-free
-{{is_sid}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}-security {{release_name}}{{security}} main contrib non-free
+{{is_sid}}deb {{http_protocol}}{{mirror}} {{release_name}}{{security}} main contrib non-free
+{{is_sid}}{{enable_source}}deb-src {{http_protocol}}{{mirror}} {{release_name}}{{security}} main contrib non-free
 ```
 
 </CodeBlock>

@@ -5,6 +5,7 @@ import { useSelectedMirror, useSetSelectedMirror } from '@/contexts/current-sele
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
 import { iconWrapperXStyle, selectWrapperXStyle, selectXStyle, iconXStyle } from './select-style';
+import { sanitizeAbbrForMirrorZ } from '@/lib/client/utils';
 
 const styles = style9.create({
   select_wrapper: {
@@ -38,7 +39,7 @@ function MirrorSelectMenu() {
               data?.[1][cname].map(mirror => {
                 const siteName = mirror.site.name ? `${mirror.site.abbr} - ${mirror.site.name}` : mirror.site.abbr;
                 return (
-                  <option key={mirror.baseUrl} value={mirror.site.abbr}>{siteName}</option>
+                  <option key={mirror.baseUrl} value={sanitizeAbbrForMirrorZ(mirror.site.abbr)}>{siteName}</option>
                 );
               })
             )

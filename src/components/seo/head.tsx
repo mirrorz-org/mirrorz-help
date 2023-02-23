@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useDarkMode } from '@/contexts/darkmode';
 import { useMemo } from 'react';
 import { usePermalink } from '@/hooks/use-permalink';
+import { jsonEndpoint, siteHost } from '@/lib/client/constant';
 
 interface SeoHeadProps {
   title?: string,
@@ -23,7 +24,7 @@ export default function SeoHead({
   twitterCardType = 'summary_large_image',
   ogType = 'website',
   ogImage = {
-    url: 'https://mirrors.help/og-help.mirrorz.org/default.png',
+    url: `https://${siteHost}/og-${siteHost}/default.png`,
     width: 1200,
     height: 630
   }
@@ -46,7 +47,7 @@ export default function SeoHead({
     [nofollow, noindex]
   );
   const darkMode = useDarkMode();
-  const permalink = usePermalink('mirrors.help');
+  const permalink = usePermalink(siteHost);
 
   return (
     <Head>
@@ -132,7 +133,7 @@ export default function SeoHead({
       <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
       {/** TODO: support both mirrorz and cernet.edu.cn */}
-      <link key="preload-mirrorz" rel="preload" href="https://mirrorz.org/static/json/legacy-pack.json" as="fetch" crossOrigin="anonymous" />
+      <link key="preload-mirrorz" rel="preload" href={jsonEndpoint} as="fetch" crossOrigin="anonymous" />
     </Head>
   );
 }

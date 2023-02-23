@@ -20,7 +20,7 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
         title={meta.title}
         ogType="article"
         // ogImage={{
-        //   url: `https://mirrors.help/og-help.mirrorz.org/${cname}.png`,
+        //   url: `https://${siteHost}/og-${siteHost}/${cname}.png`,
         //   width: 1200,
         //   height: 630
         // }}

@@ -6,11 +6,12 @@ import path from 'path';
 import { promises as fsPromises } from 'fs';
 import * as Log from 'next/dist/build/output/log';
 import { fileExists } from 'next/dist/lib/file-exists';
+
+import { loadEnvConfig } from '@next/env';
+
 // import pLimit from 'next/dist/compiled/p-limit';
 
 // import routesJson from '@/routes.json';
-
-const outputRoot = path.join(process.cwd(), 'public', 'og-help.mirrorz.org');
 
 const lockFile = fsPromises.readFile(path.join(process.cwd(), 'package-lock.json'), { encoding: 'utf-8' });
 const templateSourceCode = fsPromises.readFile(path.join(process.cwd(), 'src', 'opengraph', 'template.tsx'), { encoding: 'utf-8' });
@@ -115,7 +116,7 @@ async function generateOpengraph<T = any>({
   return fsPromises.writeFile(outputPath, pngBuffer);
 }
 
-(async () => {
+async function runGenerate(outputRoot: string, domain: string) {
   if (!await fileExists(outputRoot, 'directory')) {
     await fsPromises.mkdir(outputRoot, { recursive: true });
   }
@@ -126,9 +127,9 @@ async function generateOpengraph<T = any>({
     template: Default,
     props: {
       siteName: 'MirrorZ Help',
-      domain: 'mirrors.help'
+      domain
     },
-    id: 'default',
+    id: `${domain}/default`,
     outputPath: defaultOgPath
   });
 
@@ -151,4 +152,19 @@ async function generateOpengraph<T = any>({
   //     outputPath: path.join(outputRoot, `${routeMeta.cname}.png`)
   //   }));
   // }));
+}
+
+(async () => {
+  const projectDir = process.cwd();
+  loadEnvConfig(projectDir);
+
+  if (typeof process.env.NEXT_PUBLIC_SITE_HOST === 'string') {
+    Log.info(`Generating OpenGraph images for "${process.env.NEXT_PUBLIC_SITE_HOST}"...`);
+    await runGenerate(
+      path.join(process.cwd(), 'public', `og-${process.env.NEXT_PUBLIC_SITE_HOST}`),
+      process.env.NEXT_PUBLIC_SITE_HOST
+    );
+  } else {
+    Log.error('Missing NEXT_PUBLIC_SITE_HOST environment variable!');
+  }
 })();

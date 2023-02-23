@@ -21,6 +21,7 @@ import type { MetaFromFrontMatters } from '@/types/front-matter';
 import routesJson from '@/routes.json';
 
 const SearchCommandK = lazy(() => import('../search/cmdk'));
+const Dialog = lazy(() => import('../dialog'));
 
 const styles = style9.create({
   container: {
@@ -172,6 +173,9 @@ export function Layout({ children, meta, toc = [], cname, isContent = false }: R
                 </div>
                 <Suspense fallback={null}>
                   <SearchCommandK />
+                </Suspense>
+                <Suspense fallback={null}>
+                  <Dialog />
                 </Suspense>
               </div>
             </MirrorEnableSudoProvider>

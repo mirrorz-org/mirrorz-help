@@ -3,6 +3,27 @@ import { noop } from '../lib/shared/util';
 import { useMirrorZData } from '../hooks/use-mirrorz-data';
 import { useRouter } from 'next/router';
 import { sanitizeAbbrForMirrorZ } from '../lib/client/utils';
+import { useSetDialog } from './dialog';
+import ExternalLink from '../components/external-link';
+import style9 from 'style9';
+import useLayoutEffect from '../hooks/use-isomorphic-effect';
+
+const styles = style9.create({
+  link: {
+    color: 'var(--text-link)',
+    display: 'inline',
+    borderBottomWidth: '1px',
+    borderBottomColor: 'transparent',
+    borderBottomStyle: 'solid',
+    transitionDuration: '100ms',
+    transitionProperty: 'color',
+    transitionTimingFunction: 'cubic-bezier(0.4, 0, 1, 1)',
+    lineHeight: 1.5,
+    ':hover': {
+      borderBottomColor: 'var(--text-link)'
+    }
+  }
+});
 
 const SelectedMirrorContext = createContext<string | null>(null);
 const SelectedMirrorDispatchContext = createContext<React.Dispatch<React.SetStateAction<string | null>>>(noop);
@@ -12,6 +33,8 @@ export const useSetSelectedMirror = () => useContext(SelectedMirrorDispatchConte
 
 export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChildren<{ cname: string | null }>) => {
   const [selectedMirror, setSelectedMirror] = useState<string | null>(null);
+  const setDialog = useSetDialog();
+  const [invalid, setInvalid] = useState(false);
   const { data } = useMirrorZData();
 
   const validAbbrList = useMemo(() => {
@@ -29,6 +52,7 @@ export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChild
     let select = typeof mirrorFromUrlQuery === 'string' ? sanitizeAbbrForMirrorZ(mirrorFromUrlQuery) : null;
     if (select) {
       if (!validAbbrList.has(select)) {
+        setInvalid(true);
         select = null;
       }
     }
@@ -37,6 +61,24 @@ export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChild
     }
     setSelectedMirror(select);
   }
+
+  useLayoutEffect(() => {
+    if (invalid && cname && router.query.mirror) {
+      setDialog({
+        title: '提示',
+        content: (
+          <>
+            {/** TODO: GitHub Issue URL builder + Issue Template */}
+            您当前试图使用 {router.query.mirror} 镜像站，但是该镜像站似乎并没有提供 {cname} 的镜像。
+            <br />
+            如果你有任何疑问，请通过 <ExternalLink href="#" className={styles('link')}>通过 GitHub Issue 向我们反馈这个问题</ExternalLink>。
+          </>
+        )
+      });
+    } else {
+      setDialog(null);
+    }
+  }, [cname, invalid, router.query.mirror, setDialog]);
 
   return (
     <SelectedMirrorContext.Provider value={selectedMirror}>

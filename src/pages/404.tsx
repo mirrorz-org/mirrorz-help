@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useSetSearchOpen } from '../contexts/search';
 import { useCallback } from 'react';
 import SeoHead from '../components/seo/head';
+import ExternalLink from '../components/external-link';
 
 const styles = style9.create({
   main: {
@@ -74,7 +75,7 @@ export default function NotFoundPage() {
             </Paragraph>
             <Paragraph>
               {/** TODO: GitHub Issue URL builder + Issue Template */}
-              你也可以 <Link href="#" className={styles('link')}>通过 GitHub Issue 反馈这个问题</Link>。
+              你也可以 <ExternalLink href="#" className={styles('link')}>通过 GitHub Issue 反馈这个问题</ExternalLink>。
             </Paragraph>
           </article>
         </div>

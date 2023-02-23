@@ -6,6 +6,7 @@ import '@/styles/styles.sass';
 
 import { DarkModeProvider } from '../contexts/darkmode';
 import { SearchOpenProvider } from '../contexts/search';
+import { DialogProvider } from '../contexts/dialog';
 
 export default function App({ Component, pageProps }: AppProps) {
   useFuckSafari();
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <DarkModeProvider>
       <SearchOpenProvider>
-        <Component {...pageProps} />
+        <DialogProvider>
+          <Component {...pageProps} />
+        </DialogProvider>
       </SearchOpenProvider>
     </DarkModeProvider>
   );

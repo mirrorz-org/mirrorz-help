@@ -1,7 +1,8 @@
 import style9 from 'style9';
 import ExternalLink from '../external-link';
 import NextLink from 'next/link';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
+import { mirrorzUrl } from '../../lib/client/constant';
 
 const styles = style9.create({
   base: {
@@ -21,11 +22,27 @@ const styles = style9.create({
 });
 
 function Link({ href, ...props }: Omit<JSX.IntrinsicElements['a'], 'className' | 'ref'>) {
+  const processedHref = useMemo(() => {
+    if (typeof href !== 'string') {
+      return href;
+    }
+
+    try {
+      const url = new URL(href);
+      if (url.origin === 'https://mirrorz.org') {
+        url.hostname = mirrorzUrl;
+        return url.toString();
+      }
+    } catch {
+      return href;
+    }
+  }, [href]);
+
   if (!href) {
     return <a href={href} className={styles('base')} {...props} />;
   }
   if (href.startsWith('https://') || href.startsWith('http://')) {
-    return <ExternalLink href={href} className={styles('base')} {...props} />;
+    return <ExternalLink href={processedHref} className={styles('base')} {...props} />;
   }
   return <NextLink href={href} className={styles('base')} {...props} />;
 }

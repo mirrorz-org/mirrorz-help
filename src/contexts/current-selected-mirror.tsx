@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import { noop } from '../lib/shared/util';
 import { useMirrorZData } from '../hooks/use-mirrorz-data';
 import { useRouter } from 'next/router';
@@ -14,18 +14,28 @@ export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChild
   const [selectedMirror, setSelectedMirror] = useState<string | null>(null);
   const { data } = useMirrorZData();
 
+  const validAbbrList = useMemo(() => {
+    if (data && cname) {
+      return new Set(data[1][cname].map(m => m.site.abbr));
+    }
+    return new Set<string>();
+  }, [cname, data]);
+
   const router = useRouter();
   // When data is finally loaded, but there is no default mirror provided, we set the first mirror as default
   // TODO: use mirror from URL query when available
   if (data && cname && selectedMirror === null && router.isReady) {
-    const select = sanitizeAbbrForMirrorZ(
-      router.query.mirror as string | undefined
-      || data[1][cname]?.[0].site.abbr
-    );
-
+    const mirrorFromUrlQuery = router.query.mirror;
+    let select = typeof mirrorFromUrlQuery === 'string' ? sanitizeAbbrForMirrorZ(mirrorFromUrlQuery) : null;
     if (select) {
-      setSelectedMirror(select);
+      if (!validAbbrList.has(select)) {
+        select = null;
+      }
     }
+    if (!select) {
+      select = data[1][cname][0].site.abbr;
+    }
+    setSelectedMirror(select);
   }
 
   return (

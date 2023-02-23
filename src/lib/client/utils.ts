@@ -14,3 +14,5 @@ export const emptyOrAbsolutUrlOrConcatWithBase = (url: string | null | undefined
     ? absoluteUrlOrConcatWithBase(url, baseUrl, keepTrailingSlash)
     : null
 );
+
+export const sanitizeAbbrForMirrorZ = (abbr: string) => abbr.replace(/\s/g, '');

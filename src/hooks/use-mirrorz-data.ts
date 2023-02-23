@@ -1,6 +1,6 @@
 import useSWRImmutable from 'swr/immutable';
 import type { CnameToMirrorZ, Mirror, MirrorZLegacyPack, ParsedMirror, ParsedMirrorZLegacy, Site } from '../types/mirrorz';
-import { absoluteUrlOrConcatWithBase, emptyOrAbsolutUrlOrConcatWithBase } from '../lib/client/utils';
+import { absoluteUrlOrConcatWithBase, emptyOrAbsolutUrlOrConcatWithBase, sanitizeAbbrForMirrorZ } from '../lib/client/utils';
 import { jsonEndpoint, siteHost } from '../lib/client/constant';
 
 class RedirectError extends Error {
@@ -19,7 +19,7 @@ const parseMirror = (site: Site, { cname, url, help, size, desc, upstream, statu
   desc,
   status: status === undefined ? 'U' : status,
   size,
-  source: site.abbr,
+  source: sanitizeAbbrForMirrorZ(site.abbr),
   note: site.note
 });
 
@@ -46,8 +46,9 @@ const fetcher = async () => {
   const parsedMirrorZLegacy = pack.reduce((acc, cur) => {
     const { site, mirrors } = cur;
     const { abbr } = site;
+
     const url = new URL(site.url);
-    acc[abbr] = {
+    acc[sanitizeAbbrForMirrorZ(abbr)] = {
       // TODO: implements MirrorZ extension D
       baseUrl: url.hostname + url.pathname,
       site,
@@ -62,7 +63,7 @@ const fetcher = async () => {
       acc[cname] ||= [];
       acc[cname].push({
         site: cur.site,
-        baseUrl: parsedMirrorZLegacy[cur.site.abbr].baseUrl,
+        baseUrl: parsedMirrorZLegacy[sanitizeAbbrForMirrorZ(cur.site.abbr)].baseUrl,
         mirror: parseMirror(cur.site, mirror)
       });
     });

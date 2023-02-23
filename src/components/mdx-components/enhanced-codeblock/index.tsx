@@ -67,11 +67,13 @@ function CodeBlock({
   const httpsEnabled = useMirrorHttpsEnabled();
   const sudoEnabled = useMirrorSudoEnabled();
   const cname = useCurrentCname();
-  const { data, isLoading } = useMirrorZData();
+  const { data, isLoading: _isLoading } = useMirrorZData();
   const currentSelectedMirror = useSelectedMirror();
 
+  const isLoading = _isLoading || !currentSelectedMirror;
+
   const mirrorUrl = useMemo(() => {
-    if (isLoading || !currentSelectedMirror) return '(Loading...)';
+    if (isLoading) return '(Loading...)';
     return data?.[0][currentSelectedMirror]?.mirrors[cname].full || '(Loading...)';
   }, [cname, currentSelectedMirror, data, isLoading]);
 
@@ -102,11 +104,11 @@ function CodeBlock({
         {codeBlockMenu}
         <Tabs items={[filepath, '快速配置']}>
           <TabItem value={filepath} xstyle={[styles.code_wrapper]}>
-            <LoadingOverlay isLoading={(isLoading || !currentSelectedMirror)} />
+            <LoadingOverlay isLoading={isLoading} />
             <ActualCode code={finalCode} language={codeLanguage} />
           </TabItem>
           <TabItem value="快速配置" xstyle={[styles.code_wrapper]}>
-            <LoadingOverlay isLoading={(isLoading || !currentSelectedMirror)} />
+            <LoadingOverlay isLoading={isLoading} />
             <ActualCode
               code={buildCatEOF(finalCode, filepath, quickSetupNeedSudo && sudoEnabled)}
               language="bash"
@@ -121,7 +123,7 @@ function CodeBlock({
     <div className={clsx('enhanced-codeblock', styles('container'))}>
       {codeBlockMenu}
       <div className={styles('code_wrapper')}>
-        <LoadingOverlay isLoading={(isLoading || !currentSelectedMirror)} />
+        <LoadingOverlay isLoading={isLoading} />
         <ActualCode code={finalCode} language={codeLanguage} />
       </div>
     </div>

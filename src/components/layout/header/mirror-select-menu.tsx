@@ -32,7 +32,7 @@ function MirrorSelectMenu() {
         disabled={isLoading}
       >
         {
-          isLoading
+          (isLoading || selectedMirror === null)
             ? <option value="">Loading...</option>
             : (
               data?.[1][cname].map(mirror => {

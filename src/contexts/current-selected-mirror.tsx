@@ -39,7 +39,7 @@ export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChild
 
   const validAbbrList = useMemo(() => {
     if (data && cname) {
-      return new Set(data[1][cname].map(m => m.site.abbr));
+      return new Set(data[1][cname].map(m => sanitizeAbbrForMirrorZ(m.site.abbr)));
     }
     return new Set<string>();
   }, [cname, data]);
@@ -57,7 +57,7 @@ export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChild
       }
     }
     if (!select) {
-      select = data[1][cname][0].site.abbr;
+      select = sanitizeAbbrForMirrorZ(data[1][cname][0].site.abbr);
     }
     setSelectedMirror(select);
   }

@@ -26,15 +26,16 @@ Server = {{http_protocol}}{{mirror}}/$repo/os/$arch
 
 <CodeBlock>
 ```shell
-{{sudo}}pacman -Syy
+{{sudo}}pacman -Syyu
 ```
 </CodeBlock>
 
-如果从一个**损坏的**镜像切换到**正常的**镜像，以上命令可能无法避免问题，此时可以执行以下命令
+两次 `y` 能避免从**损坏的**镜像切换到**正常的**镜像时出现的问题。
+
+如果您从一个较新的镜像切换到较旧的镜像，以下命令可以降级部分包，以避免系统的部分更新。
 
 <CodeBlock>
 ```shell
-{{sudo}}pacman -Syyu
-{{sudo}}pacman -Syyuu # 如果仍不能解决问题
+{{sudo}}pacman -Syyuu
 ```
 </CodeBlock>

@@ -1,7 +1,7 @@
 # this workflow is for mirrorz-help forks
 name: Rebase Upstream
 on:
-  repository_dispatch: # on upstream push, it will notify 'some' forks (maintained in another workflow)
+  repository_dispatch: # on upstream push, it will notify 'some' forks (maintained in forks.yml)
     types: [mirrorz-org-push]
   workflow_dispatch: # run manually
 

@@ -1,0 +1,17 @@
+# see rebase.yml for its use case
+name: Trigger Fork Rebase
+on:
+  push:
+    branches: [master]
+
+jobs:
+  dispatch_forks:
+    runs-on: ubuntu-latest
+    if: github.repository == 'mirrorz-org/mirrorz-help'
+    steps:
+      - name: Send repository_dispatch to tuna/mirrorz-help
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT_PUBLIC_REPO_TUNA }}
+          repository: tuna/mirrorz-help
+          event-type: mirrorz-org-push

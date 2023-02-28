@@ -1,0 +1,18 @@
+---
+title: NetBSD 软件仓库镜像使用帮助
+cname: 'NetBSD'
+---
+
+## pkgsrc
+
+参考 [pkgsrc 帮助](/pkgsrc/)。
+
+## sysupgrade
+
+升级 NetBSD 时，指定 sysupgrade 的下载地址为镜像源，以 NetBSD 9.3 amd64 为例：
+
+<CodeBlock>
+```shell
+sysupgrade auto {{http_protocol}}{{mirror}}/NetBSD-9.3/amd64
+```
+</CodeBlock>

@@ -557,6 +557,12 @@
     "file": "mysql.mdx",
     "cname": "mysql"
   },
+  "/NetBSD/": {
+    "title": "NetBSD 软件仓库",
+    "fullTitle": "NetBSD 软件仓库镜像使用帮助",
+    "file": "NetBSD.mdx",
+    "cname": "NetBSD"
+  },
   "/nix/": {
     "title": "Nix",
     "fullTitle": "Nix 镜像使用帮助",

@@ -473,6 +473,12 @@
     "file": "lineage-rom.mdx",
     "cname": "lineage-rom"
   },
+  "/linuxliteos/": {
+    "title": "Linux Lite 软件仓库",
+    "fullTitle": "Linux Lite 软件仓库镜像使用帮助",
+    "file": "linuxliteos.mdx",
+    "cname": "linuxliteos"
+  },
   "/linuxmint/": {
     "title": "Linux Mint 软件仓库",
     "fullTitle": "Linux Mint 软件仓库镜像使用帮助",

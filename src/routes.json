@@ -5,6 +5,12 @@
     "file": "Adoptium.mdx",
     "cname": "Adoptium"
   },
+  "/almalinux/": {
+    "title": "Almalinux 软件仓库",
+    "fullTitle": "Almalinux 软件仓库镜像使用帮助",
+    "file": "alamalinux.mdx",
+    "cname": "almalinux"
+  },
   "/alpine/": {
     "title": "Alpine 软件仓库",
     "fullTitle": "Alpine 软件仓库镜像使用帮助",

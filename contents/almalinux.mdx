@@ -1,0 +1,39 @@
+---
+title: Almalinux 软件仓库镜像使用帮助
+cname: 'almalinux'
+---
+
+AlmaLinux OS 是一个开源、社区驱动的 Linux 操作系统，它填补了因 CentOS Linux 稳定版本停止而留下的空白。AlmaLinux OS 是 RHEL® 的 1:1 二进制兼容克隆。由社区引导和建设。
+
+AlmaLinux 可以通过以下地址下载。
+
+<CodeBlock>
+
+```
+{{http_protocol}}{{mirror}}
+```
+
+</CodeBlock>
+
+执行以下命令备份并替换默认源：
+
+<CodeBlock>
+
+```bash
+sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+    -e 's|^# baseurl=https://repo.almalinux.org/almalinux|baseurl={{http_protocol}}{{mirror}}|g' \
+    -i.bak \
+    /etc/yum.repos.d/almalinux*.repo
+```
+
+</CodeBlock>
+
+执行以下命令生成缓存：
+
+<CodeBlock>
+
+```bash
+dnf makecache
+```
+
+</CodeBlock>

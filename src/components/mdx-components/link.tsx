@@ -33,6 +33,7 @@ function Link({ href, ...props }: Omit<JSX.IntrinsicElements['a'], 'className' |
         url.hostname = mirrorzUrl;
         return url.toString();
       }
+      return href;
     } catch {
       return href;
     }

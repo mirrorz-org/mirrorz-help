@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 const IconUbuntu = (p: JSX.IntrinsicElements['svg']) => (
-  <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" {...p}><circle cx="50" cy="50" r="45" fill="#f47421" /><circle cx="50" cy="50" r="21.8" fill="none" stroke="#fff" strokeWidth="8.6" /><g id="a"><circle cx="19.4" cy="50" r="8.4" fill="#f47421" /><path stroke="#f47421" strokeWidth="3.2" d="M67 50h10" /><circle cx="19.4" cy="50" r="6" fill="#fff" /></g><use xlinkHref="#a" transform="rotate(120 50 50)" /><use xlinkHref="#a" transform="rotate(240 50 50)" /></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="233.9px" height="360.3px" viewBox="0 0 233.9 360.3" style="enable-background:new 0 0 233.9 360.3;" xml:space="preserve" {...p}><path fill="#E9500E" class="st0" d="M0,0v360.3h233.9V0H0z M153.3,159.4c13.6,0,24.5,11,24.5,24.5s-11,24.5-24.5,24.5s-24.5-11-24.5-24.5  C128.7,170.4,139.7,159.4,153.3,159.4z M125.3,162.1c-4.5,5.7-7.1,12.7-7.4,19.9c-19.3,0.3-37.2,9.9-48.2,25.8  c-5.6-3.5-12-5.3-18.6-5.3c-0.6,0-1.2,0-1.9,0C64.6,175.5,94.2,159.8,125.3,162.1z M26.5,237.8c0-13.6,11-24.6,24.6-24.6  s24.5,11,24.5,24.6s-11,24.5-24.5,24.5S26.5,251.4,26.5,237.8z M102.2,320.7c-26-5.5-47.6-23.6-57.5-48.2c7.1,1.3,14.4,0.4,21-2.6  c8.2,16,23.2,27.4,40.8,31.1c2,0.4,4,0.8,6,1c0.2,7.4,2.7,14.6,7.2,20.5C113.7,322.5,107.9,321.9,102.2,320.7z M147.7,325.7  c-13.6,0-24.5-11-24.5-24.5s11-24.5,24.5-24.5s24.6,11,24.6,24.5S161.3,325.7,147.7,325.7z M181.9,292.1c-1.9-7.2-6-13.6-11.7-18.3  c11.2-18.2,12-40.9,2-59.8c6.2-3.8,11-9.5,13.8-16.2C205.1,226.8,203.5,264.9,181.9,292.1z" /></svg>
 );
 
 export default memo(IconUbuntu);

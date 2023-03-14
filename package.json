@@ -43,7 +43,8 @@
     "react": "^18.3.0-next-41110021f-20230301",
     "react-dom": "^18.3.0-next-41110021f-20230301",
     "style9": "^0.16.1",
-    "swr": "^2.0.1"
+    "swr": "^2.0.1",
+    "typerscript": "latest"
   },
   "devDependencies": {
     "@mdx-js/mdx": "^2.2.1",

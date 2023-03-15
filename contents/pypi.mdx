@@ -78,7 +78,7 @@ pdm config pypi.url https://{{mirror}}/web/simple
 
 ### Poetry
 
-通过以下命令设置默认镜像：
+通过以下命令为单个项目设置默认镜像：
 
 <CodeBlock>
 
@@ -88,12 +88,24 @@ poetry source add --default mirrors https://{{mirror}}/web/simple/
 
 </CodeBlock>
 
-通过以下命令设置次级镜像：
+通过以下命令为单个项目设置次级镜像：
 
 <CodeBlock>
 
 ```
 poetry source add --secondary mirrors https://{{mirror}}/web/simple/
+```
+
+</CodeBlock>
+
+Poetry 尚未支持全局设置镜像。参考 [issue 1632](https://github.com/python-poetry/poetry/issues/1632)。
+
+使用全局镜像的临时方案是将 Poetry 的安装器切换回 pip，如下所示。但该方式会在将来的版本中停止支持，参考 [PR 7356](https://github.com/python-poetry/poetry/pull/7356)。
+
+<CodeBlock>
+
+```
+poetry config experimental.new-installer false
 ```
 
 </CodeBlock>

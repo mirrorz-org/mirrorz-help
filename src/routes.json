@@ -581,6 +581,12 @@
     "file": "nix-channels.mdx",
     "cname": "nix-channels"
   },
+  "/nixpkgs.git/": {
+    "title": "Nixpkgs Git",
+    "fullTitle": "Nixpkgs Git 镜像使用帮助",
+    "file": "nixpkgs.git.mdx",
+    "cname": "nixpkgs.git"
+  },
   "/nixos-images/": {
     "title": "NixOS Images",
     "fullTitle": "NixOS Images 镜像使用帮助",

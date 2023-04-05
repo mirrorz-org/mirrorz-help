@@ -1,0 +1,17 @@
+name: New Feature Request / 特性请求
+description: Request a feature for the website / 请求增加新的特性
+title: "feat: "
+labels: ["Feature"]
+body:
+  - type: markdown
+    id: introduction
+    attributes:
+      value: |
+        请使用此模板请求新的与帮助内容无关的新特性。
+        Please use this template when requesting new features unrelated to help contents
+  - type: textarea
+    id: feature
+    attributes:
+      label: 特性描述 (Feature Description)
+    validations:
+      required: true

@@ -2,6 +2,7 @@ import style9 from 'style9';
 
 import { useRouteMeta } from '@/hooks/use-route-meta';
 import ExternalLink from '../external-link';
+import { issueUrl } from '@/lib/client/constant';
 
 const styles = style9.create({
   main: {
@@ -43,8 +44,7 @@ export default function MetadataCard() {
     <div className={styles('main')}>
       <p className={styles('p')}>
         <span className={styles('bold')}>这个页面的内容有问题？</span>
-        <ExternalLink href="#" className={styles('link')}>
-          {/** TODO: GitHub Issue URL builder, GitHub Issue Template */}
+        <ExternalLink href={issueUrl} className={styles('link')}>
           在 GitHub Issue 反馈
         </ExternalLink>
       </p>

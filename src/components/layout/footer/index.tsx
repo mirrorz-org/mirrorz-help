@@ -3,7 +3,7 @@ import React, { memo, useEffect, useState } from 'react';
 import style9 from 'style9';
 import ExternalLink from '../../external-link';
 import NextLink from 'next/link';
-import { mirrorzUrl } from '@/lib/client/constant';
+import { issueUrl, mirrorzUrl } from '@/lib/client/constant';
 
 const styles = style9.create({
   footer: {
@@ -145,12 +145,12 @@ function Footer() {
           </div>
         </div>
         <div className={styles('footer_section_base')}>
-          {/** TODO: GitHub Issue URL builder + Contributing Guide */}
+          {/** TODO: Contributing Guide */}
           <Header>Contributing</Header>
           <FooterLink href="#">
             Code of Conduct (WIP)
           </FooterLink>
-          <FooterLink href="#">
+          <FooterLink href={issueUrl}>
             Report an Issue
           </FooterLink>
           <FooterLink href="#">

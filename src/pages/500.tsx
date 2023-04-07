@@ -4,6 +4,7 @@ import { Paragraph } from '../components/mdx-components/block';
 import Link from 'next/link';
 import SeoHead from '../components/seo/head';
 import ExternalLink from '../components/external-link';
+import { issueUrl } from '../lib/client/constant';
 
 const styles = style9.create({
   main: {
@@ -54,8 +55,7 @@ export default function ServerErrorPage() {
               服务器在处理你的请求时发生了错误。
             </Paragraph>
             <Paragraph>
-              {/** TODO: GitHub Issue URL builder + Issue Template */}
-              你也可以 <ExternalLink href="#" className={styles('link')}>通过 GitHub Issue 反馈这个问题</ExternalLink>，或者 <Link href="/" className={styles('link')}>返回首页</Link>。
+              你也可以 <ExternalLink href={issueUrl} className={styles('link')}>通过 GitHub Issue 反馈这个问题</ExternalLink>，或者 <Link href="/" className={styles('link')}>返回首页</Link>。
             </Paragraph>
           </article>
         </div>

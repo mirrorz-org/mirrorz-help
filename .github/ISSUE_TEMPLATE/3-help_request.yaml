@@ -1,0 +1,29 @@
+name: New Help Page / 新增帮助页面
+description: Request a new help page about a mirror repo / 为没有帮助页面的镜像请求帮助页面
+title: "contents: init: "
+labels: ["Contents"]
+body:
+  - type: markdown
+    id: introduction
+    attributes:
+      value: |
+        请使用此模板请求新的帮助页面。
+        Please use this template when requesting new help pages
+  - type: textarea
+    id: url
+    attributes:
+      label: 已有镜像链接（Existing Mirrored Repo URL）
+    validations:
+      required: true
+  - type: textarea
+    id: existing_help
+    attributes:
+      label: 已经存在的帮助页面（Existing help pages）
+    validations:
+      required: false
+  - type: textarea
+    id: more_info
+    attributes:
+      label: 备注 (Note)
+    validations:
+      required: false

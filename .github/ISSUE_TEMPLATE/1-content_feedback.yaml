@@ -1,0 +1,35 @@
+name: Help Content / 帮助内容
+description: Feedback on help content / 帮助内容的反馈和修正
+title: "contents: "
+labels: ["Contents"]
+body:
+  - type: markdown
+    id: introduction
+    attributes:
+      value: |
+        请使用此模板来报告与帮助内容有关的反馈和修正，并尽可能多地提供信息。
+        Please use this template when giving feedbacks or report bugs related to help contents.
+  - type: textarea
+    id: url
+    attributes:
+      label: 帮助页面的链接（Help page URL）
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: 原文 (Text)
+    validations:
+      required: true
+  - type: textarea
+    id: feedback
+    attributes:
+      label: 反馈和修正 (Feedback)
+    validations:
+      required: true
+  - type: textarea
+    id: more_info
+    attributes:
+      label: 备注 (Note)
+    validations:
+      required: false

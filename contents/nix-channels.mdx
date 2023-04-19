@@ -7,6 +7,8 @@ cname: 'nix-channels'
 
 目前 TUNA/BFSU/USTC 等并未提供 nix-darwin 的 binary cache，请使用官方源或 SJTUG。
 
+#### 持久配置
+
 以优先选择镜像，备选源站为例，选择以下配置之一：
 
 - 单独安装的 Nix：编辑配置文件添加或修改如下项（多用户安装修改 `/etc/nix/nix.conf`，单用户安装修改 `~/.config/nix/nix.conf`）：
@@ -38,6 +40,30 @@ cname: 'nix-channels'
     ```
 
     </CodeBlock>
+
+#### 临时使用
+
+在安装 NixOS 时临时使用：
+
+<CodeBlock>
+```shell
+nixos-install --option substituters "{{http_protocol}}{{mirror}}/store"
+```
+</CodeBlock>
+
+在 NixOS 切换配置时临时使用：
+
+<CodeBlock>
+```shell
+nixos-rebuild --option substituters "{{http_protocol}}{{mirror}}/store"
+```
+</CodeBlock>
+
+临时关闭可以通过清空 substituters 实现：
+
+```shell
+nixos-rebuild --options substituters ""
+```
 
 ### Nixpkgs channel
 

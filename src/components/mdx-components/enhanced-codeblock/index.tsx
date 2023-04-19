@@ -83,7 +83,8 @@ function CodeBlock({
       mirror: mirrorUrl,
       // eslint-disable-next-line no-nested-ternary -- it's ok
       http_protocol: isHttpProtocol ? (httpsEnabled ? 'https://' : 'http://') : '',
-      sudo: sudoEnabled ? 'sudo ' : ''
+      sudo: sudoEnabled ? 'sudo ' : '',
+      sudoE: sudoEnabled ? 'sudo -E ' : ''
     };
     return buildCode(code, variable);
   }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variableState]);

@@ -42,7 +42,7 @@ wget -O- https://get.docker.com/ | {{sudoE}}sh
 
 <CodeBlock>
 ```bash
-{{sudo}}apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+{{sudo}}apt-get install ca-certificates curl gnupg
 ```
 </CodeBlock>
 
@@ -61,11 +61,11 @@ wget -O- https://get.docker.com/ | {{sudoE}}sh
 >
 
 ```bash
-{{sudo}}mkdir -m 0755 -p /etc/apt/keyrings
+{{sudo}}install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/{{deb_release}}/gpg | {{sudo}}gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{http_protocol}}{{mirror}}/linux/{{deb_release}} \
-  $(lsb_release -cs) stable" | {{sudo}}tee /etc/apt/sources.list.d/docker.list > /dev/null
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | {{sudo}}tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
 </CodeBlock>

@@ -84,11 +84,13 @@ while (my $filename = shift @ARGV) {
 最后，更新软件包缓存
 
 <CodeBlock>
+
 ```shell
 {{sudo}}dnf clean all && dnf makecache
 或
 {{sudo}}yum clean all %% yum makecache
 ```
+
 </CodeBlock>
 
 注意，如果需要启用其中一些 repo，需要将其中的 `enabled=0` 改为 `enabled=1`。
@@ -102,6 +104,7 @@ while (my $filename = shift @ARGV) {
 centos.repo：
 
 <CodeBlock>
+
 ```
 [baseos]
 name=CentOS Stream $releasever - BaseOS
@@ -196,11 +199,13 @@ repo_gpgcheck=0
 metadata_expire=6h
 enabled=0
 ```
+
 </CodeBlock>
 
 centos-addons.repo：
 
 <CodeBlock>
+
 ```
 [highavailability]
 name=CentOS Stream $releasever - HighAvailability
@@ -347,4 +352,5 @@ repo_gpgcheck=0
 metadata_expire=6h
 enabled=0
 ```
+
 </CodeBlock>

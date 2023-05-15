@@ -1,0 +1,350 @@
+---
+title: CentOS Stream 软件仓库镜像使用帮助
+cname: 'centos-stream'
+---
+
+该文件夹只提供 CentOS Stream 9 ，如果需要非 Stream 版的 CentOS ，请参考 centos 的帮助。
+
+CentOS Stream 9 中源被整合入两个文件 centos.repo 和 centos-addons.repo ，由于文件中不包含 baseurl 字段，需要手动插入，通过文本替换修改源的方法较为复杂，也可以选择直接复制最后的替换结果覆盖源文件。
+
+### 文本替换
+
+将这段代码保存为一个文件，例如 update_mirror.pl 。
+
+<CodeBlock>
+
+```perl
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use autodie;
+
+my $mirrors = '{{http_protocol}}{{mirror}}';
+
+if (@ARGV < 1) {
+    die "Usage: $0 <filename1> <filename2> ...\n";
+}
+
+while (my $filename = shift @ARGV) {
+    my $backup_filename = $filename . '.bak';
+    rename $filename, $backup_filename;
+
+    open my $input, "<", $backup_filename;
+    open my $output, ">", $filename;
+
+    while (<$input>) {
+        s/^metalink/# metalink/;
+
+        if (m/^name/) {
+            my (undef, $repo, $arch) = split /-/;
+            $repo =~ s/^\s+|\s+$//g;
+            ($arch = defined $arch ? lc($arch) : '') =~ s/^\s+|\s+$//g;
+
+            if ($repo =~ /^Extras/) {
+                $_ .= "baseurl=${mirrors}/SIGs/\$releasever-stream/extras" . ($arch eq 'source' ? "/${arch}/" : "/\$basearch/") . "extras-common\n";
+            } else {
+                $_ .= "baseurl=${mirrors}/\$releasever-stream/$repo" . ($arch eq 'source' ? "/" : "/\$basearch/") . ($arch ne '' ? "${arch}/tree/" : "os") . "\n";
+            }
+        }
+
+        print $output $_;
+    }
+}
+```
+
+</CodeBlock>
+
+然后，在命令行中使用以下命令来执行它：
+
+<CodeBlock>
+
+```bash
+{{sudo}}perl update_mirror.pl /etc/yum.repos.d/centos*.repo
+```
+
+</CodeBlock>
+
+注意其中的`*`通配符，如果只需要替换一些文件中的源，请自行增删。
+
+另外，请确保已经安装了 Perl 解释器，并将 perl 命令添加到系统的 PATH 环境变量中。这样才能在命令行中运行 Perl 脚本。
+
+对于大部分 CentOS Stream 9 镜像，应该已经包含了 Perl 解释器，如果你的镜像没有包含，你可以使用以下命令简单的安装：
+
+<CodeBlock>
+
+```bash
+{{sudo}}dnf install perl
+或
+{{sudo}}yum install perl
+```
+
+</CodeBlock>
+
+最后，更新软件包缓存
+
+<CodeBlock>
+```shell
+{{sudo}}dnf clean all && dnf makecache
+或
+{{sudo}}yum clean all %% yum makecache
+```
+</CodeBlock>
+
+注意，如果需要启用其中一些 repo，需要将其中的 `enabled=0` 改为 `enabled=1`。
+
+**建议不要开启nfv-debuginfo和nfv-source ，这两个源疑似存在问题。**
+
+### 修改结果
+
+你可以对照替换结果是否准确，或直接复制结果覆盖源文件。
+
+centos.repo：
+
+<CodeBlock>
+```
+[baseos]
+name=CentOS Stream $releasever - BaseOS
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/BaseOS/$basearch/os
+# metalink=https://mirrors.centos.org/metalink?repo=centos-baseos-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[baseos-debuginfo]
+name=CentOS Stream $releasever - BaseOS - Debug
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/BaseOS/$basearch/debug/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-baseos-debug-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[baseos-source]
+name=CentOS Stream $releasever - BaseOS - Source
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/BaseOS/source/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-baseos-source-$stream&arch=source&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[appstream]
+name=CentOS Stream $releasever - AppStream
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/AppStream/$basearch/os
+# metalink=https://mirrors.centos.org/metalink?repo=centos-appstream-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[appstream-debuginfo]
+name=CentOS Stream $releasever - AppStream - Debug
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/AppStream/$basearch/debug/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-appstream-debug-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[appstream-source]
+name=CentOS Stream $releasever - AppStream - Source
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/AppStream/source/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-appstream-source-$stream&arch=source&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[crb]
+name=CentOS Stream $releasever - CRB
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/CRB/$basearch/os
+# metalink=https://mirrors.centos.org/metalink?repo=centos-crb-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[crb-debuginfo]
+name=CentOS Stream $releasever - CRB - Debug
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/CRB/$basearch/debug/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-crb-debug-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[crb-source]
+name=CentOS Stream $releasever - CRB - Source
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/CRB/source/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-crb-source-$stream&arch=source&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+```
+</CodeBlock>
+
+centos-addons.repo：
+
+<CodeBlock>
+```
+[highavailability]
+name=CentOS Stream $releasever - HighAvailability
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/HighAvailability/$basearch/os
+# metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=0
+
+[highavailability-debuginfo]
+name=CentOS Stream $releasever - HighAvailability - Debug
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/HighAvailability/$basearch/debug/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-debug-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[highavailability-source]
+name=CentOS Stream $releasever - HighAvailability - Source
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/HighAvailability/source/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-source-$stream&arch=source&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[nfv]
+name=CentOS Stream $releasever - NFV
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/NFV/$basearch/os
+# metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=0
+
+[nfv-debuginfo]
+name=CentOS Stream $releasever - NFV - Debug
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/NFV/$basearch/debug/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-debug-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[nfv-source]
+name=CentOS Stream $releasever - NFV - Source
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/NFV/source/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-source-$stream&arch=source&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[rt]
+name=CentOS Stream $releasever - RT
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/RT/$basearch/os
+# metalink=https://mirrors.centos.org/metalink?repo=centos-rt-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=0
+
+[rt-debuginfo]
+name=CentOS Stream $releasever - RT - Debug
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/RT/$basearch/debug/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-rt-debug-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[rt-source]
+name=CentOS Stream $releasever - RT - Source
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/RT/source/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-rt-source-$stream&arch=source&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[resilientstorage]
+name=CentOS Stream $releasever - ResilientStorage
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/ResilientStorage/$basearch/os
+# metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=0
+
+[resilientstorage-debuginfo]
+name=CentOS Stream $releasever - ResilientStorage - Debug
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/ResilientStorage/$basearch/debug/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-debug-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[resilientstorage-source]
+name=CentOS Stream $releasever - ResilientStorage - Source
+baseurl={{http_protocol}}{{mirror}}/$releasever-stream/ResilientStorage/source/tree/
+# metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-source-$stream&arch=source&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+
+[extras-common]
+name=CentOS Stream $releasever - Extras packages
+baseurl={{http_protocol}}{{mirror}}/SIGs/$releasever-stream/extras/$basearch/extras-common
+# metalink=https://mirrors.centos.org/metalink?repo=centos-extras-sig-extras-common-$stream&arch=$basearch&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Extras-SHA512
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[extras-common-source]
+name=CentOS Stream $releasever - Extras packages - Source
+baseurl={{http_protocol}}{{mirror}}/SIGs/$releasever-stream/extras/source/extras-common
+# metalink=https://mirrors.centos.org/metalink?repo=centos-extras-sig-extras-common-source-$stream&arch=source&protocol=https,http
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Extras-SHA512
+gpgcheck=1
+repo_gpgcheck=0
+metadata_expire=6h
+enabled=0
+```
+</CodeBlock>

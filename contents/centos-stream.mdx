@@ -64,13 +64,13 @@ while (my $filename = shift @ARGV) {
 
 <CodeBlock>
 
-```bash
-{{sudo}}perl update_mirror.pl /etc/yum.repos.d/centos*.repo
+```shell
+{{sudo}}perl /tmp/update_mirror.pl /etc/yum.repos.d/centos*.repo
 ```
 
 </CodeBlock>
 
-注意其中的 `*` 通配符，如果只需要替换一些文件中的源，请自行增删。
+注意将 ```/tmp/update_mirror.pl``` 替换为脚本实际保存的路径。其中的 `*` 通配符，如果只需要替换一些文件中的源，请自行增删。
 
 另外，请确保已经安装了 Perl 解释器，并将 perl 命令添加到系统的 PATH 环境变量中。这样才能在命令行中运行 Perl 脚本。
 
@@ -78,11 +78,11 @@ while (my $filename = shift @ARGV) {
 
 <CodeBlock>
 
-```bash
+```shell
+# 使用 dnf
 {{sudo}}dnf install perl
 
-或
-
+# 使用 yum
 {{sudo}}yum install perl
 ```
 
@@ -93,10 +93,10 @@ while (my $filename = shift @ARGV) {
 <CodeBlock>
 
 ```shell
+# 使用 dnf
 {{sudo}}dnf clean all && {{sudo}}dnf makecache
 
-或
-
+# 使用 yum
 {{sudo}}yum clean all && {{sudo}}yum makecache
 ```
 

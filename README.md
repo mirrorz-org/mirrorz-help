@@ -25,3 +25,5 @@ npm run og:build && npm run build && npm run export
    e.g. [TUNA/BFSU](https://github.com/tuna/mirrorz-help/blob/tuna/custom/tuna/transpile.sh)
 4. Self-host
    e.g. [xtom.help](https://github.com/xtomcom/xtom.help)
+5. Reverse proxy
+   e.g. [NJU](https://mirror.nju.edu.cn/)

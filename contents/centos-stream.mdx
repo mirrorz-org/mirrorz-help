@@ -5,13 +5,13 @@ cname: 'centos-stream'
 
 该文件夹只提供 CentOS Stream 9，如果需要非 Stream 版的 CentOS，请参考 [centos 的帮助](/centos/)。
 
-CentOS Stream 9 默认启用了包管理工具 dnf，其是 yum 包管理工具的替代品。dnf 与 yum 大部分的命令都是通用的，dnf 也使用/etc/yum.repos.d/进行镜像配置。
+CentOS Stream 9 默认启用了包管理工具 dnf，其是 yum 包管理工具的替代品。dnf 与 yum 大部分的命令都是通用的，dnf 也使用 `/etc/yum.repos.d/` 进行镜像配置。
 
-CentOS Stream 9 中源被整合入两个文件 centos.repo 和 centos-addons.repo，由于文件中不包含 baseurl 字段，需要手动插入，通过文本替换修改源的方法较为复杂，也可以选择直接复制最后的替换结果覆盖源文件。
+CentOS Stream 9 中源被整合入两个文件 `centos.repo` 和 `centos-addons.repo`，由于文件中不包含 `baseurl` 字段，需要手动插入，通过文本替换修改源的方法较为复杂，也可以选择直接复制最后的替换结果覆盖源文件。
 
 ### 文本替换
 
-将这段代码保存为一个文件，例如 update_mirror.pl。
+将这段代码保存为一个文件，例如 `update_mirror.pl`。
 
 <CodeBlock
   enableQuickSetup
@@ -70,9 +70,9 @@ while (my $filename = shift @ARGV) {
 
 </CodeBlock>
 
-注意将 ```/tmp/update_mirror.pl``` 替换为脚本实际保存的路径。其中的 `*` 通配符，如果只需要替换一些文件中的源，请自行增删。
+注意将 `/tmp/update_mirror.pl` 替换为脚本实际保存的路径。其中的 `*` 通配符，如果只需要替换一些文件中的源，请自行增删。
 
-另外，请确保已经安装了 Perl 解释器，并将 perl 命令添加到系统的 PATH 环境变量中。这样才能在命令行中运行 Perl 脚本。
+另外，请确保已经安装了 Perl 解释器，并将 `perl` 命令添加到系统的 `PATH` 环境变量中。这样才能在命令行中运行 Perl 脚本。
 
 对于大部分 CentOS Stream 9 镜像，应该已经包含了 Perl 解释器，如果你的镜像没有包含，你可以使用以下命令简单的安装：
 
@@ -104,13 +104,13 @@ while (my $filename = shift @ARGV) {
 
 注意，如果需要启用其中一些 repo，需要将其中的 `enabled=0` 改为 `enabled=1`。
 
-**建议不要开启 nfv-source，这个源疑似存在问题。**
+**注：截至 2023-05-16，并未在官方源与镜像源中发现 nfv-source，建议不要开启 nfv-source。**
 
 ### 修改结果
 
 你可以对照替换结果是否准确，或直接复制结果覆盖源文件。
 
-centos.repo:
+`centos.repo`:
 
 <CodeBlock
   enableQuickSetup
@@ -214,7 +214,7 @@ enabled=0
 
 </CodeBlock>
 
-centos-addons.repo:
+`centos-addons.repo`:
 
 <CodeBlock
   enableQuickSetup

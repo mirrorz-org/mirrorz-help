@@ -22,7 +22,6 @@ EPEL(Extra Packages for Enterprise Linux) 是由 Fedora Special Interest Group �
 <CodeBlock>
 
 ```shell
-# 对于 CentOS 7
 {{sudo}}sed -e 's!^metalink=!#metalink=!g' \
     -e 's!^#baseurl=!baseurl=!g' \
     -e 's!https\?://download\.fedoraproject\.org/pub/epel!{{http_protocol}}{{mirror}}!g' \

@@ -41,6 +41,17 @@ cname: 'nix-channels'
 
     </CodeBlock>
 
+  如果因为无法访问 https://cache.nixos.org 等原因，希望避免自动添加该默认地址，请在配置中使用`lib.mkForce`。
+
+    <CodeBlock>
+
+    ```nix
+    # load `lib` into namespace at the file head with `{ config, pkgs, lib, ... }:`
+    nix.settings.substituters = lib.mkForce [ "{{http_protocol}}{{mirror}}/store" ];
+    ```
+
+    </CodeBlock>
+
 #### 临时使用
 
 在安装 NixOS 时临时使用：

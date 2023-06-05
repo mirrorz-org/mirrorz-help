@@ -1,0 +1,30 @@
+---
+title: ImmortalWrt 软件仓库镜像使用帮助
+cname: 'immortalwrt'
+---
+
+ImmortalWrt 是 OpenWrt 的一个第三方分支，主要针对国人用户开发，提供更多的本地化软件包和设备支持。
+
+可以使用以下方法更换软件源：
+
+修改 `/etc/opkg/distfeeds.conf` 文件，将源地址 `https://downloads.immortalwrt.org` 或 `https://mirrors.vsean.net/openwrt` 更改为：
+
+<CodeBlock>
+```
+{{http_protocol}}{{mirror}}
+```
+</CodeBlock>
+
+然后运行 `opkg update` 刷新软件包列表。
+
+或通过 sed 命令一键更改：
+
+<CodeBlock>
+```bash
+sed -e 's,https://downloads.immortalwrt.org,{{http_protocol}}{{mirror}},g' \
+    -e 's,https://mirrors.vsean.net/openwrt,{{http_protocol}}{{mirror}},g' \
+    -i.bak /etc/opkg/distfeeds.conf
+```
+</CodeBlock>
+
+您也可以登录 LuCI 后台，进入 `系统` -> `软件包` 页面，点击 `配置 opkg` 并按上述说明完成对源地址的更改。

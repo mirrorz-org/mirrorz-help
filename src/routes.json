@@ -425,6 +425,12 @@
     "file": "homebrew-bottles.mdx",
     "cname": "homebrew-bottles"
   },
+  "/immortalwrt/": {
+    "title": "ImmortalWrt 软件仓库",
+    "fullTitle": "ImmortalWrt 软件仓库镜像使用帮助",
+    "file": "immortalwrt.mdx",
+    "cname": "immortalwrt"
+  },
   "/influxdata/": {
     "title": "Influxdata 软件仓库",
     "fullTitle": "Influxdata 软件仓库镜像使用帮助",

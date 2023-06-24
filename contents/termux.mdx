@@ -62,8 +62,11 @@ deb {{http_protocol}}{{mirror}}/apt/termux-main stable main
 ```
 
 </CodeBlock>
+
 如果启用了其他repo(x11,root)请同时修改这些
+
 如果启用了x11-repo则修改 
+
 <CodeBlock
   enableQuickSetup
   filepath="$PREFIX/etc/apt/sources.list.d/x11.list"
@@ -75,7 +78,9 @@ deb {{http_protocol}}{{mirror}} }/apt/termux-x11 x11 main
 ```
 
 </CodeBlock>
+
 如果启用了root-repo则修改
+
 <CodeBlock
   enableQuickSetup
   filepath="$PREFIX/etc/apt/sources.list.d/root.list"

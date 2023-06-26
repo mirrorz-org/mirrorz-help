@@ -47,6 +47,22 @@ apt update && apt upgrade
 
 </CodeBlock>
 
+社区源(如果已经启用) 
+
+x11-repo
+
+```bash
+sed -i 's@^\(deb.*x11 main\)$@#\1\ndeb {{http_protocol}}{{mirror}}/apt/termux-x11 x11 main @' $PREFIX/etc/apt/sources.list.d/x11.list 
+apt update && apt upgrade 
+```
+
+root-repo
+
+```bash
+sed -i 's@^\(deb.*root main\)$@#\1\ndeb {{http_protocol}}{{mirror}}/apt/termux-root root main @' $PREFIX/etc/apt/sources.list.d/root.list 
+apt update && apt upgrade 
+```
+
 ### 手动修改
 
 编辑 `$PREFIX/etc/apt/sources.list` 修改为如下内容
@@ -63,9 +79,9 @@ deb {{http_protocol}}{{mirror}}/apt/termux-main stable main
 
 </CodeBlock>
 
-如果启用了其他repo(x11,root)请同时修改这些
+社区源(如果已经启用)
 
-如果启用了x11-repo则修改 
+x11-repo
 
 <CodeBlock
   enableQuickSetup
@@ -79,7 +95,7 @@ deb {{http_protocol}}{{mirror}} }/apt/termux-x11 x11 main
 
 </CodeBlock>
 
-如果启用了root-repo则修改
+root-repo
 
 <CodeBlock
   enableQuickSetup

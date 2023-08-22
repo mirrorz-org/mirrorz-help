@@ -17,14 +17,14 @@ export const HttpsSwitch = memo(() => {
 });
 
 export const SudoSwitch = memo(() => {
-  const httpsEnabled = useMirrorSudoEnabled();
-  const setHttpsEnabled = useSetMirrorSudoEnabled();
+  const sudoEnabled = useMirrorSudoEnabled();
+  const setSudoEnabled = useSetMirrorSudoEnabled();
 
   const handleChange = useCallback(() => {
-    setHttpsEnabled(i => !i);
-  }, [setHttpsEnabled]);
+    setSudoEnabled(i => !i);
+  }, [setSudoEnabled]);
 
   return (
-    <CheckBox checked={httpsEnabled} onChange={handleChange} label="是否使用 sudo" />
+    <CheckBox checked={sudoEnabled} onChange={handleChange} label="是否使用 sudo" />
   );
 });

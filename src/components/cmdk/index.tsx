@@ -20,7 +20,7 @@ import {
   useSyncExternalStore
 } from 'react'
 import commandScore from 'command-score'
-import useLayoutEffect from '@/hooks/use-isomorphic-effect'
+import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect'
 
 type Children = { children?: React.ReactNode }
 type DivProps = React.HTMLAttributes<HTMLDivElement>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSearchOpen, useSetSearchOpen } from '../contexts/search';
 
 const isEditingContent = (event: KeyboardEvent) => {
@@ -16,13 +16,6 @@ export const useSearchHotKeys = () => {
   const isOpen = useSearchOpen();
   const setOpen = useSetSearchOpen();
 
-  const handleOpen = useCallback(() => {
-    setOpen(true);
-  }, [setOpen]);
-  const handleClose = useCallback(() => {
-    setOpen(false);
-  }, [setOpen]);
-
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (
@@ -32,17 +25,13 @@ export const useSearchHotKeys = () => {
         || (!isEditingContent(event) && event.key === '/' && !isOpen)
       ) {
         event.preventDefault();
-        if (isOpen) {
-          handleClose();
-        } else {
-          handleOpen();
-        }
+        setOpen(isOpen => !isOpen);
       }
     }
 
     window.addEventListener('keydown', onKeyDown);
-    return function () {
+    return () => {
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [isOpen, handleOpen, handleClose]);
+  }, [isOpen, setOpen]);
 };

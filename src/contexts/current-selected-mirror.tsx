@@ -7,7 +7,7 @@ import { issueUrl } from '../lib/client/constant';
 import { useSetDialog } from './dialog';
 import ExternalLink from '../components/external-link';
 import style9 from 'style9';
-import useLayoutEffect from '../hooks/use-isomorphic-effect';
+import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect';
 
 const styles = style9.create({
   link: {

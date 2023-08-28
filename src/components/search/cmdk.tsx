@@ -80,7 +80,6 @@ const styles = style9.create({
     transitionDuration: '150ms',
     transitionTimingFunction: 'ease',
     position: 'relative',
-    // @ts-expect-error -- known property
     gap: '12px'
   },
   list: {

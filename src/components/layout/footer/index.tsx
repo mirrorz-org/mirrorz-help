@@ -1,5 +1,6 @@
 import MirrorZLogo from '@/components/mirrorz-logo';
-import React, { memo, useEffect, useState } from 'react';
+import type React from 'react';
+import { memo, useEffect, useState } from 'react';
 import style9 from 'style9';
 import ExternalLink from '../../external-link';
 import NextLink from 'next/link';
@@ -104,7 +105,7 @@ const CurrentYear = () => {
   return <span>{year}</span>;
 };
 
-const Header = ({ children }: React.PropsWithChildren<unknown>) => (
+const Header = ({ children }: React.PropsWithChildren) => (
   <div className={styles('footer_header')}>{children}</div>
 );
 

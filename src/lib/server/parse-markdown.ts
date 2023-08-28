@@ -29,16 +29,16 @@ const { FileStore, stableHash } = metroCache as any;
 const contentsPath = path.resolve(process.cwd(), 'contents');
 
 export interface ToC {
-  url: string;
-  text: string;
+  url: string,
+  text: string,
   depth: number
 }
 
 export interface ContentProps {
-  content: any;
-  toc: ToC[];
-  meta: MetaFromFrontMatters;
-  cname: string;
+  content: any,
+  toc: ToC[],
+  meta: MetaFromFrontMatters,
+  cname: string
 }
 
 const fromHrefToSegments = (href: string) => {
@@ -132,7 +132,7 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
 
   const { code } = await transform(jsxCode.toString('utf-8'), { module: { type: 'commonjs' } });
 
-  const fakeExports = { default: (_arg: any): React.ReactElement => ({} as any) };
+  const fakeExports = { default: (_arg: any): React.JSX.Element => ({} as any) };
   const fakeRequire = (name: string) => {
     if (name === 'react/jsx-runtime') return require('react/jsx-runtime');
     // For each fake MDX import, give back the string component name.
@@ -178,7 +178,7 @@ function stringifyNodeOnServer(key: string, val: any) {
 }
 
 // Get ToC from children
-function getTableOfContents(children: React.ReactElement, depth: number) {
+function getTableOfContents(children: React.ReactNode, depth: number) {
   const anchors: ToC[] = [];
   extractHeaders(children, depth, anchors);
   if (anchors.length > 0) {
@@ -196,7 +196,7 @@ const headerTypes = new Set([
   'h2',
   'h3'
 ]);
-function extractHeaders(children: React.ReactElement, depth: number, out: ToC[]) {
+function extractHeaders(children: React.ReactNode, depth: number, out: ToC[]) {
   for (const child of Children.toArray(children)) {
     if (typeof child === 'object' && 'type' in child && typeof child.type === 'string' && headerTypes.has(child.type)) {
       const header = {

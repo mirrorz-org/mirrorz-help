@@ -46,7 +46,7 @@ function reviveNodeOnClient(key: unknown, val: any) {
       type = Fragment;
       props = { children: props.children };
     }
-    if (MDXComponents[type]) {
+    if (type in MDXComponents) {
       type = MDXComponents[type];
     }
     if (!type) {

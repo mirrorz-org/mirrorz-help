@@ -13,8 +13,6 @@ module.exports = withBundleAnalyzer(withStyle9({
   trailingSlash: true,
   reactStrictMode: true,
   experimental: {
-    runtime: 'nodejs',
-    legacyBrowsers: false,
     sharedPool: true,
     workerThreads: true,
     optimizeCss: process.env.NODE_ENV === 'production' ? {

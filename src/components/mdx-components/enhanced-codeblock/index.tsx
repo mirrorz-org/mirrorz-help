@@ -17,15 +17,15 @@ import { useMirrorHttpsEnabled } from '@/contexts/mirror-enable-https';
 import { useMirrorSudoEnabled } from '@/contexts/mirror-enable-sudo';
 
 interface CodeBlockProps {
-  isHttpProtocol?: boolean;
-  menus?: Menu[];
-  children: React.ReactElement;
-  code: string;
-  codeLanguage?: string;
-  codeMeta?: string;
-  enableQuickSetup?: boolean;
-  quickSetupNeedSudo?: boolean
-  filepath?: string;
+  isHttpProtocol?: boolean,
+  menus?: Menu[],
+  children: React.ReactNode,
+  code: string,
+  codeLanguage?: string,
+  codeMeta?: string,
+  enableQuickSetup?: boolean,
+  quickSetupNeedSudo?: boolean,
+  filepath?: string
 }
 
 const styles = style9.create({
@@ -46,11 +46,11 @@ const reducer = (prevState: Record<string, string>, value: MenuValue) => ({
 });
 
 const createInitialState = (menus: Menu[]): Record<string, string> => {
-  return menus.reduce((acc, menu) => {
+  return menus.reduce<Record<string, string>>((acc, menu) => {
     const value = menu.items[0][1];
     acc = { ...acc, ...value };
     return acc;
-  }, {} as Record<string, string>);
+  }, {});
 };
 
 function CodeBlock({

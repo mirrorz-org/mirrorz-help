@@ -6,5 +6,5 @@ const routesJson = _routesJson as RoutesJson;
 
 export const useRouteMeta = (): RoutesJson[string] | null => {
   const cleanedPath = usePathname();
-  return routesJson[cleanedPath] || null;
+  return cleanedPath in routesJson ? routesJson[cleanedPath] : null;
 };

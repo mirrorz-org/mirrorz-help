@@ -2,11 +2,11 @@
 import React from 'react';
 
 interface ContentProps {
-  siteName?: string;
-  titleLine1: string;
-  titleLine2?: string;
-  domain?: string;
-  path: string;
+  siteName?: string,
+  titleLine1: string,
+  titleLine2?: string,
+  domain?: string,
+  path: string
 }
 
 export const Content = ({

@@ -4,7 +4,8 @@ import {
   Trigger as TabsTrigger,
   Content as TabsContent
 } from '@radix-ui/react-tabs';
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 import style9 from 'style9';
 
 import type { StyleWithAtRulesAndFalsy } from '@/types/style9';
@@ -26,7 +27,6 @@ const styles = style9.create({
     paddingLeft: '12px',
     paddingRight: '12px',
     overscrollBehaviorX: 'contain',
-    // @ts-expect-error -- special proeprty for IE & Edge
     msOverflowStyle: 'none'
   },
   list: {

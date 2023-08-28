@@ -97,7 +97,7 @@ function ToCAside({ toc }: ToCProps) {
           {toc.length > 0
             && toc.map((h, i) => {
               if (process.env.NODE_ENV !== 'production') {
-                if (h.url == null) {
+                if (typeof h.url !== 'string') {
                   // eslint-disable-next-line no-console -- only log in DEV
                   console.error('Heading does not have URL');
                 }

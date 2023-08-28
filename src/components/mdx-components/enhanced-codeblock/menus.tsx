@@ -4,8 +4,8 @@ import { memo, useCallback, useMemo } from 'react';
 
 export type MenuValue = Record<string, string>;
 export interface Menu {
-  title: string;
-  items: [displayName: string, value: MenuValue][];
+  title: string,
+  items: Array<[displayName: string, value: MenuValue]>
 }
 
 const styles = style9.create({
@@ -62,8 +62,8 @@ const styles = style9.create({
 });
 
 interface CodeBlockMenuProps {
-  menus: Menu[];
-  dispatch: React.Dispatch<MenuValue>;
+  menus: Menu[],
+  dispatch: React.Dispatch<MenuValue>
 }
 
 function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {

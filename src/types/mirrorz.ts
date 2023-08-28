@@ -11,7 +11,7 @@ export interface Site {
   group?: string,
   disk?: string,
   note?: string,
-  big?: string,
+  big?: string
 }
 
 export interface Mirror {
@@ -21,7 +21,7 @@ export interface Mirror {
   desc?: string,
   help?: string,
   upstream?: string,
-  size?: string,
+  size?: string
 }
 
 export interface MirrorZLegacy {
@@ -36,15 +36,15 @@ export interface MirrorZLegacyPackExtension {
 export type MirrorZLegacyPack = MirrorZLegacy[] | MirrorZLegacyPackExtension;
 
 export interface ParsedMirror {
-  cname: string;
-  full: string;
-  help: string | null;
-  upstream: string | undefined;
-  desc: string | undefined;
-  status: string;
-  size: string | undefined;
-  source: string;
-  note: string | undefined;
+  cname: string,
+  full: string,
+  help: string | null,
+  upstream: string | undefined,
+  desc: string | undefined,
+  status: string,
+  size: string | undefined,
+  source: string,
+  note: string | undefined
 }
 
 export interface ParsedMirrorZLegacy {
@@ -58,9 +58,9 @@ export interface ParsedMirrorZLegacy {
 }
 
 export interface CnameToMirrorZ {
-  [cname: string]: {
+  [cname: string]: Array<{
     site: Site,
     baseUrl: string,
     mirror: ParsedMirror
-  }[]
+  }>
 }

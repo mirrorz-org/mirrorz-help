@@ -9,9 +9,9 @@ const sharedJsonLd = {
 };
 
 interface JsonLDProps extends Omit<JSX.IntrinsicElements['script'], 'type' | 'dangerouslySetInnerHTML' | 'children' | 'title'> {
-  isContent?: boolean
-  title?: string
-  siteName?: string
+  isContent?: boolean,
+  title?: string,
+  siteName?: string,
   ogImage?: string
 }
 

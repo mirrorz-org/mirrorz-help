@@ -23,11 +23,11 @@ const parseMirror = (site: Site, { cname, url, help, size, desc, upstream, statu
   note: site.note
 });
 
-const mirrorsArrayToObject = (site: Site, mirrors: Mirror[]) => mirrors.reduce((acc, cur) => {
+const mirrorsArrayToObject = (site: Site, mirrors: Mirror[]) => mirrors.reduce<Record<string, ParsedMirror>>((acc, cur) => {
   const parsedMirror = parseMirror(site, cur);
   acc[parsedMirror.cname] = parsedMirror;
   return acc;
-}, {} as Record<string, ParsedMirror>);
+}, {});
 
 const fetcher = async () => {
   // TODO: support both mirrorz and cernet.edu.cn
@@ -43,7 +43,7 @@ const fetcher = async () => {
     throw new RedirectError(`https://${siteHost}/#${pack.redirect}`);
   }
 
-  const parsedMirrorZLegacy = pack.reduce((acc, cur) => {
+  const parsedMirrorZLegacy = pack.reduce<ParsedMirrorZLegacy>((acc, cur) => {
     const { site, mirrors } = cur;
     const { abbr } = site;
 
@@ -55,9 +55,9 @@ const fetcher = async () => {
       mirrors: mirrorsArrayToObject(site, mirrors)
     };
     return acc;
-  }, {} as ParsedMirrorZLegacy);
+  }, {});
 
-  const cnameToMirrorZ = pack.reduce((acc, cur) => {
+  const cnameToMirrorZ = pack.reduce<CnameToMirrorZ>((acc, cur) => {
     cur.mirrors.forEach(mirror => {
       const { cname } = mirror;
       acc[cname] ||= [];
@@ -68,7 +68,7 @@ const fetcher = async () => {
       });
     });
     return acc;
-  }, {} as CnameToMirrorZ);
+  }, {});
 
   return [parsedMirrorZLegacy, cnameToMirrorZ] as const;
 };

@@ -5,7 +5,7 @@ import { Resvg } from '@resvg/resvg-js';
 import path from 'path';
 import { promises as fsPromises } from 'fs';
 import * as Log from 'next/dist/build/output/log';
-import { fileExists } from 'next/dist/lib/file-exists';
+import { fileExists, FileType } from 'next/dist/lib/file-exists';
 
 import { loadEnvConfig } from '@next/env';
 
@@ -32,10 +32,10 @@ const DISK_CACHE_BREAKER = 0;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 interface GenerateOpengraphOptions<T> {
-  template: (props: T) => JSX.Element;
-  props: T;
-  id: string;
-  outputPath: string;
+  template: (props: T) => JSX.Element,
+  props: T,
+  id: string,
+  outputPath: string
 }
 
 async function generateOpengraph<T = any>({
@@ -117,7 +117,7 @@ async function generateOpengraph<T = any>({
 }
 
 async function runGenerate(outputRoot: string, domain: string) {
-  if (!await fileExists(outputRoot, 'directory')) {
+  if (!await fileExists(outputRoot, FileType.Directory)) {
     await fsPromises.mkdir(outputRoot, { recursive: true });
   }
 

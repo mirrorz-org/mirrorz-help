@@ -3,10 +3,10 @@ import Link from 'next/link';
 import style9 from 'style9';
 
 interface SidebarLinkProps {
-  href: string;
-  isActive?: boolean;
-  title: string;
-  isPending: boolean;
+  href: string,
+  isActive?: boolean,
+  title: string,
+  isPending: boolean
 }
 
 const styles = style9.create({

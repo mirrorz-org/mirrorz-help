@@ -1,7 +1,7 @@
 import { createContext, startTransition, useCallback, useContext, useEffect, useState } from 'react';
 
-import { noop } from '@/lib/shared/util';
-import { requestIdleCallback } from '@/lib/client/request-idle-callback';
+import { noop } from 'foxact/noop';
+import { requestIdleCallback } from 'foxact/request-idle-callback';
 
 const darkModeStorageKey = 'user-color-scheme';
 
@@ -62,7 +62,7 @@ export const useSetDarkMode = () => {
   }, [setDarkMode]);
 };
 
-export const DarkModeProvider = ({ children }: React.PropsWithChildren<unknown>) => {
+export const DarkModeProvider = ({ children }: React.PropsWithChildren) => {
   const [theme, setTheme] = useState<ColorScheme>('auto');
 
   // We are showing the current theme value directly in the initial DOM (in a <select>)

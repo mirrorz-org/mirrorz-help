@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { memo } from 'react';
-import { typescriptHappyForwardRef } from '@/lib/client/forwardref-with-as';
+import { typescriptHappyForwardRef } from 'foxact/typescript-happy-forward-ref';
 import style9 from 'style9';
 import type { StyleWithAtRulesAndFalsy } from '@/types/style9';
 
@@ -81,11 +81,11 @@ type HeadingProps<T extends React.ElementType> = Omit<
 React.PropsWithChildren<React.ComponentPropsWithoutRef<T>>,
 'className'
 > & {
-  xstyle?: StyleWithAtRulesAndFalsy[]
-  isPageAnchor?: boolean;
-  children: React.ReactNode;
-  id?: string;
-  as?: T;
+  xstyle?: StyleWithAtRulesAndFalsy[],
+  isPageAnchor?: boolean,
+  children: React.ReactNode,
+  id?: string,
+  as?: T
 };
 
 export const Heading = typescriptHappyForwardRef(<T extends 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>(

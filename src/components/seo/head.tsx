@@ -12,7 +12,7 @@ interface SeoHeadProps {
   nofollow?: boolean,
   twitterCardType?: 'summary_large_image' | 'summary',
   ogType?: 'website' | 'article',
-  ogImage?: { url: string, width?: number | undefined, height?: number | undefined },
+  ogImage?: { url: string, width?: number | undefined, height?: number | undefined }
 }
 
 export default function SeoHead({

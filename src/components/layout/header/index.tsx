@@ -3,8 +3,8 @@ import MetaCard from './metacard';
 import { memo } from 'react';
 
 interface PageHeadingProps {
-  title: string;
-  description?: string;
+  title: string,
+  description?: string
 }
 
 const styles = style9.create({

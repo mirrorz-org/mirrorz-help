@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useMemo, useState } from 'react';
-import { noop } from '../lib/shared/util';
+import type React from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
+import { noop } from 'foxact/noop';
 import { useMirrorZData } from '../hooks/use-mirrorz-data';
 import { useRouter } from 'next/router';
 import { sanitizeAbbrForMirrorZ } from '../lib/client/utils';

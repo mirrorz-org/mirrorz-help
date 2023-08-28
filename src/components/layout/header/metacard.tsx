@@ -16,14 +16,12 @@ const styles = style9.create({
     marginTop: '24px',
     display: 'flex',
     flexDirection: 'column',
-    // @ts-expect-error -- gap is known property
     gap: '24px'
   },
   menu_wrapper: {
     display: 'flex',
     flexWrap: 'nowrap',
     alignItems: 'center',
-    // @ts-expect-error -- gap is known property
     gap: '12px'
   },
   switch_wrapper: {
@@ -47,7 +45,7 @@ function MetaCard() {
         <MirrorSelectMenu />
       </div>
       <div className={styles('switch_wrapper')}>
-        {(disable_https_select !== true) && (<HttpsSwitch />)}
+        {(!disable_https_select) && (<HttpsSwitch />)}
         <SudoSwitch />
       </div>
     </div>

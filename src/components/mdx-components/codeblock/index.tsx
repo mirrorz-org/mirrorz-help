@@ -8,8 +8,8 @@ import buttonGroupStyles from './buttongroup.module.css';
 const Lowlight = lazy(() => import('./highlight'));
 
 interface NormalCodeBlockProps {
-  code: string;
-  language?: string | undefined;
+  code: string,
+  language?: string | undefined
 }
 
 const styles = style9.create({

@@ -77,8 +77,8 @@ const alias: Record<string, string> = {
 };
 
 interface LowlightProps {
-  code: string;
-  language: string;
+  code: string,
+  language: string
 }
 
 export default function Lowlight({ code, language }: LowlightProps) {

@@ -24,6 +24,7 @@ curl https://packages.gitlab.com/gpg.key 2> /dev/null | {{sudo}}apt-key add - &>
     {
       title: '发行版',
       items: [
+        ['Debian 12', { os_name: 'debian', release_name: 'bookworm' }],
         ['Debian 11', { os_name: 'debian', release_name: 'bullseye' }],
         ['Debian 10', { os_name: 'debian', release_name: 'buster' }],
         ['Debian 9', { os_name: 'debian', release_name: 'stretch' }],

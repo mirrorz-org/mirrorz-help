@@ -47,21 +47,25 @@ apt update && apt upgrade
 
 </CodeBlock>
 
-社区源 (如果已经启用) 
+社区源 (如果已经启用)
 
 x11-repo
 
+<CodeBlock> 
 ```bash
 sed -i 's@^\(deb.*x11 main\)$@#\1\ndeb {{http_protocol}}{{mirror}}/apt/termux-x11 x11 main @' $PREFIX/etc/apt/sources.list.d/x11.list 
 apt update && apt upgrade 
 ```
+</CodeBlock>
 
 root-repo
 
+<CodeBlock> 
 ```bash
 sed -i 's@^\(deb.*root main\)$@#\1\ndeb {{http_protocol}}{{mirror}}/apt/termux-root root main @' $PREFIX/etc/apt/sources.list.d/root.list 
 apt update && apt upgrade 
 ```
+</CodeBlock> 
 
 ### 手动修改
 

@@ -47,6 +47,30 @@ apt update && apt upgrade
 
 </CodeBlock>
 
+社区源（如果已经启用）
+
+x11-repo
+
+<CodeBlock> 
+
+```bash
+sed -i 's@^\(deb.*x11 main\)$@#\1\ndeb {{http_protocol}}{{mirror}}/apt/termux-x11 x11 main @' $PREFIX/etc/apt/sources.list.d/x11.list 
+apt update && apt upgrade 
+```
+
+</CodeBlock>
+
+root-repo
+
+<CodeBlock> 
+
+```bash
+sed -i 's@^\(deb.*root main\)$@#\1\ndeb {{http_protocol}}{{mirror}}/apt/termux-root root main @' $PREFIX/etc/apt/sources.list.d/root.list 
+apt update && apt upgrade 
+```
+
+</CodeBlock> 
+
 ### 手动修改
 
 编辑 `$PREFIX/etc/apt/sources.list` 修改为如下内容
@@ -54,34 +78,45 @@ apt update && apt upgrade
 <CodeBlock
   enableQuickSetup
   filepath="$PREFIX/etc/apt/sources.list"
-  menus={[
-    {
-      title: '启用 X11',
-      items: [
-        ['否', { enable_x11: '# ' }],
-        ['是', { enable_x11: '' }],
-      ]
-    },
-    {
-      title: '启用 root',
-      items: [
-        ['否', { enable_root: '# ' }],
-        ['是', { enable_root: '' }],
-      ]
-    },
-  ]}
-
 >
 
 ```properties
 # The termux repository mirror
 deb {{http_protocol}}{{mirror}}/apt/termux-main stable main
-{{enable_x11}}deb {{http_protocol}}{{mirror}}/apt/termux-x11 x11 main
-{{enable_root}}deb {{http_protocol}}{{mirror}}/apt/termux-root root stable
 ```
 
 </CodeBlock>
 
+社区源（如果已经启用）
+
+x11-repo
+
+<CodeBlock
+  enableQuickSetup
+  filepath="$PREFIX/etc/apt/sources.list.d/x11.list"
+>
+
+```properties
+# The termux repository mirror
+deb {{http_protocol}}{{mirror}}/apt/termux-x11 x11 main 
+```
+
+</CodeBlock>
+
+root-repo
+
+<CodeBlock
+  enableQuickSetup
+  filepath="$PREFIX/etc/apt/sources.list.d/root.list"
+>
+
+```properties
+# The termux repository mirror
+deb {{http_protocol}}{{mirror}}/apt/termux-root root stable 
+```
+
+</CodeBlock>
+ 
 请使用内置或安装在 Termux 里的文本编辑器，例如 `vi` / `vim` / `nano` 等，**不要使用 RE 管理器等其他具有 ROOT 权限的外部 APP** 来修改 Termux 的文件
 
 注：Termux 会自动将环境变量 `$PREFIX` 设定为 `/data/data/com.termux/files/usr`

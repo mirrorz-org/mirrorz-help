@@ -1,6 +1,6 @@
 # mirrorz-help
 
-[mirrors.help](https://mirrors.help) and [help.mirrors.cernet.edu.cn](https://help.mirrors.cernet.edu.cn)
+[help.mirrorz.org](https://help.mirrorz.org) and [help.mirrors.cernet.edu.cn](https://help.mirrors.cernet.edu.cn)
 
 ## Get started
 

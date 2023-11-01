@@ -12,7 +12,7 @@ npm run dev
 ## Deploy
 
 ```bash
-npm run og:build && npm run build && npm run export
+npm run og:build && npm run build
 ```
 
 ### Ways to integrate mirrorz-help

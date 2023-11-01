@@ -1,6 +1,6 @@
 // Modified from next-remote-watch
 // https://github.com/hashicorp/next-remote-watch/blob/6a56b7fc42d4f354ed6da61626074ac51d1c2783/bin/next-remote-watch#L1
-const chalk = require('next/dist/compiled/chalk');
+const picocolors = require('next/dist/lib/picocolors');
 const chokidar = require('chokidar');
 const express = require('express');
 const next = require('next');
@@ -43,7 +43,7 @@ app.prepare().then(() => {
     const msg = req.body.message;
     const color = req.body.color;
     if (msg) {
-      Log.log(color ? chalk[color](msg) : msg);
+      Log.log(color ? picocolors[color](msg) : msg);
     }
 
     // reload the nextjs app

@@ -48,7 +48,7 @@ export const useSetDarkMode = () => {
     if (typeof window === 'object') {
       updateThemeToDom(newMode);
 
-      // eslint-disable-next-line @fluffyfox/prefer-timer-id -- update localStorage is slow, hang the job
+      // eslint-disable-next-line sukka/prefer-timer-id -- update localStorage is slow, hang the job
       requestIdleCallback(() => {
         try {
           if (newMode === 'auto') {

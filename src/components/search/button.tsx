@@ -141,6 +141,7 @@ export const SearchButtonInSideNav = memo(() => {
     <button
       className={styles('search_button_in_sidenav')}
       onClick={handleOpen}
+      type="button"
     >
       <IconSearch className={styles('icon_in_button')} />
       Search

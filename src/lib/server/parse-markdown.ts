@@ -17,12 +17,13 @@ import type { MetaFromFrontMatters } from '@/types/front-matter';
 import { compile as compileMdx } from '@/compiled/@mdx-js/mdx';
 import remarkGfm from '@/compiled/remark-gfm';
 import remarkUnwrapImages from '@/compiled/remark-unwrap-images';
-import remarkExternalLinks from '@/compiled/remark-external-links';
 import remarkHeaderCustomId from './remark-header-custom-id';
 import {
   remarkExtractCodeFromEnhancedCodeBlock,
   remarkProcessNormalCodeBlock
 } from './remark-extract-code-from-codeblock';
+
+import rehypeExternalLinks from '@/compiled/rehype-external-links';
 
 const { FileStore, stableHash } = metroCache as any;
 
@@ -42,11 +43,11 @@ export interface ContentProps {
 }
 
 const fromHrefToSegments = (href: string) => {
-  return href.replace(/^\/|\/$/g, '').split('/');
+  return href.replaceAll(/^\/|\/$/g, '').split('/');
 };
 
-export const getAvaliableSegments = async () => {
-  return Object.keys(routesJson).map(p => fromHrefToSegments(p));
+export const getAvaliableSegments = () => {
+  return Promise.resolve(Object.keys(routesJson).map(p => fromHrefToSegments(p)));
 };
 
 const _cache = new Map();
@@ -65,6 +66,13 @@ const DISK_CACHE_BREAKER = 4;
 const store = new FileStore({
   root: `${process.cwd()}/node_modules/.cache/mirrorz-help-mdx-cache/`
 });
+
+const fakeRequire = (name: string) => {
+  if (name === 'react/jsx-runtime') return require('react/jsx-runtime');
+  // For each fake MDX import, give back the string component name.
+  // It will get serialized later.
+  return name;
+};
 
 export const getContentBySegments = async (segments: string[]): Promise<{ props: ContentProps } | { notFound: true }> => {
   const id = segments.length === 0 ? 'index' : (segments.join('/') || 'index');
@@ -126,19 +134,14 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
 
   const jsxCode = await compileMdx(mdxWithFakeImports, {
     development: false,
-    remarkPlugins: [remarkExternalLinks, remarkUnwrapImages, remarkGfm, remarkHeaderCustomId, remarkProcessNormalCodeBlock, remarkExtractCodeFromEnhancedCodeBlock],
-    rehypePlugins: []
+    remarkPlugins: [remarkUnwrapImages, remarkGfm, remarkHeaderCustomId, remarkProcessNormalCodeBlock, remarkExtractCodeFromEnhancedCodeBlock],
+    rehypePlugins: [rehypeExternalLinks]
   });
 
   const { code } = await transform(jsxCode.toString('utf-8'), { module: { type: 'commonjs' } });
 
   const fakeExports = { default: (_arg: any): React.JSX.Element => ({} as any) };
-  const fakeRequire = (name: string) => {
-    if (name === 'react/jsx-runtime') return require('react/jsx-runtime');
-    // For each fake MDX import, give back the string component name.
-    // It will get serialized later.
-    return name;
-  };
+
   // eslint-disable-next-line @typescript-eslint/no-implied-eval, no-new-func -- see below
   const evalJSCode = new Function('require', 'exports', code);
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

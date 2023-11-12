@@ -4,7 +4,6 @@ import {
   Trigger as TabsTrigger,
   Content as TabsContent
 } from '@radix-ui/react-tabs';
-import type React from 'react';
 import { useState } from 'react';
 import style9 from 'style9';
 

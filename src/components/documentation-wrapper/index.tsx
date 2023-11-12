@@ -1,5 +1,3 @@
-import type React from 'react';
-
 import articleStyles from '@/styles/article/article.module.sass';
 import hljsStyles from '@/styles/highlight/hljs.module.sass';
 import clsx from 'clsx';

@@ -38,7 +38,6 @@ type DialogProps = RadixDialog.DialogProps &
   CommandProps & {
     /** Provide a custom element the Dialog should portal into. */
     container?: HTMLElement,
-    dialogPortalClassName?: string | undefined,
     dialogOverlayClassName?: string | undefined,
     dialogContentClassName?: string | undefined
   }
@@ -825,14 +824,13 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>((props, forwardedRef) => 
     open,
     onOpenChange,
     container,
-    dialogPortalClassName,
     dialogOverlayClassName,
     dialogContentClassName,
     ...etc
   } = props
   return (
     <RadixDialogRoot open={open} onOpenChange={onOpenChange}>
-      <RadixDialogPortal className={dialogPortalClassName} container={container}>
+      <RadixDialogPortal container={container}>
         <RadixDialogOverlay className={dialogOverlayClassName} cmdk-overlay="" />
         <RadixDialogContent className={dialogContentClassName} aria-label={props.label} cmdk-dialog="">
           <Command ref={forwardedRef} {...etc} />

@@ -1,4 +1,4 @@
-import { lowlight } from 'lowlight/lib/core';
+import { createLowlight } from 'lowlight';
 import { useMemo } from 'react';
 
 /**
@@ -26,37 +26,39 @@ import perl from 'highlight.js/lib/languages/perl';
 
 import clsx from 'clsx';
 
-lowlight.registerLanguage('markdown', md);
+const lowlight = createLowlight();
+
+lowlight.register('markdown', md);
 lowlight.registerAlias({ markdown: ['mdown', 'mkdn', 'mdwn', 'ron'] });
 
-lowlight.registerLanguage('ini', ini);
+lowlight.register('ini', ini);
 lowlight.registerAlias({ ini: ['toml', 'conf'] });
 
-lowlight.registerLanguage('properties', properties);
+lowlight.register('properties', properties);
 
-lowlight.registerLanguage('bash', bash);
+lowlight.register('bash', bash);
 lowlight.registerAlias({ bash: ['sh', 'zsh', 'fish', 'shell'] });
 
-lowlight.registerLanguage('yaml', yaml);
+lowlight.register('yaml', yaml);
 lowlight.registerAlias({ yaml: ['yml'] });
 
-lowlight.registerLanguage('lisp', lisp);
+lowlight.register('lisp', lisp);
 
-lowlight.registerLanguage('julia', julia);
+lowlight.register('julia', julia);
 
-lowlight.registerLanguage('nix', nix);
+lowlight.register('nix', nix);
 
-lowlight.registerLanguage('xml', xml);
+lowlight.register('xml', xml);
 
-lowlight.registerLanguage('r', r);
+lowlight.register('r', r);
 
-lowlight.registerLanguage('powershell', powershell);
+lowlight.register('powershell', powershell);
 
-lowlight.registerLanguage('clojure', clojure);
+lowlight.register('clojure', clojure);
 
-lowlight.registerLanguage('dos', dos);
+lowlight.register('dos', dos);
 
-lowlight.registerLanguage('perl', perl);
+lowlight.register('perl', perl);
 
 const alias: Record<string, string> = {
   mdown: 'markdown',

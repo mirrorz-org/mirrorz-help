@@ -4,9 +4,9 @@ export type OS = 'undetermined' | 'macos' | 'ios' | 'windows' | 'android' | 'lin
 
 export const getOS = (): OS => {
   const { userAgent } = window.navigator;
-  const macosPlatforms = /(Macintosh)|(MacIntel)|(MacPPC)|(Mac68K)/i;
-  const windowsPlatforms = /(Win32)|(Win64)|(Windows)|(WinCE)/i;
-  const iosPlatforms = /(iPhone)|(iPad)|(iPod)/i;
+  const macosPlatforms = /(macintosh)|(macintel)|(macppc)|(mac68k)/i;
+  const windowsPlatforms = /(win32)|(win64)|(windows)|(wince)/i;
+  const iosPlatforms = /(iphone)|(ipad)|(ipod)/i;
 
   if (macosPlatforms.test(userAgent)) {
     return 'macos';
@@ -17,10 +17,10 @@ export const getOS = (): OS => {
   if (windowsPlatforms.test(userAgent)) {
     return 'windows';
   }
-  if (/Android/i.test(userAgent)) {
+  if (/android/i.test(userAgent)) {
     return 'android';
   }
-  if (/Linux/i.test(userAgent)) {
+  if (/linux/i.test(userAgent)) {
     return 'linux';
   }
 

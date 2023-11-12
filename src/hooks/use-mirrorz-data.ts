@@ -17,6 +17,7 @@ const parseMirror = (site: Site, { cname, url, help, size, desc, upstream, statu
   help: emptyOrAbsolutUrlOrConcatWithBase(help, site.url),
   upstream,
   desc,
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- mirrorz spec inconsistency
   status: status === undefined ? 'U' : status,
   size,
   source: sanitizeAbbrForMirrorZ(site.abbr),

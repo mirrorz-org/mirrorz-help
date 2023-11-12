@@ -1,3 +1,5 @@
+'use strict';
+
 const findUp = require('find-up');
 const ncc = require('@vercel/ncc');
 const { existsSync, readFileSync } = require('fs');
@@ -13,7 +15,7 @@ bundleRequire.resolve = (request, options) => Module._resolveFilename(request, m
 
 module.exports = function (task, _utils) {
   // eslint-disable-next-line require-yield -- taskr plugin
-  task.plugin('ncc', {}, function* (file, options) {
+  task.plugin('ncc', {}, function *(file, options) {
     if (options.externals && options.packageName) {
       options.externals = { ...options.externals };
       delete options.externals[options.packageName];
@@ -51,7 +53,7 @@ module.exports = function (task, _utils) {
   });
 
   // eslint-disable-next-line require-yield -- taskr plugin
-  task.plugin('dts', {}, function* (file, options) {
+  task.plugin('dts', {}, function *(file, options) {
     const code = options.packages
       .map(packageName => `declare module '@/compiled/${packageName}' {\n  import * as p from '${packageName}';\n  export = p;\n}\n`)
       .join('\n');
@@ -71,7 +73,7 @@ function writePackageManifest(packageName, main, bundleName) {
 
   try {
     packagePath = bundleRequire.resolve(`${packageName}/package.json`);
-  } catch (_) {
+  } catch {
     packagePath = findUp.sync('package.json', {
       cwd: dirname(bundleRequire.resolve(packageName))
     });

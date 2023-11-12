@@ -18,8 +18,8 @@ declare module '@/compiled/remark-unwrap-images' {
   export = p;
 }
 
-declare module '@/compiled/remark-external-links' {
-  import * as p from 'remark-external-links';
+declare module '@/compiled/rehype-external-links' {
+  import * as p from 'rehype-external-links';
   export = p;
 }
 

@@ -17,12 +17,13 @@ import type { MetaFromFrontMatters } from '@/types/front-matter';
 import { compile as compileMdx } from '@/compiled/@mdx-js/mdx';
 import remarkGfm from '@/compiled/remark-gfm';
 import remarkUnwrapImages from '@/compiled/remark-unwrap-images';
-import remarkExternalLinks from '@/compiled/remark-external-links';
 import remarkHeaderCustomId from './remark-header-custom-id';
 import {
   remarkExtractCodeFromEnhancedCodeBlock,
   remarkProcessNormalCodeBlock
 } from './remark-extract-code-from-codeblock';
+
+import rehypeExternalLinks from '@/compiled/rehype-external-links';
 
 const { FileStore, stableHash } = metroCache as any;
 
@@ -126,8 +127,8 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
 
   const jsxCode = await compileMdx(mdxWithFakeImports, {
     development: false,
-    remarkPlugins: [remarkExternalLinks, remarkUnwrapImages, remarkGfm, remarkHeaderCustomId, remarkProcessNormalCodeBlock, remarkExtractCodeFromEnhancedCodeBlock],
-    rehypePlugins: []
+    remarkPlugins: [remarkUnwrapImages, remarkGfm, remarkHeaderCustomId, remarkProcessNormalCodeBlock, remarkExtractCodeFromEnhancedCodeBlock],
+    rehypePlugins: [rehypeExternalLinks]
   });
 
   const { code } = await transform(jsxCode.toString('utf-8'), { module: { type: 'commonjs' } });

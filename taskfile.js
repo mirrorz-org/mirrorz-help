@@ -34,7 +34,7 @@ const tasks = [
   fromEsmToCjs('@mdx-js/mdx'),
   fromEsmToCjs('remark-gfm'),
   fromEsmToCjs('remark-unwrap-images'),
-  fromEsmToCjs('remark-external-links'),
+  fromEsmToCjs('rehype-external-links'),
   fromEsmToCjs('github-slugger'),
   fromEsmToCjs('mdast-util-to-string'),
   fromEsmToCjs('unist-util-visit'),

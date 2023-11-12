@@ -41,8 +41,8 @@ app.prepare().then(() => {
   reloadRoute.all('/', (req, res) => {
     // log message if present
     const msg = req.body.message;
-    const color = req.body.color;
     if (msg) {
+      const color = req.body.color;
       Log.log(color ? picocolors[color](msg) : msg);
     }
 

@@ -5,7 +5,15 @@ cname: 'CRAN'
 
 ### 长期使用
 
-[CRAN](https://cran.r-project.org/) (The Comprehensive R Archive Network) 镜像源配置文件之一是 `.Rprofile` (linux 下位于 `~/.Rprofile` )。
+[CRAN](https://cran.r-project.org/) (The Comprehensive R Archive Network) 镜像源配置文件之一是 `~/.Rprofile`。
+
+注：R 的 `~` 在类 Unix 系统下为：`$HOME`（即 `~`），在 Windows 下为：`%USERPROFILE%\Documents`，具体路径可以在 R 中执行 `path.expand("~")` 查看。
+
+新建 `.Rprofile` 文件或在 R 中执行如下语句打开已有文件：
+
+```r
+file.edit(file.path("~", ".Rprofile"))
+```
 
 在文末添加如下语句：
 
@@ -15,11 +23,11 @@ options("repos" = c(CRAN="{{http_protocol}}{{mirror}}/"))
 ```
 </CodeBlock>
 
-打开 R 即可使用该 CRAN 镜像源安装 R 软件包。
+之后即可使用该 CRAN 镜像源安装 R 软件包。
 
 ### 临时使用
 
-在安装时指定 repo。
+在安装时指定 repo：
 
 <CodeBlock>
 ```r

@@ -1,3 +1,5 @@
+'use strict';
+
 // Modified from next-remote-watch
 // https://github.com/hashicorp/next-remote-watch/blob/6a56b7fc42d4f354ed6da61626074ac51d1c2783/bin/next-remote-watch#L1
 const picocolors = require('next/dist/lib/picocolors');
@@ -7,7 +9,7 @@ const next = require('next');
 const { parse } = require('url');
 const Log = require('next/dist/build/output/log');
 
-const port = parseInt(process.env.PORT, 10) || 3000;
+const port = Number.parseInt(process.env.PORT, 10) || 3000;
 const hostname = process.env.HOSTNAME || 'localhost';
 const app = next({
   dev: true,

@@ -1,4 +1,3 @@
-import type React from 'react';
 import {
   useCallback
 } from 'react';
@@ -40,7 +39,7 @@ export const CopyToClipboard = ({
 }: CopyToClipboardProps) => {
   const { copied, copy } = useClipboard({ timeout: 2500 });
 
-  const handleClick = useCallback<React.MouseEventHandler<HTMLButtonElement>>(async () => {
+  const handleClick = useCallback<React.MouseEventHandler<HTMLButtonElement>>(() => {
     const text = value || getValue?.();
     if (text) {
       copy(text);
@@ -53,7 +52,9 @@ export const CopyToClipboard = ({
       onClick={handleClick}
       title="Copy code"
       tabIndex={0}
-      {...props}>
+      type="button"
+      {...props}
+    >
       {copied
         ? <IconCheck className={styles('icon')} />
         : <IconClipboard className={styles('icon')} />}

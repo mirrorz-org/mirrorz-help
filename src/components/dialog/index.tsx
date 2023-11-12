@@ -102,7 +102,7 @@ function Dialog() {
             </RadixDialogDescription>
           )}
           <RadixDialogClose asChild>
-            <button className={styles('close_button')} aria-label="Close">
+            <button className={styles('close_button')} aria-label="Close" type="button">
               <IconClose />
             </button>
           </RadixDialogClose>

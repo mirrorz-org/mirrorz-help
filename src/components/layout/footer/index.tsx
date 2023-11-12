@@ -1,5 +1,4 @@
 import MirrorZLogo from '@/components/mirrorz-logo';
-import type React from 'react';
 import { memo, useEffect, useState } from 'react';
 import style9 from 'style9';
 import ExternalLink from '../../external-link';
@@ -99,7 +98,6 @@ const styles = style9.create({
 const CurrentYear = () => {
   const [year, setYear] = useState(2023);
   useEffect(() => {
-    // eslint-disable-next-line @fluffyfox/no-unsafe-date -- safe
     setYear(new Date().getFullYear());
   }, []);
   return <span>{year}</span>;

@@ -15,4 +15,4 @@ export const emptyOrAbsolutUrlOrConcatWithBase = (url: string | null | undefined
     : null
 );
 
-export const sanitizeAbbrForMirrorZ = (abbr: string) => abbr.replace(/\s/g, '');
+export const sanitizeAbbrForMirrorZ = (abbr: string) => abbr.replaceAll(/\s/g, '');

@@ -3,12 +3,12 @@ declare module 'next/dist/compiled/p-limit' {
     /**
     The number of promises that are currently running.
     */
-    readonly activeCount: number;
+    readonly activeCount: number,
 
     /**
     The number of promises that are waiting to run (i.e. their internal `fn` was not called yet).
     */
-    readonly pendingCount: number;
+    readonly pendingCount: number,
 
     /**
     Discard pending promises that are waiting to run.
@@ -17,7 +17,7 @@ declare module 'next/dist/compiled/p-limit' {
 
     Note: This does not cancel promises that are already running.
     */
-    clearQueue: () => void;
+    clearQueue: () => void,
 
     /**
     @param fn - Promise-returning/async function.
@@ -27,7 +27,7 @@ declare module 'next/dist/compiled/p-limit' {
     <Arguments extends unknown[], ReturnType>(
       fn: (...arguments: Arguments) => PromiseLike<ReturnType> | ReturnType,
       ...arguments: Arguments
-    ): Promise<ReturnType>;
+    ): Promise<ReturnType>
   }
 
   declare function pLimit(concurrency: number): LimitFunction;

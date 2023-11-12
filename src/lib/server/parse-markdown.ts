@@ -43,11 +43,11 @@ export interface ContentProps {
 }
 
 const fromHrefToSegments = (href: string) => {
-  return href.replace(/^\/|\/$/g, '').split('/');
+  return href.replaceAll(/^\/|\/$/g, '').split('/');
 };
 
-export const getAvaliableSegments = async () => {
-  return Object.keys(routesJson).map(p => fromHrefToSegments(p));
+export const getAvaliableSegments = () => {
+  return Promise.resolve(Object.keys(routesJson).map(p => fromHrefToSegments(p)));
 };
 
 const _cache = new Map();
@@ -66,6 +66,13 @@ const DISK_CACHE_BREAKER = 4;
 const store = new FileStore({
   root: `${process.cwd()}/node_modules/.cache/mirrorz-help-mdx-cache/`
 });
+
+const fakeRequire = (name: string) => {
+  if (name === 'react/jsx-runtime') return require('react/jsx-runtime');
+  // For each fake MDX import, give back the string component name.
+  // It will get serialized later.
+  return name;
+};
 
 export const getContentBySegments = async (segments: string[]): Promise<{ props: ContentProps } | { notFound: true }> => {
   const id = segments.length === 0 ? 'index' : (segments.join('/') || 'index');
@@ -134,12 +141,7 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
   const { code } = await transform(jsxCode.toString('utf-8'), { module: { type: 'commonjs' } });
 
   const fakeExports = { default: (_arg: any): React.JSX.Element => ({} as any) };
-  const fakeRequire = (name: string) => {
-    if (name === 'react/jsx-runtime') return require('react/jsx-runtime');
-    // For each fake MDX import, give back the string component name.
-    // It will get serialized later.
-    return name;
-  };
+
   // eslint-disable-next-line @typescript-eslint/no-implied-eval, no-new-func -- see below
   const evalJSCode = new Function('require', 'exports', code);
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

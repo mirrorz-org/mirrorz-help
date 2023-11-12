@@ -50,8 +50,10 @@ function reviveNodeOnClient(key: unknown, val: any) {
       type = MDXComponents[type];
     }
     if (!type) {
-      // eslint-disable-next-line no-console -- log error
-      // console.error(`Unknown type: ${type}`);
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console -- log error
+        console.warn(`Unknown type: ${type}`);
+      }
       type = Fragment;
     }
     return {

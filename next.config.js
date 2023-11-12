@@ -1,3 +1,5 @@
+'use strict';
+
 const withStyle9 = require('style9-webpack/next');
 const withBundleAnalyzer = process.env.ANALYZE === 'true'
   ? require('@next/bundle-analyzer')({

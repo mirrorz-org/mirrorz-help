@@ -1,4 +1,3 @@
-import type React from 'react';
 import { createContext, useContext, useMemo, useState } from 'react';
 import { noop } from 'foxact/noop';
 import { useMirrorZData } from '../hooks/use-mirrorz-data';

@@ -1,3 +1,5 @@
+'use strict';
+
 /* eslint-disable camelcase -- cli */
 const path = require('path');
 const { sync: requireResolve } = require('resolve');

@@ -18,7 +18,7 @@ export const safeJsonLdReplacer = (_: string, value: any) => {
     case 'object':
       // Omit null values.
       if (value === null) {
-        return undefined;
+        return;
       }
 
       return value; // JSON.stringify will recursively call replacer.
@@ -30,7 +30,6 @@ export const safeJsonLdReplacer = (_: string, value: any) => {
       return value.replace(ESCAPE_REGEX, ESCAPE_REPLACER);
     default: {
       // JSON.stringify will remove this element.
-      return undefined;
     }
   }
 };

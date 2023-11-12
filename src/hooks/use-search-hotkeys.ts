@@ -19,7 +19,6 @@ export const useSearchHotKeys = () => {
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (
-        // eslint-disable-next-line @fluffyfox/browser/prefer-keyboard-event-key -- Esc on both macOS & Windows
         (event.keyCode === 27 && isOpen)
         || (event.key === 'k' && (event.metaKey || event.ctrlKey))
         || (!isEditingContent(event) && event.key === '/' && !isOpen)

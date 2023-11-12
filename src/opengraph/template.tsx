@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- require React UMD global exists
-import React from 'react';
-
 interface ContentProps {
   siteName?: string,
   titleLine1: string,

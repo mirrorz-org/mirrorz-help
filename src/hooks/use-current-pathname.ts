@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 export const usePathname = () => {
   const { asPath } = useRouter();
   return useMemo(() => {
-    const path = asPath.split(/[?#]/)[0];
+    const path = asPath.split(/[#?]/)[0];
     return path.endsWith('/') ? path : `${path}/`;
   }, [asPath]);
 };

@@ -68,7 +68,7 @@ export default function NotFoundPage() {
             <Paragraph>
               你可以尝试使用
               {' '}
-              <button onClick={handleSearchButtonClick} className={styles('link')}>
+              <button onClick={handleSearchButtonClick} className={styles('link')} type="button">
                 搜索
               </button>
               {' '}

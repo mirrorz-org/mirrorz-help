@@ -31,11 +31,11 @@ export default function remarkHeaderCustomId() {
         id = children.pop().value;
         const isValidCustomId = id.startsWith('/*') && id.endsWith('*/');
         if (!isValidCustomId) {
-          throw Error(`Expected header ID to be like: {/*some-header*/}. Instead, received: ${id}`);
+          throw new Error(`Expected header ID to be like: {/*some-header*/}. Instead, received: ${id}`);
         }
         id = id.slice(2, id.length - 2);
         if (id !== toSlug(id)) {
-          throw Error(`Expected header ID to be a valid slug. You specified: {/*${id}*/}. Replace it with: {/*${toSlug(id)}*/}`);
+          throw new Error(`Expected header ID to be a valid slug. You specified: {/*${id}*/}. Replace it with: {/*${toSlug(id)}*/}`);
         }
       } else {
         // # My header
@@ -43,7 +43,7 @@ export default function remarkHeaderCustomId() {
       }
 
       if (ids.has(id)) {
-        throw Error(
+        throw new Error(
           `Cannot have a duplicate header with id "${id}" on the page. `
           + 'Rename the section or give it an explicit unique ID. '
           + 'For example: #### Arguments {/*setstate-arguments*/}'

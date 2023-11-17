@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface ContentProps {
   siteName?: string,
   titleLine1: string,

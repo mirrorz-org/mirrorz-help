@@ -17,7 +17,7 @@ EPEL(Extra Packages for Enterprise Linux) 是由 Fedora Special Interest Group �
 ```
 </CodeBlock>
 
-用如下命令自动替换：（来自 [https://github.com/tuna/issues/issues/687](https://github.com/tuna/issues/issues/687)）
+用如下命令自动替换：（修改自 [https://github.com/tuna/issues/issues/687](https://github.com/tuna/issues/issues/687)）
 
 <CodeBlock>
 
@@ -26,7 +26,7 @@ EPEL(Extra Packages for Enterprise Linux) 是由 Fedora Special Interest Group �
     -e 's!^#baseurl=!baseurl=!g' \
     -e 's!https\?://download\.fedoraproject\.org/pub/epel!{{http_protocol}}{{mirror}}!g' \
     -e 's!https\?://download\.example/pub/epel!{{http_protocol}}{{mirror}}!g' \
-    -i /etc/yum.repos.d/epel*.repo
+    -i /etc/yum.repos.d/epel{,-testing}.repo
 ```
 
 </CodeBlock>

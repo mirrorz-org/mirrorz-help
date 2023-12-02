@@ -11,7 +11,7 @@
     "src/compiled"
   ],
   "scripts": {
-    "dev": "node ./scripts/better-next-dev.js",
+    "dev": "next dev",
     "build": "next build",
     "build:analyze": "ANALYZE=true next build",
     "og:build": "node -r @swc-node/register ./scripts/generate-opengraph.ts",

@@ -215,6 +215,12 @@
     "file": "debian-cdimage.mdx",
     "cname": "debian-cdimage"
   },
+  "/debian-elts/": {
+    "title": "Debian ELTS 软件仓库",
+    "fullTitle": "Debian ELTS 软件仓库镜像使用帮助",
+    "file": "debian-elts.mdx",
+    "cname": "debian-elts"
+  },
   "/deb-multimedia/": {
     "title": "Deb Multimedia 软件仓库",
     "fullTitle": "Deb Multimedia 软件仓库镜像使用帮助",

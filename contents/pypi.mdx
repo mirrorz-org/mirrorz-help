@@ -78,22 +78,22 @@ pdm config pypi.url https://{{mirror}}/web/simple
 
 ### Poetry
 
-通过以下命令为单个项目设置默认镜像：
+通过以下命令为单个项目设置首选镜像：
 
 <CodeBlock>
 
 ```
-poetry source add --default mirrors https://{{mirror}}/web/simple/
+poetry source add --priority=primary mirrors https://{{mirror}}/web/simple/
 ```
 
 </CodeBlock>
 
-通过以下命令为单个项目设置次级镜像：
+通过以下命令为单个项目设置补充镜像：
 
 <CodeBlock>
 
 ```
-poetry source add --secondary mirrors https://{{mirror}}/web/simple/
+poetry source add --priority=supplemental mirrors https://{{mirror}}/web/simple/
 ```
 
 </CodeBlock>

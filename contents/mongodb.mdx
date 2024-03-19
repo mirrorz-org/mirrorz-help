@@ -16,6 +16,7 @@ MongoDB 镜像自 MongoDB [官方仓库](https://repo.mongodb.org/)，目前有 
     {
       title: 'MongoDB 版本号',
       items: [
+        ['7.0', { version: '7.0' }],
         ['6.0', { version: '6.0' }],
         ['5.0', { version: '5.0' }],
         ['4.4', { version: '4.4' }],
@@ -40,6 +41,7 @@ wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | {{sudo}}a
     {
       title: '发行版',
       items: [
+        ['Debian 12', { os_name: 'debian', release_name: 'bookworm', component_name: 'main' }],
         ['Debian 11', { os_name: 'debian', release_name: 'bullseye', component_name: 'main' }],
         ['Debian 10', { os_name: 'debian', release_name: 'buster', component_name: 'main' }],
         ['Debian 9', { os_name: 'debian', release_name: 'stretch', component_name: 'main' }],
@@ -53,6 +55,7 @@ wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | {{sudo}}a
     {
       title: 'MongoDB 版本号',
       items: [
+        ['7.0', { version: '7.0' }],
         ['6.0', { version: '6.0' }],
         ['5.0', { version: '5.0' }],
         ['4.4', { version: '4.4' }],

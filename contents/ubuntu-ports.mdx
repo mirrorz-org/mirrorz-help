@@ -114,43 +114,51 @@ Types: deb
 URIs: {{http_protocol}}{{mirror}}
 Suites: {{release_name}} {{release_name}}-updates {{release_name}}-backports
 Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 {{enable_source}}Types: deb-src
 {{enable_source}}URIs: {{http_protocol}}{{mirror}}
 {{enable_source}}Suites: {{release_name}} {{release_name}}-updates {{release_name}}-backports
 {{enable_source}}Components: main restricted universe multiverse
+{{enable_source}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
 {{security_mirror}}Types: deb
 {{security_mirror}}URIs: {{http_protocol}}{{mirror}}
 {{security_mirror}}Suites: {{release_name}}-security
 {{security_mirror}}Components: main restricted universe multiverse
+{{security_mirror}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
 {{security_mirror}}{{enable_source}}Types: deb-src
 {{security_mirror}}{{enable_source}}URIs: {{http_protocol}}{{mirror}}
 {{security_mirror}}{{enable_source}}Suites: {{release_name}}-security
 {{security_mirror}}{{enable_source}}Components: main restricted universe multiverse
+{{security_mirror}}{{enable_source}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
 {{security_official}}Types: deb
 {{security_official}}URIs: http://ports.ubuntu.com/ubuntu-ports/
 {{security_official}}Suites: {{release_name}}-security
 {{security_official}}Components: main restricted universe multiverse
+{{security_official}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
 {{security_official}}{{enable_source}}Types: deb-src
 {{security_official}}{{enable_source}}URIs: http://ports.ubuntu.com/ubuntu-ports/
 {{security_official}}{{enable_source}}Suites: {{release_name}}-security
 {{security_official}}{{enable_source}}Components: main restricted universe multiverse
+{{security_official}}{{enable_source}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
 # 预发布软件源，不建议启用
 {{enable_proposed}}Types: deb
 {{enable_proposed}}URIs: {{http_protocol}}{{mirror}}
 {{enable_proposed}}Suites: {{release_name}}-proposed
 {{enable_proposed}}Components: main restricted universe multiverse
+{{enable_proposed}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
 {{enable_proposed}}{{enable_source}}Types: deb-src
 {{enable_proposed}}{{enable_source}}URIs: {{http_protocol}}{{mirror}}
 {{enable_proposed}}{{enable_source}}Suites: {{release_name}}-proposed
 {{enable_proposed}}{{enable_source}}Components: main restricted universe multiverse
+{{enable_proposed}}{{enable_source}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 ```
 
 </CodeBlock>

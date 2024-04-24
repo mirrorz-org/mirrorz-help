@@ -103,41 +103,49 @@ Types: deb
 URIs: {{http_protocol}}{{mirror}}
 Suites: {{release_name}}
 Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 {{enable_source}}Types: deb-src
 {{enable_source}}URIs: {{http_protocol}}{{mirror}}
 {{enable_source}}Suites: {{release_name}}
 {{enable_source}}Components: main contrib non-free non-free-firmware
+{{enable_source}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 {{is_sid}}Types: deb
 {{is_sid}}URIs: {{http_protocol}}{{mirror}}
 {{is_sid}}Suites: {{release_name}}-updates {{release_name}}-backports
 {{is_sid}}Components: main contrib non-free non-free-firmware
+{{is_sid}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 {{enable_source}}{{is_sid}}Types: deb-src
 {{enable_source}}{{is_sid}}URIs: {{http_protocol}}{{mirror}}
 {{enable_source}}{{is_sid}}Suites: {{release_name}}-updates {{release_name}}-backports
 {{enable_source}}{{is_sid}}Components: main contrib non-free non-free-firmware
+{{enable_source}}{{is_sid}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 {{security_mirror}}{{is_sid}}Types: deb
 {{security_mirror}}{{is_sid}}URIs: {{http_protocol}}{{mirror}}-security
 {{security_mirror}}{{is_sid}}Suites: {{release_name}}-security
 {{security_mirror}}{{is_sid}}Components: main contrib non-free non-free-firmware
+{{security_mirror}}{{is_sid}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 {{security_mirror}}{{enable_source}}{{is_sid}}Types: deb-src
 {{security_mirror}}{{enable_source}}{{is_sid}}URIs: {{http_protocol}}{{mirror}}-security
 {{security_mirror}}{{enable_source}}{{is_sid}}Suites: {{release_name}}-security
 {{security_mirror}}{{enable_source}}{{is_sid}}Components: main contrib non-free non-free-firmware
+{{security_mirror}}{{enable_source}}{{is_sid}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 {{security_official}}{{is_sid}}Types: deb
 {{security_official}}{{is_sid}}URIs: http://security.debian.org/debian-security
 {{security_official}}{{is_sid}}Suites: {{release_name}}-security
 {{security_official}}{{is_sid}}Components: main contrib non-free non-free-firmware
+{{security_official}}{{is_sid}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 {{security_official}}{{enable_source}}{{is_sid}}Types: deb-src
 {{security_official}}{{enable_source}}{{is_sid}}URIs: http://security.debian.org/debian-security
 {{security_official}}{{enable_source}}{{is_sid}}Suites: {{release_name}}-security
 {{security_official}}{{enable_source}}{{is_sid}}Components: main contrib non-free non-free-firmware
+{{security_official}}{{enable_source}}{{is_sid}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 ```
 
 </CodeBlock>

@@ -62,11 +62,13 @@ Types: deb
 URIs: {{http_protocol}}{{mirror}}
 Suites: {{release_name}}-security
 Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 {{enable_source}}Types: deb-src
 {{enable_source}}URIs: {{http_protocol}}{{mirror}}
 {{enable_source}}Suites: {{release_name}}-security
 {{enable_source}}Components: main contrib non-free non-free-firmware
+{{enable_source}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 ```
 
 </CodeBlock>

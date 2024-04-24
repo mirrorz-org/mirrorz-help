@@ -46,9 +46,9 @@ cname: 'debian-security'
     {
       title: 'Debian 版本',
       items: [
-        ['Debian 12 (bookworm)', { release_name: 'bookworm', security: '-security', is_sid: '', has_nfw: ' non-free-firmware' }],
-        ['sid', { release_name: 'sid', security: '-security', is_sid: '# ', has_nfw: ' non-free-firmware' }],
-        ['testing', { release_name: 'testing', security: '-security', is_sid: '', has_nfw: ' non-free-firmware' }],
+        ['Debian 12 (bookworm)', { release_name: 'bookworm', is_sid: '' }],
+        ['sid', { release_name: 'sid', is_sid: '# ' }],
+        ['testing', { release_name: 'testing', is_sid: '' }],
       ]
     },
     {
@@ -65,12 +65,12 @@ cname: 'debian-security'
 {{is_sid}}Types: deb
 {{is_sid}}URIs: {{http_protocol}}{{mirror}}
 {{is_sid}}Suites: {{release_name}}-security
-{{is_sid}}Components: main contrib non-free{{has_nfw}}
+{{is_sid}}Components: main contrib non-free non-free-firmware
 
 {{is_sid}}{{enable_source}}Types: deb-src
 {{is_sid}}{{enable_source}}URIs: {{http_protocol}}{{mirror}}
 {{is_sid}}{{enable_source}}Suites: {{release_name}}-security
-{{is_sid}}{{enable_source}}Components: main contrib non-free{{has_nfw}}
+{{is_sid}}{{enable_source}}Components: main contrib non-free non-free-firmware
 ```
 
 </CodeBlock>

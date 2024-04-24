@@ -3,7 +3,7 @@ title: Debian 软件仓库镜像使用帮助
 cname: 'debian'
 ---
 
-一般情况下，将 `/etc/apt/sources.list` 文件中 Debian 默认的源地址 `http://deb.debian.org/` 替换为镜像地址即可。
+大部分 Debian 的软件源配置文件使用传统的 One-Line-Style，路径为 `/etc/apt/sources.list`；但是对于容器镜像，从 Debian 12 开始，其软件源配置文件变更为 DEB822 格式，路径为 `/etc/apt/sources.list.d/debian.sources`。一般情况下，将对应文件中 Debian 默认的源地址 `http://deb.debian.org/` 替换为镜像地址即可。
 
 Debian Buster 以上版本默认支持 HTTPS 源。如果遇到无法拉取 HTTPS 源的情况，请先使用 HTTP 源并安装：
 
@@ -12,6 +12,8 @@ Debian Buster 以上版本默认支持 HTTPS 源。如果遇到无法拉取 HTTP
 {{sudo}}apt install apt-transport-https ca-certificates
 ```
 </CodeBlock>
+
+#### 传统格式（`/etc/apt/sources.list`）：
 
 <CodeBlock
   enableQuickSetup
@@ -60,6 +62,82 @@ deb {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free{{has_nfw
 
 {{security_official}}{{is_sid}}deb {{http_protocol}}security.debian.org/debian-security {{release_name}}{{security}} main contrib non-free{{has_nfw}}
 {{security_official}}{{is_sid}}{{enable_source}}deb-src {{http_protocol}}security.debian.org/debian-security {{release_name}}{{security}} main contrib non-free{{has_nfw}}
+```
+
+</CodeBlock>
+
+#### DEB822 格式（`/etc/apt/sources.list.d/debian.sources`）：
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/debian.sources"
+  menus={[
+    {
+      title: 'Debian 版本',
+      items: [
+        ['Debian 12 (bookworm)', { release_name: 'bookworm', security: '-security', is_sid: '', has_nfw: ' non-free-firmware' }],
+        ['sid', { release_name: 'sid', security: '-security', is_sid: '# ', has_nfw: ' non-free-firmware' }],
+        ['testing', { release_name: 'testing', security: '-security', is_sid: '', has_nfw: ' non-free-firmware' }],
+      ]
+    },
+    {
+      title: '启用源码镜像',
+      items: [
+        ['否', { enable_source: '# ' }],
+        ['是', { enable_source: '' }],
+      ]
+    },
+    {
+      title: '使用官方安全更新软件源',
+      items: [
+        ['是', { security_mirror: '# ', security_official: '' }],
+        ['否', { security_mirror: '', security_official: '# ' }],
+      ]
+    }
+  ]}
+>
+
+```yaml
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+Types: deb
+URIs: {{http_protocol}}{{mirror}}
+Suites: {{release_name}}
+Components: main contrib non-free{{has_nfw}}
+
+{{enable_source}}Types: deb-src
+{{enable_source}}URIs: {{http_protocol}}{{mirror}}
+{{enable_source}}Suites: {{release_name}}
+{{enable_source}}Components: main contrib non-free{{has_nfw}}
+
+{{is_sid}}Types: deb
+{{is_sid}}URIs: {{http_protocol}}{{mirror}}
+{{is_sid}}Suites: {{release_name}}-updates {{release_name}}-backports
+{{is_sid}}Components: main contrib non-free{{has_nfw}}
+
+{{enable_source}}{{is_sid}}Types: deb-src
+{{enable_source}}{{is_sid}}URIs: {{http_protocol}}{{mirror}}
+{{enable_source}}{{is_sid}}Suites: {{release_name}}-updates {{release_name}}-backports
+{{enable_source}}{{is_sid}}Components: main contrib non-free{{has_nfw}}
+
+{{security_mirror}}{{is_sid}}Types: deb
+{{security_mirror}}{{is_sid}}URIs: {{http_protocol}}{{mirror}}
+{{security_mirror}}{{is_sid}}Suites: {{release_name}}-security
+{{security_mirror}}{{is_sid}}Components: main contrib non-free{{has_nfw}}
+
+{{security_mirror}}{{enable_source}}{{is_sid}}Types: deb-src
+{{security_mirror}}{{enable_source}}{{is_sid}}URIs: {{http_protocol}}{{mirror}}
+{{security_mirror}}{{enable_source}}{{is_sid}}Suites: {{release_name}}-security
+{{security_mirror}}{{enable_source}}{{is_sid}}Components: main contrib non-free{{has_nfw}}
+
+{{security_official}}{{is_sid}}Types: deb
+{{security_official}}{{is_sid}}URIs: http://security.debian.org/debian-security
+{{security_official}}{{is_sid}}Suites: {{release_name}}-security
+{{security_official}}{{is_sid}}Components: main contrib non-free{{has_nfw}}
+
+{{security_official}}{{enable_source}}{{is_sid}}Types: deb-src
+{{security_official}}{{enable_source}}{{is_sid}}URIs: http://security.debian.org/debian-security
+{{security_official}}{{enable_source}}{{is_sid}}Suites: {{release_name}}-security
+{{security_official}}{{enable_source}}{{is_sid}}Components: main contrib non-free{{has_nfw}}
 ```
 
 </CodeBlock>

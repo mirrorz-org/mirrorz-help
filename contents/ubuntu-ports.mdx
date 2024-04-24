@@ -5,7 +5,11 @@ cname: 'ubuntu-ports'
 
 对于 Ubuntu 不再支持的版本，请参考 [Ubuntu 旧版本帮助](/ubuntu-old-releases/)。
 
-Ubuntu 的软件源配置文件是 `/etc/apt/sources.list`。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用选择的软件源镜像。
+在 Ubuntu 24.04 之前，Ubuntu 的软件源配置文件使用传统的 One-Line-Style，路径为 `/etc/apt/sources.list`；从 Ubuntu 24.04 开始，Ubuntu 的软件源配置文件变更为 DEB822 格式，路径为 `/etc/apt/sources.list.d/ubuntu.sources`。
+
+将系统自带的对应文件做个备份，然后根据格式的选择下面对应的内容替换，即可使用选择的软件源镜像。
+
+#### 传统格式（`/etc/apt/sources.list`）：
 
 <CodeBlock
   enableQuickSetup
@@ -65,6 +69,88 @@ deb {{http_protocol}}{{mirror}}/ {{release_name}}-backports main restricted univ
 # 预发布软件源，不建议启用
 {{enable_proposed}}deb {{http_protocol}}{{mirror}}/ {{release_name}}-proposed main restricted universe multiverse
 {{enable_proposed}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-proposed main restricted universe multiverse
+```
+
+</CodeBlock>
+
+#### DEB822 格式（`/etc/apt/sources.list.d/ubuntu.sources`）：
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/ubuntu.sources"
+  menus={[
+    {
+      title: 'Ubuntu 版本',
+      items: [
+        ['24.04 LTS', { release_name: 'noble' }],
+      ]
+    },
+    {
+      title: '使用官方安全更新软件源',
+      items: [
+        ['是', { security_mirror: '# ', security_official: '' }],
+        ['否', { security_mirror: '', security_official: '# ' }],
+      ]
+    },
+    {
+      title: '启用 proposed',
+      items: [
+        ['否', { enable_proposed: '# ' }],
+        ['是', { enable_proposed: '' }],
+      ]
+    },
+    {
+      title: '启用源码镜像',
+      items: [
+        ['否', { enable_source: '# ' }],
+        ['是', { enable_source: '' }],
+      ]
+    },
+  ]}
+>
+
+```yaml
+Types: deb
+URIs: {{http_protocol}}{{mirror}}
+Suites: {{release_name}} {{release_name}}-updates {{release_name}}-backports
+Components: main restricted universe multiverse
+
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+{{enable_source}}Types: deb-src
+{{enable_source}}URIs: {{http_protocol}}{{mirror}}
+{{enable_source}}Suites: {{release_name}} {{release_name}}-updates {{release_name}}-backports
+{{enable_source}}Components: main restricted universe multiverse
+
+{{security_mirror}}Types: deb
+{{security_mirror}}URIs: {{http_protocol}}{{mirror}}
+{{security_mirror}}Suites: {{release_name}}-security
+{{security_mirror}}Components: main restricted universe multiverse
+
+{{security_mirror}}{{enable_source}}Types: deb-src
+{{security_mirror}}{{enable_source}}URIs: {{http_protocol}}{{mirror}}
+{{security_mirror}}{{enable_source}}Suites: {{release_name}}-security
+{{security_mirror}}{{enable_source}}Components: main restricted universe multiverse
+
+{{security_official}}Types: deb
+{{security_official}}URIs: http://ports.ubuntu.com/ubuntu-ports/
+{{security_official}}Suites: {{release_name}}-security
+{{security_official}}Components: main restricted universe multiverse
+
+{{security_official}}{{enable_source}}Types: deb-src
+{{security_official}}{{enable_source}}URIs: http://ports.ubuntu.com/ubuntu-ports/
+{{security_official}}{{enable_source}}Suites: {{release_name}}-security
+{{security_official}}{{enable_source}}Components: main restricted universe multiverse
+
+# 预发布软件源，不建议启用
+{{enable_proposed}}Types: deb
+{{enable_proposed}}URIs: {{http_protocol}}{{mirror}}
+{{enable_proposed}}Suites: {{release_name}}-proposed
+{{enable_proposed}}Components: main restricted universe multiverse
+
+{{enable_proposed}}{{enable_source}}Types: deb-src
+{{enable_proposed}}{{enable_source}}URIs: {{http_protocol}}{{mirror}}
+{{enable_proposed}}{{enable_source}}Suites: {{release_name}}-proposed
+{{enable_proposed}}{{enable_source}}Components: main restricted universe multiverse
 ```
 
 </CodeBlock>

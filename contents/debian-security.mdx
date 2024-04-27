@@ -5,6 +5,12 @@ cname: 'debian-security'
 
 大部分 Debian 的软件源配置文件使用传统的 One-Line-Style，路径为 `/etc/apt/sources.list`；但是对于容器镜像，从 Debian 12 开始，其软件源配置文件变更为 DEB822 格式，路径为 `/etc/apt/sources.list.d/debian.sources`。一般情况下，将对应文件中 Debian 默认的源地址 `http://security.debian.org/` 替换为镜像地址即可。
 
+不过，一般来说，为了更及时地获得安全更新，不推荐使用镜像站安全更新软件源，因为镜像站往往有同步延迟。参考 https://www.debian.org/security/faq.en.html#mirror
+
+> The purpose of security.debian.org is to make security updates available as quickly and easily as possible.
+>
+> Encouraging the use of unofficial mirrors would add extra complexity that is usually not needed and that can cause frustration if these mirrors are not kept up to date.
+
 #### 传统格式（`/etc/apt/sources.list`）：
 
 <CodeBlock

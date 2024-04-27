@@ -14,7 +14,6 @@ cname: 'debian-security'
       items: [
         ['Debian 11 (bullseye)', { release_name: 'bullseye', security: '-security', has_nfw: ''  }],
         ['Debian 12 (bookworm)', { release_name: 'bookworm', security: '-security', has_nfw: ' non-free-firmware'  }],
-        ['testing', { release_name: 'testing', security: '-security', has_nfw: ' non-free-firmware'  }],
         ['Debian 10 (buster)', { release_name: 'buster', security: '/updates', has_nfw: ''  }],
       ]
     },
@@ -44,7 +43,6 @@ deb {{http_protocol}}{{mirror}} {{release_name}}{{security}} main contrib non-fr
       title: 'Debian 版本',
       items: [
         ['Debian 12 (bookworm)', { release_name: 'bookworm' }],
-        ['testing', { release_name: 'testing' }],
       ]
     },
     {

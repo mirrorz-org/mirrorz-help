@@ -57,6 +57,7 @@ deb {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free{{has_nfw
 {{is_sid}}{{has_backports}}deb {{http_protocol}}{{mirror}}/ {{release_name}}-backports main contrib non-free{{has_nfw}}
 {{is_sid}}{{has_backports}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}/ {{release_name}}-backports main contrib non-free{{has_nfw}}
 
+# 以下安全更新软件源包含了官方源与镜像站配置，如有需要可自行修改注释切换
 {{security_mirror}}{{is_sid}}deb {{http_protocol}}{{mirror}}-security {{release_name}}{{security}} main contrib non-free{{has_nfw}}
 {{security_mirror}}{{is_sid}}{{enable_source}}deb-src {{http_protocol}}{{mirror}}-security {{release_name}}{{security}} main contrib non-free{{has_nfw}}
 
@@ -98,19 +99,20 @@ deb {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free{{has_nfw
 >
 
 ```yaml
-# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 Types: deb
 URIs: {{http_protocol}}{{mirror}}
 Suites: {{suites}}
 Components: main contrib non-free non-free-firmware
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 {{enable_source}}Types: deb-src
 {{enable_source}}URIs: {{http_protocol}}{{mirror}}
 {{enable_source}}Suites: {{suites}}
 {{enable_source}}Components: main contrib non-free non-free-firmware
 {{enable_source}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
+# 以下安全更新软件源包含了官方源与镜像站配置，如有需要可自行修改注释切换
 {{security_mirror}}{{is_stable}}Types: deb
 {{security_mirror}}{{is_stable}}URIs: {{http_protocol}}{{mirror}}-security
 {{security_mirror}}{{is_stable}}Suites: {{release_name}}-security

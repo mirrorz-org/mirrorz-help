@@ -55,6 +55,8 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
@@ -68,10 +70,10 @@ jobs:
           esac
           source_msg="$(git log -1 --pretty="[%h] %B")"
 
+          tar zxf out-${{ matrix.build_type }}.tar.gz -C /tmp
           git checkout -f "$branch"
           git rm -rf .
           git clean -dfx
-          tar zxf out-${{ matrix.build_type }}.tar.gz -C /tmp
           rsync -a /tmp/out/ ./
           touch .nojekyll
           git add -A

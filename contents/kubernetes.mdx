@@ -5,7 +5,7 @@ cname: 'kubernetes'
 
 Kubernetes 是用于自动部署，扩展和管理容器化应用程序的开源系统。详情可见 [官方介绍](https://kubernetes.io/zh/)。
 
-**硬件架构：`x86_64`, `armhfp`, `aarch64`**
+在以下 URL 中，所有仓库的公钥均相同，因此只需要将仓库地址中的 `v1.28` 修改为所需的版本。
 
 ### Debian/Ubuntu 用户
 
@@ -13,7 +13,7 @@ Kubernetes 是用于自动部署，扩展和管理容器化应用程序的开源
 
 <CodeBlock>
 ```bash
-{{sudo}}curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://dl.k8s.io/apt/doc/apt-key.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | {{sudo}}gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 ```
 </CodeBlock>
 
@@ -22,10 +22,20 @@ Kubernetes 是用于自动部署，扩展和管理容器化应用程序的开源
 <CodeBlock
   enableQuickSetup
   filepath="/etc/apt/sources.list.d/kubernetes.list"
+  menus={[
+    {
+      title: '使用 CRI-O',
+      items: [
+        ['否', { cri_o: '# ' }],
+        ['是', { cri_o: '' }]
+      ]
+    }
+  ]}
 >
 
 ```properties
-deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] {{http_protocol}}{{mirror}}/apt kubernetes-xenial main
+deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] {{http_protocol}}{{mirror}}/core:/stable:/v1.28/deb/ /
+{{cri_o}}deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] {{http_protocol}}{{mirror}}/addons:/cri-o:/stable:/v1.28/deb/ /
 ```
 
 </CodeBlock>
@@ -37,13 +47,31 @@ deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] {{http_protoc
 <CodeBlock
   enableQuickSetup
   filepath="/etc/yum.repos.d/kubernetes.repo"
+  menus={[
+    {
+      title: '使用 CRI-O',
+      items: [
+        ['否', { cri_o: '# ' }],
+        ['是', { cri_o: '' }]
+      ]
+    }
+  ]}
 >
 
 ```ini
 [kubernetes]
-name=kubernetes
-baseurl={{http_protocol}}{{mirror}}/yum/repos/kubernetes-el7-$basearch
+name=Kubernetes
+baseurl={{http_protocol}}{{mirror}}/core:/stable:/v1.28/rpm/
 enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+
+{{cri_o}}[cri-o]
+{{cri_o}}name=CRI-O
+{{cri_o}}baseurl={{http_protocol}}{{mirror}}/addons:/cri-o:/stable:/v1.28/rpm/
+{{cri_o}}enabled=1
+{{cri_o}}gpgcheck=1
+{{cri_o}}gpgkey=https://pkgs.k8s.io/addons:/cri-o:/prerelease:/main/rpm/repodata/repomd.xml.key
 ```
 
 </CodeBlock>

@@ -1,0 +1,83 @@
+name: Npm build and Publish to another branch
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Currently mirrorz build is done by cloudflare pages, so here we only build cernet
+        # build_type: [mirrorz, cernet]
+        build_type: [cernet]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Prepare env
+        run: |
+          if [ ${{ matrix.build_type }} == 'cernet' ]; then
+            echo "NEXT_PUBLIC_SITE_HOST=help.mirrors.cernet.edu.cn" > .env.local
+            echo "NEXT_PUBLIC_JSON_ENDPOINT=https://mirrors.cernet.edu.cn/static/json/legacy-pack.json" >> .env.local
+            echo "NEXT_PUBLIC_MIRROZ_HOST=mirrors.cernet.edu.cn" >> .env.local
+          else
+            echo "Unexpected build type: ${{ matrix.build_type }}"
+            exit 1
+          fi
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: |
+          npm run og:build && npm run build
+          tar -czf out-${{ matrix.build_type }}.tar.gz out
+      - name: Upload out directory as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.build_type }}
+          path: out-${{ matrix.build_type }}.tar.gz
+          retention-days: 3
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        build_type: [cernet]
+    if: ${{ github.ref == 'refs/heads/master' }}
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-${{ matrix.build_type }}
+      - name: Commit and publish
+        run: |
+          tar -xzf out-${{ matrix.build_type }}.tar.gz
+          mv out /tmp/out
+          if [[ "${{ matrix.build_type }}" == "cernet" ]]; then
+            branch="cernet-pages"
+          else
+            echo "Unexpected build type: ${{ matrix.build_type }}"
+            exit 1
+          fi
+          git checkout $branch
+          git config user.name "Mirrorz Bot"
+          git config user.email "bot@mirrorz.org"
+          git rm -rf .
+          git clean -fxd
+          cp -ar /tmp/out/* .
+          touch .nojekyll
+          git add .
+          git commit -m "Github Action auto build for https://github.com/mirrorz-org/mirrorz-help/commit/${git_commit_id}" --allow-empty
+          git push -f origin $branch

@@ -55,29 +55,28 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: dist-${{ matrix.build_type }}
       - name: Commit and publish
         run: |
-          tar -xzf out-${{ matrix.build_type }}.tar.gz
-          mv out /tmp/out
-          if [[ "${{ matrix.build_type }}" == "cernet" ]]; then
-            branch="cernet-pages"
-          else
-            echo "Unexpected build type: ${{ matrix.build_type }}"
-            exit 1
-          fi
-          git checkout $branch
-          git config user.name "Mirrorz Bot"
-          git config user.email "bot@mirrorz.org"
+          case "${{ matrix.build_type }}" in
+            cernet) branch=cernet-pages;;
+            *) echo "Unknown build type ${{ matrix.build_type }}"
+               exit 1;;
+          esac
+          source_msg="$(git log -1 --pretty="[%h] %B")"
+
+          git checkout -f "$branch"
           git rm -rf .
-          git clean -fxd
-          cp -ar /tmp/out/* .
+          git clean -dfx
+          tar zxf out-${{ matrix.build_type }}.tar.gz -C /tmp
+          rsync -a /tmp/out/ ./
           touch .nojekyll
-          git add .
-          git commit -m "Github Action auto build for https://github.com/mirrorz-org/mirrorz-help/commit/${git_commit_id}" --allow-empty
-          git push -f origin $branch
+          git add -A
+          git -c user.name="Mirrorz Bot" -c user.email="bot@mirrorz.org" \
+            commit --allow-empty \
+            -m "GitHub Actions build ${GITHUB_RUN_NUMBER}" \
+            -m "$source_msg"
+          git push -f origin "$branch"

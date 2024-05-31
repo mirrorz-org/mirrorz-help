@@ -77,8 +77,26 @@ Leap 15.3 注：若在安装时**没有**启用在线软件源，sle 源和 back
 Tumbleweed 注：Tumbleweed 安装后默认会启用 oss, non-oss, update, 3 个官方软件源，
 其中 oss 及 non-oss 源用于发布 Tumbleweed 的每日构建快照，快照中已包含系统所需的全部软件包及更新。
 update 源仅用于推送临时安全补丁，如当日快照已发布但仍有临时安全补丁时，会首先推送至 update 源，并在次日合入下一版快照。
-由于 update 源存在较强的时效性，上游镜像并未同步 update 源，镜像源亦无法提供该源的镜像。
-禁用 update 源并不会使系统缺失任何功能或安全更新，仅会导致极少数更新晚些推送，如有需求可以重新启用官方 update 源。
+由于 update 源存在较强的时效性，部分镜像源未提供该源的镜像。
+禁用 update 源并不会使系统缺失任何功能或安全更新，仅会导致极少数更新晚些推送，如有需求可以使用以下命令重新启用官方 update 源：
+
+<CodeBlock>
+
+```shell
+{{sudo}}zypper mr -e repo-update
+```
+
+</CodeBlock>
+
+如果使用的镜像源提供了 update 的镜像，则使用以下命令启用镜像 update 源：
+
+<CodeBlock>
+
+```shell
+{{sudo}}zypper ar -cfg '{{http_protocol}}{{mirror}}/update/tumbleweed' mirror-update
+```
+
+</CodeBlock>
 
 ## 图形界面下配置方法
 

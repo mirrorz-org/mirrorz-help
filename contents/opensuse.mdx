@@ -15,7 +15,7 @@ openSUSE 默认启用了 [RIS](https://en.opensuse.org/openSUSE:Standards_Reposi
 
 由于 RIS 的存在，手工关闭单个官方源仓库的刷新，将在下次执行更新操作时被重新启用。仍需要和官方源（download.opensuse.org）进行同步，因此在不更改 `openSUSE` 服务的前提下，所有针对官方源的修改将在下次仓库或软件更新时被覆盖或重置。
 
-下面流程提供了一种半永久性禁用 RIS 的方法,但同时保留了 `zypper` 的 `RIS` 特性满足官方的推荐更新方式，来实现临时禁用 RIS 自动刷新。
+下面流程提供了一种半永久性禁用 RIS 的方法，但同时保留了 `zypper` 的 `RIS` 特性满足官方的推荐更新方式，来实现临时禁用 RIS 自动刷新。
 
 1. 使用任意编辑器打开并编辑文件 `/etc/zypp/services.d/openSUSE.service`;
 2. 修改 `enabled` 值为 `0`;
@@ -85,7 +85,7 @@ Leap 15.4 注：若在安装时**没有**启用在线软件源，sle 源和 back
 ```
 </CodeBlock>
 
-添加镜像源，并启用更高优先级用以覆盖官方镜像(可更改 `98` 为更小的数字，越小优先级越高）
+添加镜像源，并启用更高优先级用以覆盖官方镜像（可更改 `98` 为更小的数字，越小优先级越高）
 
 <CodeBlock>
 
@@ -125,7 +125,7 @@ Slowroll 目前仍未正式发行，此发行版以 Tumbleweed 作为基础，�
 ```
 </CodeBlock>
 
-添加镜像源，并启用更高优先级用以覆盖官方镜像(可更改 `98` 为更小的数字，越小优先级越高）
+添加镜像源，并启用更高优先级用以覆盖官方镜像（可更改 `98` 为更小的数字，越小优先级越高）
 
 <CodeBlock>
 
@@ -156,10 +156,10 @@ update 源用于推送工厂源 [Factory](https://build.opensuse.org/project/sho
 以 openSUSE Leap 15.5 为例：
 
 1. 打开 `YaST控制中心`；
-2. 点击 `软件` （Software） 分组中的 `软件源` （Software Repositories）；
-3. 在打开的窗口中找到 `服务` （Service） 列为 `openSUSE` 的条目，选择并取消勾选 `已启用(E)` （enabled(E)） 。此流程需要保留 `名称` （Name） 列为 `repo-openh264` 的仓库保持勾选;
+2. 点击 `软件` （Software）分组中的 `软件源` （Software Repositories）；
+3. 在打开的窗口中找到 `服务` （Service）列为 `openSUSE` 的条目，选择并取消勾选 `已启用(E)` （enabled(E)） 。此流程需要保留 `名称` （Name）列为 `repo-openh264` 的仓库保持勾选;
 4. 点击 `添加(A)` （Add(A)） ，类型选择为 `指定 URL`，并点击下一步;
-5. `软件源名称` （Repository Name） 和 `URL` 填写为 [Leap](#openSUSE-Leap-使用方法) 或 [Tumbleweed](#opensuse-tumbleweed-使用方法) 中的仓库和对应连接，如：
+5. `软件源名称` （Repository Name）和 `URL` 填写为 [Leap](#openSUSE-Leap-使用方法) 或 [Tumbleweed](#opensuse-tumbleweed-使用方法) 中的仓库和对应连接，如：
 
     <CodeBlock>
     ```
@@ -174,7 +174,7 @@ update 源用于推送工厂源 [Factory](https://build.opensuse.org/project/sho
 
     此处给出通常情况下需要手工添加的仓库和发行版分支对应关系：
 
-    |发行版|仓库名称|URL|备注|
+    |发行版 | 仓库名称|URL|备注|
     |:-:|:-:|:-:|:-:|
     |Leap|OSS|{{http_protocol}}{{mirror}}/distribution/leap/$releasever/repo/oss/|-|
     |Leap|NON-OSS|{{http_protocol}}{{mirror}}/distribution/leap/$releasever/repo/non-oss/|-|

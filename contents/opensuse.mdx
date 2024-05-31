@@ -11,9 +11,11 @@ openSUSE 默认使用 [MirrorCache](https://zh.opensuse.org/MirrorCache) 替换�
 
 ### 关于统一镜像分发
 
-openSUSE 默认启用了 [RIS](https://en.opensuse.org/openSUSE:Standards_Repository_Index_Service) 和 MirrorCache 技术用于统一分发软件仓库更改和镜像，**无需更改镜像**。以下所有操作在下次镜像更新时将被覆盖或重置。
+openSUSE 默认启用了 [RIS](https://en.opensuse.org/openSUSE:Standards_Repository_Index_Service) 和 MirrorCache 技术用于统一分发软件仓库更改和镜像，通常情况下**无需更改镜像**，但可以通过禁用官方源并启用更高优先级的其他镜像来实现更换镜像源的操作。
 
-本方法中提供了一种禁用 RIS 的方法来实现临时禁用 RIS 自动刷新。
+由于 RIS 的存在，手工关闭单个官方源仓库的刷新，将在下次执行更新操作时被重新启用。仍需要和官方源（download.opensuse.org）进行同步，因此在不更改 `openSUSE` 服务的前提下，所有针对官方源的修改将在下次仓库或软件更新时被覆盖或重置。
+
+下面流程提供了一种半永久性禁用 RIS 的方法,但同时保留了 `zypper` 的 `RIS` 特性满足官方的推荐更新方式，来实现临时禁用 RIS 自动刷新。
 
 1. 使用任意编辑器打开并编辑文件 `/etc/zypp/services.d/openSUSE.service`;
 2. 修改 `enabled` 值为 `0`;

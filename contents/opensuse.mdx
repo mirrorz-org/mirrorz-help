@@ -31,9 +31,9 @@ openSUSE 默认启用了 [RIS](https://en.opensuse.org/openSUSE:Standards_Reposi
 # 查看需要恢复的 repo 文件
 ls -la /etc/zypp/repos.d/*.rpmsave 
 
-sudo for file in /etc/zypp/repos.d/*.rpmsave; do echo mv $file `echo $file | sed -s "s/\.rpmsave//"`; done
+{{sudo}}for file in /etc/zypp/repos.d/*.rpmsave; do echo mv $file `echo $file | sed -s "s/\.rpmsave//"`; done
 
-sudo zypper ref
+{{sudo}}zypper ref
 ```
 </CodeBlock>
 

@@ -15,27 +15,58 @@ openSUSE 默认启用了 [RIS](https://en.opensuse.org/openSUSE:Standards_Reposi
 
 由于 RIS 的存在，手工关闭单个官方源仓库的刷新，将在下次执行更新操作时被重新启用，在执行更新时 `zypper` 仍需要和官方源（download.opensuse.org）进行同步，因此在不更改 `openSUSE` 服务的前提下，所有针对官方源的修改将在下次仓库或软件更新时被覆盖或重置。
 
-下面流程提供了一种半永久性禁用 RIS 的方法，但同时保留了 `zypper` 的 `RIS` 特性满足官方的推荐更新方式，来实现临时禁用 RIS 自动刷新。
+下面提供了三种方法以供用户选择来保留或使用 RIS。无论是否禁用 RIS ，都可以使用高优先级的软件源替代官方源进行使用。
+
+#### 1 完全启用 RIS
+
+在此目标下，通常无需对系统软件源进行任何更改，更新时会被自动分流至任意**同时**[注册到 MirrorCache](https://mirrors.opensuse.org) 和校园网联合镜像的镜像站。这也是官方最推荐的做法。
+
+#### 2 临时禁用 RIS
+
+下面流程提供了一种通过修改配置文件半永久性禁用 RIS 的方法，但同时保留了 `zypper` 的 `RIS` 特性满足官方的推荐更新方式，来实现临时禁用 RIS 自动刷新。
 
 1. 使用任意编辑器打开并编辑文件 `/etc/zypp/services.d/openSUSE.service`;
 2. 修改 `enabled` 值为 `0`;
 3. 修改 `autorefresh` 值为 `0`;
 4. 保存并退出;
 
+更改后可以指定更高优先级的软件源，并同时可以免去使用第三方软件源但仍和官方服务器通信的不便。
+
+请注意：这种方法的更改会在软件包 `openSUSE-repos-*` 所包含的多个软件包更新后被覆盖，需要重新执行更改。对于希望方便维护系统，但又不需要定期和官方主服务器通信的用户，我们推荐这种方式。
+
+#### 3 完全禁用 RIS
+
+完全禁用 RIS 意味着用户需要手工管理软件源，除非清楚这么做的目的和意义，否则通常情况下不推荐此方法。
+
 如需还原为传统镜像源管理方式，确保在 `bash` 或 `zsh` 下执行：
 
 <CodeBlock>
 ```shell
 {{sudo}}zypper remove openSUSE-repos-*
-
-# 查看需要恢复的 repo 文件
-ls -la /etc/zypp/repos.d/*.rpmsave 
-
-{{sudo}}for file in /etc/zypp/repos.d/*.rpmsave; do echo mv $file `echo $file | sed -s "s/\.rpmsave//"`; done
-
-{{sudo}}zypper ref
 ```
 </CodeBlock>
+
+请注意，这可能会移除安装的包含 NVIDIA 等相关的使用 RIS 管理的第三方软件源。
+
+查看需要恢复的 repo 文件：
+
+<CodeBlock>
+```shell
+ls -la /etc/zypp/repos.d/*.rpmsave 
+```
+</CodeBlock>
+
+还原 repo 文件：
+
+<CodeBlock>
+```shell
+{{sudo}}for file in /etc/zypp/repos.d/*.rpmsave; do echo mv $file `echo $file | sed -s "s/\.rpmsave//"`; done
+```
+</CodeBlock>
+
+执行后需要刷新缓存。
+
+请注意：该方法目前仍然可以使用，但如果官方给出了明确的路线图认为不再需要此种方法管理镜像源，则该方法失效。目前暂不明确不再提供还原的时间表。
 
 ### openSUSE Leap 使用方法
 

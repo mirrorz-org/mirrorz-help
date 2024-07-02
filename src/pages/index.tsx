@@ -7,7 +7,6 @@ import IconDebian from '@/components/icons/brands/debian';
 import IconFedora from '../components/icons/brands/fedora';
 import IconOpenSUSE from '../components/icons/brands/opensuse';
 import IconArchLinux from '../components/icons/brands/archlinux';
-import IconCentOS from '../components/icons/brands/centos';
 import IconGentoo from '../components/icons/brands/gentoo';
 import IconPython from '../components/icons/brands/python';
 import Link from 'next/link';
@@ -169,12 +168,6 @@ export default function HomePage() {
               <IconOpenSUSE className={styles('brand_icon')} />
               <h3 className={styles('card_title')}>
                 openSUSE 软件仓库镜像使用帮助
-              </h3>
-            </Link>
-            <Link href="/centos/" className={styles('card')}>
-              <IconCentOS className={styles('brand_icon')} />
-              <h3 className={styles('card_title')}>
-                CentOS 软件仓库镜像使用帮助
               </h3>
             </Link>
             <Link href="/gentoo/" className={styles('card')}>

@@ -101,23 +101,11 @@
     "file": "blackarch.mdx",
     "cname": "blackarch"
   },
-  "/centos/": {
-    "title": "CentOS 软件仓库",
-    "fullTitle": "CentOS 软件仓库镜像使用帮助",
-    "file": "centos.mdx",
-    "cname": "centos"
-  },
   "/centos-stream/": {
     "title": "CentOS Stream 软件仓库",
     "fullTitle": "CentOS Stream 软件仓库镜像使用帮助",
     "file": "centos-stream.mdx",
     "cname": "centos-stream"
-  },
-  "/centos-altarch/": {
-    "title": "CentOS altarch 软件仓库",
-    "fullTitle": "CentOS altarch 软件仓库镜像使用帮助",
-    "file": "centos-altarch.mdx",
-    "cname": "centos-altarch"
   },
   "/centos-vault/": {
     "title": "CentOS Vault 软件仓库",

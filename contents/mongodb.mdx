@@ -43,9 +43,6 @@ wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | {{sudo}}a
       items: [
         ['Debian 12', { os_name: 'debian', release_name: 'bookworm', component_name: 'main' }],
         ['Debian 11', { os_name: 'debian', release_name: 'bullseye', component_name: 'main' }],
-        ['Debian 10', { os_name: 'debian', release_name: 'buster', component_name: 'main' }],
-        ['Debian 9', { os_name: 'debian', release_name: 'stretch', component_name: 'main' }],
-        ['Debian 8', { os_name: 'debian', release_name: 'jessie', component_name: 'main' }],
         ['Ubuntu 22.04 LTS', { os_name: 'ubuntu', release_name: 'jammy', component_name: 'multiverse' }],
         ['Ubuntu 20.04 LTS', { os_name: 'ubuntu', release_name: 'focal', component_name: 'multiverse' }],
         ['Ubuntu 18.04 LTS', { os_name: 'ubuntu', release_name: 'bionic', component_name: 'multiverse' }],

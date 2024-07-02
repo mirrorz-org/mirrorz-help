@@ -85,10 +85,8 @@ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | {{sudo}}apt-ke
     {
       title: '发行版',
       items: [
+        ['Debian 12 (bookworm)', { release_name: 'bookworm' }],
         ['Debian 11 (bullseye)', { release_name: 'bullseye' }],
-        ['Debian 10 (buster)', { release_name: 'buster' }],
-        ['Debian 9 (stretch)', { release_name: 'stretch' }],
-        ['Debian 8 (jessie)', { release_name: 'jessie' }],
         ['Ubuntu 22.04 LTS', { release_name: 'jammy' }],
         ['Ubuntu 20.04 LTS', { release_name: 'focal' }],
         ['Ubuntu 18.04 LTS', { release_name: 'bionic' }],

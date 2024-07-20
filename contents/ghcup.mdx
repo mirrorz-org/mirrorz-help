@@ -7,14 +7,6 @@ GHCup 是一种用于安装 Haskell 的工具，它使得用户可以轻易地�
 
 GHCup 类似 Rustup，可以用于安装 Haskell 工具链。建议搭配 Hackage 和 Stackage 源使用。
 
-> 对于 Linux、FreeBSD、macOS 用户，如果想要让 GHCup 遵循 XDG 规范，可以使用 `GHCUP_USE_XDG_DIRS` 变量，例如：
->
-> ```bash
-> export GHCUP_USE_XDG_DIRS=1
-> ```
->
-> 还可以将上述内容写入 `~/.profile` 等文件中。
-
 ## USTC
 
 该节内容仅适用于 USTC 及通过类似方式同步 GHCup 的站点。
@@ -144,3 +136,57 @@ ghcup 于 0.1.15.1 版本前使用 0.0.4 版本的配置文件，此版本及之
 当出现上述现象时，请首先尝试更新 ghcup 的版本，并根据 `故障排除 1` 的指示修改配置文件。若 ghcup 已无法更新，可以尝试删除 `~/.ghcup` 整个文件夹（这一操作将删除 ghcup 以及所有通过 ghcup 安装的软件），并根据 `使用说明` 重新安装最新版本的 ghcup。
 
 若完成以上步骤后问题仍未解决，请至 [此处](https://github.com/sjtug/mirror-requests) 向 SJTUG 反馈 BUG。
+
+## 其他配置
+
+### XDG 支持
+
+对于 Linux、FreeBSD、macOS 用户，如果想要让 GHCup 遵循 XDG 规范，可以使用 `GHCUP_USE_XDG_DIRS` 变量，例如：
+
+```bash
+export GHCUP_USE_XDG_DIRS=1
+```
+
+还可以将上述内容写入 `~/.profile` 等文件中，具体可以参考 [GHCup xdg-support](https://www.haskell.org/ghcup/guide/#xdg-support)。
+
+使用 `GHCUP_USE_XDG_DIRS` 后，GHCup 配置目录将由默认的 `~/.ghcup` 变成 `~/.config/ghcup`；
+而二进制目录会使用 `~/.local/bin`，需要将该目录加入 `PATH` 才能够正常使用 GHCup 安装的 GHC 以及其他工具。
+
+```bash
+export PATH=$HOME/.local/bin:$PATH
+```
+
+### 安装目录变更
+
+对于 Windows 用户或不想使用 XDG 目录的 Linux、FreeBSD、macOS 用户，可以使用 `GHCUP_INSTALL_BASE_PREFIX` 来更改默认安装路径。
+
+默认安装路径，对 Windows 用户而言是 `C:\ghcup`，而对于 Linux、FreeBSD、macOS 用户而言是 `$HOME/.ghcup`。
+
+如果想要将 GHCup 的安装目录放到某一个特定目录下，例如 `~/sdk`，则可以使用
+
+**Windows 用户**:
+
+可以在终端使用如下方法：
+
+```powershell
+$env:GHCUP_INSTALL_BASE_PREFIX = $env:USERPROFILE/sdk
+```
+
+或使用系统设置添加该环境变量。
+
+**Linux、FreeBSD、macOS 用户**:
+
+可以在终端使用如下方法：
+
+```bash
+export GHCUP_INSTALL_BASE_PREFIX=$HOME/sdk
+```
+
+还可以将上述内容写入 `~/.profile` 等文件中，具体可以参考 [GHCup env-variables](https://www.haskell.org/ghcup/guide/#env-variables)。
+
+### MSYS2 设置
+
+对于 Windows 用户，如果系统中已经安装了 MSYS2 环境，则可以使用 `GHCUP_MSYS2` 来指定你想要 GHCup 使用的 MSYS2 环境。
+如果不指定使用的 MSYS2 环境，则会默认新安装一个 MSYS2 环境，并且使用新安装的 MSYS2 环境。
+
+详细内容可以参考 [GHCup env-variables](https://www.haskell.org/ghcup/guide/#env-variables)。

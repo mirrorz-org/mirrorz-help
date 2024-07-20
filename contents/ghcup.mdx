@@ -7,11 +7,13 @@ GHCup 是一种用于安装 Haskell 的工具，它使得用户可以轻易地�
 
 GHCup 类似 Rustup，可以用于安装 Haskell 工具链。建议搭配 Hackage 和 Stackage 源使用。
 
-> 如果想要使用 XDG 规范，可以设置 `GHCUP_USE_XDG_DIRS` 变量
+> 对于 Linux、FreeBSD、macOS 用户，如果想要让 GHCup 遵循 XDG 规范，可以使用 `GHCUP_USE_XDG_DIRS` 变量，例如：
 >
-> Linux、BSD、macOS 用户可在终端使用 `export GHCUP_USE_XDG_DIRS=1`
+> ```bash
+> export GHCUP_USE_XDG_DIRS=1
+> ```
 >
-> Windows 用户可使用 `$env:GHCUP_USE_XDG_DIRS = 1`
+> 还可以将上述内容写入 `~/.profile` 等文件中。
 
 ## USTC
 

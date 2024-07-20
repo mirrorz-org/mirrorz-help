@@ -1,11 +1,13 @@
 ---
 title: GHCup 使用帮助
-cname: 'ghcup'
+cname: "ghcup"
 ---
 
 GHCup 是一种用于安装 Haskell 的工具，它使得用户可以轻易地在 GNU/Linux、macOS 和 FreeBSD 上安装特定版本的 ghc，并从零开始搭建好一个全新的 Haskell 开发环境（包括 cabal 与 HLS 支持）。
 
 GHCup 类似 Rustup，可以用于安装 Haskell 工具链。建议搭配 Hackage 和 Stackage 源使用。
+
+> 如果想要使用 XDG 规范，可以设置 `GHCUP_USE_XDG_DIRS` 变量，例如 `export GHCUP_USE_XDG_DIRS=1`
 
 ## USTC
 
@@ -15,44 +17,35 @@ GHCup 类似 Rustup，可以用于安装 Haskell 工具链。建议搭配 Hackag
 
 参考如下步骤可安装完整的 Haskell 工具链。
 
-注意，以下命令会安装并配置 GHCup 0.0.7 版本的元数据。
+注意，以下命令会安装并配置 GHCup 0.0.8 版本的元数据。
 可查看以下目录的内容，并选择需要安装的 GHCup 版本的 yaml 文件替换以下命令中的 URL。
 
-<CodeBlock>
 ```
-{{http_protocol}}{{mirror}}/ghcup-metadata/
+https://mirrors.ustc.edu.cn/ghcup/ghcup-metadata/
 ```
-</CodeBlock>
-
 
 **第一步（可选）** ：使用镜像源安装 GHCup 本体。如已经安装 GHCup，可跳到下一步。
 
+- Linux, FreeBSD, macOS 用户：在终端中运行如下命令
 
-* Linux, FreeBSD, macOS 用户：在终端中运行如下命令
-
-  <CodeBlock>
   ```bash
-  curl --proto '=https' --tlsv1.2 -sSf https://{{mirror}}/sh/bootstrap-haskell | BOOTSTRAP_HASKELL_YAML={{http_protocol}}{{mirror}}/ghcup-metadata/ghcup-0.0.7.yaml sh
+  # Linux, FreeBSD, macOS 用户：在终端中运行如下命令
+  curl --proto '=https' --tlsv1.2 -sSf https://mirrors.ustc.edu.cn/ghcup/sh/bootstrap-haskell | BOOTSTRAP_HASKELL_YAML=https://mirrors.ustc.edu.cn/ghcup/ghcup-metadata/ghcup-0.0.8.yaml sh
   ```
-  </CodeBlock>
 
-* Windows 用户：以非管理员身份在 PowerShell 中运行如下命令
+- Windows 用户：以非管理员身份在 PowerShell 中运行如下命令
 
-  <CodeBlock>
   ```powershell
-  $env:BOOTSTRAP_HASKELL_YAML = '{{http_protocol}}{{mirror}}/ghcup-metadata/ghcup-0.0.7.yaml'
-  Set-ExecutionPolicy Bypass -Scope Process -Force;[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;Invoke-Command -ScriptBlock ([ScriptBlock]::Create((Invoke-WebRequest {{http_protocol}}{{mirror}}/sh/bootstrap-haskell.ps1 -UseBasicParsing))) -ArgumentList $true
+  $env:BOOTSTRAP_HASKELL_YAML = 'https://mirrors.ustc.edu.cn/ghcup/ghcup-metadata/ghcup-0.0.8.yaml'
+  Set-ExecutionPolicy Bypass -Scope Process -Force;[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;Invoke-Command -ScriptBlock ([ScriptBlock]::Create((Invoke-WebRequest https://mirrors.ustc.edu.cn/ghcup/sh/bootstrap-haskell.ps1 -UseBasicParsing))) -ArgumentList $true
   ```
-  </CodeBlock>
 
 **第二步** ：配置 GHCup 使用科大源。编辑 `~/.ghcup/config.yaml` 增加如下配置：
 
-<CodeBlock>
 ```yaml
 url-source:
-    OwnSource: {{http_protocol}}{{mirror}}/ghcup/ghcup-metadata/ghcup-0.0.7.yaml
+  OwnSource: https://mirrors.ustc.edu.cn/ghcup/ghcup-metadata/ghcup-0.0.8.yaml
 ```
-</CodeBlock>
 
 **第三步（可选）** ：配置 Cabal 和 Stack 使用镜像源，请参考文档 [Hackage 帮助](/hackage/) 和 [Stackage 帮助](stackage) 。
 
@@ -62,14 +55,12 @@ url-source:
 
 使用预发布频道可以安装尚未正式发布的测试版本。要启用预发布源，将 `~/.ghcup/config.yaml` 文件中 `url-source` 一节修改如下：
 
-<CodeBlock>
 ```yaml
 url-source:
-    OwnSource:
-    - {{http_protocol}}{{mirror}}/ghcup-metadata/ghcup-0.0.7.yaml
-    - {{http_protocol}}{{mirror}}/ghcup-metadata/ghcup-prereleases-0.0.7.yaml
+  OwnSource:
+    - https://mirrors.ustc.edu.cn/ghcup/ghcup-metadata/ghcup-0.0.8.yaml
+    - https://mirrors.ustc.edu.cn/ghcup/ghcup-metadata/ghcup-prereleases-0.0.8.yaml
 ```
-</CodeBlock>
 
 ## SJTUG
 
@@ -80,10 +71,12 @@ url-source:
 创建 `~/.ghcup/config.yaml` 并输入以下内容
 
 <CodeBlock>
+
 ```yaml
 url-source:
-    OwnSource: "{{http_protocol}}{{mirror}}/yaml/ghcup/data/ghcup-0.0.6.yaml"
+  OwnSource: "{{http_protocol}}{{mirror}}/yaml/ghcup/data/ghcup-0.0.6.yaml"
 ```
+
 </CodeBlock>
 
 如果您尚未安装 ghcup，请在完成以上步骤后，于终端中执行以下指令（请不要以 root 用户执行），随后跟随屏幕上的指引完成安装。
@@ -91,17 +84,21 @@ url-source:
 - 如果您运行的是 Linux, macOS (Intel), FreeBSD 或 WSL，请执行
 
 <CodeBlock>
+
 ```bash
 curl --proto '=https' --tlsv1.2 -LsSf https://{{mirror}}/script/install.sh | sh
 ```
+
 </CodeBlock>
 
 - 如果您运行的是 macOS (Apple 芯片) 请执行
 
 <CodeBlock>
+
 ```bash
 curl --proto '=https' --tlsv1.2 -LsSf https://{{mirror}}/script/install.sh | arch -x86_64 /bin/bash
 ```
+
 </CodeBlock>
 
 **故障排除**

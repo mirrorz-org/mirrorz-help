@@ -86,7 +86,7 @@ url-source:
 
 ### 使用说明
 
-创建 `~/.ghcup/config.yaml` 并输入以下内容
+创建 `~/.ghcup/config.yaml` 并输入以下内容：
 
 <CodeBlock>
 
@@ -99,7 +99,7 @@ url-source:
 
 如果您尚未安装 ghcup，请在完成以上步骤后，于终端中执行以下指令（请不要以 root 用户执行），随后跟随屏幕上的指引完成安装。
 
-- 如果您运行的是 Linux, macOS (Intel), FreeBSD 或 WSL，请执行
+- 如果您运行的是 Linux, macOS (Intel), FreeBSD 或 WSL，请执行：
 
 <CodeBlock>
 
@@ -109,7 +109,7 @@ curl --proto '=https' --tlsv1.2 -LsSf https://{{mirror}}/script/install.sh | sh
 
 </CodeBlock>
 
-- 如果您运行的是 macOS (Apple 芯片) 请执行
+- 如果您运行的是 macOS (Apple 芯片) 请执行：
 
 <CodeBlock>
 
@@ -141,13 +141,15 @@ ghcup 于 0.1.15.1 版本前使用 0.0.4 版本的配置文件，此版本及之
 
 ### XDG 支持
 
+参考 [GHCup xdg-support](https://www.haskell.org/ghcup/guide/#xdg-support)。
+
 对于 Linux、FreeBSD、macOS 用户，如果想要让 GHCup 遵循 XDG 规范，可以使用 `GHCUP_USE_XDG_DIRS` 变量，例如：
 
 ```bash
 export GHCUP_USE_XDG_DIRS=1
 ```
 
-还可以将上述内容写入 `~/.profile` 等文件中，具体可以参考 [GHCup xdg-support](https://www.haskell.org/ghcup/guide/#xdg-support)。
+还可以将上述内容写入 `~/.profile` 等文件中。
 
 使用 `GHCUP_USE_XDG_DIRS` 后，GHCup 配置目录将由默认的 `~/.ghcup` 变成 `~/.config/ghcup`；
 而二进制目录会使用 `~/.local/bin`，需要将该目录加入 `PATH` 才能够正常使用 GHCup 安装的 GHC 以及其他工具。
@@ -158,35 +160,36 @@ export PATH=$HOME/.local/bin:$PATH
 
 ### 安装目录变更
 
-对于 Windows 用户或不想使用 XDG 目录的 Linux、FreeBSD、macOS 用户，可以使用 `GHCUP_INSTALL_BASE_PREFIX` 来更改默认安装路径。
+参考 [GHCup env-variables](https://www.haskell.org/ghcup/guide/#env-variables)。
 
+对于 Windows 用户或不想使用 XDG 目录的 Linux、FreeBSD、macOS 用户，可以使用 `GHCUP_INSTALL_BASE_PREFIX` 来更改默认安装路径。
 默认安装路径，对 Windows 用户而言是 `C:\ghcup`，而对于 Linux、FreeBSD、macOS 用户而言是 `$HOME/.ghcup`。
 
-如果想要将 GHCup 的安装目录放到某一个特定目录下，例如 `~/sdk`，则可以使用
+如果想要将 GHCup 的安装目录放到某一个特定目录下，例如 `~/sdk`：
 
-**Windows 用户**:
+- **Windows 用户**
 
-可以在终端使用如下方法：
+  可以在终端使用如下方法：
 
-```powershell
-$env:GHCUP_INSTALL_BASE_PREFIX = $env:USERPROFILE/sdk
-```
+  ```powershell
+  $env:GHCUP_INSTALL_BASE_PREFIX = $env:USERPROFILE/sdk
+  ```
 
-或使用系统设置添加该环境变量。
+  或使用系统设置添加该环境变量。
 
-**Linux、FreeBSD、macOS 用户**:
+- **Linux、FreeBSD、macOS 用户**
 
-可以在终端使用如下方法：
+  可以在终端使用如下方法：
 
-```bash
-export GHCUP_INSTALL_BASE_PREFIX=$HOME/sdk
-```
+  ```bash
+  export GHCUP_INSTALL_BASE_PREFIX=$HOME/sdk
+  ```
 
-还可以将上述内容写入 `~/.profile` 等文件中，具体可以参考 [GHCup env-variables](https://www.haskell.org/ghcup/guide/#env-variables)。
+  还可以将上述内容写入 `~/.profile` 等文件中。
 
 ### MSYS2 设置
 
-对于 Windows 用户，如果系统中已经安装了 MSYS2 环境，则可以使用 `GHCUP_MSYS2` 来指定你想要 GHCup 使用的 MSYS2 环境。
-如果不指定使用的 MSYS2 环境，则会默认新安装一个 MSYS2 环境，并且使用新安装的 MSYS2 环境。
+参考 [GHCup env-variables](https://www.haskell.org/ghcup/guide/#env-variables)。
 
-详细内容可以参考 [GHCup env-variables](https://www.haskell.org/ghcup/guide/#env-variables)。
+对于 Windows 用户，如果系统中已经安装了 MSYS2 环境，则可以使用 `GHCUP_MSYS2` 来指定想要让 GHCup 使用的 MSYS2 环境。
+如果不指定使用的 MSYS2 环境，则会默认新安装一个 MSYS2 环境，并且使用新安装的 MSYS2 环境。

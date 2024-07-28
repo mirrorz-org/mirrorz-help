@@ -23,6 +23,7 @@ import powershell from 'highlight.js/lib/languages/powershell';
 import clojure from 'highlight.js/lib/languages/clojure';
 import dos from 'highlight.js/lib/languages/dos';
 import perl from 'highlight.js/lib/languages/perl';
+import json from 'highlight.js/lib/languages/json';
 
 import clsx from 'clsx';
 
@@ -59,6 +60,8 @@ lowlight.register('clojure', clojure);
 lowlight.register('dos', dos);
 
 lowlight.register('perl', perl);
+
+lowlight.register('json', json);
 
 const alias: Record<string, string> = {
   mdown: 'markdown',

@@ -78,18 +78,11 @@ nvm install <version>
 
 #### nvs
 
-编辑 `settings.json` ，将内容替换如下
 
 <CodeBlock>
 
-```json
-{
-	"aliases": {},
-	"remotes": {
-		"default": "node",
-		"node": "{{http_protocol}}{{mirror}}"
-	}
-}
+```bash
+nvs remote node {{http_protocol}}{{mirror}}/
 ```
 
 </CodeBlock>

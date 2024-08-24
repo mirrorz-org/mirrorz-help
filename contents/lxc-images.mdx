@@ -3,28 +3,31 @@ title: LXC Images 软件仓库镜像使用帮助
 cname: 'lxc-images'
 ---
 
-LXC 1.0 以上版本增加了 `download` 模版，支持下载定义好的系统镜像。
+## LXD/Incus 分叉说明
 
-欲使用镜像站进行下载加速，可以在 `lxc-create -t download` 的选项部分，
-增加 `--server` 即可，例如：
+**此镜像库为 linuxcontainers 的镜像，只适用于 Incus 项目。**
 
-<CodeBlock>
+曾经 LXD 是 linuxcontainers 社区维护的项目，LXC 是命令行工具，LXD 是后台守护进程。
+后来 Canonical 公司接管了 LXD 项目进行开发维护，linuxcontainers 社区分叉并独立维护了 Incus 项目作为 LXC 和 LXD 的替代。
+经过 LXD/Incus 项目分叉后，目前差异如下：
 
-```bash
-lxc-create -t download -n my-container -- --server {{mirror}}
-```
+* Incus 有自己独立的命令行工具和守护进程（incus/incusd），并且只使用 incus 命令交互，不再暴露 incusd 命令给使用者。**本镜像库（linuxcontainers 镜像）只能用于 Incus 项目**。
+* LXC/LXD 继续沿用之前体系，并且只能使用 Canonical 公司的镜像库。**LXC/LXD 不能使用本镜像库**。如果强行让 LXC/LXD 使用本镜像库，有些镜像可能可以启动，但是会出现各种各样的兼容性问题，例如虚拟机镜像无法启动 agent，无法进行 "exec"。
 
-</CodeBlock>
+参考来源：
 
-**LXD/LXC 2.0 及以上版本使用镜像加速的方法**:
+* https://discuss.linuxcontainers.org/t/important-notice-for-lxd-users-image-server/18479
+* https://discuss.linuxcontainers.org/t/lxd-is-no-longer-part-of-the-linux-containers-project/17593
+
+## Incus 使用镜像加速的方法
 
 创建一个 remote 链接，指向镜像站即可，或替换掉默认的 images 链接。
 
 <CodeBlock>
 
 ```bash
-lxc remote add mirror-images {{http_protocol}}{{mirror}}/ --protocol=simplestreams --public
-lxc image list mirror-images:
+incus remote add mirror-images {{http_protocol}}{{mirror}}/ --protocol=simplestreams --public
+incus image list mirror-images:
 ```
 
 </CodeBlock>

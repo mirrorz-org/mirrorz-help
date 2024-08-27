@@ -563,6 +563,12 @@
     "file": "mongodb.mdx",
     "cname": "mongodb"
   },
+  "/mozilla/": {
+    "title": "Mozilla 软件仓库",
+    "fullTitle": "Mozilla 软件仓库镜像使用帮助",
+    "file": "Mozilla.mdx",
+    "cname": "mozilla"
+  },
   "/msys2/": {
     "title": "MSYS2 软件仓库",
     "fullTitle": "MSYS2 软件仓库镜像使用帮助",

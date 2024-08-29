@@ -3,9 +3,7 @@ title: OpenMediaVault 软件仓库镜像使用帮助
 cname: 'OpenMediaVault'
 ---
 
-Open Media Vault 是一款基于 Debian 的 NAS 操作系统，本站提供 OpenMediaVault 的镜像，以加快国内访问速度。
-
-以下方法自 5.6.3-1 开始可用（2021-04-07）
+Open Media Vault 是一款基于 Debian 的 NAS 操作系统。
 
 ### 替换 Open Media Vault 镜像源
 
@@ -31,12 +29,12 @@ omv-salt stage run all
 
 </CodeBlock>
 
-1. 由于 Open Media Vault 自带 kernel backports 因此在 `/etc/apt/source.list` 中配置 backports 源会造成冲突。
+1. 由于 Open Media Vault 自带 kernel backports，因此在 `/etc/apt/source.list` 中配置 backports 源会造成冲突。
 2. 由于 Open Media Vault 的公钥分发通过源自己携带完成，因此本身存在被篡改的可能性，故在换源后用户需要通过其他渠道验证获取的公钥的正确性。
 
 ### 首次部署 Open Media Vault
 
-对于首次部署操作步骤以 https://openmediavault.readthedocs.io/en/latest/installation/on_debian.html 为准
+首次部署操作步骤可参考 [https://openmediavault.readthedocs.io/en/latest/installation/on_debian.html](https://openmediavault.readthedocs.io/en/latest/installation/on_debian.html)。
 
 我们仅对 **Add the package repositories** 段落做出如下调整
 

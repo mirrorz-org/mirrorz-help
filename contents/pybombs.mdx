@@ -6,14 +6,9 @@ disable_https_select: true
 
 [PyBOMBS](http://gnuradio.org/redmine/projects/pybombs/wiki) (Python Build Overlay Managed Bundle System) 是 [GNU Radio](http://gnuradio.org/) 的包管理系统。
 
-从头开始一键安装 GNU Radio 在 Thinkpad X230 上实测大约只需要 40 分钟，下载非常快，主要的时间就剩编译了。而且安装的都是最新的版本。
+本镜像使用 http://github.com/scateu/pybombs-mirror 脚本进行构建。
 
-另外，PyBOMBS 会帮你解决依赖的问题，省得每次敲一堆 make cmake 命令了。
-
-以前自己拖代码回来经常会被重置，而且耗时要几个小时。
-
-
-**使用示例**
+### 使用示例
 
 <CodeBlock>
 
@@ -34,7 +29,7 @@ pybombs install rtl-sdr hackrf bladeRF gr-osmosdr gr-bluetooth gr-ieee-80211
 
 </CodeBlock>
 
-**更新**
+### 更新
 
 由于 PyBOMBS 的 recipes 只能通过 git 仓库进行发布。而我们暂时不想维护一个复杂的 git 分支合并历史。所以更新时，需要将 recipe 仓库删除，然后再重新添加回来。(见[讨论](http://lists.gnu.org/archive/html/discuss-gnuradio/2016-06/msg00170.html))
 
@@ -48,5 +43,3 @@ pybombs recipes add gr-etcetera git+https://{{mirror}}/recipes/gr-etcetera.git
 ```
 
 </CodeBlock>
-
- - 本镜像使用 http://github.com/scateu/pybombs-mirror 脚本进行构建。

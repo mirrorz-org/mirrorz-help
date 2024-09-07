@@ -7,11 +7,11 @@ cname: 'gitlab-runner'
 
 ### Debian/Ubuntu 用户
 
-首先信任 GitLab 的 GPG 公钥：
+首先下载 GitLab 的 GPG 公钥：
 
 <CodeBlock>
 ```bash
-curl https://packages.gitlab.com/gpg.key 2> /dev/null | {{sudo}}apt-key add - &>/dev/null
+curl -L https://packages.gitlab.com/runner/gitlab-runner/gpgkey | gpg --dearmor > /usr/share/keyrings/gitlab-runner.gpg
 ```
 </CodeBlock>
 
@@ -36,7 +36,7 @@ curl https://packages.gitlab.com/gpg.key 2> /dev/null | {{sudo}}apt-key add - &>
 >
 
 ```properties
-deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
+deb [signed-by=/usr/share/keyrings/gitlab-runner.gpg] {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
 ```
 
 </CodeBlock>

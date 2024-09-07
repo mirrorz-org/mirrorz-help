@@ -566,7 +566,7 @@
   "/mozilla/": {
     "title": "Mozilla 软件仓库",
     "fullTitle": "Mozilla 软件仓库镜像使用帮助",
-    "file": "Mozilla.mdx",
+    "file": "mozilla.mdx",
     "cname": "mozilla"
   },
   "/msys2/": {

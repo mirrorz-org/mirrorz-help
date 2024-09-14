@@ -874,5 +874,11 @@
     "fullTitle": "Wine Builds 软件仓库镜像使用帮助",
     "file": "wine-builds.mdx",
     "cname": "wine-builds"
+  },
+  "/winget-source/": {
+    "title": "WinGet 软件仓库索引",
+    "fullTitle": "WinGet 软件仓库索引镜像使用帮助",
+    "file": "winget-source.mdx",
+    "cname": "winget-source"
   }
 }

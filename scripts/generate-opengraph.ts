@@ -104,12 +104,12 @@ async function generateOpengraph<T = any>({
     }
   );
 
-  const pngBuffer = new Resvg(svg, {
+  const pngBuffer = new Uint8Array(new Resvg(svg, {
     fitTo: {
       mode: 'width',
       value: 1200
     }
-  }).render().asPng();
+  }).render().asPng());
 
   await store.set(cacheKey, pngBuffer);
 

@@ -8,7 +8,7 @@ const sharedJsonLd = {
   logo: `https://${siteHost}/favicon/android-icon-192x192.png`
 };
 
-interface JsonLDProps extends Omit<JSX.IntrinsicElements['script'], 'type' | 'dangerouslySetInnerHTML' | 'children' | 'title'> {
+interface JsonLDProps extends Omit<React.JSX.IntrinsicElements['script'], 'type' | 'dangerouslySetInnerHTML' | 'children' | 'title'> {
   isContent?: boolean,
   title?: string,
   siteName?: string,

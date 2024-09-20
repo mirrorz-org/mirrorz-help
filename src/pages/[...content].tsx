@@ -25,7 +25,7 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
         //   height: 630
         // }}
       />
-      <Layout meta={meta as any} toc={toc} cname={cname} isContent>
+      <Layout meta={meta} toc={toc} cname={cname} isContent>
         <DocumentationWrapper>
           {parsedContent}
         </DocumentationWrapper>
@@ -36,7 +36,7 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
 }
 
 // Deserialize a client React tree from JSON.
-function reviveNodeOnClient(key: unknown, val: any) {
+function reviveNodeOnClient(key: unknown, val: unknown) {
   if (Array.isArray(val) && val[0] === '$r') {
     // Assume it's a React element.
     let type = val[1];

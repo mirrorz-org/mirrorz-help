@@ -6,7 +6,7 @@ const picocolors = require('next/dist/lib/picocolors');
 const chokidar = require('chokidar');
 const express = require('express');
 const next = require('next');
-const { parse } = require('url');
+const { parse } = require('node:url');
 const Log = require('next/dist/build/output/log');
 
 const port = Number.parseInt(process.env.PORT, 10) || 3000;
@@ -21,7 +21,9 @@ const app = next({
 });
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
+(async () => {
+  await app.prepare();
+
   chokidar.watch('./contents', { usePolling: false }).on(
     'change',
     () => {
@@ -64,4 +66,4 @@ app.prepare().then(() => {
     if (err) throw err;
     Log.ready(`started server http://${hostname}:${port}`);
   });
-});
+})();

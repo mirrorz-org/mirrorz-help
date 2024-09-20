@@ -27,7 +27,7 @@ const styles = style9.create({
   }
 });
 
-interface CopyToClipboardProps extends Omit<JSX.IntrinsicElements['button'], 'className'> {
+interface CopyToClipboardProps extends Omit<React.JSX.IntrinsicElements['button'], 'className'> {
   getValue?: () => string,
   value?: string
 }

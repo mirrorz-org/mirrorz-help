@@ -1,4 +1,4 @@
-const PROTO_REGEX = /(^https?:)?\/\//;
+const PROTO_REGEX = /(?:^https?:)?\/\//;
 
 export const stringIsNullOrEmpty = (s: string | null | undefined) => s === null || s === undefined || s === '';
 export const absoluteUrlOrConcatWithBase = (url: string, baseUrl: string, keepTrailingSlash = false) => {

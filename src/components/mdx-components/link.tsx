@@ -21,7 +21,7 @@ const styles = style9.create({
   }
 });
 
-function Link({ href, ...props }: Omit<JSX.IntrinsicElements['a'], 'className' | 'ref'>) {
+function Link({ href, ...props }: Omit<React.JSX.IntrinsicElements['a'], 'className' | 'ref'>) {
   const processedHref = useMemo(() => {
     if (typeof href !== 'string') {
       return href;

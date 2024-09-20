@@ -2,9 +2,9 @@
 
 const findUp = require('find-up');
 const ncc = require('@vercel/ncc');
-const { existsSync, readFileSync } = require('fs');
-const { basename, dirname, extname, join, resolve } = require('path');
-const { Module } = require('module');
+const { existsSync, readFileSync } = require('node:fs');
+const { basename, dirname, extname, join, resolve } = require('node:path');
+const { Module } = require('node:module');
 
 // See taskfile.js bundleContext definition for explanation
 const m = new Module(resolve(__dirname, 'bundles', '_'));
@@ -48,7 +48,7 @@ module.exports = function (task, _utils) {
         );
       }
 
-      file.data = Buffer.from(code, 'utf8');
+      file.data = new TextEncoder().encode(code);
     });
   });
 
@@ -58,7 +58,7 @@ module.exports = function (task, _utils) {
       .map(packageName => `declare module '@/compiled/${packageName}' {\n  import * as p from '${packageName}';\n  export = p;\n}\n`)
       .join('\n');
     return Promise.resolve().then(() => {
-      file.data = Buffer.from(code, 'utf8');
+      file.data = new TextEncoder().encode(code, 'utf8');
     });
   });
 };

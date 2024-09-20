@@ -13,9 +13,9 @@ const styles = style9.create({
   }
 });
 
-export const Paragraph = memo((p: JSX.IntrinsicElements['p']) => (
+export const Paragraph = memo((p: React.JSX.IntrinsicElements['p']) => (
   <p className={styles('p')} {...p} />
 ));
-export const Blockquote = memo((p: JSX.IntrinsicElements['blockquote']) => (
+export const Blockquote = memo((p: React.JSX.IntrinsicElements['blockquote']) => (
   <blockquote className={styles('blockquote')} {...p} />
 ));

@@ -95,32 +95,30 @@ function ToCAside({ toc }: ToCProps) {
       <div className={styles('inner')}>
         <ul className={styles('list')}>
           {toc.length > 0
-            && toc.map((h, i) => {
-              if (process.env.NODE_ENV !== 'production') {
-                if (typeof h.url !== 'string') {
-                  // eslint-disable-next-line no-console -- only log in DEV
-                  console.error('Heading does not have URL');
-                }
-              }
-              if (h.depth < 2 && h.depth > 3) return null;
-              return (
-                <li
-                  key={`heading-${h.url}-${i}`}
-                  className={styles(
-                    'item',
-                    h.depth === 3 && 'item_deep',
-                    selectedIndex === i && 'item_active'
-                  )}
+          && toc.map((h, i) => {
+            if (process.env.NODE_ENV !== 'production' && typeof h.url !== 'string') {
+              // eslint-disable-next-line no-console -- only log in DEV
+              console.error('Heading does not have URL');
+            }
+            if (h.depth < 2 && h.depth > 3) return null;
+            return (
+              <li
+                key={`heading-${h.url}-${h.text}`}
+                className={styles(
+                  'item',
+                  h.depth === 3 && 'item_deep',
+                  selectedIndex === i && 'item_active'
+                )}
+              >
+                <a
+                  className={styles('item_link', selectedIndex === i ? 'item_link_active' : 'item_link_inactive')}
+                  href={h.url}
                 >
-                  <a
-                    className={styles('item_link', selectedIndex === i ? 'item_link_active' : 'item_link_inactive')}
-                    href={h.url}
-                  >
-                    {h.text}
-                  </a>
-                </li>
-              );
-            })}
+                  {h.text}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </nav>

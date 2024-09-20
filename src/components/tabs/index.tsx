@@ -8,6 +8,7 @@ import { useState } from 'react';
 import style9 from 'style9';
 
 import type { StyleWithAtRulesAndFalsy } from '@/types/style9';
+import { EMPTY_ARRAY } from '../../lib/client/constant';
 
 interface TabsProps {
   items: string[],
@@ -97,7 +98,7 @@ export const Tabs = ({ children, items, defaultValue }: React.PropsWithChildren<
 export const TabItem = ({
   children,
   value,
-  xstyle = []
+  xstyle = EMPTY_ARRAY
 }: React.PropsWithChildren<{ value: string, xstyle?: StyleWithAtRulesAndFalsy[] }>) => {
   return (
     <TabsContent className={style9(styles.tab, ...xstyle)} value={value}>

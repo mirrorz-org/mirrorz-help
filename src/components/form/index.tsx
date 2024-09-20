@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import style9 from 'style9';
 import type { StyleWithAtRulesAndFalsy } from '@/types/style9';
 import clsx from 'clsx';
+import { EMPTY_ARRAY } from '../../lib/client/constant';
 
 interface InputExtraProps {
   prefix?: React.ReactNode,
@@ -40,8 +41,8 @@ const styles = style9.create({
   }
 });
 
-const Input = forwardRef<HTMLInputElement, InputExtraProps & JSX.IntrinsicElements['input']>(
-  ({ prefix, suffix, className, inputXstyle = [], ...props }, forwardedRef) => (
+const Input = forwardRef<HTMLInputElement, InputExtraProps & React.JSX.IntrinsicElements['input']>(
+  ({ prefix, suffix, className, inputXstyle = EMPTY_ARRAY, ...props }, forwardedRef) => (
     <div className={styles('wrapper')}>
       {prefix}
       <input

@@ -19,6 +19,7 @@ import { MirrorEnableSudoProvider } from '@/contexts/mirror-enable-sudo';
 import type { MetaFromFrontMatters } from '@/types/front-matter';
 
 import routesJson from '@/routes.json';
+import { EMPTY_ARRAY } from '../../lib/client/constant';
 
 const SearchCommandK = lazy(() => import('../search/cmdk'));
 const Dialog = lazy(() => import('../dialog'));
@@ -91,37 +92,35 @@ interface LayoutProps {
   isContent?: boolean
 }
 
-export function Layout({ children, meta, toc = [], cname, isContent = false }: React.PropsWithChildren<LayoutProps>) {
+export function Layout({ children, meta, toc = EMPTY_ARRAY, cname, isContent = false }: React.PropsWithChildren<LayoutProps>) {
   const { asPath } = useRouter();
   useSearchHotKeys();
 
-  if (process.env.NODE_ENV !== 'production') {
-    if (isContent) {
-      // Validate Front Matters
-      if (!meta) {
-        throw new Error('Current Page is missing Front Matters!');
-      }
-      if (!cname) {
-        throw new Error('Current Page\'s Front Matters is missing "cname" field!');
-      }
+  if (process.env.NODE_ENV !== 'production' && isContent) {
+    // Validate Front Matters
+    if (!meta) {
+      throw new Error('Current Page is missing Front Matters!');
+    }
+    if (!cname) {
+      throw new Error('Current Page\'s Front Matters is missing "cname" field!');
+    }
 
-      // Validate routes.json
-      for (const [href, routeMeta] of Object.entries(routesJson)) {
-        if (!(href.startsWith('/') && href.endsWith('/'))) {
-          throw new Error(`Invalid route in routes.json: ${href} should start and end with "/"`);
-        }
-        if (!routeMeta.cname) {
-          throw new Error(`Invalid route in routes.json: ${href} is missing "cname" field`);
-        }
-        if (asPath.startsWith(href) && routeMeta.cname !== cname) {
-          throw new Error(`Invalid route in routes.json: ${href} has conflicted "cname" field, ${routeMeta.cname} in routes.json while "${cname}" in Front Matters`);
-        }
-        if (routeMeta.title.length >= routeMeta.fullTitle.length) {
-          throw new Error(`Invalid route in routes.json: ${href} "title" field is longer than "fullTitle" field, which is not allowed`);
-        }
-        if (!routeMeta.fullTitle.startsWith(routeMeta.title)) {
-          throw new Error(`Invalid route in routes.json: ${href} "fullTitle" field should start with "title" field`);
-        }
+    // Validate routes.json
+    for (const [href, routeMeta] of Object.entries(routesJson)) {
+      if (!(href.startsWith('/') && href.endsWith('/'))) {
+        throw new Error(`Invalid route in routes.json: ${href} should start and end with "/"`);
+      }
+      if (!routeMeta.cname) {
+        throw new Error(`Invalid route in routes.json: ${href} is missing "cname" field`);
+      }
+      if (asPath.startsWith(href) && routeMeta.cname !== cname) {
+        throw new Error(`Invalid route in routes.json: ${href} has conflicted "cname" field, ${routeMeta.cname} in routes.json while "${cname}" in Front Matters`);
+      }
+      if (routeMeta.title.length >= routeMeta.fullTitle.length) {
+        throw new Error(`Invalid route in routes.json: ${href} "title" field is longer than "fullTitle" field, which is not allowed`);
+      }
+      if (!routeMeta.fullTitle.startsWith(routeMeta.title)) {
+        throw new Error(`Invalid route in routes.json: ${href} "fullTitle" field should start with "title" field`);
       }
     }
   }

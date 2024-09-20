@@ -23,6 +23,7 @@ export default function SeoHead({
   nofollow = false,
   twitterCardType = 'summary_large_image',
   ogType = 'website',
+  // eslint-disable-next-line @eslint-react/no-unstable-default-props -- immutable
   ogImage = {
     url: `https://${siteHost}/og-${siteHost}/default.png`,
     width: 1200,
@@ -104,14 +105,14 @@ export default function SeoHead({
       <meta key="og:description" property="og:description" content={finalDescription} />
       <meta key="og:locale" property="og:locale" content="zh-Hans" />
       <meta key="og:image" property="og:image" content={ogImage.url} />
-      {ogImage.width && (
+      {!!ogImage.width && (
         <meta
           key="og:image:width"
           property="og:image:width"
           content={ogImage.width.toString()}
         />
       )}
-      {ogImage.height && (
+      {!!ogImage.height && (
         <meta
           key="og:image:height"
           property="og:image:height"

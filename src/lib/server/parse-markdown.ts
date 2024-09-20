@@ -1,5 +1,6 @@
-import path from 'path';
-import fsPromises from 'fs/promises';
+import path from 'node:path';
+import fsPromises from 'node:fs/promises';
+import { Buffer } from 'node:buffer';
 import { default as matter } from 'gray-matter';
 import * as metroCache from 'metro-cache';
 
@@ -25,7 +26,7 @@ import {
 
 import rehypeExternalLinks from '@/compiled/rehype-external-links';
 
-const { FileStore, stableHash } = metroCache as any;
+const { FileStore, stableHash } = metroCache;
 
 const contentsPath = path.resolve(process.cwd(), 'contents');
 
@@ -68,6 +69,7 @@ const store = new FileStore({
 });
 
 const fakeRequire = (name: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports -- fake require
   if (name === 'react/jsx-runtime') return require('react/jsx-runtime');
   // For each fake MDX import, give back the string component name.
   // It will get serialized later.
@@ -118,7 +120,7 @@ export const getContentBySegments = async (segments: string[]): Promise<{ props:
         `[CMS] Reading compiled MDX for /${id} from ./node_modules/.cache/`
       );
     }
-    return cached;
+    return cached as any;
   }
   Log.info(
     `[CMS] Cache miss for MDX for /${id} from ./node_modules/.cache/`

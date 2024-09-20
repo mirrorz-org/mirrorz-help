@@ -1,7 +1,7 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { ContentProps } from '../lib/server/parse-markdown';
 import { getAvaliableSegments, getContentBySegments } from '../lib/server/parse-markdown';
-import { Fragment, useMemo } from 'react';
+import { createElement, Fragment, useMemo } from 'react';
 import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';
 import SeoHead from '../components/seo/head';
@@ -56,14 +56,7 @@ function reviveNodeOnClient(key: unknown, val: unknown) {
       }
       type = Fragment;
     }
-    return {
-      $$typeof: Symbol.for('react.element'),
-      type,
-      key,
-      ref: null,
-      props,
-      _owner: null
-    };
+    return createElement(type, key ? Object.assign(props, { key }) : props);
   }
   return val;
 }

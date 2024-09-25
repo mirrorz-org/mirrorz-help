@@ -37,7 +37,15 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
 
 // Deserialize a client React tree from JSON.
 function reviveNodeOnClient(key: unknown, val: unknown) {
-  if (Array.isArray(val) && val[0] === '$r') {
+  if (
+    Array.isArray(val)
+    && (
+      val[0] === '$r'
+      || val[0] === '$r1'
+      || val[0] === '$r2'
+      || val[0] === '$r3'
+    )
+  ) {
     // Assume it's a React element.
     let type = val[1];
     const key = val[2];

@@ -86,7 +86,7 @@ interface LowlightProps {
 }
 
 export default function Lowlight({ code, language }: LowlightProps) {
-  const tree = useMemo(() => toJsxRuntime(lowlight.highlight(language, code), { Fragment, jsx: jsx as any, jsxs: jsxs as any, development: process.env.NODE_ENV === 'development' }), [code, language]);
+  const tree = useMemo(() => toJsxRuntime(lowlight.highlight(language, code), { Fragment, jsx: jsx as any, jsxs: jsxs as any }), [code, language]);
   return (
     <pre className={clsx('hljs', `language-${alias[language] || language}`)}>
       <code>

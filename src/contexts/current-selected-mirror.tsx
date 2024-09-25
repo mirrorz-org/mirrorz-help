@@ -51,11 +51,9 @@ export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChild
   if (data && cname && selectedMirror === null && router.isReady) {
     const mirrorFromUrlQuery = router.query.mirror;
     let select = typeof mirrorFromUrlQuery === 'string' ? sanitizeAbbrForMirrorZ(mirrorFromUrlQuery) : null;
-    if (select) {
-      if (!validAbbrList.has(select)) {
-        setInvalid(true);
-        select = null;
-      }
+    if (select && !validAbbrList.has(select)) {
+      setInvalid(true);
+      select = null;
     }
     if (!select) {
       select = sanitizeAbbrForMirrorZ(data[1][cname][0].site.abbr);

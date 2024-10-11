@@ -11,6 +11,7 @@ import MirrorZLogo from '../../mirrorz-logo';
 import Sidebar from './sidebar';
 import DarkModeSwitch from '../darkmode-switch';
 import { SearchButtonInSideNav, SearchButtonOnMobile } from '../../search/button';
+import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect';
 
 const styles = style9.create({
   container: {
@@ -176,7 +177,8 @@ function Nav() {
   }, [isOpen]);
 
   // Close the overlay on any navigation.
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect -- missing event listener from useRouter
     setIsOpen(false);
   }, [asPath]);
 
@@ -186,6 +188,7 @@ function Nav() {
     const media = window.matchMedia('(max-width: 839px)');
     function closeIfNeeded() {
       if (!media.matches) {
+        // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect -- missing event listener from useRouter
         setIsOpen(false);
       }
     }

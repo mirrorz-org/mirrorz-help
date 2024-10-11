@@ -72,12 +72,8 @@ const SidebarLink = ({
       prefetch={false}
       href={href}
       ref={useCallback((el: HTMLAnchorElement | null) => {
-        if (el) {
-          if (isActive) {
-            if ('scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {
-              el.scrollIntoViewIfNeeded();
-            }
-          }
+        if (el && isActive && 'scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {
+          el.scrollIntoViewIfNeeded();
         }
       }, [isActive])}
       title={title}

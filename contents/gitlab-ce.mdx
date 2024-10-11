@@ -11,7 +11,7 @@ cname: 'gitlab-ce'
 
 <CodeBlock>
 ```bash
-curl https://packages.gitlab.com/gpg.key 2> /dev/null | {{sudo}}apt-key add - &>/dev/null
+curl -fsSL https://packages.gitlab.com/gpg.key | {{sudo}}gpg --dearmor > /usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg
 ```
 </CodeBlock>
 
@@ -36,7 +36,7 @@ curl https://packages.gitlab.com/gpg.key 2> /dev/null | {{sudo}}apt-key add - &>
 >
 
 ```properties
-deb {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
+deb [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
 ```
 
 </CodeBlock>

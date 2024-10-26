@@ -21,3 +21,33 @@ cname: 'fdroid'
 {{http_protocol}}{{mirror}}/archive?fingerprint=43238D512C1E5EB2D6569F4A3AFBF5523418B82E0A3ED1552770ABB9A9C9CCAB
 ```
 </CodeBlock>
+
+如果你尚未安装 F-Droid 客户端，你可以直接从 [f-droid.org](https://f-droid.org) 下载。
+<details>
+<summary>我无法访问 <tt>f-droid.org</tt></summary>
+<p>对于首次安装的用户，<tt>f-droid.org</tt> 是官方下载地址，也应当始终是你的首选。如果你无法访问此网站，那么下方有其他选项。你将需要格外谨慎，确保使用你信任的来源。恶意行为者可能会将你带到有伪造及潜在恶意的 F-Droid 客户端。</p>
+
+<h3>从其他来源下载</h3>
+<p>这些替代来源由 F-Droid 团队提供，请验证它们正确：</p>
+<ul>
+<li><a href="https://gitlab.com/fdroid/fdroidclient/-/releases/">https://gitlab.com/fdroid/fdroidclient/-/releases/</a></li>
+<li><a href="https://github.com/f-droid/fdroidclient/releases/">https://github.com/f-droid/fdroidclient/releases/</a></li>
+<li><a href="https://cloudflare.f-droid.org/">https://cloudflare.f-droid.org/</a></li>
+</ul>
+<p>还是不走运？你可以直接从此镜像下载最新版本：</p>
+
+<CodeBlock>
+```
+{{http_protocol}}{{mirror}}/archive/org.fdroid.fdroid_1019052.apk
+```
+</CodeBlock>
+
+<p>如果你知道怎样验证 PGP 签名，你可以从这里下载它：</p>
+
+<CodeBlock>
+```
+{{http_protocol}}{{mirror}}/archive/org.fdroid.fdroid_1019052.apk.asc
+```
+</CodeBlock>
+
+</details>

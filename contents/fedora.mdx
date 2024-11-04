@@ -10,11 +10,11 @@ Fedora 默认使用 [Metalink](https://zh.fedoracommunity.org/2018/04/05/fedora-
 Fedora 的软件源配置文件可以有多个，其中：
 系统默认的 `fedora` 仓库配置文件为 `/etc/yum.repos.d/fedora.repo`，系统默认的 `updates` 仓库配置文件为 `/etc/yum.repos.d/fedora-updates.repo` 。将上述两个文件先做个备份，根据 Fedora 系统版本分别替换为下面内容，之后通过 `sudo dnf makecache` 命令更新本地缓存，即可使用所选择的软件源镜像。
 
-## Fedora 29 或更旧版本
+## Fedora 38 或更旧版本
 
-Fedora 29 及更旧版本已不再受官方支持，Fedora 官方已将 Fedora 29 及更旧版本的软件仓库从主镜像中移除，并转移至了 archive 镜像中。故 Fedora 29 及更旧版本无法使用所选择的镜像。请使用默认配置文件，以使 `yum` / `dnf` 自动获取可用的镜像源。
+Fedora 38 及更旧版本已不再受官方支持，Fedora 官方已将 Fedora 38 及更旧版本的软件仓库从主镜像中移除，并转移至了 archive 镜像中。故 Fedora 38 及更旧版本无法使用所选择的镜像。请使用默认配置文件，以使 `yum` / `dnf` 自动获取可用的镜像源。
 
-## Fedora 30 或更新版本
+## Fedora 39 或更新版本
 
 ### 命令替换
 
@@ -26,9 +26,7 @@ Fedora 29 及更旧版本已不再受官方支持，Fedora 官方已将 Fedora 2
          -e 's|^#baseurl=http://download.example/pub/fedora/linux|baseurl={{http_protocol}}{{mirror}}|g' \
          -i.bak \
          /etc/yum.repos.d/fedora.repo \
-         /etc/yum.repos.d/fedora-modular.repo \
-         /etc/yum.repos.d/fedora-updates.repo \
-         /etc/yum.repos.d/fedora-updates-modular.repo
+         /etc/yum.repos.d/fedora-updates.repo 
 ```
 </CodeBlock>
 
@@ -42,9 +40,37 @@ Fedora 29 及更旧版本已不再受官方支持，Fedora 官方已将 Fedora 2
 ```ini
 [fedora]
 name=Fedora $releasever - $basearch
-failovermethod=priority
 baseurl={{http_protocol}}{{mirror}}/releases/$releasever/Everything/$basearch/os/
-metadata_expire=28d
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
+enabled=1
+countme=1
+metadata_expire=7d
+repo_gpgcheck=0
+type=rpm
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
+skip_if_unavailable=False
+
+[fedora-debuginfo]
+name=Fedora $releasever - $basearch - Debug
+baseurl={{http_protocol}}{{mirror}}/releases/$releasever/Everything/$basearch/debug/tree/
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-debug-$releasever&arch=$basearch
+enabled=0
+metadata_expire=7d
+repo_gpgcheck=0
+type=rpm
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
+skip_if_unavailable=False
+
+[fedora-source]
+name=Fedora $releasever - Source
+baseurl={{http_protocol}}{{mirror}}/releases/$releasever/Everything/source/tree/
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-source-$releasever&arch=$basearch
+enabled=0
+metadata_expire=7d
+repo_gpgcheck=0
+type=rpm
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 skip_if_unavailable=False
@@ -59,47 +85,36 @@ skip_if_unavailable=False
 ```ini
 [updates]
 name=Fedora $releasever - $basearch - Updates
-failovermethod=priority
 baseurl={{http_protocol}}{{mirror}}/updates/$releasever/Everything/$basearch/
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
 enabled=1
+countme=1
+repo_gpgcheck=0
+type=rpm
 gpgcheck=1
 metadata_expire=6h
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 skip_if_unavailable=False
-```
 
-</CodeBlock>
-
-**`fedora-modular` 仓库 (/etc/yum.repos.d/fedora-modular.repo)**
-
-
-<CodeBlock>
-
-```ini
-[fedora-modular]
-name=Fedora Modular $releasever - $basearch
-failovermethod=priority
-baseurl={{http_protocol}}{{mirror}}/releases/$releasever/Modular/$basearch/os/
-enabled=1
-metadata_expire=7d
+[updates-debuginfo]
+name=Fedora $releasever - $basearch - Updates - Debug
+baseurl={{http_protocol}}{{mirror}}/updates/$releasever/Everything/$basearch/debug/
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-debug-f$releasever&arch=$basearch
+enabled=0
+repo_gpgcheck=0
+type=rpm
 gpgcheck=1
+metadata_expire=6h
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 skip_if_unavailable=False
-```
 
-</CodeBlock>
-
-**`updates-modular` 仓库 (/etc/yum.repos.d/fedora-updates-modular.repo)**
-
-
-<CodeBlock>
-
-```ini
-[updates-modular]
-name=Fedora Modular $releasever - $basearch - Updates
-failovermethod=priority
-baseurl={{http_protocol}}{{mirror}}/updates/$releasever/Modular/$basearch/
-enabled=1
+[updates-source]
+name=Fedora $releasever - Updates Source
+baseurl={{http_protocol}}{{mirror}}/updates/$releasever/Everything/SRPMS/
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-source-f$releasever&arch=$basearch
+enabled=0
+repo_gpgcheck=0
+type=rpm
 gpgcheck=1
 metadata_expire=6h
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch

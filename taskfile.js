@@ -1,7 +1,7 @@
 'use strict';
 
 /* eslint-disable camelcase -- cli */
-const path = require('path');
+const path = require('node:path');
 const { sync: requireResolve } = require('resolve');
 
 const packages = [];
@@ -54,3 +54,4 @@ async function ncc(task, opts) {
   await task.start('write_compiled_ts_declaration');
 }
 module.exports.ncc = ncc;
+/* eslint-enable camelcase -- cli */

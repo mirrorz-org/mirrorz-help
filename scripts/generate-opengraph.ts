@@ -2,8 +2,8 @@ import { Default } from '@/opengraph/template';
 import satori from '@/compiled/satori';
 import * as metroCache from 'metro-cache';
 import { Resvg } from '@resvg/resvg-js';
-import path from 'path';
-import { promises as fsPromises } from 'fs';
+import path from 'node:path';
+import { promises as fsPromises } from 'node:fs';
 import * as Log from 'next/dist/build/output/log';
 import { fileExists, FileType } from 'next/dist/lib/file-exists';
 
@@ -32,7 +32,7 @@ const DISK_CACHE_BREAKER = 0;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 interface GenerateOpengraphOptions<T> {
-  template: (props: T) => JSX.Element,
+  template: (props: T) => React.JSX.Element,
   props: T,
   id: string,
   outputPath: string
@@ -44,7 +44,7 @@ async function generateOpengraph<T = any>({
   id,
   outputPath
 }: GenerateOpengraphOptions<T>) {
-  const cacheKey = Buffer.from(
+  const cacheKey = new TextEncoder().encode(
     stableHash({
       props,
       templateSourceCode: await templateSourceCode,
@@ -104,12 +104,12 @@ async function generateOpengraph<T = any>({
     }
   );
 
-  const pngBuffer = new Resvg(svg, {
+  const pngBuffer = new Uint8Array(new Resvg(svg, {
     fitTo: {
       mode: 'width',
       value: 1200
     }
-  }).render().asPng();
+  }).render().asPng());
 
   await store.set(cacheKey, pngBuffer);
 

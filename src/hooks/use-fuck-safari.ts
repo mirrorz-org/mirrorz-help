@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 export const useFuckSafari = () => {
   useEffect(() => {
     // Taken from StackOverflow. Trying to detect both Safari desktop and mobile.
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const isSafari = /^(?:(?!chrome|android).)*safari/i.test(navigator.userAgent);
     if (isSafari) {
       // This is kind of a lie.
       // We still rely on the manual Next.js scrollRestoration logic.

@@ -7,6 +7,7 @@ export const buildCode = (code: string, variables: Record<string, string>) => {
   return code;
 };
 
-export const buildCatEOF = (finalCode: string, filePath: string, sudo: boolean) => {
-  return `${sudo ? 'sudo ' : ''}cat <<'EOF' > ${filePath}\n${finalCode}\nEOF`;
+export const buildEchoTee = (finalCode: string, filePath: string, sudo: boolean) => {
+  const escapedFinalCode = finalCode.replace(/'/g, "\\'");
+  return `echo '${escapedFinalCode}\n' | ${sudo ? 'sudo ' : ''}tee ${filePath}`;
 };

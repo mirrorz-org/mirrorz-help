@@ -12,7 +12,7 @@ import ActualCode from '../codeblock';
 import LoadingOverlay from './overlay';
 import { TabItem, Tabs } from '../../tabs';
 
-import { buildCode, buildCatEOF } from './build-code';
+import { buildCode, buildEchoTee } from './build-code';
 import { useMirrorHttpsEnabled } from '@/contexts/mirror-enable-https';
 import { useMirrorSudoEnabled } from '@/contexts/mirror-enable-sudo';
 
@@ -24,7 +24,6 @@ interface CodeBlockProps {
   codeLanguage?: string,
   codeMeta?: string,
   enableQuickSetup?: boolean,
-  quickSetupNeedSudo?: boolean,
   filepath?: string
 }
 
@@ -59,7 +58,6 @@ function CodeBlock({
   code,
   codeLanguage,
   enableQuickSetup = false,
-  quickSetupNeedSudo = false,
   filepath
 }: CodeBlockProps) {
   const [variableState, dispatch] = useReducer(reducer, menus, createInitialState);
@@ -110,7 +108,7 @@ function CodeBlock({
           <TabItem value="快速配置" xstyle={[styles.code_wrapper]}>
             <LoadingOverlay isLoading={isLoading} />
             <ActualCode
-              code={buildCatEOF(finalCode, filepath, quickSetupNeedSudo && sudoEnabled)}
+              code={buildEchoTee(finalCode, filepath, sudoEnabled)}
               language="bash"
             />
           </TabItem>

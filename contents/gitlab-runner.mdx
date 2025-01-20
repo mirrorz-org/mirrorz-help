@@ -11,7 +11,7 @@ cname: 'gitlab-runner'
 
 <CodeBlock>
 ```bash
-curl -L https://packages.gitlab.com/runner/gitlab-runner/gpgkey | gpg --dearmor > /usr/share/keyrings/gitlab-runner.gpg
+curl -L https://packages.gitlab.com/runner/gitlab-runner/gpgkey | {{sudo}}gpg --dearmor -o /usr/share/keyrings/gitlab-runner.gpg
 ```
 </CodeBlock>
 

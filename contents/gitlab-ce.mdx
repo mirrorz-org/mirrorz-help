@@ -11,7 +11,7 @@ cname: 'gitlab-ce'
 
 <CodeBlock>
 ```bash
-curl -fsSL https://packages.gitlab.com/gpg.key | {{sudo}}gpg --dearmor > /usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg
+curl -fsSL https://packages.gitlab.com/gpg.key | {{sudo}}gpg --dearmor -o /usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg
 ```
 </CodeBlock>
 

@@ -14,7 +14,7 @@ cname: 'erlang-solutions'
 
 ```bash
 {{sudo}}mkdir -m 0755 -p /etc/apt/keyrings/
-curl -s https://binaries2.erlang-solutions.com/GPG-KEY-pmanager.asc | gpg --dearmor | {{sudo}}tee /etc/apt/keyrings/erlang-solutions-archive_compat.gpg > /dev/null
+curl -s https://binaries2.erlang-solutions.com/GPG-KEY-pmanager.asc | {{sudo}}gpg --dearmor -o /etc/apt/keyrings/erlang-solutions-archive_compat.gpg
 ```
 
 </CodeBlock>

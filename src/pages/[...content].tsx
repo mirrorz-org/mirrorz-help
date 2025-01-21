@@ -1,7 +1,7 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { ContentProps } from '../lib/server/parse-markdown';
 import { getAvaliableSegments, getContentBySegments } from '../lib/server/parse-markdown';
-import { Fragment, useMemo } from 'react';
+import { createElement, Fragment, useMemo } from 'react';
 import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';
 import SeoHead from '../components/seo/head';
@@ -25,7 +25,7 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
         //   height: 630
         // }}
       />
-      <Layout meta={meta as any} toc={toc} cname={cname} isContent>
+      <Layout meta={meta} toc={toc} cname={cname} isContent>
         <DocumentationWrapper>
           {parsedContent}
         </DocumentationWrapper>
@@ -36,8 +36,16 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
 }
 
 // Deserialize a client React tree from JSON.
-function reviveNodeOnClient(key: unknown, val: any) {
-  if (Array.isArray(val) && val[0] === '$r') {
+function reviveNodeOnClient(key: unknown, val: unknown) {
+  if (
+    Array.isArray(val)
+    && (
+      val[0] === '$r'
+      || val[0] === '$r1'
+      || val[0] === '$r2'
+      || val[0] === '$r3'
+    )
+  ) {
     // Assume it's a React element.
     let type = val[1];
     const key = val[2];
@@ -56,14 +64,7 @@ function reviveNodeOnClient(key: unknown, val: any) {
       }
       type = Fragment;
     }
-    return {
-      $$typeof: Symbol.for('react.element'),
-      type,
-      key,
-      ref: null,
-      props,
-      _owner: null
-    };
+    return createElement(type, key ? Object.assign(props, { key }) : props);
   }
   return val;
 }

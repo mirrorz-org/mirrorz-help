@@ -5,6 +5,7 @@ import { jsonEndpoint, siteHost } from '../lib/client/constant';
 
 class RedirectError extends Error {
   readonly redirect: string;
+  readonly name = 'RedirectError';
   constructor(readonly input: string) {
     super();
     this.redirect = input;

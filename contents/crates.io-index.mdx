@@ -12,8 +12,11 @@ disable_https_select: true
 [source.crates-io]
 replace-with = 'mirror'
 
-[source.mirror]
-registry = "sparse+{{http_protocol}}{{mirror}}/"
+[registries.mirror]
+index = "sparse+{{http_protocol}}{{mirror}}/"
+
+[registry]
+default = "mirror"
 ```
 
 </CodeBlock>
@@ -35,8 +38,11 @@ cat << EOF | tee -a ${CARGO_HOME:-$HOME/.cargo}/config.toml
 [source.crates-io]
 replace-with = 'mirror'
 
-[source.mirror]
-registry = "sparse+{{http_protocol}}{{mirror}}/"
+[registries.mirror]
+index = "sparse+{{http_protocol}}{{mirror}}/"
+
+[registry]
+default = "mirror"
 EOF
 ```
 

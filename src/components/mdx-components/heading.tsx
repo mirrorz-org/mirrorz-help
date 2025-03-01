@@ -5,6 +5,7 @@ import style9 from 'style9';
 import type { StyleWithAtRulesAndFalsy } from '@/types/style9';
 
 import headingAnchorStyles from './heading.module.css';
+import { EMPTY_ARRAY } from '../../lib/client/constant';
 
 const styles = style9.create({
   base: {
@@ -78,8 +79,8 @@ const styles = style9.create({
 });
 
 type HeadingProps<T extends React.ElementType> = Omit<
-React.PropsWithChildren<React.ComponentPropsWithoutRef<T>>,
-'className'
+  React.PropsWithChildren<React.ComponentPropsWithoutRef<T>>,
+  'className'
 > & {
   xstyle?: StyleWithAtRulesAndFalsy[],
   isPageAnchor?: boolean,
@@ -89,7 +90,7 @@ React.PropsWithChildren<React.ComponentPropsWithoutRef<T>>,
 };
 
 export const Heading = typescriptHappyForwardRef(<T extends 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>(
-  { as, children, id, isPageAnchor = true, xstyle = [], ...props }: HeadingProps<T>,
+  { as, children, id, isPageAnchor = true, xstyle = EMPTY_ARRAY, ...props }: HeadingProps<T>,
   ref: React.ForwardedRef<HTMLHeadingElement> | null
 ) => {
   const label = typeof children === 'string' ? `Link for ${children}` : 'Link for this heading';

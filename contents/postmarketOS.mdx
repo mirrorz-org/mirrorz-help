@@ -5,33 +5,24 @@ cname: 'postmarketOS'
 
 ### pmbootstrap
 
-需要在每个 `pmbootstrap` 命令中都指定镜像
+通过 `pmbootstrap config` 更新镜像配置。
 
 <CodeBlock>
 
 ```bash
-pmbootstrap --mirror-pmOS={{http_protocol}}{{mirror}}/ --mirror-alpine=http://mirror/alpine/ init
-pmbootstrap --mirror-pmOS={{http_protocol}}{{mirror}}/ --mirror-alpine=http://mirror/alpine/ install
+pmbootstrap config mirrors.alpine {{http_protocol}}{{host}}/alpine/
+pmbootstrap config mirrors.pmaports {{http_protocol}}{{mirror}}/
+pmbootstrap config mirrors.systemd {{http_protocol}}{{mirror}}/extra-repos/systemd/
 ```
 
 </CodeBlock>
 
-其中 `mirror-alpine` 部分需要前往 [Alpine 帮助](/alpine/)构造。
+其中 `mirrors.alpine` 部分也可前往 [Alpine 帮助](/alpine/) 选择其他的镜像站。
 
-### 安装后的 postmarketOS
+### 移除镜像配置
 
-将 `/etc/apk/repositories` 替换为以下的内容
-
-<CodeBlock>
-
+```bash
+pmbootstrap config -r mirrors.alpine
+pmbootstrap config -r mirrors.pmaports
+pmbootstrap config -r mirrors.systemd
 ```
-{{http_protocol}}{{mirror}}/master
-http://mirror/alpine/edge/main
-http://mirror/alpine/edge/community
-```
-
-</CodeBlock>
-
-其中 alpine 部分需要前往 [Alpine 帮助](/alpine/)构造。
-
-可以按照需要使用不同的 channel，例如 `postmarketOS/v21.12`，`alpine/v3.15/main`

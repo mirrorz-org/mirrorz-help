@@ -121,3 +121,19 @@ export HOMEBREW_PIP_INDEX_URL="https://{{mirror}}/web/simple"
 ```
 
 </CodeBlock>
+
+## Astral uv
+
+在 `~/.config/uv/uv.toml` 或者 `/etc/uv/uv.toml` 填写下面的内容：
+
+<CodeBlock>
+
+```toml
+[[index]]
+url = "https://{{mirror}}/pypi/web/simple"
+default = true
+```
+
+</CodeBlock>
+
+详情参考[官方配置文件文档](https://docs.astral.sh/uv/configuration/files/)。

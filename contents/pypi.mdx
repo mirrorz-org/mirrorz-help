@@ -110,19 +110,7 @@ poetry config experimental.new-installer false
 
 </CodeBlock>
 
-## Homebrew
-
-本节主要供 [Homebrew 帮助](/homebrew/)使用。
-
-<CodeBlock>
-
-```
-export HOMEBREW_PIP_INDEX_URL="https://{{mirror}}/web/simple"
-```
-
-</CodeBlock>
-
-## Astral uv
+### Astral uv
 
 在 `~/.config/uv/uv.toml` 或者 `/etc/uv/uv.toml` 填写下面的内容：
 
@@ -137,3 +125,15 @@ default = true
 </CodeBlock>
 
 详情参考[官方配置文件文档](https://docs.astral.sh/uv/configuration/files/)。
+
+## Homebrew
+
+本节主要供 [Homebrew 帮助](/homebrew/)使用。
+
+<CodeBlock>
+
+```
+export HOMEBREW_PIP_INDEX_URL="https://{{mirror}}/web/simple"
+```
+
+</CodeBlock>

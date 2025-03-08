@@ -76,9 +76,12 @@ function CodeBlock({
   }, [cname, currentSelectedMirror, data, isLoading]);
 
   const finalCode = useMemo(() => {
+    const url = new URL('https://' + mirrorUrl);
     const variable: Record<string, string> = {
       ...variableState,
       mirror: mirrorUrl,
+      host: url.host,
+      path: url.pathname,
       http_protocol: isHttpProtocol ? (httpsEnabled ? 'https://' : 'http://') : '',
       sudo: sudoEnabled ? 'sudo ' : '',
       sudoE: sudoEnabled ? 'sudo -E ' : ''

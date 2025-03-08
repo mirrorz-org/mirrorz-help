@@ -12,3 +12,4 @@ Thumb.db
 tailwind.config.js
 public/og-*
 .env*.local
+next-env.d.ts

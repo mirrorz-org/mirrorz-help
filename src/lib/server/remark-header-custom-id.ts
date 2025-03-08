@@ -33,7 +33,7 @@ export default function remarkHeaderCustomId() {
         if (!isValidCustomId) {
           throw new Error(`Expected header ID to be like: {/*some-header*/}. Instead, received: ${id}`);
         }
-        id = id.slice(2, id.length - 2);
+        id = id.slice(2, -2);
         if (id !== toSlug(id)) {
           throw new Error(`Expected header ID to be a valid slug. You specified: {/*${id}*/}. Replace it with: {/*${toSlug(id)}*/}`);
         }

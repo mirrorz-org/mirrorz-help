@@ -42,28 +42,3 @@ sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#{{http_protocol}}{{mirror}}#g'
 </CodeBlock>
 
 更改完 `/etc/apk/repositories` 文件后请运行 `apk update` 更新索引以生效。
-
-## postmarketOS
-
-本节供 [postmarketOS 帮助](/postmarketOS/)使用。
-
-<CodeBlock>
-
-```bash
-pmbootstrap --mirror-pmOS=http://mirror/postmarketOS/ --mirror-alpine={{http_protocol}}{{mirror}}/ init
-pmbootstrap --mirror-pmOS=http://mirror/postmarketOS/ --mirror-alpine={{http_protocol}}{{mirror}}/ install
-```
-
-</CodeBlock>
-
-将 `/etc/apk/repositories` 替换为以下的内容
-
-<CodeBlock>
-
-```
-http://mirror/postmarketOS/master
-{{http_protocol}}{{mirror}}/edge/main
-{{http_protocol}}{{mirror}}/edge/community
-```
-
-</CodeBlock>

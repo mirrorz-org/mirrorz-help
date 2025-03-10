@@ -5,7 +5,6 @@ import { useMemo } from 'react';
  * This is a runtime version of React 17+ new JSX transform.
  * So we are accessing those exports that "doesn't exist"
  */
-// @ts-expect-error -- This is something really stupid
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime';
 
@@ -87,7 +86,7 @@ interface LowlightProps {
 }
 
 export default function Lowlight({ code, language }: LowlightProps) {
-  const tree = useMemo(() => toJsxRuntime(lowlight.highlight(language, code), { Fragment, jsx, jsxs }), [code, language]);
+  const tree = useMemo(() => toJsxRuntime(lowlight.highlight(language, code), { Fragment, jsx: jsx as any, jsxs: jsxs as any }), [code, language]);
   return (
     <pre className={clsx('hljs', `language-${alias[language] || language}`)}>
       <code>

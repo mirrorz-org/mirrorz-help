@@ -34,7 +34,7 @@ GHCup 类似 Rustup，可以用于安装 Haskell 工具链。建议搭配 Hackag
 
   ```bash
   # Linux, FreeBSD, macOS 用户：在终端中运行如下命令
-  curl --proto '=https' --tlsv1.2 -sSf {{http_protocol}}{{mirror}}/sh/bootstrap-haskell | BOOTSTRAP_HASKELL_YAML={{http_protocol}}{{mirror}}/ghcup-metadata/ghcup-0.0.8.yaml sh
+  curl --proto '=https' --tlsv1.2 -LsSf {{http_protocol}}{{mirror}}/sh/bootstrap-haskell | BOOTSTRAP_HASKELL_YAML={{http_protocol}}{{mirror}}/ghcup-metadata/ghcup-0.0.8.yaml sh
   ```
 
   </CodeBlock>

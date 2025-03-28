@@ -18,7 +18,7 @@ cname: 'nix'
     <CodeBlock>
 
     ```bash
-    sh <(curl {{http_protocol}}{{mirror}}/latest/install)
+    sh <(curl -L {{http_protocol}}{{mirror}}/latest/install)
     ```
 
     </CodeBlock>
@@ -28,7 +28,7 @@ cname: 'nix'
     <CodeBlock>
 
     ```bash
-    sh <(curl {{http_protocol}}{{mirror}}/latest/install) --daemon
+    sh <(curl -L {{http_protocol}}{{mirror}}/latest/install) --daemon
     ```
 
     </CodeBlock>

@@ -14,7 +14,7 @@ GitHub RAW 镜像仅为其他镜像服务。
 ```bash
 # 手动模拟 rosdep init
 {{sudo}}mkdir -p /etc/ros/rosdep/sources.list.d/
-{{sudo}}curl -o /etc/ros/rosdep/sources.list.d/20-default.list {{http_protocol}}{{mirror}}/ros/rosdistro/master/rosdep/sources.list.d/20-default.list
+{{sudo}}curl -o /etc/ros/rosdep/sources.list.d/20-default.list -L {{http_protocol}}{{mirror}}/ros/rosdistro/master/rosdep/sources.list.d/20-default.list
 ```
 
 </CodeBlock>

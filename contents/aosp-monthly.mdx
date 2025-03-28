@@ -32,9 +32,9 @@ cname: 'aosp-monthly'
 
 ```bash
 # 包含断点续传
-curl -OC - {{http_protocol}}{{mirror}}/aosp-latest.tar # 下载初始化包
+curl -LOC - {{http_protocol}}{{mirror}}/aosp-latest.tar # 下载初始化包
 {{enable_checksum}}md5sum aosp-latest.tar
-{{enable_checksum}}curl -q {{http_protocol}}{{mirror}}/aosp-latest.tar.md5
+{{enable_checksum}}curl -Lq {{http_protocol}}{{mirror}}/aosp-latest.tar.md5
 tar xf aosp-latest.tar
 cd AOSP   # 解压得到的 AOSP 工程目录
 # 这时 ls 的话什么也看不到，因为只有一个隐藏的 .repo 目录

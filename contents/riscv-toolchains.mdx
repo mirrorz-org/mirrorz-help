@@ -16,12 +16,12 @@ cname: 'riscv-toolchains'
 ## 单独克隆
 git clone {{http_protocol}}{{mirror}}/git/riscv-collab/riscv-gnu-toolchain.git
 ## 同时克隆子模块，注意路径为 .git 替换为 .sh
-curl {{http_protocol}}{{mirror}}/git/riscv-collab/riscv-gnu-toolchain.sh | bash
+curl -L {{http_protocol}}{{mirror}}/git/riscv-collab/riscv-gnu-toolchain.sh | bash
 # rocket-tools 及其子模块
 ## 单独克隆
 git {{http_protocol}}{{mirror}}/git/chipsalliance/rocket-tools.git
 ## 同时克隆子模块
-curl {{http_protocol}}{{mirror}}/git/chipsalliance/rocket-tools.sh | bash
+curl -L {{http_protocol}}{{mirror}}/git/chipsalliance/rocket-tools.sh | bash
 ```
 
 </CodeBlock>

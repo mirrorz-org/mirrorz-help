@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- required for satori & resvg
 import React from 'react';
 
 interface ContentProps {

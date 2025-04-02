@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-function ExternalLink({ href, ...props }: JSX.IntrinsicElements['a']) {
+function ExternalLink({ href, ...props }: React.JSX.IntrinsicElements['a']) {
   return (
     <a
       href={href}

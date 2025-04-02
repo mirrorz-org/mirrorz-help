@@ -96,7 +96,7 @@ function Dialog() {
         <RadixDialogOverlay className={styles('overlay')} />
         <RadixDialogContent className={styles('dialog')}>
           {dialog?.title && <RadixDialogTitle className={styles('title')}>{dialog.title}</RadixDialogTitle>}
-          {dialog?.content && (
+          {dialog?.content != null && (
             <RadixDialogDescription className={styles('description')}>
               {dialog.content}
             </RadixDialogDescription>

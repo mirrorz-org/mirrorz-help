@@ -36,7 +36,7 @@ chmod +x llvm.sh
 
 <CodeBlock>
 ```bash
-wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | {{sudo}}apt-key add -
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | {{sudo}}gpg -o /etc/apt/keyrings/llvm-snapshot.gpg --dearmor
 ```
 </CodeBlock>
 
@@ -80,8 +80,8 @@ wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | {{sudo}}apt-key add -
 
 ```properties
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
-deb {{http_protocol}}{{mirror}}/{{release_name}}/ llvm-toolchain-{{release_name}}{{version}} main
-{{enable_source}}deb-src {{http_protocol}}{{mirror}}/{{release_name}}/ llvm-toolchain-{{release_name}}{{version}} main
+deb [signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] {{http_protocol}}{{mirror}}/{{release_name}}/ llvm-toolchain-{{release_name}}{{version}} main
+{{enable_source}}deb-src [signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] {{http_protocol}}{{mirror}}/{{release_name}}/ llvm-toolchain-{{release_name}}{{version}} main
 ```
 
 </CodeBlock>

@@ -85,7 +85,7 @@ const styles = style9.create({
   }
 });
 
-function Kbd(props: JSX.IntrinsicElements['kbd']) {
+function Kbd(props: React.JSX.IntrinsicElements['kbd']) {
   return (
     <kbd className={styles('kbd')} {...props} />
   );

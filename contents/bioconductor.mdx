@@ -3,11 +3,17 @@ title: Bioconductor 软件仓库镜像使用帮助
 cname: 'bioconductor'
 ---
 
-Bioconductor 为高通量基因组数据的分析和可视化提供开源工具。Bioconductor 多数软件包采用 R 统计编程语言开发。Bioconductor 每年释出两个版本，并有活跃的用户社区。
+[Bioconductor](https://www.bioconductor.org) 为高通量基因组数据的分析和可视化提供开源工具。Bioconductor 多数软件包采用 R 统计编程语言开发。Bioconductor 每年释出两个版本，并有活跃的用户社区。
+
+### 版本说明
+
+由于 Bioconductor 的 rsync 上游会自行删除非最新的版本，大部分镜像站仅提供 Bioconductor 的当前最新版本和开发版本，只有少量镜像站点会保留过时的版本。目前已知[西湖大学镜像站](https://mirrors.westlake.edu.cn/)提供了历史版本的镜像。
+
+详细讨论参见 [tuna/issues #1969](https://github.com/tuna/issues/issues/1969)。
 
 ### 使用方法
 
-[Bioconductor](https://www.bioconductor.org) 镜像源配置文件之一是 `~/.Rprofile`。
+Bioconductor 镜像源配置文件之一是 `~/.Rprofile`。
 
 注：R 的 `~` 在类 Unix 系统下为：`$HOME`（即 `~`），在 Windows 下为：`%USERPROFILE%\Documents`，具体路径可以在 R 中执行 `path.expand("~")` 查看。
 

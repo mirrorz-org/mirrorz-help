@@ -18,7 +18,8 @@ FreeBSD pkg 包管理器的官方源配置是 `/etc/pkg/FreeBSD.conf` ，请先�
 <CodeBlock>
 ```
 FreeBSD: {
-  url: "pkg+{{http_protocol}}{{mirror}}/${ABI}/quarterly",
+  url: "{{http_protocol}}{{mirror}}/${ABI}/quarterly",
+  mirror_type: "none",
 }
 ```
 </CodeBlock>

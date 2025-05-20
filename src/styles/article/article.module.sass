@@ -1,7 +1,7 @@
-@import "_base"
-@import "_list"
-@import "_inline"
-@import "_table"
+@use "_base"
+@use "_list"
+@use "_inline"
+@use "_table"
 
 .article
   font-size: 1rem
@@ -11,10 +11,10 @@
   word-wrap: break-word
   hyphens: auto
 
-  @include base()
-  @include list()
-  @include table()
-  @include inline()
+  @include base.base()
+  @include list.list()
+  @include table.table()
+  @include inline.inline()
 
   pre > code, table
     scrollbar-width: thin

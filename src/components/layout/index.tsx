@@ -107,7 +107,7 @@ export function Layout({ children, meta, toc = EMPTY_ARRAY, cname, isContent = f
 
     // Validate routes.json
     for (const [href, routeMeta] of Object.entries(routesJson)) {
-      if (!(href.startsWith('/') && href.endsWith('/'))) {
+      if (!href.startsWith('/') || !href.endsWith('/')) {
         throw new Error(`Invalid route in routes.json: ${href} should start and end with "/"`);
       }
       if (!routeMeta.cname) {

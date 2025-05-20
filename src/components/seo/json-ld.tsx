@@ -67,6 +67,7 @@ export default function JsonLD({
       {...rest}
       dangerouslySetInnerHTML={{
         __html: JSON.stringify((Array.isArray(data) && data.length === 1) ? data[0] : data, safeJsonLdReplacer)
-      }} />
+      }}
+    />
   );
 }

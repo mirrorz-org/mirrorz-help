@@ -1,4 +1,4 @@
-import { createContext, startTransition, useCallback, useContext, useEffect, useState } from 'react';
+import { createContext, startTransition, useCallback, use, useEffect, useState } from 'react';
 
 import { noop } from 'foxact/noop';
 import { requestIdleCallback } from 'foxact/request-idle-callback';
@@ -7,7 +7,7 @@ const darkModeStorageKey = 'user-color-scheme';
 
 export type ColorScheme = 'light' | 'dark' | 'auto';
 
-const getInitialThemeValue = (): ColorScheme => {
+function getInitialThemeValue(): ColorScheme {
   try {
     if (typeof window === 'object') {
       return localStorage.getItem(darkModeStorageKey) as ColorScheme | null || 'auto';
@@ -16,9 +16,9 @@ const getInitialThemeValue = (): ColorScheme => {
   } catch {
     return 'auto';
   }
-};
+}
 
-const updateThemeToDom = (theme: ColorScheme) => {
+function updateThemeToDom(theme: ColorScheme) {
   if (typeof window === 'object') {
     const rootEl = document.documentElement;
     if (theme === 'dark') {
@@ -31,7 +31,7 @@ const updateThemeToDom = (theme: ColorScheme) => {
       rootEl.classList.remove('dark', 'light');
     }
   }
-};
+}
 
 const initialThemeValue = getInitialThemeValue();
 updateThemeToDom(initialThemeValue);
@@ -39,9 +39,9 @@ updateThemeToDom(initialThemeValue);
 const DarkModeContext = createContext<ColorScheme>('auto');
 const DarkModeDispatchContext = createContext<React.Dispatch<React.SetStateAction<ColorScheme>>>(noop);
 
-export const useDarkMode = () => useContext(DarkModeContext);
-export const useSetDarkMode = () => {
-  const setDarkMode = useContext(DarkModeDispatchContext);
+export const useDarkMode = () => use(DarkModeContext);
+export function useSetDarkMode() {
+  const setDarkMode = use(DarkModeDispatchContext);
 
   return useCallback((newMode: ColorScheme) => {
     setDarkMode(newMode);
@@ -60,9 +60,9 @@ export const useSetDarkMode = () => {
       });
     }
   }, [setDarkMode]);
-};
+}
 
-export const DarkModeProvider = ({ children }: React.PropsWithChildren) => {
+export function DarkModeProvider({ children }: React.PropsWithChildren) {
   const [theme, setTheme] = useState<ColorScheme>('auto');
 
   // We are showing the current theme value directly in the initial DOM (in a <select>)
@@ -73,10 +73,10 @@ export const DarkModeProvider = ({ children }: React.PropsWithChildren) => {
   }, []);
 
   return (
-    <DarkModeContext.Provider value={theme}>
-      <DarkModeDispatchContext.Provider value={setTheme}>
+    <DarkModeContext value={theme}>
+      <DarkModeDispatchContext value={setTheme}>
         {children}
-      </DarkModeDispatchContext.Provider>
-    </DarkModeContext.Provider>
+      </DarkModeDispatchContext>
+    </DarkModeContext>
   );
-};
+}

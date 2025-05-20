@@ -6,7 +6,7 @@ const macosPlatforms = /macintosh|macintel|macppc|mac68k/i;
 const windowsPlatforms = /win32|win64|windows|wince/i;
 const iosPlatforms = /iphone|ipad|ipod/i;
 
-export const getOS = (): OS => {
+export function getOS(): OS {
   const { userAgent } = window.navigator;
 
   if (macosPlatforms.test(userAgent)) {
@@ -26,12 +26,14 @@ export const getOS = (): OS => {
   }
 
   return 'undetermined';
-};
+}
 
-export const useOs = (): OS => useMemo(() => {
-  if (typeof window !== 'undefined') {
-    return getOS();
-  }
+export function useOs(): OS {
+  return useMemo(() => {
+    if (typeof window !== 'undefined') {
+      return getOS();
+    }
 
-  return 'undetermined';
-}, []);
+    return 'undetermined';
+  }, []);
+}

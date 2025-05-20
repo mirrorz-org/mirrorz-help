@@ -84,25 +84,23 @@ function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
 
   return (
     <div className={styles('container')}>
-      {menus.map((menu, menuIndex) => {
-        return (
-          <div className={styles('menu')} key={menu.title}>
-            <span>{menu.title}</span>
-            <div className={styles('select_wrapper')}>
-              <select className={styles('select')} onChange={handleChange}>
-                {menu.items.map((item, optionIndex) => {
-                  const value = `${menuIndex}_${optionIndex}`;
-                  const key = `${menu.title}_${value}`;
-                  return <option key={key} value={value}>{item[0]}</option>;
-                })}
-              </select>
-              <span className={styles('icon_wrapper')}>
-                <IconChevronUpDown className={styles('icon')} />
-              </span>
-            </div>
+      {menus.map((menu, menuIndex) => (
+        <div className={styles('menu')} key={menu.title}>
+          <span>{menu.title}</span>
+          <div className={styles('select_wrapper')}>
+            <select className={styles('select')} onChange={handleChange}>
+              {menu.items.map((item, optionIndex) => {
+                const value = `${menuIndex}_${optionIndex}`;
+                const key = `${menu.title}_${value}`;
+                return <option key={key} value={value}>{item[0]}</option>;
+              })}
+            </select>
+            <span className={styles('icon_wrapper')}>
+              <IconChevronUpDown className={styles('icon')} />
+            </span>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
 }

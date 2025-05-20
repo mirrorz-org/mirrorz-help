@@ -5,7 +5,7 @@ const path = require('node:path');
 const { sync: requireResolve } = require('resolve');
 
 const packages = [];
-const fromEsmToCjs = (packageName, overrideSource = null) => {
+function fromEsmToCjs(packageName, overrideSource = null) {
   const taskName = `ncc_${packageName.replaceAll('@', '__').replaceAll('-', '_').replaceAll('/', '_')}`;
 
   const source = overrideSource || path.relative(__dirname, require.resolve(packageName));
@@ -29,7 +29,7 @@ const fromEsmToCjs = (packageName, overrideSource = null) => {
       .target(targetDir);
   };
   return taskName;
-};
+}
 
 const tasks = [
   fromEsmToCjs('unified'),

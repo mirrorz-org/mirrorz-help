@@ -109,7 +109,7 @@ export const SearchButtonOnMobile = memo(() => {
   );
 });
 
-const SearchButtonSuffix = () => {
+function SearchButtonSuffix() {
   const [icon, setIcon] = useState<string>('\u2318');
 
   useEffect(() => {
@@ -129,7 +129,7 @@ const SearchButtonSuffix = () => {
       <Kbd>K</Kbd>
     </span>
   );
-};
+}
 
 export const SearchButtonInSideNav = memo(() => {
   const setSearchOpen = useSetSearchOpen();

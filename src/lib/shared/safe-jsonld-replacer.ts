@@ -13,7 +13,7 @@ const ESCAPE_REPLACER = (t: string): string => ESCAPE_ENTITIES[t as keyof typeof
  * per https://www.w3.org/TR/json-ld11/#restrictions-for-contents-of-json-ld-script-elements
  * Solution from https://stackoverflow.com/a/5499821/864313
  */
-export const safeJsonLdReplacer = (_: string, value: any) => {
+export function safeJsonLdReplacer(_: string, value: any) {
   switch (typeof value) {
     case 'object':
       // Omit null values.
@@ -32,4 +32,4 @@ export const safeJsonLdReplacer = (_: string, value: any) => {
       // JSON.stringify will remove this element.
     }
   }
-};
+}

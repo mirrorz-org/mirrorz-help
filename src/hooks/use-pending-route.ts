@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useRef, useEffect } from 'react';
 
-export const usePendingRoute = () => {
+export function usePendingRoute() {
   const { events } = useRouter();
   const [pendingRoute, setPendingRoute] = useState<string | null>(null);
   const currentRoute = useRef<string | null>(null);
@@ -39,4 +39,4 @@ export const usePendingRoute = () => {
   }, [events]);
 
   return pendingRoute;
-};
+}

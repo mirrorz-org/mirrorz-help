@@ -5,7 +5,7 @@ import SidebarLink from './nav-link';
 import { memo } from 'react';
 
 import _routesJson from '@/routes.json';
-import type { RoutesJson } from '@/types/routesJson';
+import type { RoutesJson } from '@/types/routes-json';
 
 const routesJson = _routesJson as RoutesJson;
 const hrefs = Object.keys(routesJson);

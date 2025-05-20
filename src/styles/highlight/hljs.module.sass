@@ -1,17 +1,17 @@
-@import "_github_light"
-@import "_github_dark"
+@use "_github_light"
+@use "_github_dark"
 
 .hljs_container
-  @include githublight()
+  @include github_light.githublight()
 
   :global(.language-shell .prompt_)
     user-select: none
 
 :global(html.dark)
   .hljs_container
-    @include githubdark()
+    @include github_dark.githubdark()
 
 @media (prefers-color-scheme: dark)
   :global(:not(.light):root)
     .hljs_container
-      @include githubdark()
+      @include github_dark.githubdark()

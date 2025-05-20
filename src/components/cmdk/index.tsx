@@ -920,7 +920,7 @@ function useAsRef<T>(data: T) {
 }
 
 function useLazyRef<T>(fn: () => T) {
-  const ref = useRef<T>();
+  const ref = useRef<T>(null);
 
   if (ref.current === undefined) {
     ref.current = fn();
@@ -953,10 +953,10 @@ function useCmdk<T = any>(selector: (state: State) => T) {
 
 function useValue(
   id: string,
-  ref: React.RefObject<HTMLElement>,
-  deps: Array<string | React.ReactNode | React.RefObject<HTMLElement>>
+  ref: React.RefObject<HTMLElement | null>,
+  deps: Array<string | React.ReactNode | React.RefObject<HTMLElement | null>>
 ) {
-  const valueRef = useRef<string>();
+  const valueRef = useRef<string | undefined>(undefined);
   const context = useCommand();
 
   useLayoutEffect(() => {

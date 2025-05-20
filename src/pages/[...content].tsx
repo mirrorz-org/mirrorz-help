@@ -1,7 +1,7 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { ContentProps } from '../lib/server/parse-markdown';
 import { getAvaliableSegments, getContentBySegments } from '../lib/server/parse-markdown';
-import { createElement, Fragment, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import { MDXComponents } from '../components/mdx-components';
 import { Layout } from '../components/layout';
 import SeoHead from '../components/seo/head';
@@ -36,36 +36,31 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
 }
 
 // Deserialize a client React tree from JSON.
-function reviveNodeOnClient(key: unknown, val: unknown) {
-  if (
-    Array.isArray(val)
-    && (
-      val[0] === '$r'
-      || val[0] === '$r1'
-      || val[0] === '$r2'
-      || val[0] === '$r3'
-    )
-  ) {
+function reviveNodeOnClient(parentPropertyName: string, val: any) {
+  if (Array.isArray(val) && val[0] === '$r') {
     // Assume it's a React element.
-    let type = val[1];
-    const key = val[2];
+    let Type = val[1];
+    let key = val[2];
+    if (key == null) {
+      key = parentPropertyName; // Index within a parent.
+    }
     let props = val[3];
-    if (type === 'wrapper') {
-      type = Fragment;
+    if (Type === 'wrapper') {
+      Type = Fragment;
       props = { children: props.children };
     }
-    if (type in MDXComponents) {
-      type = MDXComponents[type];
+    if (Type in MDXComponents) {
+      Type = MDXComponents[Type];
     }
-    if (!type) {
-      if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console -- log error
-        console.warn(`Unknown type: ${type}`);
+    if (!Type) {
+      if (Type !== null) {
+        console.error('[reviveNodeOnClient] Unknown type: ' + Type);
       }
-      type = Fragment;
+      Type = Fragment;
     }
-    return createElement(type, key ? Object.assign(props, { key }) : props);
+    return <Type key={key} {...props} />;
   }
+
   return val;
 }
 

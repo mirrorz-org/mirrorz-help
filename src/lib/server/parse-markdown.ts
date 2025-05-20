@@ -61,7 +61,7 @@ async function asyncCache<T>(key: string, fn: () => Promise<T>): Promise<T> {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 5;
+const DISK_CACHE_BREAKER = 6;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -168,24 +168,22 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
 }
 
 // Serialize a server React tree node to JSON.
-function stringifyNodeOnServer(key: string, val: any) {
-  if (val != null) {
-    if (val.$$typeof === Symbol.for('react.element') || val.$$typeof === Symbol.for('react.transitional.element')) {
-      // Remove fake MDX props.
-      const { mdxType, originalType, parentName, ...cleanProps } = val.props;
-      return [
-        val.$$typeof === Symbol.for('react.element')
-          ? '$r1'
-          : (val.$$typeof === Symbol.for('react.transitional.element')
-            ? '$r2'
-            : '$r3'),
-        typeof val.type === 'string' ? val.type : mdxType,
-        val.key,
-        cleanProps
-      ];
-    }
-    return val;
+function stringifyNodeOnServer(key: unknown, val: any) {
+  if (
+    val != null
+    && val.$$typeof === Symbol.for('react.transitional.element')
+  ) {
+    // Remove fake MDX props.
+
+    const { mdxType, originalType, parentName, ...cleanProps } = val.props;
+    return [
+      '$r',
+      typeof val.type === 'string' ? val.type : mdxType,
+      val.key,
+      cleanProps
+    ];
   }
+  return val;
 }
 
 // Get ToC from children

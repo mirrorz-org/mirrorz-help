@@ -32,11 +32,11 @@ interface CopyToClipboardProps extends Omit<React.JSX.IntrinsicElements['button'
   value?: string
 }
 
-export const CopyToClipboard = ({
+export function CopyToClipboard({
   value,
   getValue,
   ...props
-}: CopyToClipboardProps) => {
+}: CopyToClipboardProps) {
   const { copied, copy } = useClipboard({ timeout: 2500 });
 
   const handleClick = useCallback<React.MouseEventHandler<HTMLButtonElement>>(() => {
@@ -60,4 +60,4 @@ export const CopyToClipboard = ({
         : <IconClipboard className={styles('icon')} />}
     </button>
   );
-};
+}

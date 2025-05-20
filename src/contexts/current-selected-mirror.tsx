@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, use, useMemo, useState } from 'react';
 import { noop } from 'foxact/noop';
 import { useMirrorZData } from '../hooks/use-mirrorz-data';
 import { useRouter } from 'next/router';
@@ -29,10 +29,10 @@ const styles = style9.create({
 const SelectedMirrorContext = createContext<string | null>(null);
 const SelectedMirrorDispatchContext = createContext<React.Dispatch<React.SetStateAction<string | null>>>(noop);
 
-export const useSelectedMirror = () => useContext(SelectedMirrorContext);
-export const useSetSelectedMirror = () => useContext(SelectedMirrorDispatchContext);
+export const useSelectedMirror = () => use(SelectedMirrorContext);
+export const useSetSelectedMirror = () => use(SelectedMirrorDispatchContext);
 
-export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChildren<{ cname: string | null }>) => {
+export function SelectedMirrorProvider({ children, cname }: React.PropsWithChildren<{ cname: string | null }>) {
   const [selectedMirror, setSelectedMirror] = useState<string | null>(null);
   const setDialog = useSetDialog();
   const [invalid, setInvalid] = useState(false);
@@ -79,10 +79,10 @@ export const SelectedMirrorProvider = ({ children, cname }: React.PropsWithChild
   }, [cname, invalid, router.query.mirror, setDialog]);
 
   return (
-    <SelectedMirrorContext.Provider value={selectedMirror}>
-      <SelectedMirrorDispatchContext.Provider value={setSelectedMirror}>
+    <SelectedMirrorContext value={selectedMirror}>
+      <SelectedMirrorDispatchContext value={setSelectedMirror}>
         {children}
-      </SelectedMirrorDispatchContext.Provider>
-    </SelectedMirrorContext.Provider>
+      </SelectedMirrorDispatchContext>
+    </SelectedMirrorContext>
   );
-};
+}

@@ -41,8 +41,8 @@ const styles = style9.create({
   }
 });
 
-const Input = forwardRef<HTMLInputElement, InputExtraProps & React.JSX.IntrinsicElements['input']>(
-  ({ prefix, suffix, className, inputXstyle = EMPTY_ARRAY, ...props }, forwardedRef) => (
+function Input({ ref: forwardedRef, prefix, suffix, className, inputXstyle = EMPTY_ARRAY, ...props }: InputExtraProps & React.JSX.IntrinsicElements['input'] & { ref?: React.RefObject<HTMLInputElement | null> }) {
+  return (
     <div className={styles('wrapper')}>
       {prefix}
       <input
@@ -53,7 +53,7 @@ const Input = forwardRef<HTMLInputElement, InputExtraProps & React.JSX.Intrinsic
       />
       {suffix}
     </div>
-  )
-);
+  );
+}
 
 export default Input;

@@ -96,11 +96,11 @@ const styles = style9.create({
   }
 });
 
-const Header = ({ children }: React.PropsWithChildren) => (
-  <div className={styles('footer_header')}>{children}</div>
-);
+function Header({ children }: React.PropsWithChildren) {
+  return <div className={styles('footer_header')}>{children}</div>;
+}
 
-const FooterLink = ({ href, ...props }: Omit<React.JSX.IntrinsicElements['a'], 'ref'>) => {
+function FooterLink({ href, ...props }: Omit<React.JSX.IntrinsicElements['a'], 'ref'>) {
   if (!href) {
     return <div className={styles('footer_link')}>{props.children}</div>;
   }
@@ -118,7 +118,7 @@ const FooterLink = ({ href, ...props }: Omit<React.JSX.IntrinsicElements['a'], '
       <NextLink href={href} className={styles('footer_link')} {...props} />
     </div>
   );
-};
+}
 
 // TODO: finish footer
 function Footer() {

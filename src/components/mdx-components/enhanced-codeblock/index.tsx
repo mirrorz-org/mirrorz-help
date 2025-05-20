@@ -40,18 +40,20 @@ const styles = style9.create({
   }
 });
 
-const reducer = (prevState: Record<string, string>, value: MenuValue) => ({
-  ...prevState,
-  ...value
-});
+function reducer(prevState: Record<string, string>, value: MenuValue) {
+  return {
+    ...prevState,
+    ...value
+  };
+}
 
-const createInitialState = (menus: Menu[]): Record<string, string> => {
+function createInitialState(menus: Menu[]): Record<string, string> {
   return menus.reduce<Record<string, string>>((acc, menu) => {
     const value = menu.items[0][1];
     acc = { ...acc, ...value };
     return acc;
   }, {});
-};
+}
 
 function CodeBlock({
   menus = EMPTY_ARRAY,

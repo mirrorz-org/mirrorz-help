@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export const useFuckSafari = () => {
+export function useFuckSafari() {
   useEffect(() => {
     // Taken from StackOverflow. Trying to detect both Safari desktop and mobile.
     const isSafari = /^(?:(?!chrome|android).)*safari/i.test(navigator.userAgent);
@@ -15,4 +15,4 @@ export const useFuckSafari = () => {
       // It seems to work better for Chrome and Firefox which don't animate the back swipe.
     }
   }, []);
-};
+}

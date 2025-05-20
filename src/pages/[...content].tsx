@@ -69,9 +69,7 @@ function reviveNodeOnClient(key: unknown, val: unknown) {
   return val;
 }
 
-export const getStaticProps: GetStaticProps<ContentProps, { content: string[], cname: string }> = (context) => {
-  return getContentBySegments(context.params?.content || []);
-};
+export const getStaticProps: GetStaticProps<ContentProps, { content: string[], cname: string }> = (context) => getContentBySegments(context.params?.content || []);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const segments = await getAvaliableSegments();

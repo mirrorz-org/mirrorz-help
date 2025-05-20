@@ -60,12 +60,12 @@ const styles = style9.create({
   }
 });
 
-const SidebarLink = ({
+function SidebarLink({
   href,
   isActive = false,
   title,
   isPending
-}: SidebarLinkProps) => {
+}: SidebarLinkProps) {
   return (
     <Link
       // Disable prefetch when in view (prevent unnecessary requests)
@@ -83,6 +83,6 @@ const SidebarLink = ({
       {title}
     </Link>
   );
-};
+}
 
 export default memo(SidebarLink);

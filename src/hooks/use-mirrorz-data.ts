@@ -12,26 +12,30 @@ class RedirectError extends Error {
   }
 }
 
-const parseMirror = (site: Site, { cname, url, help, size, desc, upstream, status }: Mirror): ParsedMirror => ({
-  cname,
-  full: absoluteUrlOrConcatWithBase(url, site.url),
-  help: emptyOrAbsolutUrlOrConcatWithBase(help, site.url),
-  upstream,
-  desc,
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- mirrorz spec inconsistency
-  status: status === undefined ? 'U' : status,
-  size,
-  source: sanitizeAbbrForMirrorZ(site.abbr),
-  note: site.note
-});
+function parseMirror(site: Site, { cname, url, help, size, desc, upstream, status }: Mirror): ParsedMirror {
+  return {
+    cname,
+    full: absoluteUrlOrConcatWithBase(url, site.url),
+    help: emptyOrAbsolutUrlOrConcatWithBase(help, site.url),
+    upstream,
+    desc,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- mirrorz spec inconsistency
+    status: status === undefined ? 'U' : status,
+    size,
+    source: sanitizeAbbrForMirrorZ(site.abbr),
+    note: site.note
+  };
+}
 
-const mirrorsArrayToObject = (site: Site, mirrors: Mirror[]) => mirrors.reduce<Record<string, ParsedMirror>>((acc, cur) => {
-  const parsedMirror = parseMirror(site, cur);
-  acc[parsedMirror.cname] = parsedMirror;
-  return acc;
-}, {});
+function mirrorsArrayToObject(site: Site, mirrors: Mirror[]) {
+  return mirrors.reduce<Record<string, ParsedMirror>>((acc, cur) => {
+    const parsedMirror = parseMirror(site, cur);
+    acc[parsedMirror.cname] = parsedMirror;
+    return acc;
+  }, {});
+}
 
-const fetcher = async () => {
+async function fetcher() {
   // TODO: support both mirrorz and cernet.edu.cn
   const res = await fetch(jsonEndpoint);
 
@@ -73,12 +77,14 @@ const fetcher = async () => {
   }, {});
 
   return [parsedMirrorZLegacy, cnameToMirrorZ] as const;
-};
+}
 
-export const useMirrorZData = () => useSWRImmutable('parsed-mirrorz-legacy-data', fetcher, {
-  onError(err) {
-    if (err instanceof RedirectError) {
-      window.location.assign(err.redirect);
+export function useMirrorZData() {
+  return useSWRImmutable('parsed-mirrorz-legacy-data', fetcher, {
+    onError(err) {
+      if (err instanceof RedirectError) {
+        window.location.assign(err.redirect);
+      }
     }
-  }
-});
+  });
+}

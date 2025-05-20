@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSearchOpen, useSetSearchOpen } from '../contexts/search';
 
-const isEditingContent = (event: KeyboardEvent) => {
+function isEditingContent(event: KeyboardEvent) {
   const element = event.target as HTMLElement | null;
   const tagName = element?.tagName;
   return (
@@ -10,9 +10,9 @@ const isEditingContent = (event: KeyboardEvent) => {
     || tagName === 'SELECT'
     || tagName === 'TEXTAREA'
   );
-};
+}
 
-export const useSearchHotKeys = () => {
+export function useSearchHotKeys() {
   const isOpen = useSearchOpen();
   const setOpen = useSetSearchOpen();
 
@@ -33,4 +33,4 @@ export const useSearchHotKeys = () => {
       window.removeEventListener('keydown', onKeyDown);
     };
   }, [isOpen, setOpen]);
-};
+}

@@ -178,7 +178,6 @@ function Nav() {
 
   // Close the overlay on any navigation.
   useLayoutEffect(() => {
-    // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect -- missing event listener from useRouter
     setIsOpen(false);
   }, [asPath]);
 
@@ -249,7 +248,8 @@ function Nav() {
         className={clsx('no-bg-scrollbar', styles('nav_container'))}
       >
         <aside
-          className={styles('aside', isOpen ? 'aside_open' : 'aside_close')}>
+          className={styles('aside', isOpen ? 'aside_open' : 'aside_close')}
+        >
           <nav
             role="navigation"
             className={styles('nav')}

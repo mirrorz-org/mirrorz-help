@@ -1,55 +1,22 @@
-import { Command } from '../cmdk';
+import { Command } from 'cmdk';
 import { memo, startTransition, useCallback } from 'react';
 import { useSearchOpen, useSetSearchOpen } from '@/contexts/search';
 import style9 from 'style9';
 
 import routesJson from '@/routes.json';
 
-import cmdkStyles from './cmdk.module.sass';
-import clsx from 'clsx';
+// import cmdkStyles from './cmdk.module.sass';
+// import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 const data = Object.entries(routesJson);
 
 const styles = style9.create({
-  overlay: {
-    position: 'fixed',
-    backgroundColor: 'var(--overlay)',
-    top: '0',
-    right: '0',
-    left: '0',
-    bottom: '0',
-    zIndex: 100,
-    backdropFilter: 'blur(4px)'
-  },
   root: {
     maxWidth: '640px',
     width: '100%',
     overflow: 'hidden',
     padding: 0
-  },
-  dialog: {
-    zIndex: 101,
-    transform: 'translateX(-50%) translateY(0)',
-    width: '100%',
-    height: '100%',
-    position: 'fixed',
-    borderTopLeftRadius: '8px',
-    borderTopRightRadius: '8px',
-    '@media screen and (min-width: 640px)': {
-      transform: 'translateX(-50%) translateY(0)',
-      width: '640px',
-      height: 'auto',
-      borderBottomLeftRadius: '8px',
-      borderBottomRightRadius: '8px'
-    },
-    top: '10%',
-    left: '50%',
-    backgroundColor: 'var(--bg-wash)',
-    overflow: 'hidden',
-    boxShadow: '0 16px 70px rgb(0 0 0 / 20%)',
-    transformOrigin: '50%',
-    outline: '0'
   },
   input: {
     border: 'none',
@@ -112,7 +79,7 @@ function SearchCommandK() {
   const setOpen = useSetSearchOpen();
 
   const router = useRouter();
-  const handleSelect = useCallback((_: string, __: string, href?: string) => {
+  const handleSelect = useCallback((href: string) => {
     if (href) {
       startTransition(() => {
         router.push(href);
@@ -124,8 +91,6 @@ function SearchCommandK() {
   return (
     <Command.Dialog
       className={styles('root')}
-      dialogOverlayClassName={styles('overlay')}
-      dialogContentClassName={clsx(cmdkStyles.search, styles('dialog'))}
       open={open}
       onOpenChange={setOpen}
     >
@@ -142,8 +107,7 @@ function SearchCommandK() {
         {
           data.map(([href, route]) => (
             <Command.Item
-              value={`${route.title} ${route.title}`}
-              identifier={href}
+              value={href}
               key={href}
               className={styles('item')}
               onSelect={handleSelect}

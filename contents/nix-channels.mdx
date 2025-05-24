@@ -58,7 +58,7 @@ cname: 'nix-channels'
 
 <CodeBlock>
 ```shell
-nixos-install --option substituters "{{http_protocol}}{{mirror}}/store"
+nixos-install --option substituters "{{http_protocol}}{{mirror}}/store https://cache.nixos.org"
 ```
 </CodeBlock>
 
@@ -66,14 +66,14 @@ nixos-install --option substituters "{{http_protocol}}{{mirror}}/store"
 
 <CodeBlock>
 ```shell
-nixos-rebuild --option substituters "{{http_protocol}}{{mirror}}/store"
+nixos-rebuild --option substituters "{{http_protocol}}{{mirror}}/store https://cache.nixos.org"
 ```
 </CodeBlock>
 
-临时关闭可以通过清空 substituters 实现：
+临时关闭可以通过还原 substituters 实现：
 
 ```shell
-nixos-rebuild --option substituters ""
+nixos-rebuild --option substituters "https://cache.nixos.org"
 ```
 
 ### Nixpkgs channel

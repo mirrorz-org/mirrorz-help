@@ -17,7 +17,7 @@ cname: 'wine-builds'
 
 <CodeBlock>
 ```bash
-{{sudo}}wget -nc -O /usr/share/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+{{sudo}}wget -nc -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
 ```
 </CodeBlock>
 
@@ -41,7 +41,7 @@ cname: 'wine-builds'
 >
 
 ```properties
-deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] {{http_protocol}}{{mirror}}/{{os_name}}/ {{release_name}} main
+deb [arch=amd64,i386 signed-by=/etc/apt/keyrings/winehq-archive.key] {{http_protocol}}{{mirror}}/{{os_name}}/ {{release_name}} main
 ```
 
 </CodeBlock>

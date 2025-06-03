@@ -18,6 +18,7 @@ cname: 'debian-security'
     {
       title: 'Debian 版本',
       items: [
+        ['Debian 13 (trixie)', { release_name: 'trixie', security: '-security', has_nfw: ' non-free-firmware'  }],
         ['Debian 12 (bookworm)', { release_name: 'bookworm', security: '-security', has_nfw: ' non-free-firmware'  }],
         ['Debian 11 (bullseye)', { release_name: 'bullseye', security: '-security', has_nfw: ''  }],
       ]
@@ -47,6 +48,7 @@ deb {{http_protocol}}{{mirror}} {{release_name}}{{security}} main contrib non-fr
     {
       title: 'Debian 版本',
       items: [
+        ['Debian 13 (trixie)', { release_name: 'trixie' }],
         ['Debian 12 (bookworm)', { release_name: 'bookworm' }],
       ]
     },

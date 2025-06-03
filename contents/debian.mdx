@@ -22,6 +22,7 @@ Debian Buster 以上版本默认支持 HTTPS 源。如果遇到无法拉取 HTTP
     {
       title: 'Debian 版本',
       items: [
+        ['Debian 13 (trixie)', { release_name: 'trixie', security: '-security', is_sid: '', has_backports: '', has_nfw: ' non-free-firmware' }],
         ['Debian 12 (bookworm)', { release_name: 'bookworm', security: '-security', is_sid: '', has_backports: '', has_nfw: ' non-free-firmware' }],
         ['Debian 11 (bullseye)', { release_name: 'bullseye', security: '-security', is_sid: '', has_backports: '', has_nfw: '' }],
         ['sid', { release_name: 'sid', security: '-security', is_sid: '# ', has_backports: '# ', has_nfw: ' non-free-firmware' }],
@@ -75,6 +76,7 @@ deb {{http_protocol}}{{mirror}}/ {{release_name}} main contrib non-free{{has_nfw
     {
       title: 'Debian 版本',
       items: [
+        ['Debian 13 (trixie)', { release_name: 'trixie', is_stable: '', suites: 'trixie trixie-updates trixie-backports' }],
         ['Debian 12 (bookworm)', { release_name: 'bookworm', is_stable: '', suites: 'bookworm bookworm-updates bookworm-backports' }],
         ['sid', { release_name: 'sid', is_stable: '# ', suites: 'sid' }],
         ['testing', { release_name: 'testing', is_stable: '# ', suites: 'testing' }],

@@ -34,8 +34,8 @@ env RUSTUP_DIST_SERVER={{http_protocol}}{{mirror}} rustup install nightly-YYYY-m
 
 ```bash
 # for bash
-echo 'export RUSTUP_UPDATE_ROOT={{http_protocol}}{{mirror}}/rustup' >> ~/.bash_profile
-echo 'export RUSTUP_DIST_SERVER={{http_protocol}}{{mirror}}' >> ~/.bash_profile
+echo 'export RUSTUP_UPDATE_ROOT={{http_protocol}}{{mirror}}/rustup' >> ~/.bashrc
+echo 'export RUSTUP_DIST_SERVER={{http_protocol}}{{mirror}}' >> ~/.bashrc
 # for fish
 echo 'set -x RUSTUP_UPDATE_ROOT {{http_protocol}}{{mirror}}/rustup' >> ~/.config/fish/config.fish
 echo 'set -x RUSTUP_DIST_SERVER {{http_protocol}}{{mirror}}' >> ~/.config/fish/config.fish

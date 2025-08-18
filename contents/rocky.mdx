@@ -10,14 +10,11 @@ cname: 'rocky'
 {{sudo}}sed -e 's|^mirrorlist=|#mirrorlist=|g' \
          -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl={{http_protocol}}{{mirror}}|g' \
          -i.bak \
-         /etc/yum.repos.d/Rocky-AppStream.repo \
-         /etc/yum.repos.d/Rocky-BaseOS.repo \
-         /etc/yum.repos.d/Rocky-Extras.repo \
-         /etc/yum.repos.d/Rocky-PowerTools.repo
+         /etc/yum.repos.d/Rocky-*.repo
 ```
 </CodeBlock>
 
-对于 Rocky Linux 9，使用以下命令替换默认的配置
+对于 Rocky Linux 9 及以上版本，使用以下命令替换默认的配置
 
 
 <CodeBlock>
@@ -25,8 +22,7 @@ cname: 'rocky'
 {{sudo}}sed -e 's|^mirrorlist=|#mirrorlist=|g' \
          -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl={{http_protocol}}{{mirror}}|g' \
          -i.bak \
-         /etc/yum.repos.d/rocky-extras.repo \
-         /etc/yum.repos.d/rocky.repo
+         /etc/yum.repos.d/rocky*.repo
 ```
 </CodeBlock>
 

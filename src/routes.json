@@ -641,6 +641,12 @@
     "file": "nodejs-release.mdx",
     "cname": "nodejs-release"
   },
+  "/opam-repository.git/": {
+    "title": "OPAM 软件仓库",
+    "fullTitle": "OPAM 软件仓库镜像使用帮助",
+    "file": "opam-repository.git.mdx",
+    "cname": "opam-repository.git"
+  },
   "/OpenMediaVault/": {
     "title": "OpenMediaVault 软件仓库",
     "fullTitle": "OpenMediaVault 软件仓库镜像使用帮助",

@@ -1,0 +1,20 @@
+---
+title: Fedora SilverBlue 软件仓库镜像使用帮助
+cname: 'fedora-ostree'
+---
+
+Fedora Silverblue（原 Atomic Workstation）是 Fedora Workstation 的一个变体，使用只读根文件系统，通过 rpm-ostree 管理整个系统。
+
+## 使用方法
+
+编辑 `/etc/ostree/remotes.d/fedora.conf`：
+
+<CodeBlock>
+```conf
+[remote "fedora"]
+url={{http_protocol}}{{mirror}}
+gpg-verify=true
+gpgkeypath=/etc/pki/rpm-gpg/
+# contenturl=mirrorlist=https://ostree.fedoraproject.org/mirrorlist
+```
+</CodeBlock>

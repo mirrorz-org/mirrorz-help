@@ -287,6 +287,12 @@
     "file": "fedora.mdx",
     "cname": "fedora"
   },
+  "/fedora-ostree/": {
+    "title": "Fedora SilverBlue 软件仓库",
+    "fullTitle": "Fedora SilverBlue 软件仓库镜像使用帮助",
+    "file": "fedora-ostree.mdx",
+    "cname": "fedora-ostree"
+  },
   "/flathub/": {
     "title": "Flathub",
     "fullTitle": "Flathub 镜像使用帮助",

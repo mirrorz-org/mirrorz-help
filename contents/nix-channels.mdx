@@ -52,6 +52,28 @@ cname: 'nix-channels'
 
     </CodeBlock>
 
+  Nix 2.4 及之后的版本可以在 substituter 链接参数中指定优先级 (1~100)：
+
+    <CodeBlock>
+
+    ```nix
+    nix.settings.substituters = [ "{{http_protocol}}{{mirror}}/store?priority=10" ];
+    ```
+
+    </CodeBlock>
+
+  查询 substituter 默认优先级：
+
+  <CodeBlock>
+  
+  ```shell
+  curl {{http_protocol}}{{mirror}}/store/nix-cache-info
+  ```
+
+  </CodeBlock>
+
+  一般情况下，镜像的默认优先级为 40，与 cache.nixos.org 保持一致。
+
 #### 临时使用
 
 在安装 NixOS 时临时使用：
@@ -98,10 +120,9 @@ nix-channel --update
     {
       title: '系统版本',
       items: [
-        ['22.11', { version: '22.11' }],
+        ['25.05', { version: '25.05' }],
+        ['24.11', { version: '24.11' }],
         ['unstable', { version: 'unstable' }],
-        ['22.05', { version: '22.05' }],
-        ['21.11', { version: '21.11' }],
       ]
     }
   ]}

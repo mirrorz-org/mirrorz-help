@@ -17,5 +17,5 @@ jobs:
 
     - name: AutoCorrect check
       run: |
-        curl -sSL https://git.io/JcGER | sudo bash
+        curl -sSL https://raw.githubusercontent.com/huacnlee/autocorrect/main/install | sudo bash
         autocorrect --lint --no-diff-bg-color $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }})

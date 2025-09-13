@@ -13,6 +13,8 @@ import DarkModeSwitch from '../darkmode-switch';
 import { SearchButtonInSideNav, SearchButtonOnMobile } from '../../search/button';
 import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect';
 
+import { useNavEnabled } from '@/contexts/enable-nav';
+
 const styles = style9.create({
   container: {
     position: 'sticky',
@@ -157,6 +159,9 @@ const styles = style9.create({
       paddingRight: '20px',
       paddingBottom: '24px'
     }
+  },
+  hide_nav: {
+    display: 'none'
   }
 });
 
@@ -198,8 +203,11 @@ function Nav() {
     };
   }, []);
 
+  // hide nav bar
+  const navEnabled = useNavEnabled();
+
   return (
-    <div className={styles('container', isOpen && 'container_open')}>
+    <div className={styles('container', isOpen && 'container_open', !navEnabled && 'hide_nav')}>
       <div className={styles('header', isOpen && 'header_open')}>
         <div className={styles('header_inner')}>
           <button

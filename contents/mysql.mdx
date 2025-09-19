@@ -14,19 +14,17 @@ cname: 'mysql'
     {
       title: '发行版',
       items: [
+        ['Debian 13', { os_name: 'debian', release_name: 'trixie' }],
         ['Debian 12', { os_name: 'debian', release_name: 'bookworm' }],
-        ['Debian 11', { os_name: 'debian', release_name: 'bullseye' }],
+        ['Ubuntu 24.04 LTS', { os_name: 'ubuntu', release_name: 'noble' }],
         ['Ubuntu 22.04 LTS', { os_name: 'ubuntu', release_name: 'jammy' }],
-        ['Ubuntu 20.04 LTS', { os_name: 'ubuntu', release_name: 'focal' }],
-        ['Ubuntu 18.04 LTS', { os_name: 'ubuntu', release_name: 'bionic' }],
-        ['Ubuntu 16.04 LTS', { os_name: 'ubuntu', release_name: 'xenial' }],
       ]
     },
     {
       title: 'MySQL 版本号',
       items: [
+        ['8.4', { version: '8.4' }],
         ['8.0', { version: '8.0' }],
-        ['5.7', { version: '5.7' }],
       ]
     }
   ]}
@@ -44,10 +42,6 @@ deb {{http_protocol}}{{mirror}}/apt/{{os_name}} {{release_name}} mysql-{{version
 
 新建 `/etc/yum.repos.d/mysql-community.repo`，内容如下：
 
-注：`mysql-8.0`, `mysql-connectors` 和 `mysql-tools` 在 RHEL 7/8 上还提供了 `aarch64` 版本。
-
-注：TUNA / BFSU 等镜像站不提供 CentOS 8 与 CentOS 6 版本
-
 
 <CodeBlock
   enableQuickSetup
@@ -56,15 +50,15 @@ deb {{http_protocol}}{{mirror}}/apt/{{os_name}} {{release_name}} mysql-{{version
     {
       title: '发行版',
       items: [
-        ['CentOS/RHEL 7', { release_name: 'el7' }],
-        ['CentOS/RHEL 8', { release_name: 'el8' }],
+        ['RHEL 9', { release_name: 'el9' }],
+        ['RHEL 10', { release_name: 'el10' }],
       ]
     },
     {
       title: 'MySQL 版本号',
       items: [
+        ['8.4', { version: '8.4' }],
         ['8.0', { version: '8.0' }],
-        ['5.7', { version: '5.7' }],
       ]
     }
   ]}
@@ -78,6 +72,7 @@ enabled=1
 gpgcheck=1
 gpgkey=https://repo.mysql.com/RPM-GPG-KEY-mysql
        https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+       https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
 
 [mysql-tools-community]
 name=MySQL Tools Community
@@ -86,6 +81,7 @@ enabled=1
 gpgcheck=1
 gpgkey=https://repo.mysql.com/RPM-GPG-KEY-mysql
        https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+       https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
 
 [mysql-{{version}}-community]
 name=MySQL {{version}} Community Server
@@ -94,6 +90,7 @@ enabled=1
 gpgcheck=1
 gpgkey=https://repo.mysql.com/RPM-GPG-KEY-mysql
        https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+       https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
 ```
 
 </CodeBlock>

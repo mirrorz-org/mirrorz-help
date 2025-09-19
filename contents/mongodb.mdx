@@ -16,12 +16,8 @@ MongoDB 镜像自 MongoDB [官方仓库](https://repo.mongodb.org/)，目前有 
     {
       title: 'MongoDB 版本号',
       items: [
-        ['8.0', { version: '8.0' }],
-        ['7.0', { version: '7.0' }],
-        ['6.0', { version: '6.0' }],
-        ['5.0', { version: '5.0' }],
-        ['4.4', { version: '4.4' }],
-        ['4.2', { version: '4.2' }],
+        ['8.x', { version: '8.0' }],
+        ['7.x', { version: '7.0' }],
       ]
     }
   ]}
@@ -42,24 +38,19 @@ wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | {{sudo}}g
     {
       title: '发行版',
       items: [
+        ['Debian 13', { os_name: 'debian', release_name: 'trixie', component_name: 'main' }],
         ['Debian 12', { os_name: 'debian', release_name: 'bookworm', component_name: 'main' }],
         ['Debian 11', { os_name: 'debian', release_name: 'bullseye', component_name: 'main' }],
         ['Ubuntu 24.04 LTS', { os_name: 'ubuntu', release_name: 'noble', component_name: 'multiverse' }],
         ['Ubuntu 22.04 LTS', { os_name: 'ubuntu', release_name: 'jammy', component_name: 'multiverse' }],
-        ['Ubuntu 20.04 LTS', { os_name: 'ubuntu', release_name: 'focal', component_name: 'multiverse' }],
-        ['Ubuntu 18.04 LTS', { os_name: 'ubuntu', release_name: 'bionic', component_name: 'multiverse' }],
-        ['Ubuntu 16.04 LTS', { os_name: 'ubuntu', release_name: 'xenial', component_name: 'multiverse' }],
       ]
     },
     {
       title: 'MongoDB 版本号',
       items: [
-        ['8.0', { version: '8.0' }],
+        ['8.0（稳定版）', { version: '8.0' }],
+        ['8.2', { version: '8.2' }],
         ['7.0', { version: '7.0' }],
-        ['6.0', { version: '6.0' }],
-        ['5.0', { version: '5.0' }],
-        ['4.4', { version: '4.4' }],
-        ['4.2', { version: '4.2' }],
       ]
     }
   ]}

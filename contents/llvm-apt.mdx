@@ -10,12 +10,9 @@ cname: 'llvm-apt'
     {
       title: 'LLVM 版本',
       items: [
-        ['默认', { version: '' }],
-        ['15', { version: '15' }],
-        ['14', { version: '14' }],
-        ['13', { version: '13' }],
-        ['12', { version: '12' }],
-        ['11', { version: '11' }],
+        ['最新', { version: '' }],
+        ['21', { version: '-21' }],
+        ['20', { version: '-20' }],
       ]
     },
   ]}
@@ -49,23 +46,19 @@ wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | {{sudo}}gpg -o /etc/apt/k
     {
       title: '发行版',
       items: [
+        ['Debian 13', { release_name: 'trixie' }],
         ['Debian 12', { release_name: 'bookworm' }],
         ['Debian 11', { release_name: 'bullseye' }],
+        ['Ubuntu 24.04 LTS', { release_name: 'noble' }],
         ['Ubuntu 22.04 LTS', { release_name: 'jammy' }],
-        ['Ubuntu 20.04 LTS', { release_name: 'focal' }],
-        ['Ubuntu 18.04 LTS', { release_name: 'bionic' }],
       ]
     },
     {
       title: 'LLVM 版本',
       items: [
-        ['默认', { version: '' }],
-        ['16', { version: '-16' }],
-        ['15', { version: '-15' }],
-        ['14', { version: '-14' }],
-        ['13', { version: '-13' }],
-        ['12', { version: '-12' }],
-        ['11', { version: '-11' }],
+        ['最新', { version: '' }],
+        ['21', { version: '-21' }],
+        ['20', { version: '-20' }],
       ]
     },
     {

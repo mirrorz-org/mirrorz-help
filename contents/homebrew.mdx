@@ -110,13 +110,9 @@ export HOMEBREW_CORE_GIT_REMOTE="{{http_protocol}}{{mirror}}/homebrew-core.git"
 brew tap --custom-remote homebrew/core {{http_protocol}}{{mirror}}/homebrew-core.git
 brew tap --custom-remote homebrew/cask {{http_protocol}}{{mirror}}/homebrew-cask.git
 
-# 除 homebrew/core 和 homebrew/cask 仓库外的 tap 仓库仍然需要设置镜像
-brew tap --custom-remote homebrew/autoupdate {{http_protocol}}{{mirror}}/homebrew-autoupdate.git
-brew update
-
 # 或使用下面的几行命令自动设置
 export HOMEBREW_CORE_GIT_REMOTE="{{http_protocol}}{{mirror}}/homebrew-core.git"
-for tap in core cask autoupdate; do
+for tap in core cask; do
     brew tap --custom-remote "homebrew/${tap}" "{{http_protocol}}{{mirror}}/homebrew-${tap}.git"
 done
 brew update
@@ -135,10 +131,6 @@ export HOMEBREW_CORE_GIT_REMOTE="{{http_protocol}}{{mirror}}/homebrew-core.git"
 # 如果不是默认 prefix 或者需要使用 Homebrew 的开发命令 (如 `brew cat <formula>`)，则仍然需要设置 homebrew/core 镜像。
 # 请按需执行如下命令：
 brew tap --custom-remote homebrew/core {{http_protocol}}{{mirror}}/homebrew-core.git
-
-# 除 homebrew/core 仓库外的 tap 仓库仍然需要设置镜像
-brew tap --custom-remote homebrew/autoupdate {{http_protocol}}{{mirror}}/homebrew-autoupdate.git
-brew update
 ```
 
 </CodeBlock>
@@ -176,7 +168,7 @@ git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew
 # 以下针对 macOS 系统上的 Homebrew
 unset HOMEBREW_CORE_GIT_REMOTE
 BREW_TAPS="$(BREW_TAPS="$(brew tap 2>/dev/null)"; echo -n "${BREW_TAPS//$'\n'/:}")"
-for tap in core cask autoupdate; do
+for tap in core cask; do
     if [[ ":${BREW_TAPS}:" == *":homebrew/${tap}:"* ]]; then  # 只复原已安装的 Tap
         brew tap --custom-remote "homebrew/${tap}" "https://github.com/Homebrew/homebrew-${tap}"
     fi
@@ -198,7 +190,6 @@ git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew
 unset HOMEBREW_API_DOMAIN
 unset HOMEBREW_CORE_GIT_REMOTE
 brew tap --custom-remote homebrew/core https://github.com/Homebrew/homebrew-core
-brew tap --custom-remote homebrew/autoupdate https://github.com/Homebrew/homebrew-autoupdate
 
 # 重新拉取远程
 brew update

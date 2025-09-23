@@ -58,7 +58,7 @@ ls -la /etc/zypp/repos.d/*.rpmsave
 
 <CodeBlock>
 ```shell
-{{sudo}}for file in /etc/zypp/repos.d/*.rpmsave; do echo mv $file `echo $file | sed -s "s/\.rpmsave//"`; done
+{{sudo}}for file in /etc/zypp/repos.d/*.rpmsave; do mv $file `echo $file | sed -s "s/\.rpmsave//"`; done
 ```
 </CodeBlock>
 

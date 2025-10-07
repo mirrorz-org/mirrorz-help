@@ -1,6 +1,7 @@
 import { memo, useCallback } from 'react';
 import Link from 'next/link';
 import * as stylex from '@stylexjs/stylex';
+import { AddMirrorQueryToRelativeHref } from '@/contexts/current-selected-mirror';
 
 interface SidebarLinkProps {
   href: string,
@@ -78,7 +79,7 @@ function SidebarLink({
     <Link
       // Disable prefetch when in view (prevent unnecessary requests)
       prefetch={false}
-      href={href}
+      href={AddMirrorQueryToRelativeHref(href)}
       ref={useCallback((el: HTMLAnchorElement | null) => {
         if (el && isActive && 'scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {
           el.scrollIntoViewIfNeeded();

@@ -3,6 +3,7 @@ import ExternalLink from '../external-link';
 import NextLink from 'next/link';
 import { memo, useMemo } from 'react';
 import { mirrorzUrl } from '../../lib/client/constant';
+import { AddMirrorQueryToRelativeHref } from '@/contexts/current-selected-mirror';
 
 const styles = stylex.create({
   base: {
@@ -22,6 +23,10 @@ const styles = stylex.create({
 });
 
 function Link({ href, ...props }: Omit<React.JSX.IntrinsicElements['a'], 'className' | 'ref'>) {
+  if (typeof href === 'string') {
+    href = AddMirrorQueryToRelativeHref(href);
+  }
+
   const processedHref = useMemo(() => {
     if (typeof href !== 'string') {
       return href;

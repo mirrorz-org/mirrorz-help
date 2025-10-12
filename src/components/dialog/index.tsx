@@ -62,15 +62,12 @@ const styles = stylex.create({
     borderTopLeftRadius: '8px',
     borderTopRightRadius: '8px',
     height: {
-      default: 'auto',
       '@media screen and (min-width: 640px)': 'auto'
     },
     borderBottomLeftRadius: {
-      default: '0px',
       '@media screen and (min-width: 640px)': '8px'
     },
     borderBottomRightRadius: {
-      default: '0px',
       '@media screen and (min-width: 640px)': '8px'
     },
     padding: '25px',

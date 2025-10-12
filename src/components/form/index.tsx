@@ -31,7 +31,7 @@ const styles = stylex.create({
     },
     lineHeight: 1.25,
     backgroundColor: {
-      default: 'var(--bg-wash)',
+      default: 'var(--bg-secondary)',
       ':focus': 'var(--bg-wash)'
     },
     '::placeholder': {

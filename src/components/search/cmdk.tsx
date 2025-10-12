@@ -1,7 +1,7 @@
 import { Command } from 'cmdk';
 import { memo, startTransition, useCallback } from 'react';
 import { useSearchOpen, useSetSearchOpen } from '@/contexts/search';
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 
 import routesJson from '@/routes.json';
 
@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 const data = Object.entries(routesJson);
 
-const styles = style9.create({
+const styles = stylex.create({
   root: {
     maxWidth: '640px',
     width: '100%',
@@ -19,14 +19,16 @@ const styles = style9.create({
     padding: 0
   },
   input: {
-    border: 'none',
+    borderStyle: 'none',
     width: '100%',
     fontSize: '18px',
     padding: '20px',
     outline: 'none',
     backgroundColor: 'var(--bg-wash)',
     color: 'var(--text-primary)',
-    borderBottom: '1px solid var(--border-secondary)',
+    borderBottomWidth: '1px',
+    borderBottomStyle: 'solid',
+    borderBottomColor: 'var(--border-secondary)',
     borderRadius: '0',
     margin: '0',
     '::placeholder': {
@@ -39,7 +41,8 @@ const styles = style9.create({
     fontSize: 15,
     display: 'flex',
     alignItems: 'center',
-    padding: '14px 20px',
+    paddingBlock: '14px',
+    paddingInline: '20px',
     color: 'var(--text-primary)',
     userSelect: 'none',
     willChange: 'background-color, color',
@@ -50,11 +53,13 @@ const styles = style9.create({
     gap: '12px'
   },
   list: {
-    '@media screen and (min-width: 640px)': {
-      height: 'var(--cmdk-list-height)',
-      maxHeight: '650px'
+    height: {
+      '@media screen and (min-width: 640px)': 'var(--cmdk-list-height)'
     },
-    maxHeight: '400px',
+    maxHeight: {
+      default: '400px',
+      '@media screen and (min-width: 640px)': '650px'
+    },
     overflow: 'auto',
     overscrollBehaviorX: 'contain',
     overscrollBehaviorY: 'contain',
@@ -90,26 +95,26 @@ function SearchCommandK() {
 
   return (
     <Command.Dialog
-      className={styles('root')}
+      {...stylex.props(styles.root)}
       open={open}
       onOpenChange={setOpen}
     >
       <Command.Input
-        className={styles('input')}
+        {...stylex.props(styles.input)}
         placeholder="Search documentation"
         autoFocus
       />
 
-      <Command.List className={styles('list')}>
+      <Command.List {...stylex.props(styles.list)}>
         {/* {isLoading && <Command.Loading>Hang on…</Command.Loading>} */}
 
-        <Command.Empty className={styles('empty')}>No results found.</Command.Empty>
+        <Command.Empty {...stylex.props(styles.empty)}>No results found.</Command.Empty>
         {
           data.map(([href, route]) => (
             <Command.Item
               value={href}
               key={href}
-              className={styles('item')}
+              {...stylex.props(styles.item)}
               onSelect={handleSelect}
             >
               {route.title}

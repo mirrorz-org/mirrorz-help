@@ -11,9 +11,9 @@ import {
   Close as RadixDialogClose,
   Description as RadixDialogDescription
 } from '@radix-ui/react-dialog';
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 
-const styles = style9.create({
+const styles = stylex.create({
   close_button: {
     borderRadius: '100%',
     height: '25px',
@@ -49,18 +49,29 @@ const styles = style9.create({
     position: 'fixed',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '90vw',
+    transform: {
+      default: 'translate(-50%, -50%)',
+      '@media screen and (min-width: 640px)': 'translateX(-50%) translateY(0)'
+    },
+    width: {
+      default: '90vw',
+      '@media screen and (min-width: 640px)': '640px'
+    },
     maxWidth: '450px',
     maxHeight: '85vh',
     borderTopLeftRadius: '8px',
     borderTopRightRadius: '8px',
-    '@media screen and (min-width: 640px)': {
-      transform: 'translateX(-50%) translateY(0)',
-      width: '640px',
-      height: 'auto',
-      borderBottomLeftRadius: '8px',
-      borderBottomRightRadius: '8px'
+    height: {
+      default: 'auto',
+      '@media screen and (min-width: 640px)': 'auto'
+    },
+    borderBottomLeftRadius: {
+      default: '0px',
+      '@media screen and (min-width: 640px)': '8px'
+    },
+    borderBottomRightRadius: {
+      default: '0px',
+      '@media screen and (min-width: 640px)': '8px'
     },
     padding: '25px',
     backgroundColor: 'var(--bg-wash)',
@@ -74,7 +85,10 @@ const styles = style9.create({
     fontSize: 18
   },
   description: {
-    margin: '10px 0 20px',
+    marginTop: '10px',
+    marginRight: '0',
+    marginBottom: '20px',
+    marginLeft: '0',
     fontSize: 15,
     lineHeight: 1.5
   }
@@ -93,16 +107,16 @@ function Dialog() {
   return (
     <RadixDialogRoot open={dialog !== null} onOpenChange={handleOpenChange}>
       <RadixDialogPortal>
-        <RadixDialogOverlay className={styles('overlay')} />
-        <RadixDialogContent className={styles('dialog')}>
-          {dialog?.title && <RadixDialogTitle className={styles('title')}>{dialog.title}</RadixDialogTitle>}
+        <RadixDialogOverlay {...stylex.props(styles.overlay)} />
+        <RadixDialogContent {...stylex.props(styles.dialog)}>
+          {dialog?.title && <RadixDialogTitle {...stylex.props(styles.title)}>{dialog.title}</RadixDialogTitle>}
           {dialog?.content != null && (
-            <RadixDialogDescription className={styles('description')}>
+            <RadixDialogDescription {...stylex.props(styles.description)}>
               {dialog.content}
             </RadixDialogDescription>
           )}
           <RadixDialogClose asChild>
-            <button className={styles('close_button')} aria-label="Close" type="button">
+            <button {...stylex.props(styles.close_button)} aria-label="Close" type="button">
               <IconClose />
             </button>
           </RadixDialogClose>

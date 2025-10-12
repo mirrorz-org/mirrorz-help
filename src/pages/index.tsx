@@ -1,4 +1,4 @@
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 import { Layout } from '../components/layout';
 import MirrorzLogo from '../components/mirrorz-logo';
 
@@ -13,30 +13,36 @@ import Link from 'next/link';
 import SeoHead from '../components/seo/head';
 import JsonLD from '../components/seo/json-ld';
 
-const styles = style9.create({
+const styles = stylex.create({
   main: {
-    marginTop: '32px',
-    marginBottom: '32px',
-    '@media screen and (min-width: 840px)': {
-      marginTop: '40px',
-      marginBottom: '40px'
+    marginTop: {
+      default: '32px',
+      '@media screen and (min-width: 840px)': '40px'
+    },
+    marginBottom: {
+      default: '32px',
+      '@media screen and (min-width: 840px)': '40px'
     },
     display: 'flex',
-    flexDirection: 'column',
-    '@media screen and (min-width: 640px)': {
-      flexDirection: 'row',
-      alignItems: 'center'
+    flexDirection: {
+      default: 'column',
+      '@media screen and (min-width: 640px)': 'row'
     },
     flexGrow: 1,
-    alignItems: 'flex-start',
+    alignItems: {
+      default: 'flex-start',
+      '@media screen and (min-width: 640px)': 'center'
+    },
     justifyContent: 'flex-start'
   },
   mirrorz_logo: {
-    width: '80px',
-    height: '80px',
-    '@media screen and (min-width: 640px)': {
-      width: '112px',
-      height: '112px'
+    width: {
+      default: '80px',
+      '@media screen and (min-width: 640px)': '112px'
+    },
+    height: {
+      default: '80px',
+      '@media screen and (min-width: 640px)': '112px'
     },
     marginRight: '12px'
   },
@@ -85,26 +91,25 @@ const styles = style9.create({
   },
   featured_docs: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-    columnGap: '24px',
-    rowGap: '24px',
-    '@media screen and (min-width: 640px)': {
-      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
+    gridTemplateColumns: {
+      default: 'repeat(2, minmax(0, 1fr))',
+      '@media screen and (min-width: 640px)': 'repeat(2, minmax(0, 1fr))',
+      '@media screen and (min-width: 1536px)': 'repeat(4, minmax(0, 1fr))'
     },
-    '@media screen and (min-width: 1536px)': {
-      gridTemplateColumns: 'repeat(4, minmax(0, 1fr))'
-    }
+    columnGap: '24px',
+    rowGap: '24px'
   },
   card: {
-    padding: '24px 32px',
+    paddingBlock: '24px',
+    paddingInline: '32px',
     boxShadow: 'var(--shadow-main)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'var(--bg-card)',
-    ':hover': {
-      backgroundColor: 'var(--bg-hover)'
+    backgroundColor: {
+      default: 'var(--bg-card)',
+      ':hover': 'var(--bg-hover)'
     }
   },
   brand_icon: {
@@ -123,62 +128,62 @@ export default function HomePage() {
     <>
       <SeoHead />
       <Layout>
-        <div className={styles('main')}>
-          <MirrorzLogo className={styles('mirrorz_logo')} />
-          <div className={styles('title_wrapper')}>
-            <h1 className={styles('title')}>
+        <div {...stylex.props(styles.main)}>
+          <MirrorzLogo {...stylex.props(styles.mirrorz_logo)} />
+          <div {...stylex.props(styles.title_wrapper)}>
+            <h1 {...stylex.props(styles.title)}>
               MirrorZ Help
             </h1>
-            <div className={styles('badge')}>
+            <div {...stylex.props(styles.badge)}>
               Alpha
             </div>
           </div>
         </div>
         <section>
-          <p className={styles('paragraph')}>
+          <p {...stylex.props(styles.paragraph)}>
             MirrorZ Help 致力于成为一个开源、开放、且持续更新的开源软件镜像的帮助文档整合站点，旨在帮助高校间推广开源软件的使用。
           </p>
-          <h2 className={styles('h2')}>热门文档</h2>
-          <div className={styles('featured_docs')}>
-            <Link href="/ubuntu/" className={styles('card')}>
-              <IconUbuntu className={styles('brand_icon')} />
-              <h3 className={styles('card_title')}>
+          <h2 {...stylex.props(styles.h2)}>热门文档</h2>
+          <div {...stylex.props(styles.featured_docs)}>
+            <Link href="/ubuntu/" {...stylex.props(styles.card)}>
+              <IconUbuntu {...stylex.props(styles.brand_icon)} />
+              <h3 {...stylex.props(styles.card_title)}>
                 Ubuntu 软件仓库镜像使用帮助
               </h3>
             </Link>
-            <Link href="/debian/" className={styles('card')}>
-              <IconDebian className={styles('brand_icon')} />
-              <h3 className={styles('card_title')}>
+            <Link href="/debian/" {...stylex.props(styles.card)}>
+              <IconDebian {...stylex.props(styles.brand_icon)} />
+              <h3 {...stylex.props(styles.card_title)}>
                 Debian 软件仓库镜像使用帮助
               </h3>
             </Link>
-            <Link href="/archlinux/" className={styles('card')}>
-              <IconArchLinux className={styles('brand_icon')} />
-              <h3 className={styles('card_title')}>
+            <Link href="/archlinux/" {...stylex.props(styles.card)}>
+              <IconArchLinux {...stylex.props(styles.brand_icon)} />
+              <h3 {...stylex.props(styles.card_title)}>
                 Arch Linux 软件仓库镜像使用帮助
               </h3>
             </Link>
-            <Link href="/fedora/" className={styles('card')}>
-              <IconFedora className={styles('brand_icon')} />
-              <h3 className={styles('card_title')}>
+            <Link href="/fedora/" {...stylex.props(styles.card)}>
+              <IconFedora {...stylex.props(styles.brand_icon)} />
+              <h3 {...stylex.props(styles.card_title)}>
                 Fedora 软件仓库镜像使用帮助
               </h3>
             </Link>
-            <Link href="/opensuse/" className={styles('card')}>
-              <IconOpenSUSE className={styles('brand_icon')} />
-              <h3 className={styles('card_title')}>
+            <Link href="/opensuse/" {...stylex.props(styles.card)}>
+              <IconOpenSUSE {...stylex.props(styles.brand_icon)} />
+              <h3 {...stylex.props(styles.card_title)}>
                 openSUSE 软件仓库镜像使用帮助
               </h3>
             </Link>
-            <Link href="/gentoo/" className={styles('card')}>
-              <IconGentoo className={styles('brand_icon')} />
-              <h3 className={styles('card_title')}>
+            <Link href="/gentoo/" {...stylex.props(styles.card)}>
+              <IconGentoo {...stylex.props(styles.brand_icon)} />
+              <h3 {...stylex.props(styles.card_title)}>
                 Gentoo 软件仓库镜像使用帮助
               </h3>
             </Link>
-            <Link href="/pypi/" className={styles('card')}>
-              <IconPython className={styles('brand_icon')} />
-              <h3 className={styles('card_title')}>
+            <Link href="/pypi/" {...stylex.props(styles.card)}>
+              <IconPython {...stylex.props(styles.brand_icon)} />
+              <h3 {...stylex.props(styles.card_title)}>
                 PyPI 软件仓库镜像使用帮助
               </h3>
             </Link>

@@ -5,21 +5,21 @@ import { useClipboard } from 'foxact/use-clipboard';
 
 import IconCheck from '../../icons/check';
 import IconClipboard from '../../icons/clipboard';
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 
-const styles = style9.create({
+const styles = stylex.create({
   button: {
     backdropFilter: 'blur(6px)',
     backgroundColor: 'var(--bg-codeblock)/.2',
     borderWidth: '1px',
     borderColor: 'var(--border)',
     borderStyle: 'solid',
-    color: 'var(--text-secondary)',
+    color: {
+      default: 'var(--text-secondary)',
+      ':hover': 'var(--text-primary)'
+    },
     borderRadius: '8px',
-    padding: '6px',
-    ':hover': {
-      color: 'var(--text-primary)'
-    }
+    padding: '6px'
   },
   icon: {
     width: '16px',
@@ -48,7 +48,7 @@ export function CopyToClipboard({
 
   return (
     <button
-      className={styles('button')}
+      {...stylex.props(styles.button)}
       onClick={handleClick}
       title="Copy code"
       tabIndex={0}
@@ -56,8 +56,8 @@ export function CopyToClipboard({
       {...props}
     >
       {copied
-        ? <IconCheck className={styles('icon')} />
-        : <IconClipboard className={styles('icon')} />}
+        ? <IconCheck {...stylex.props(styles.icon)} />
+        : <IconClipboard {...stylex.props(styles.icon)} />}
     </button>
   );
 }

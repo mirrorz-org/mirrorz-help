@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 
-const styles = style9.create({
+const styles = stylex.create({
   strong: {
     fontWeight: 700
   },
@@ -43,23 +43,23 @@ const styles = style9.create({
 });
 
 export const Strong = memo((p: React.JSX.IntrinsicElements['strong']) => (
-  <strong className={styles('strong')} {...p} />
+  <strong {...stylex.props(styles.strong)} {...p} />
 ));
 export const OL = memo((p: React.JSX.IntrinsicElements['ol']) => (
-  <ol className={styles('ol')} {...p} />
+  <ol {...stylex.props(styles.ol)} {...p} />
 ));
 export const LI = memo((p: React.JSX.IntrinsicElements['li']) => (
-  <li className={styles('li')} {...p} />
+  <li {...stylex.props(styles.li)} {...p} />
 ));
 export const UL = memo((p: React.JSX.IntrinsicElements['ul']) => (
-  <ul className={styles('ul')} {...p} />
+  <ul {...stylex.props(styles.ul)} {...p} />
 ));
 export const Divider = memo((p: React.JSX.IntrinsicElements['hr']) => (
-  <hr className={styles('hr')} {...p} />
+  <hr {...stylex.props(styles.hr)} {...p} />
 ));
 export const Code = memo((p: React.JSX.IntrinsicElements['code']) => (
-  <code className={styles('code')} {...p} />
+  <code {...stylex.props(styles.code)} {...p} />
 ));
 export const EM = memo((p: React.JSX.IntrinsicElements['em']) => (
-  <em className={styles('em')} {...p} />
+  <em {...stylex.props(styles.em)} {...p} />
 ));

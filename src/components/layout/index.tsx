@@ -1,4 +1,4 @@
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 import { Suspense, lazy } from 'react';
 
 import Nav from './nav';
@@ -24,29 +24,29 @@ import { EMPTY_ARRAY } from '../../lib/client/constant';
 const SearchCommandK = lazy(() => import('../search/cmdk'));
 const Dialog = lazy(() => import('../dialog'));
 
-const styles = style9.create({
+const styles = stylex.create({
   container: {
     display: 'grid',
-    gridTemplateColumns: 'auto',
-    '@media screen and (min-width: 840px)': {
-      gridTemplateColumns: '320px auto'
-    },
-    '@media screen and (min-width: 1280px)': {
-      gridTemplateColumns: '320px auto 320px'
+    gridTemplateColumns: {
+      default: 'auto',
+      '@media screen and (min-width: 840px)': '320px auto',
+      '@media screen and (min-width: 1280px)': '320px auto 320px'
     }
   },
   sidenav_container: {
-    position: 'fixed',
+    position: {
+      default: 'fixed',
+      '@media screen and (min-width: 840px)': 'sticky'
+    },
     top: 0,
     left: 0,
     right: 0,
     paddingTop: 0,
     paddingBottom: 0,
     zIndex: 50,
-    boxShadow: 'var(--nav-shadow)',
-    '@media screen and (min-width: 840px)': {
-      position: 'sticky',
-      boxShadow: 'none'
+    boxShadow: {
+      default: 'var(--nav-shadow)',
+      '@media screen and (min-width: 840px)': 'none'
     }
   },
   main: {
@@ -56,17 +56,17 @@ const styles = style9.create({
   main_spacer: {
     height: '64px',
     marginBottom: '8px',
-    '@media screen and (min-width: 840px)': {
-      display: 'none'
+    display: {
+      '@media screen and (min-width: 840px)': 'none'
     }
   },
   toc: {
-    display: 'none',
-    '@media screen and (min-width: 840px)': {
-      maxWidth: '336px'
+    display: {
+      default: 'none',
+      '@media screen and (min-width: 1280px)': 'block'
     },
-    '@media screen and (min-width: 1280px)': {
-      display: 'block'
+    maxWidth: {
+      '@media screen and (min-width: 840px)': '336px'
     }
   },
   content_wrapper: {
@@ -76,11 +76,13 @@ const styles = style9.create({
     maxWidth: '1280px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    paddingLeft: '20px',
-    paddingRight: '20px',
-    '@media screen and (min-width: 640px)': {
-      paddingLeft: '48px',
-      paddingRight: '48px'
+    paddingLeft: {
+      default: '20px',
+      '@media screen and (min-width: 640px)': '48px'
+    },
+    paddingRight: {
+      default: '20px',
+      '@media screen and (min-width: 640px)': '48px'
     }
   }
 });
@@ -132,8 +134,8 @@ export function Layout({ children, meta, toc = EMPTY_ARRAY, cname, isContent = f
         <SelectedMirrorProvider key={asPath} cname={cname || null}>
           <MirrorEnableHttpsProvider>
             <MirrorEnableSudoProvider>
-              <div className={styles('container')}>
-                <div className={styles('sidenav_container')}>
+              <div {...stylex.props(styles.container)}>
+                <div {...stylex.props(styles.sidenav_container)}>
                   {/**
                   * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
                   *
@@ -144,13 +146,13 @@ export function Layout({ children, meta, toc = EMPTY_ARRAY, cname, isContent = f
                     <Nav />
                   </Suspense>
                 </div>
-                <main className={styles('main')}>
-                  <div className={styles('main_spacer')} />
+                <main {...stylex.props(styles.main)}>
+                  <div {...stylex.props(styles.main_spacer)} />
 
                   {isContent && meta && <Header title={meta.title} />}
 
-                  <div className={styles('content_wrapper')}>
-                    <div className={styles('content_inner')}>
+                  <div {...stylex.props(styles.content_wrapper)}>
+                    <div {...stylex.props(styles.content_inner)}>
                       {children}
 
                       {isContent && <MetadataCard />}
@@ -159,7 +161,7 @@ export function Layout({ children, meta, toc = EMPTY_ARRAY, cname, isContent = f
 
                   <Footer />
                 </main>
-                <div className={styles('toc')}>
+                <div {...stylex.props(styles.toc)}>
                   {/**
                   * !!ALERT!! PERFORMANCE OPTIMIZATION HACK AHEAD!
                   * No fallback UI so need to be careful not to suspend directly inside.

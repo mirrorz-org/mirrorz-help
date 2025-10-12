@@ -5,9 +5,9 @@ import {
   Content as TabsContent
 } from '@radix-ui/react-tabs';
 import { useState } from 'react';
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 
-import type { StyleWithAtRulesAndFalsy } from '@/types/style9';
+import type { StyleXRulesAndFalsy } from '@/types/stylex';
 import { EMPTY_ARRAY } from '../../lib/client/constant';
 
 interface TabsProps {
@@ -15,7 +15,7 @@ interface TabsProps {
   defaultValue?: string
 }
 
-const styles = style9.create({
+const styles = stylex.create({
   root: {
     marginTop: '24px',
     marginBottom: '36px',
@@ -26,20 +26,22 @@ const styles = style9.create({
     marginRight: '-12px',
     paddingLeft: '12px',
     paddingRight: '12px',
-    overscrollBehaviorX: 'contain',
-    msOverflowStyle: 'none'
+    overscrollBehaviorX: 'contain'
   },
   list: {
     display: 'flex',
     width: 'max-content',
     minWidth: '100%',
-    borderBottom: '1px solid var(--border-secondary)',
+    borderBottomWidth: '1px',
+    borderBottomStyle: 'solid',
+    borderBottomColor: 'var(--border-secondary)',
     paddingBottom: '8px'
   },
   trigger: {
     borderTopLeftRadius: '8px',
     borderTopRightRadius: '8px',
-    padding: '8px 12px',
+    paddingBlock: '8px',
+    paddingInline: '12px',
     fontWeight: 500,
     lineHeight: 1.25,
     fontSize: 18,
@@ -55,11 +57,13 @@ const styles = style9.create({
     color: 'var(--bg-primary)'
   },
   trigger_inactive: {
-    borderBottomColor: 'transparent',
-    color: 'var(--text-secondary)',
-    ':hover': {
-      color: 'var(--text-primary)',
-      borderBottomColor: 'var(--border)'
+    borderBottomColor: {
+      default: 'transparent',
+      ':hover': 'var(--border)'
+    },
+    color: {
+      default: 'var(--text-secondary)',
+      ':hover': 'var(--text-primary)'
     }
   },
   tab: {
@@ -71,17 +75,13 @@ const styles = style9.create({
 export function Tabs({ children, items, defaultValue }: React.PropsWithChildren<TabsProps>) {
   const [value, setValue] = useState(defaultValue || items[0]);
   return (
-    <TabsRoot className={styles('root')} value={value} onValueChange={setValue}>
-      <TabsList className={styles('list')}>
+    <TabsRoot {...stylex.props(styles.root)} value={value} onValueChange={setValue}>
+      <TabsList {...stylex.props(styles.list)}>
         {
           items.map(item => (
             <TabsTrigger
               key={item}
-              className={styles({
-                trigger: true,
-                trigger_active: value === item,
-                trigger_inactive: value !== item
-              })}
+              {...stylex.props(styles.trigger, value === item && styles.trigger_active, value !== item && styles.trigger_inactive)}
               value={item}
             >
               {item}
@@ -98,9 +98,9 @@ export function TabItem({
   children,
   value,
   xstyle = EMPTY_ARRAY
-}: React.PropsWithChildren<{ value: string, xstyle?: StyleWithAtRulesAndFalsy[] }>) {
+}: React.PropsWithChildren<{ value: string, xstyle?: StyleXRulesAndFalsy[] }>) {
   return (
-    <TabsContent className={style9(styles.tab, ...xstyle)} value={value}>
+    <TabsContent {...stylex.props(styles.tab, ...xstyle)} value={value}>
       {children}
     </TabsContent>
   );

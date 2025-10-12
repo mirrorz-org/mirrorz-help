@@ -1,16 +1,15 @@
-import { forwardRef } from 'react';
-import style9 from 'style9';
-import type { StyleWithAtRulesAndFalsy } from '@/types/style9';
+import * as stylex from '@stylexjs/stylex';
+import type { StyleXRulesAndFalsy } from '@/types/stylex';
 import clsx from 'clsx';
 import { EMPTY_ARRAY } from '../../lib/client/constant';
 
 interface InputExtraProps {
   prefix?: React.ReactNode,
   suffix?: React.ReactNode,
-  inputXstyle?: StyleWithAtRulesAndFalsy[]
+  inputXstyle?: StyleXRulesAndFalsy[]
 }
 
-const styles = style9.create({
+const styles = stylex.create({
   wrapper: {
     position: 'relative',
     display: 'flex',
@@ -26,14 +25,14 @@ const styles = style9.create({
     paddingRight: '12px',
     paddingTop: '8px',
     paddingBottom: '8px',
-    fontSize: 15,
-    lineHeight: 1.25,
-    '@media screen and (min-width: 840px)': {
-      fontSize: 13
+    fontSize: {
+      default: 15,
+      '@media screen and (min-width: 840px)': 13
     },
-    backgroundColor: 'var(--bg-secondary)',
-    ':focus': {
-      backgroundColor: 'var(--bg-wash)'
+    lineHeight: 1.25,
+    backgroundColor: {
+      default: 'var(--bg-wash)',
+      ':focus': 'var(--bg-wash)'
     },
     '::placeholder': {
       color: 'var(--text-shallow)'
@@ -43,12 +42,12 @@ const styles = style9.create({
 
 function Input({ ref: forwardedRef, prefix, suffix, className, inputXstyle = EMPTY_ARRAY, ...props }: InputExtraProps & React.JSX.IntrinsicElements['input'] & { ref?: React.RefObject<HTMLInputElement | null> }) {
   return (
-    <div className={styles('wrapper')}>
+    <div {...stylex.props(styles.wrapper)}>
       {prefix}
       <input
         ref={forwardedRef}
         spellCheck={false}
-        className={clsx(className, style9(styles.input, ...inputXstyle))}
+        className={clsx(className, stylex.props(styles.input, ...inputXstyle).className)}
         {...props}
       />
       {suffix}

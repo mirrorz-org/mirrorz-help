@@ -16,10 +16,6 @@ module.exports = withBundleAnalyzer(withStyle9({
   reactStrictMode: true,
   output: 'export',
   experimental: {
-    optimizeCss: process.env.NODE_ENV === 'production'
-      ? {
-        logLevel: 'warn'
-      }
-      : false
+    optimizeCss: false
   }
 }));

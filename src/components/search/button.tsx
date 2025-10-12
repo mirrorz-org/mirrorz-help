@@ -1,14 +1,16 @@
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 import IconSearch from '../icons/search';
 import { memo, startTransition, useCallback, useEffect, useState } from 'react';
 import { useSetSearchOpen } from '@/contexts/search';
 import { getOS } from '@/hooks/use-os';
 
-const styles = style9.create({
+const styles = stylex.create({
   kbd: {
     height: '20px',
     width: 'auto',
-    border: '1px solid transparent',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'transparent',
     marginRight: '4px',
     backgroundColor: 'var(--bg-wash)',
     color: 'var(--text-shallow)',
@@ -27,7 +29,10 @@ const styles = style9.create({
     height: '14px'
   },
   search_button_on_mobile: {
-    display: 'inline-flex',
+    display: {
+      default: 'inline-flex',
+      '@media screen and (min-width: 840px)': 'none'
+    },
     alignItems: 'center',
     paddingTop: '4px',
     paddingBottom: '4px',
@@ -35,20 +40,19 @@ const styles = style9.create({
     paddingRight: '8px',
     marginLeft: '8px',
     marginRight: '8px',
-    border: '1px solid var(--border)',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'var(--border)',
     borderRadius: '8px',
-    backgroundColor: 'var(--bg-wash)',
-    '@media screen and (min-width: 840px)': {
-      display: 'none'
-    },
-    ':hover': {
-      backgroundColor: 'var(--bg-hover)'
+    backgroundColor: {
+      default: 'var(--bg-wash)',
+      ':hover': 'var(--bg-hover)'
     }
   },
   search_button_in_sidenav: {
-    display: 'none',
-    '@media screen and (min-width: 840px)': {
-      display: 'flex'
+    display: {
+      default: 'none',
+      '@media screen and (min-width: 840px)': 'flex'
     },
     color: 'var(--text-shallow)',
     width: '100%',
@@ -59,9 +63,9 @@ const styles = style9.create({
     paddingBottom: '4px',
     height: '40px',
     backgroundColor: 'var(--bg-secondary)',
-    outline: 'none',
-    ':focus': {
-      outline: 'none'
+    outline: {
+      default: 'none',
+      ':focus': 'none'
     },
     cursor: 'pointer',
     alignItems: 'center',
@@ -87,7 +91,7 @@ const styles = style9.create({
 
 function Kbd(props: React.JSX.IntrinsicElements['kbd']) {
   return (
-    <kbd className={styles('kbd')} {...props} />
+    <kbd {...stylex.props(styles.kbd)} {...props} />
   );
 }
 
@@ -101,10 +105,10 @@ export const SearchButtonOnMobile = memo(() => {
     <button
       aria-label="Search"
       type="button"
-      className={styles('search_button_on_mobile')}
+      {...stylex.props(styles.search_button_on_mobile)}
       onClick={handleOpen}
     >
-      <IconSearch className={styles('icon_as_button')} />
+      <IconSearch {...stylex.props(styles.icon_as_button)} />
     </button>
   );
 });
@@ -124,7 +128,7 @@ function SearchButtonSuffix() {
   }, []);
 
   return (
-    <span className={styles('suffix')}>
+    <span {...stylex.props(styles.suffix)}>
       <Kbd>{icon}</Kbd>
       <Kbd>K</Kbd>
     </span>
@@ -139,11 +143,11 @@ export const SearchButtonInSideNav = memo(() => {
 
   return (
     <button
-      className={styles('search_button_in_sidenav')}
+      {...stylex.props(styles.search_button_in_sidenav)}
       onClick={handleOpen}
       type="button"
     >
-      <IconSearch className={styles('icon_in_button')} />
+      <IconSearch {...stylex.props(styles.icon_in_button)} />
       Search
       <SearchButtonSuffix />
     </button>

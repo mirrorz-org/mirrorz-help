@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 import Link from 'next/link';
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 
 interface SidebarLinkProps {
   href: string,
@@ -9,7 +9,7 @@ interface SidebarLinkProps {
   isPending: boolean
 }
 
-const styles = style9.create({
+const styles = stylex.create({
   base: {
     paddingTop: '8px',
     paddingBottom: '8px',
@@ -26,36 +26,44 @@ const styles = style9.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderTopRightRadius: '8px',
-    borderBottomRightRadius: '8px',
-    borderTopLeftRadius: '8px',
-    borderBottomLeftRadius: '8px',
-    '@media screen and (min-width: 840px)': {
-      borderTopRightRadius: '8px',
-      borderBottomRightRadius: '8px',
-      borderTopLeftRadius: 0,
-      borderBottomLeftRadius: 0
+    borderTopRightRadius: {
+      default: '8px',
+      '@media screen and (min-width: 840px)': '8px'
     },
-    ':hover': {
-      backgroundColor: 'var(--bg-hover)'
+    borderBottomRightRadius: {
+      default: '8px',
+      '@media screen and (min-width: 840px)': '8px'
+    },
+    borderTopLeftRadius: {
+      default: '8px',
+      '@media screen and (min-width: 840px)': 0
+    },
+    borderBottomLeftRadius: {
+      default: '8px',
+      '@media screen and (min-width: 840px)': 0
+    },
+    backgroundColor: {
+      ':hover': 'var(--bg-hover)'
     }
   },
   active: {
     fontWeight: 700,
-    color: 'var(--text-link)',
-    backgroundColor: 'var(--bg-highlight)',
-    ':hover': {
-      backgroundColor: 'var(--bg-highlight)',
-      color: 'var(--text-link)'
+    color: {
+      default: 'var(--text-link)',
+      ':hover': 'var(--text-link)'
+    },
+    backgroundColor: {
+      default: 'var(--bg-highlight)',
+      ':hover': 'var(--bg-highlight)'
     }
   },
   inactive: {
     color: 'var(--text-primary)'
   },
   pending: {
-    backgroundColor: 'var(--bg-hover)',
-    ':hover': {
-      backgroundColor: 'var(--bg-hover)'
+    backgroundColor: {
+      default: 'var(--bg-hover)',
+      ':hover': 'var(--bg-hover)'
     }
   }
 });
@@ -78,7 +86,7 @@ function SidebarLink({
       }, [isActive])}
       title={title}
       target={href.startsWith('https://') ? '_blank' : undefined}
-      className={styles('base', isActive ? 'active' : 'inactive', isPending && 'pending')}
+      {...stylex.props(styles.base, isActive ? styles.active : styles.inactive, isPending && styles.pending)}
     >
       {title}
     </Link>

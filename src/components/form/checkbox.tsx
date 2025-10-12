@@ -1,7 +1,7 @@
 import { useId } from 'react';
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 
-const styles = style9.create({
+const styles = stylex.create({
   wrapper: {
     display: 'flex',
     flexWrap: 'nowrap',
@@ -67,13 +67,13 @@ export default function Switch({
   const id = useId();
 
   return (
-    <div className={styles('wrapper')}>
+    <div {...stylex.props(styles.wrapper)}>
       <label htmlFor={id} className="mantine-1ld5t9y mantine-Switch-label">
         {label}
       </label>
-      <input onChange={onChange} id={id} type="checkbox" className={styles('sr_only')} />
-      <label htmlFor={id} className={styles('track', checked ? 'track_active' : 'track_inactive')}>
-        <div className={styles('thumb', checked && 'thumb_active')} />
+      <input onChange={onChange} id={id} type="checkbox" {...stylex.props(styles.sr_only)} />
+      <label htmlFor={id} {...stylex.props(styles.track, checked ? styles.track_active : styles.track_inactive)}>
+        <div {...stylex.props(styles.thumb, checked && styles.thumb_active)} />
       </label>
     </div>
   );

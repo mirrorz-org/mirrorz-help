@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 
 import { memo, useMemo, useReducer } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
@@ -28,9 +28,10 @@ interface CodeBlockProps {
   filepath?: string
 }
 
-const styles = style9.create({
+const styles = stylex.create({
   container: {
-    margin: '24px 0'
+    marginBlock: '24px',
+    marginInline: '0'
   },
   code_wrapper: {
     position: 'relative'
@@ -124,7 +125,7 @@ function CodeBlock({
   return (
     <div className={clsx('enhanced-codeblock', styles('container'))}>
       {codeBlockMenu}
-      <div className={styles('code_wrapper')}>
+      <div {...stylex.props(styles.code_wrapper)}>
         <LoadingOverlay isLoading={isLoading} />
         <ActualCode code={finalCode} language={codeLanguage} />
       </div>

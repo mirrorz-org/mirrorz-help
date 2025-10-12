@@ -1,4 +1,4 @@
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 import IconChevronUpDown from '@/components/icons/chevron-up-down';
 import { memo, useCallback } from 'react';
 import { useSelectedMirror, useSetSelectedMirror } from '@/contexts/current-selected-mirror';
@@ -7,7 +7,7 @@ import { useCurrentCname } from '@/contexts/current-cname';
 import { iconWrapperXStyle, selectWrapperXStyle, selectXStyle, iconXStyle } from './select-style';
 import { sanitizeAbbrForMirrorZ } from '@/lib/client/utils';
 
-const styles = style9.create({
+const styles = stylex.create({
   select_wrapper: {
     flex: '1'
   }
@@ -25,9 +25,9 @@ function MirrorSelectMenu() {
   const { isLoading, data } = useMirrorZData();
 
   return (
-    <div className={style9(selectWrapperXStyle, styles.select_wrapper)}>
+    <div {...stylex.props(selectWrapperXStyle, styles.select_wrapper)}>
       <select
-        className={style9(selectXStyle)}
+        {...stylex.props(selectXStyle)}
         value={selectedMirror || undefined}
         onChange={handleChange}
         disabled={isLoading}
@@ -45,8 +45,8 @@ function MirrorSelectMenu() {
             )
         }
       </select>
-      <span className={style9(iconWrapperXStyle)}>
-        <IconChevronUpDown className={style9(iconXStyle)} />
+      <span {...stylex.props(iconWrapperXStyle)}>
+        <IconChevronUpDown {...stylex.props(iconXStyle)} />
       </span>
     </div>
   );

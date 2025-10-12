@@ -1,14 +1,14 @@
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 import MirrorSelectMenu from './mirror-select-menu';
 import { memo } from 'react';
 import { HttpsSwitch, SudoSwitch } from './switch';
 import { useFrontMatters } from '@/contexts/current-frontmatters';
 
-const styles = style9.create({
+const styles = stylex.create({
   main: {
-    padding: '24px',
-    '@media screen and (min-width: 1280px)': {
-      padding: '32px'
+    padding: {
+      default: '24px',
+      '@media screen and (min-width: 1280px)': '32px'
     },
     backgroundColor: 'var(--bg-secondary)',
     borderRadius: '8px',
@@ -39,12 +39,12 @@ const styles = style9.create({
 function MetaCard() {
   const { disable_https_select = false } = useFrontMatters();
   return (
-    <div className={styles('main')}>
-      <div className={styles('menu_wrapper')}>
+    <div {...stylex.props(styles.main)}>
+      <div {...stylex.props(styles.menu_wrapper)}>
         <p>选择镜像</p>
         <MirrorSelectMenu />
       </div>
-      <div className={styles('switch_wrapper')}>
+      <div {...stylex.props(styles.switch_wrapper)}>
         {(!disable_https_select) && (<HttpsSwitch />)}
         <SudoSwitch />
       </div>

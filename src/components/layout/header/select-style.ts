@@ -1,6 +1,6 @@
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 
-const styles = style9.create({
+const styles = stylex.create({
   select_wrapper: {
     position: 'relative',
     display: 'flex',
@@ -19,7 +19,9 @@ const styles = style9.create({
     appearance: 'none',
     lineHeight: 1.5,
     borderRadius: '8px',
-    border: '1px solid var(--border)',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'var(--border)',
     backgroundColor: 'var(--bg-wash)',
     color: 'var(--text-primary)'
   },
@@ -31,11 +33,13 @@ const styles = style9.create({
     right: '4px'
   },
   icon: {
-    width: '14px',
-    height: '14px',
-    '@media screen and (min-width: 840px)': {
-      width: '16px',
-      height: '16px'
+    width: {
+      default: '14px',
+      '@media screen and (min-width: 840px)': '16px'
+    },
+    height: {
+      default: '14px',
+      '@media screen and (min-width: 840px)': '16px'
     }
   }
 });

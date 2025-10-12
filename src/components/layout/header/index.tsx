@@ -1,4 +1,4 @@
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 import MetaCard from './metacard';
 import { memo } from 'react';
 
@@ -7,27 +7,31 @@ interface PageHeadingProps {
   description?: string
 }
 
-const styles = style9.create({
+const styles = stylex.create({
   wrapper: {
-    paddingLeft: '20px',
-    paddingRight: '20px',
-    paddingTop: '32px',
-    paddingBottom: '24px',
-    '@media screen and (min-width: 640px)': {
-      paddingLeft: '48px',
-      paddingRight: '48px',
-      paddingTop: '28px'
+    paddingLeft: {
+      default: '20px',
+      '@media screen and (min-width: 640px)': '48px'
     },
-    '@media screen and (min-width: 840px)': {
-      paddingTop: '20px'
-    }
+    paddingRight: {
+      default: '20px',
+      '@media screen and (min-width: 640px)': '48px'
+    },
+    paddingTop: {
+      default: '32px',
+      '@media screen and (min-width: 640px)': '28px',
+      '@media screen and (min-width: 840px)': '20px'
+    },
+    paddingBottom: '24px'
   },
   container: {
     maxWidth: '1280px',
-    marginLeft: 0,
-    '@media screen and (min-width: 1280px)': {
-      marginLeft: 'auto',
-      marginRight: 'auto'
+    marginLeft: {
+      default: 0,
+      '@media screen and (min-width: 1280px)': 'auto'
+    },
+    marginRight: {
+      '@media screen and (min-width: 1280px)': 'auto'
     }
   },
   h1: {
@@ -52,13 +56,13 @@ function Header({
   description
 }: PageHeadingProps) {
   return (
-    <div className={styles('wrapper')}>
-      <div className={styles('container')}>
-        <h1 className={styles('h1')}>
+    <div {...stylex.props(styles.wrapper)}>
+      <div {...stylex.props(styles.container)}>
+        <h1 {...stylex.props(styles.h1)}>
           {title}
         </h1>
         {description && (
-          <p className={styles('description')}>
+          <p {...stylex.props(styles.description)}>
             {description}
           </p>
         )}

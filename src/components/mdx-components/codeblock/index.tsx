@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Suspense, lazy, memo, useMemo } from 'react';
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 import { CopyToClipboard } from './copy-to-clipboard';
 
 import buttonGroupStyles from './buttongroup.module.css';
@@ -12,7 +12,7 @@ interface NormalCodeBlockProps {
   language?: string | undefined
 }
 
-const styles = style9.create({
+const styles = stylex.create({
   container: {
     position: 'relative',
     marginBottom: '24px'

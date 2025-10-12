@@ -1,23 +1,23 @@
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 import ExternalLink from '../external-link';
 import NextLink from 'next/link';
 import { memo, useMemo } from 'react';
 import { mirrorzUrl } from '../../lib/client/constant';
 
-const styles = style9.create({
+const styles = stylex.create({
   base: {
     color: 'var(--text-link)',
     display: 'inline',
     borderBottomWidth: '1px',
-    borderBottomColor: 'transparent',
+    borderBottomColor: {
+      default: 'transparent',
+      ':hover': 'var(--text-link)'
+    },
     borderBottomStyle: 'solid',
     transitionDuration: '100ms',
     transitionProperty: 'color',
     transitionTimingFunction: 'cubic-bezier(0.4, 0, 1, 1)',
-    lineHeight: 1.5,
-    ':hover': {
-      borderBottomColor: 'var(--text-link)'
-    }
+    lineHeight: 1.5
   }
 });
 
@@ -40,12 +40,12 @@ function Link({ href, ...props }: Omit<React.JSX.IntrinsicElements['a'], 'classN
   }, [href]);
 
   if (!href) {
-    return <a href={href} className={styles('base')} {...props} />;
+    return <a href={href} {...stylex.props(styles.base)} {...props} />;
   }
   if (href.startsWith('https://') || href.startsWith('http://')) {
-    return <ExternalLink href={processedHref} className={styles('base')} {...props} />;
+    return <ExternalLink href={processedHref} {...stylex.props(styles.base)} {...props} />;
   }
-  return <NextLink href={href} className={styles('base')} {...props} />;
+  return <NextLink href={href} {...stylex.props(styles.base)} {...props} />;
 }
 
 export default memo(Link);

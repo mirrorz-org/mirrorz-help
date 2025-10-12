@@ -1,4 +1,4 @@
-import style9 from 'style9';
+import * as stylex from '@stylexjs/stylex';
 import IconChevronUpDown from '../../icons/chevron-up-down';
 import { memo, useCallback, useMemo } from 'react';
 
@@ -8,7 +8,7 @@ export interface Menu {
   items: Array<[displayName: string, value: MenuValue]>
 }
 
-const styles = style9.create({
+const styles = stylex.create({
   container: {
     display: 'flex',
     flexWrap: 'wrap'
@@ -17,11 +17,11 @@ const styles = style9.create({
     display: 'flex',
     alignItems: 'center',
     flexWrap: 'nowrap',
-    marginRight: '20px',
-    marginBottom: '8px',
-    ':last-child': {
-      marginRight: 0
-    }
+    marginRight: {
+      default: '20px',
+      ':last-child': 0
+    },
+    marginBottom: '8px'
   },
   select_wrapper: {
     position: 'relative',
@@ -40,7 +40,9 @@ const styles = style9.create({
     appearance: 'none',
     lineHeight: 1.5,
     borderRadius: '8px',
-    border: '1px solid var(--border)',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'var(--border)',
     backgroundColor: 'var(--bg-wash)',
     color: 'var(--text-primary)'
   },
@@ -52,11 +54,13 @@ const styles = style9.create({
     right: '4px'
   },
   icon: {
-    width: '14px',
-    height: '14px',
-    '@media screen and (min-width: 840px)': {
-      width: '16px',
-      height: '16px'
+    width: {
+      default: '14px',
+      '@media screen and (min-width: 840px)': '16px'
+    },
+    height: {
+      default: '14px',
+      '@media screen and (min-width: 840px)': '16px'
     }
   }
 });
@@ -83,20 +87,20 @@ function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
   }, [dispatch, valueMap]);
 
   return (
-    <div className={styles('container')}>
+    <div {...stylex.props(styles.container)}>
       {menus.map((menu, menuIndex) => (
-        <div className={styles('menu')} key={menu.title}>
+        <div {...stylex.props(styles.menu)} key={menu.title}>
           <span>{menu.title}</span>
-          <div className={styles('select_wrapper')}>
-            <select className={styles('select')} onChange={handleChange}>
+          <div {...stylex.props(styles.select_wrapper)}>
+            <select {...stylex.props(styles.select)} onChange={handleChange}>
               {menu.items.map((item, optionIndex) => {
                 const value = `${menuIndex}_${optionIndex}`;
                 const key = `${menu.title}_${value}`;
                 return <option key={key} value={value}>{item[0]}</option>;
               })}
             </select>
-            <span className={styles('icon_wrapper')}>
-              <IconChevronUpDown className={styles('icon')} />
+            <span {...stylex.props(styles.icon_wrapper)}>
+              <IconChevronUpDown {...stylex.props(styles.icon)} />
             </span>
           </div>
         </div>

@@ -187,7 +187,6 @@ function Nav() {
     const media = window.matchMedia('(max-width: 839px)');
     function closeIfNeeded() {
       if (!media.matches) {
-        // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect -- missing event listener from useRouter
         setIsOpen(false);
       }
     }

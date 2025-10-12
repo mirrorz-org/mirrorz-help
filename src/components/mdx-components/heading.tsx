@@ -96,15 +96,23 @@ export const Heading = typescriptHappyForwardRef(<T extends 'h1' | 'h2' | 'h3' |
   const Comp = as || 'h2';
   const beaconClassName = (Comp === 'h2' || Comp === 'h3') && 'toc-heading-anchor';
 
+  const anchorLinkStylexProps = stylex.props(styles.anchor_link, Comp === 'h1' ? styles.hidden : styles.inline_block);
   return (
-    <Comp id={id} {...props} ref={ref} className={clsx(beaconClassName, headingAnchorStyles.heading, stylex.props(styles.base, ...xstyle).className)}>
+    <Comp
+      id={id}
+      {...props}
+      ref={ref}
+      {...stylex.props(styles.base, ...xstyle)}
+      className={clsx(beaconClassName, headingAnchorStyles.heading, stylex.props(styles.base, ...xstyle).className)}
+    >
       {children}
       {isPageAnchor && (
         <a
           href={`#${id || ''}`}
           aria-label={label}
           title={label}
-          className={clsx(headingAnchorStyles.anchor, stylex.props(styles.anchor_link, Comp === 'h1' ? styles.hidden : styles.inline_block).className)}
+          {...anchorLinkStylexProps}
+          className={clsx(headingAnchorStyles.anchor, anchorLinkStylexProps.className)}
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" {...stylex.props(styles.anchor)}>
             <g fill="currentColor" fillRule="evenodd">

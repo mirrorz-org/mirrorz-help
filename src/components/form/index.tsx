@@ -47,6 +47,7 @@ function Input({ ref: forwardedRef, prefix, suffix, className, inputXstyle = EMP
       <input
         ref={forwardedRef}
         spellCheck={false}
+        {...stylex.props(styles.input, ...inputXstyle)}
         className={clsx(className, stylex.props(styles.input, ...inputXstyle).className)}
         {...props}
       />

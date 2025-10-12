@@ -103,7 +103,10 @@ function CodeBlock({
 
   if (enableQuickSetup && filepath) {
     return (
-      <div className={clsx('enhanced-codeblock', styles('container'))}>
+      <div
+        {...stylex.props(styles.container)}
+        className={clsx('enhanced-codeblock', stylex.props(styles.container).className)}
+      >
         {codeBlockMenu}
         <Tabs items={[filepath, '快速配置']}>
           <TabItem value={filepath} xstyle={[styles.code_wrapper]}>
@@ -123,7 +126,10 @@ function CodeBlock({
   }
 
   return (
-    <div className={clsx('enhanced-codeblock', styles('container'))}>
+    <div
+      {...stylex.props(styles.container)}
+      className={clsx('enhanced-codeblock', stylex.props(styles.container).className)}
+    >
       {codeBlockMenu}
       <div {...stylex.props(styles.code_wrapper)}>
         <LoadingOverlay isLoading={isLoading} />

@@ -38,7 +38,10 @@ function SyntaxHighlight({ code, language }: NormalCodeBlockProps) {
   ), [code]);
 
   return (
-    <div className={clsx('lowlight', buttonGroupStyles.parent, styles('container'))}>
+    <div
+      {...stylex.props(styles.container)}
+      className={clsx('lowlight', buttonGroupStyles.parent, stylex.props(styles.container).className)}
+    >
       <Suspense fallback={fallback}>
         {
           language
@@ -46,7 +49,10 @@ function SyntaxHighlight({ code, language }: NormalCodeBlockProps) {
             : fallback
         }
       </Suspense>
-      <div className={clsx(styles('button_group'), buttonGroupStyles.group)}>
+      <div
+        {...stylex.props(styles.button_group)}
+        className={clsx(stylex.props(styles.button_group).className, buttonGroupStyles.group)}
+      >
         <CopyToClipboard value={code} />
       </div>
     </div>

@@ -48,8 +48,8 @@
     "swr": "^2.3.3"
   },
   "devDependencies": {
-    "@eslint-sukka/node": "^6.20.0",
-    "@eslint-sukka/react": "^6.20.0",
+    "@eslint-sukka/node": "^7.3.3",
+    "@eslint-sukka/react": "^7.3.3",
     "@mdx-js/mdx": "^3.1.0",
     "@next/bundle-analyzer": "^15.3.2",
     "@parcel/watcher": "^2.5.1",
@@ -63,9 +63,9 @@
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "@vercel/ncc": "^0.38.3",
-    "eslint": "^9.27.0",
-    "eslint-config-sukka": "^6.20.0",
-    "eslint-formatter-sukka": "^6.20.0",
+    "eslint": "^9.37.0",
+    "eslint-config-sukka": "^7.3.3",
+    "eslint-formatter-sukka": "^7.3.3",
     "eslint-plugin-mdx": "^3.4.2",
     "express": "^5.1.0",
     "find-up": "5.0.0",

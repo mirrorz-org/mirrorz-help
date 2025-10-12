@@ -10,9 +10,8 @@
     "jsx": "preserve",
     "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "baseUrl": ".",
+    "module": "preserve",
+    "moduleResolution": "bundler",
     "paths": {
       "@/*": [
         "./src/*"

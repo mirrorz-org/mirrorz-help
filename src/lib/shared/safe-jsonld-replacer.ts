@@ -27,7 +27,7 @@ export function safeJsonLdReplacer(_: string, value: any) {
     case 'bigint':
       return value; // These values are not risky.
     case 'string':
-      return value.replace(ESCAPE_REGEX, ESCAPE_REPLACER);
+      return value.replaceAll(ESCAPE_REGEX, ESCAPE_REPLACER);
     default: {
       // JSON.stringify will remove this element.
     }

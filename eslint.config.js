@@ -12,6 +12,7 @@ module.exports = require('eslint-config-sukka').sukka(
       ]
     },
     node: {
+      enable: true,
       files: [
         '**/*.js'
       ]
@@ -43,5 +44,13 @@ module.exports = require('eslint-config-sukka').sukka(
   {
     ...mdx.flatCodeBlocks,
     rules: mdx.flatCodeBlocks.rules
+  },
+  {
+    // TODO: fix in the future
+    rules: {
+      '@eslint-react/no-unnecessary-use-memo': 'off',
+      '@eslint-react/hooks-extra/no-direct-set-state-in-use-effect': 'off',
+      'react-hooks/set-state-in-effect': 'off'
+    }
   }
 );

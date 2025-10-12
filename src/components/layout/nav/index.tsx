@@ -281,6 +281,7 @@ function Nav() {
       <div
         ref={scrollParentRef}
         style={stylex.props(styles.nav_container).style}
+        {...stylex.props(styles.nav_container)}
         className={clsx('no-bg-scrollbar', stylex.props(styles.nav_container).className)}
       >
         <aside

@@ -95,7 +95,10 @@ function DarkModeSwitch() {
         * Add a hidden element with className being "dark".
         * This prevents critter from excluding .dark variable from inline css.
         */}
-      <div className={clsx(stylex.props(styles.dark_hack).className, 'dark')} />
+      <div
+        {...stylex.props(styles.dark_hack)}
+        className={clsx(stylex.props(styles.dark_hack).className, 'dark')}
+      />
       <label htmlFor={id}>
         <div {...stylex.props(styles.container)}>
           <span {...stylex.props(styles.icon_wrapper, styles.icon_wrapper_prefix)}>

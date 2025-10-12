@@ -4,6 +4,8 @@ import { useFuckSafari } from '../hooks/use-fuck-safari';
 import '@/styles/reset.css';
 import '@/styles/styles.sass';
 
+import 'stylex-webpack/stylex.css';
+
 import { DarkModeProvider } from '../contexts/darkmode';
 import { SearchOpenProvider } from '../contexts/search';
 import { DialogProvider } from '../contexts/dialog';

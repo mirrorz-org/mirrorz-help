@@ -1,6 +1,6 @@
 'use strict';
 
-const withStyleX = require('stylex-webpack/next');
+const { withStyleX } = require('stylex-webpack/next');
 const withBundleAnalyzer = process.env.ANALYZE === 'true'
   ? require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true'

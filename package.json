@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.13",
+    "@stylexjs/stylex": "^0.16.1",
     "body-scroll-lock": "^4.0.0-beta.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -44,7 +45,6 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "rehype-external-links": "^3.0.0",
-    "style9": "^0.18.2",
     "swr": "^2.3.3"
   },
   "devDependencies": {
@@ -55,6 +55,7 @@
     "@parcel/watcher": "^2.5.1",
     "@radix-ui/react-tabs": "^1.1.11",
     "@resvg/resvg-js": "^2.6.2",
+    "@stylexjs/babel-plugin": "^0.16.1",
     "@swc-node/register": "^1.10.10",
     "@swc/core": "^1.11.24",
     "@taskr/clear": "^1.1.0",
@@ -79,7 +80,7 @@
     "rimraf": "^6.0.1",
     "sass": "^1.89.0",
     "satori": "^0.11.3",
-    "style9-webpack": "^0.5.2",
+    "stylex-webpack": "^0.4.3",
     "taskr": "^1.1.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0"

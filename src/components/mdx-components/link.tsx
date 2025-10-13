@@ -54,9 +54,7 @@ function Link({ href, ...props }: Omit<React.JSX.IntrinsicElements['a'], 'classN
       <NextLink
         href={{
           pathname: href,
-          query: {
-            mirror: router.query.mirror || undefined // Preserve mirror query if exists
-          }
+          query: router.query.mirror ? { mirror: router.query.mirror || null } : undefined
         }}
         {...stylex.props(styles.base)}
         {...props}

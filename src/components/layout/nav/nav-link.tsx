@@ -93,9 +93,7 @@ function SidebarLink({
       prefetch={false}
       href={{
         pathname,
-        query: {
-          mirror: router.query.mirror || undefined // Preserve mirror query if exists
-        }
+        query: router.query.mirror ? { mirror: router.query.mirror || null } : undefined
       }}
       ref={useCallback((el: HTMLAnchorElement | null) => {
         if (el && isActive && 'scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {

@@ -3,28 +3,25 @@ import { noop } from 'foxact/noop';
 import { useMirrorZData } from '../hooks/use-mirrorz-data';
 import { useRouter } from 'next/router';
 import { sanitizeAbbrForMirrorZ } from '../lib/client/utils';
-import { issueUrl } from '../lib/client/constant';
 import { useSetDialog } from './dialog';
-import ExternalLink from '../components/external-link';
-import * as stylex from '@stylexjs/stylex';
 import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect';
 
-const styles = stylex.create({
-  link: {
-    color: 'var(--text-link)',
-    display: 'inline',
-    borderBottomWidth: '1px',
-    borderBottomColor: {
-      default: 'transparent',
-      ':hover': 'var(--text-link)'
-    },
-    borderBottomStyle: 'solid',
-    transitionDuration: '100ms',
-    transitionProperty: 'color',
-    transitionTimingFunction: 'cubic-bezier(0.4, 0, 1, 1)',
-    lineHeight: 1.5
-  }
-});
+// const styles = stylex.create({
+//   link: {
+//     color: 'var(--text-link)',
+//     display: 'inline',
+//     borderBottomWidth: '1px',
+//     borderBottomColor: {
+//       default: 'transparent',
+//       ':hover': 'var(--text-link)'
+//     },
+//     borderBottomStyle: 'solid',
+//     transitionDuration: '100ms',
+//     transitionProperty: 'color',
+//     transitionTimingFunction: 'cubic-bezier(0.4, 0, 1, 1)',
+//     lineHeight: 1.5
+//   }
+// });
 
 const SelectedMirrorContext = createContext<string | null>(null);
 const SelectedMirrorDispatchContext = createContext<React.Dispatch<React.SetStateAction<string | null>>>(noop);
@@ -68,8 +65,6 @@ export function SelectedMirrorProvider({ children, cname }: React.PropsWithChild
         content: (
           <>
             您当前试图使用 {router.query.mirror} 镜像站，但是该镜像站似乎并没有提供 {cname} 的镜像。
-            <br />
-            如果你有任何疑问，请通过 <ExternalLink href={issueUrl} {...stylex.props(styles.link)}>通过 GitHub Issue 向我们反馈这个问题</ExternalLink>。
           </>
         )
       });

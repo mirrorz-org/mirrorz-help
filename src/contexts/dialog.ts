@@ -5,6 +5,4 @@ export interface DialogParams {
   content?: React.ReactNode
 }
 
-const [DialogProvider, useDialog, useSetDialog] = createContextState<DialogParams | null>(null);
-
-export { DialogProvider, useDialog, useSetDialog };
+export const [DialogProvider, useDialog, useSetDialog] = createContextState<DialogParams | null>(null);

@@ -89,7 +89,9 @@ function SearchCommandK() {
       startTransition(() => {
         router.push({
           pathname,
-          query: router.query
+          query: {
+            mirror: router.query.mirror || undefined // Preserve mirror query if exists
+          }
         });
         setOpen(false);
       });

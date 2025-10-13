@@ -39,7 +39,10 @@ function MirrorSelectMenu() {
               data?.[1][cname].map(mirror => {
                 const siteName = mirror.site.name ? `${mirror.site.abbr} - ${mirror.site.name}` : mirror.site.abbr;
                 return (
-                  <option key={mirror.baseUrl} value={sanitizeAbbrForMirrorZ(mirror.site.abbr)}>{siteName}</option>
+                  <option
+                    key={mirror.baseUrl + '|' + mirror.site.abbr + '|' + mirror.site.name}
+                    value={sanitizeAbbrForMirrorZ(mirror.site.abbr)}
+                  >{siteName}</option>
                 );
               })
             )

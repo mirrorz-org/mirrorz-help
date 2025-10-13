@@ -69,6 +69,9 @@ const styles = stylex.create({
   }
 });
 
+/**
+ * Navigate to other software
+ */
 function SidebarLink({
   pathname,
   isActive = false,
@@ -77,6 +80,9 @@ function SidebarLink({
 }: SidebarLinkProps) {
   const router = useRouter();
 
+  /**
+   * We only handles relative link here. If external link is really needed, we need to implement proper target="_blank"
+   */
   if (!pathname.startsWith('/')) {
     throw new TypeError('<SidebarLink /> pathname must start with "/"');
   }
@@ -87,7 +93,9 @@ function SidebarLink({
       prefetch={false}
       href={{
         pathname,
-        query: router.query
+        query: {
+          mirror: router.query.mirror || undefined // Preserve mirror query if exists
+        }
       }}
       ref={useCallback((el: HTMLAnchorElement | null) => {
         if (el && isActive && 'scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {

@@ -8,7 +8,7 @@ import _routesJson from '@/routes.json';
 import type { RoutesJson } from '@/types/routes-json';
 
 const routesJson = _routesJson as RoutesJson;
-const hrefs = Object.keys(routesJson);
+const pathnames = Object.keys(routesJson);
 
 function Sidebar() {
   const pendingRoute = usePendingRoute();
@@ -17,14 +17,14 @@ function Sidebar() {
   return (
     <ul>
       {
-        hrefs.map((href: string) => {
-          const route = routesJson[href];
-          const isPending = pendingRoute === href;
-          const isActive = cleanedPath === href;
+        pathnames.map((pathname: string) => {
+          const route = routesJson[pathname];
+          const isPending = pendingRoute === pathname;
+          const isActive = cleanedPath === pathname;
 
           return (
             <SidebarLink
-              href={href}
+              pathname={pathname}
               key={route.title}
               isActive={isActive}
               isPending={isPending}

@@ -1,5 +1,5 @@
 export interface RoutesJson {
-  [href: string]: {
+  [pathname: string]: {
     title: string,
     fullTitle: string,
     file: string,

@@ -1,10 +1,10 @@
 import { memo, useCallback } from 'react';
 import Link from 'next/link';
 import * as stylex from '@stylexjs/stylex';
-import { AddMirrorQueryToRelativeHref } from '@/contexts/current-selected-mirror';
+import { useRouter } from 'next/router';
 
 interface SidebarLinkProps {
-  href: string,
+  pathname: string,
   isActive?: boolean,
   title: string,
   isPending: boolean
@@ -70,24 +70,29 @@ const styles = stylex.create({
 });
 
 function SidebarLink({
-  href,
+  pathname,
   isActive = false,
   title,
   isPending
 }: SidebarLinkProps) {
+  const router = useRouter();
+
   return (
     <Link
       // Disable prefetch when in view (prevent unnecessary requests)
       prefetch={false}
-      href={AddMirrorQueryToRelativeHref(href)}
+      href={{
+        pathname,
+        query: router.query
+      }}
       ref={useCallback((el: HTMLAnchorElement | null) => {
         if (el && isActive && 'scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {
           el.scrollIntoViewIfNeeded();
         }
       }, [isActive])}
       title={title}
-      target={href.startsWith('https://') ? '_blank' : undefined}
       {...stylex.props(styles.base, isActive ? styles.active : styles.inactive, isPending && styles.pending)}
+      target={pathname.startsWith('https://') ? '_blank' : undefined}
     >
       {title}
     </Link>

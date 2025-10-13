@@ -8,7 +8,6 @@ import routesJson from '@/routes.json';
 // import cmdkStyles from './cmdk.module.sass';
 // import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { AddMirrorQueryToRelativeHref } from '@/contexts/current-selected-mirror';
 
 const data = Object.entries(routesJson);
 
@@ -85,10 +84,13 @@ function SearchCommandK() {
   const setOpen = useSetSearchOpen();
 
   const router = useRouter();
-  const handleSelect = useCallback((href: string) => {
-    if (href) {
+  const handleSelect = useCallback((pathname: string) => {
+    if (pathname) {
       startTransition(() => {
-        router.push(href);
+        router.push({
+          pathname,
+          query: router.query
+        });
         setOpen(false);
       });
     }
@@ -113,7 +115,7 @@ function SearchCommandK() {
         {
           data.map(([href, route]) => (
             <Command.Item
-              value={AddMirrorQueryToRelativeHref(href)}
+              value={href}
               key={href}
               {...stylex.props(styles.item)}
               onSelect={handleSelect}

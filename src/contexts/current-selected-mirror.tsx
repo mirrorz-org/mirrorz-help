@@ -86,21 +86,3 @@ export function SelectedMirrorProvider({ children, cname }: React.PropsWithChild
     </SelectedMirrorContext>
   );
 }
-
-export function AddMirrorQueryToRelativeHref(href: string) {
-  const router = useRouter();
-
-  if (router.query.mirror) {
-    try {
-      const _ = new URL(href);
-      // Absolute URL and just return it directly
-      return href;
-    } catch {
-      // Relative URL
-    }
-    const url = new URL(href, 'http://example.com');
-    url.searchParams.set('mirror', String(router.query.mirror));
-    return url.pathname + url.search + url.hash;
-  }
-  return href;
-}

@@ -50,8 +50,7 @@ const styles = stylex.create({
     top: '50%',
     left: '50%',
     transform: {
-      default: 'translate(-50%, -50%)',
-      '@media screen and (min-width: 640px)': 'translateX(-50%) translateY(0)'
+      default: 'translate(-50%, -50%)'
     },
     width: {
       default: '90vw',

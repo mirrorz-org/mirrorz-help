@@ -77,6 +77,10 @@ function SidebarLink({
 }: SidebarLinkProps) {
   const router = useRouter();
 
+  if (!pathname.startsWith('/')) {
+    throw new TypeError('<SidebarLink /> pathname must start with "/"');
+  }
+
   return (
     <Link
       // Disable prefetch when in view (prevent unnecessary requests)
@@ -92,7 +96,7 @@ function SidebarLink({
       }, [isActive])}
       title={title}
       {...stylex.props(styles.base, isActive ? styles.active : styles.inactive, isPending && styles.pending)}
-      target={pathname.startsWith('https://') ? '_blank' : undefined}
+      // target={pathname.startsWith('https://') ? '_blank' : undefined}
     >
       {title}
     </Link>

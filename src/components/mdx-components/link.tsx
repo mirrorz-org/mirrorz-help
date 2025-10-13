@@ -3,6 +3,7 @@ import ExternalLink from '../external-link';
 import NextLink from 'next/link';
 import { memo, useMemo } from 'react';
 import { mirrorzUrl } from '../../lib/client/constant';
+import { useRouter } from 'next/router';
 
 const styles = stylex.create({
   base: {
@@ -39,12 +40,28 @@ function Link({ href, ...props }: Omit<React.JSX.IntrinsicElements['a'], 'classN
     }
   }, [href]);
 
+  const router = useRouter();
+
   if (!href) {
     return <a href={href} {...stylex.props(styles.base)} {...props} />;
   }
   if (href.startsWith('https://') || href.startsWith('http://')) {
     return <ExternalLink href={processedHref} {...stylex.props(styles.base)} {...props} />;
   }
+
+  if (href.startsWith('/')) {
+    return (
+      <NextLink
+        href={{
+          pathname: href,
+          query: router.query
+        }}
+        {...stylex.props(styles.base)}
+        {...props}
+      />
+    );
+  }
+
   return <NextLink href={href} {...stylex.props(styles.base)} {...props} />;
 }
 

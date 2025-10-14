@@ -15,6 +15,8 @@ interface SeoHeadProps {
   ogImage?: { url: string, width?: number | undefined, height?: number | undefined }
 }
 
+const jsonEndpointOrigin = new URL(jsonEndpoint).origin;
+
 export default function SeoHead({
   title,
   siteName = 'MirrorZ Help',
@@ -50,10 +52,7 @@ export default function SeoHead({
   const darkMode = useDarkMode();
   const permalink = usePermalink(siteHost);
 
-  const jsonEndpointOrigin = useMemo(() => {
-    const url = new URL(jsonEndpoint);
-    return url.origin;
-  }, []);
+  // ReactDOM.preconnect(jsonEndpointOrigin, { crossOrigin: 'anonymous' });
 
   return (
     <Head>

@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import { Suspense, lazy, memo, useMemo } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { CopyToClipboard } from './copy-to-clipboard';

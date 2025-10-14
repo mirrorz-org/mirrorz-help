@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
 import type { StyleXRulesAndFalsy } from '@/types/stylex';
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import { EMPTY_ARRAY } from '../../lib/client/constant';
 
 interface InputExtraProps {

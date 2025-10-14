@@ -13,8 +13,5 @@ module.exports = withBundleAnalyzer(withStyleX({
 })({
   trailingSlash: true,
   reactStrictMode: true,
-  output: 'export',
-  experimental: {
-    optimizeCss: false
-  }
+  output: 'export'
 }));

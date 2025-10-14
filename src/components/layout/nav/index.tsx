@@ -1,17 +1,18 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useRouter } from 'next/router';
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import Link from 'next/link';
 import IconHambuger from '../../icons/hamburger';
 import IconClose from '../../icons/close';
 import * as stylex from '@stylexjs/stylex';
 import MirrorZLogo from '../../mirrorz-logo';
 
+import { useMediaQuery } from 'foxact/use-media-query';
+
 import Sidebar from './sidebar';
 import DarkModeSwitch from '../darkmode-switch';
 import { SearchButtonInSideNav, SearchButtonOnMobile } from '../../search/button';
-import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect';
 
 const styles = stylex.create({
   container: {
@@ -196,12 +197,15 @@ const styles = stylex.create({
   }
 });
 
+const mobileOrTabletMediaQuery = '(max-width: 839px)';
+
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = useCallback(() => setIsOpen(isOpen => !isOpen), []);
 
   const scrollParentRef = useRef<HTMLDivElement>(null);
-  const asPath = useRouter().asPath;
+
+  const router = useRouter();
 
   // While the overlay is open, disable body scroll.
   useEffect(() => {
@@ -213,41 +217,49 @@ function Nav() {
   }, [isOpen]);
 
   // Close the overlay on any navigation.
-  useLayoutEffect(() => {
-    setIsOpen(false);
-  }, [asPath]);
+  useEffect(() => {
+    const close = () => setIsOpen(false);
+
+    router.events.on('routeChangeComplete', close);
+    router.events.on('routeChangeError', close);
+    return () => {
+      router.events.off('routeChangeComplete', close);
+      router.events.off('routeChangeError', close);
+    };
+  }, [router.events]);
 
   // Also close the overlay if the window gets resized past mobile layout.
   // (This is also important because we don't want to keep the body locked!)
   useEffect(() => {
-    const media = window.matchMedia('(max-width: 839px)');
+    const media = window.matchMedia(mobileOrTabletMediaQuery);
     function closeIfNeeded() {
       if (!media.matches) {
         setIsOpen(false);
       }
     }
-    closeIfNeeded();
     media.addEventListener('change', closeIfNeeded);
     return () => {
       media.removeEventListener('change', closeIfNeeded);
     };
   }, []);
 
+  // Only when isMobileOrTablet is true do we care about if isOpen should be applied.
+  // On desktop, we don't care about isOpen at all.
+  const isMobileOrTablet = useMediaQuery(mobileOrTabletMediaQuery, false);
+
   return (
-    <div {...stylex.props(styles.container, isOpen && styles.container_open)}>
-      <div {...stylex.props(styles.header, isOpen && styles.header_open)}>
+    <div {...stylex.props(styles.container, isMobileOrTablet && isOpen && styles.container_open)}>
+      <div {...stylex.props(styles.header, isMobileOrTablet && isOpen && styles.header_open)}>
         <div {...stylex.props(styles.header_inner)}>
           <button
             type="button"
             aria-label="Menu"
             onClick={handleOpen}
-            {...stylex.props(styles.menu_button, isOpen && styles.menu_button_open)}
+            {...stylex.props(styles.menu_button, isMobileOrTablet && isOpen && styles.menu_button_open)}
           >
-            {
-              isOpen
-                ? <IconClose {...stylex.props(styles.icon)} />
-                : <IconHambuger {...stylex.props(styles.icon)} />
-            }
+            {isOpen
+              ? <IconClose {...stylex.props(styles.icon)} />
+              : <IconHambuger {...stylex.props(styles.icon)} />}
           </button>
           <Link href="/" {...stylex.props(styles.title)}>
             <MirrorZLogo {...stylex.props(styles.logo)} />

@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex';
 import IconSearch from '../icons/search';
-import { memo, startTransition, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useSyncExternalStore } from 'react';
 import { useSetSearchOpen } from '@/contexts/search';
 import { getOS } from '@/hooks/use-os';
+import { noop } from 'foxact/noop';
 
 const styles = stylex.create({
   kbd: {
@@ -113,19 +114,24 @@ export const SearchButtonOnMobile = memo(() => {
   );
 });
 
-function SearchButtonSuffix() {
-  const [icon, setIcon] = useState<string>('\u2318');
+function getControlIconClient() {
+  if (typeof window === 'undefined') {
+    return '\u2318';
+  }
+  const os = getOS();
+  if (os === 'macos' || os === 'undetermined') {
+    return '\u2318';
+  }
+  return 'Ctrl';
+};
+const getControlIconServer = () => '\u2318';
 
-  useEffect(() => {
-    startTransition(() => {
-      const os = getOS();
-      if (os === 'macos' || os === 'undetermined') {
-        setIcon('\u2318');
-      } else {
-        setIcon('Ctrl');
-      }
-    });
-  }, []);
+function SearchButtonSuffix() {
+  const icon = useSyncExternalStore(
+    noop,
+    getControlIconClient,
+    getControlIconServer
+  );
 
   return (
     <span {...stylex.props(styles.suffix)}>

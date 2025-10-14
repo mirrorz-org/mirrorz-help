@@ -15,6 +15,14 @@ interface JsonLDProps extends Omit<React.JSX.IntrinsicElements['script'], 'type'
   ogImage?: string
 }
 
+const jsonMain = {
+  ...sharedJsonLd,
+  // keywords: props.keywords.join(', '),
+  description: 'MirrorZ Help 致力于成为一个开源、开放、且持续更新的开源软件镜像的帮助文档整合站点，旨在帮助高校间推广开源软件的使用。',
+  '@type': 'WebSite',
+  url: `https://${siteHost}`
+};
+
 export default function JsonLD({
   title,
   siteName = 'MirrorZ Help',
@@ -22,14 +30,6 @@ export default function JsonLD({
   ogImage = `https://${siteHost}/og-${siteHost}/default.png`,
   ...rest
 }: JsonLDProps) {
-  const jsonMain = useMemo(() => ({
-    ...sharedJsonLd,
-    // keywords: props.keywords.join(', '),
-    description: 'MirrorZ Help 致力于成为一个开源、开放、且持续更新的开源软件镜像的帮助文档整合站点，旨在帮助高校间推广开源软件的使用。',
-    '@type': 'WebSite',
-    url: `https://${siteHost}`
-  }), []);
-
   const finalTitle = title ? `${title} - ${siteName}` : siteName;
   const permalink = usePermalink(siteHost);
 
@@ -59,7 +59,7 @@ export default function JsonLD({
     };
 
     return [jsonMain, jsonArticle];
-  }, [finalTitle, isContent, jsonMain, ogImage, permalink]);
+  }, [finalTitle, isContent, ogImage, permalink]);
 
   return (
     <script

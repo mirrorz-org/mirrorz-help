@@ -6,7 +6,7 @@ import IconSun from '../icons/sun';
 import IconMoon from '../icons/moon';
 import IconDisplay from '../icons/display';
 import IconChevronUpDown from '../icons/chevron-up-down';
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 
 const styles = stylex.create({
   container: {

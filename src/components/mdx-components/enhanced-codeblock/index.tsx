@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import * as stylex from '@stylexjs/stylex';
 
 import { memo, useMemo, useReducer } from 'react';

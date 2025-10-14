@@ -6,7 +6,7 @@ import * as stylex from '@stylexjs/stylex';
 import routesJson from '@/routes.json';
 
 // import cmdkStyles from './cmdk.module.sass';
-// import clsx from 'clsx';
+// import { clsx } from 'clsx';
 import { useRouter } from 'next/router';
 
 const data = Object.entries(routesJson);

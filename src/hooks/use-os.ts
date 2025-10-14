@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 export type OS = 'undetermined' | 'macos' | 'ios' | 'windows' | 'android' | 'linux';
 
 const macosPlatforms = /macintosh|macintel|macppc|mac68k/i;
@@ -28,12 +26,12 @@ export function getOS(): OS {
   return 'undetermined';
 }
 
-export function useOs(): OS {
-  return useMemo(() => {
-    if (typeof window !== 'undefined') {
-      return getOS();
-    }
+// export function useOs(): OS {
+//   return useMemo(() => {
+//     if (typeof window !== 'undefined') {
+//       return getOS();
+//     }
 
-    return 'undetermined';
-  }, []);
-}
+//     return 'undetermined';
+//   }, []);
+// }

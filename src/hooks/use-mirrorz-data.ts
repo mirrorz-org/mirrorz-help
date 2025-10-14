@@ -66,7 +66,7 @@ async function fetcher() {
   const cnameToMirrorZ = pack.reduce<CnameToMirrorZ>((acc, cur) => {
     cur.mirrors.forEach(mirror => {
       const { cname } = mirror;
-      acc[cname] ||= [];
+      acc[cname] ??= [];
       acc[cname].push({
         site: cur.site,
         baseUrl: parsedMirrorZLegacy[sanitizeAbbrForMirrorZ(cur.site.abbr)].baseUrl,

@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import { memo } from 'react';
 import { typescriptHappyForwardRef } from 'foxact/typescript-happy-forward-ref';
 import * as stylex from '@stylexjs/stylex';

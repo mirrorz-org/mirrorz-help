@@ -170,8 +170,7 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
 // Serialize a server React tree node to JSON.
 function stringifyNodeOnServer(key: unknown, val: any) {
   if (
-    val != null
-    && val.$$typeof === Symbol.for('react.transitional.element')
+    val?.$$typeof === Symbol.for('react.transitional.element')
   ) {
     // Remove fake MDX props.
 

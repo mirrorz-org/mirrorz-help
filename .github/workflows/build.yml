@@ -23,6 +23,8 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: '.node-version'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Prepare env
         run: |
           if [ ${{ matrix.build_type }} == 'cernet' ]; then
@@ -34,10 +36,10 @@ jobs:
             exit 1
           fi
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
       - name: Build
         run: |
-          npm run og:build && npm run build
+          pnpm og:build && pnpm build
           tar -czf out-${{ matrix.build_type }}.tar.gz out
       - name: Upload out directory as artifact
         uses: actions/upload-artifact@v5

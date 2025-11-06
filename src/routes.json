@@ -731,6 +731,12 @@
     "file": "pypi.mdx",
     "cname": "pypi"
   },
+  "/python/": {
+    "title": "Python 官方仓库",
+    "fullTitle": "Python 官方仓库镜像使用帮助",
+    "file": "python.mdx",
+    "cname": "python"
+  },
   "/qemu.git/": {
     "title": "QEMU Git",
     "fullTitle": "QEMU Git 镜像使用帮助",

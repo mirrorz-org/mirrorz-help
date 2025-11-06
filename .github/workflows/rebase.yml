@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository != 'mirrorz-org/mirrorz-help'
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
       with:
         fetch-depth: 32 # greater than the number of commits the fork made
-    - uses: imba-tjd/rebase-upstream-action@0.5
+    - uses: imba-tjd/rebase-upstream-action@0.12
       with:
         upstream: mirrorz-org/mirrorz-help
         branch:   master

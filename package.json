@@ -11,6 +11,7 @@
     "src/compiled"
   ],
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "next dev",
     "build": "next build",
     "build:analyze": "ANALYZE=true next build",
@@ -53,6 +54,7 @@
     "@eslint-sukka/react": "^7.3.5",
     "@mdx-js/mdx": "^3.1.0",
     "@next/bundle-analyzer": "^15.5.5",
+    "@next/env": "*",
     "@parcel/watcher": "^2.5.1",
     "@radix-ui/react-tabs": "^1.1.13",
     "@resvg/resvg-js": "^2.6.2",
@@ -113,5 +115,6 @@
     "string.prototype.codepointat": "npm:@nolyfill/string.prototype.codepointat@^1.0.44",
     "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@^1.0.44",
     "typedarray": "npm:@nolyfill/typedarray@^1.0.44"
-  }
+  },
+  "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
 }

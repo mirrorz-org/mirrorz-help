@@ -10,7 +10,7 @@ jobs:
     if: github.repository == 'mirrorz-org/mirrorz-help'
     steps:
       - name: Send repository_dispatch to tuna/mirrorz-help
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v4
         with:
           token: ${{ secrets.PAT_PUBLIC_REPO_TUNA }}
           repository: tuna/mirrorz-help

@@ -13,7 +13,7 @@ import { loadEnvConfig } from '@next/env';
 
 // import routesJson from '@/routes.json';
 
-const lockFile = fsPromises.readFile(path.join(process.cwd(), 'package-lock.json'), { encoding: 'utf-8' });
+const lockFile = fsPromises.readFile(path.join(process.cwd(), 'pnpm-lock.yaml'), { encoding: 'utf-8' });
 const templateSourceCode = fsPromises.readFile(path.join(process.cwd(), 'src', 'opengraph', 'template.tsx'), { encoding: 'utf-8' });
 
 const notoSansRegular = fsPromises.readFile(path.join(process.cwd(), 'vendors', 'Noto_Sans_SC', 'NotoSansSC-Regular.otf'));

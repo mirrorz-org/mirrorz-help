@@ -16,13 +16,15 @@ jobs:
         # build_type: [mirrorz, cernet]
         build_type: [cernet]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           submodules: true
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.node-version'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Prepare env
         run: |
           if [ ${{ matrix.build_type }} == 'cernet' ]; then
@@ -34,13 +36,13 @@ jobs:
             exit 1
           fi
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
       - name: Build
         run: |
-          npm run og:build && npm run build
+          pnpm og:build && pnpm build
           tar -czf out-${{ matrix.build_type }}.tar.gz out
       - name: Upload out directory as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: dist-${{ matrix.build_type }}
           path: out-${{ matrix.build_type }}.tar.gz
@@ -54,11 +56,11 @@ jobs:
     needs:
       - build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: dist-${{ matrix.build_type }}
       - name: Commit and publish

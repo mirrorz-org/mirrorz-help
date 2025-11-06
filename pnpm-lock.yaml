@@ -69,6 +69,9 @@ importers:
       '@next/bundle-analyzer':
         specifier: ^15.5.5
         version: 15.5.5
+      '@next/env':
+        specifier: '*'
+        version: 15.5.5
       '@parcel/watcher':
         specifier: ^2.5.1
         version: 2.5.1

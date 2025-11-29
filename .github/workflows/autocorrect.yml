@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   autocorrect:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest # nix requires KVM, can not use ubuntu-slim
     steps:
     - name: Check source code
       uses: actions/checkout@v5

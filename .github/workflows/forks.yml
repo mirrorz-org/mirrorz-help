@@ -6,7 +6,7 @@ on:
 
 jobs:
   dispatch_forks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     if: github.repository == 'mirrorz-org/mirrorz-help'
     steps:
       - name: Send repository_dispatch to tuna/mirrorz-help

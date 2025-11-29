@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   autocorrect:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
     - name: Check source code
       uses: actions/checkout@v5

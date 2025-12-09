@@ -1,11 +1,10 @@
-import { clsx } from 'clsx';
 import { memo } from 'react';
 import { typescriptHappyForwardRef } from 'foxact/typescript-happy-forward-ref';
 import * as stylex from '@stylexjs/stylex';
-import type { StyleXRulesAndFalsy } from '@/types/stylex';
+import type { WithXStyleProps } from '@/types/stylex';
 
 import headingAnchorStyles from './heading.module.css';
-import { EMPTY_ARRAY } from '../../lib/client/constant';
+import { stylexPropsWithClassName } from '../../lib/shared/stylex';
 
 const styles = stylex.create({
   base: {
@@ -77,33 +76,26 @@ const styles = stylex.create({
   }
 });
 
-type HeadingProps<T extends React.ElementType> = Omit<
-  React.PropsWithChildren<React.ComponentPropsWithoutRef<T>>,
-  'className'
-> & {
-  xstyle?: StyleXRulesAndFalsy[],
+type HeadingProps<T extends React.ElementType> = WithXStyleProps<React.PropsWithChildren<React.ComponentPropsWithoutRef<T>>> & {
   isPageAnchor?: boolean,
-  children: React.ReactNode,
   id?: string,
   as?: T
 };
 
 export const Heading = typescriptHappyForwardRef(<T extends 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>(
-  { as, children, id, isPageAnchor = true, xstyle = EMPTY_ARRAY, ...props }: HeadingProps<T>,
+  { as, children, id, isPageAnchor = true, xstyle, ...props }: HeadingProps<T>,
   ref: React.ForwardedRef<HTMLHeadingElement> | null
 ) => {
   const label = typeof children === 'string' ? `Link for ${children}` : 'Link for this heading';
   const Comp = as || 'h2';
   const beaconClassName = (Comp === 'h2' || Comp === 'h3') && 'toc-heading-anchor';
 
-  const anchorLinkStylexProps = stylex.props(styles.anchor_link, Comp === 'h1' ? styles.hidden : styles.inline_block);
   return (
     <Comp
       id={id}
       {...props}
       ref={ref}
-      {...stylex.props(styles.base, ...xstyle)}
-      className={clsx(beaconClassName, headingAnchorStyles.heading, stylex.props(styles.base, ...xstyle).className)}
+      {...stylexPropsWithClassName(stylex.props(styles.base, xstyle), beaconClassName, headingAnchorStyles.heading)}
     >
       {children}
       {isPageAnchor && (
@@ -111,8 +103,7 @@ export const Heading = typescriptHappyForwardRef(<T extends 'h1' | 'h2' | 'h3' |
           href={`#${id || ''}`}
           aria-label={label}
           title={label}
-          {...anchorLinkStylexProps}
-          className={clsx(headingAnchorStyles.anchor, anchorLinkStylexProps.className)}
+          {...stylexPropsWithClassName(stylex.props(styles.anchor_link, Comp === 'h1' ? styles.hidden : styles.inline_block), headingAnchorStyles.anchor)}
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" {...stylex.props(styles.anchor)}>
             <g fill="currentColor" fillRule="evenodd">

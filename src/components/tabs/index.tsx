@@ -7,8 +7,7 @@ import {
 import { useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 
-import type { StyleXRulesAndFalsy } from '@/types/stylex';
-import { EMPTY_ARRAY } from '../../lib/client/constant';
+import type { WithXStyleProps } from '@/types/stylex';
 
 interface TabsProps {
   items: string[],
@@ -97,10 +96,10 @@ export function Tabs({ children, items, defaultValue }: React.PropsWithChildren<
 export function TabItem({
   children,
   value,
-  xstyle = EMPTY_ARRAY
-}: React.PropsWithChildren<{ value: string, xstyle?: StyleXRulesAndFalsy[] }>) {
+  xstyle
+}: WithXStyleProps<React.PropsWithChildren<{ value: string }>>) {
   return (
-    <TabsContent {...stylex.props(styles.tab, ...xstyle)} value={value}>
+    <TabsContent {...stylex.props(styles.tab, xstyle)} value={value}>
       {children}
     </TabsContent>
   );

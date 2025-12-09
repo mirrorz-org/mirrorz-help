@@ -1,12 +1,11 @@
 import * as stylex from '@stylexjs/stylex';
 import type { StyleXRulesAndFalsy } from '@/types/stylex';
-import { clsx } from 'clsx';
-import { EMPTY_ARRAY } from '../../lib/client/constant';
+import { stylexPropsWithClassName } from '../../lib/shared/stylex';
 
 interface InputExtraProps {
   prefix?: React.ReactNode,
   suffix?: React.ReactNode,
-  inputXstyle?: StyleXRulesAndFalsy[]
+  inputXstyle?: StyleXRulesAndFalsy[] | StyleXRulesAndFalsy
 }
 
 const styles = stylex.create({
@@ -40,15 +39,14 @@ const styles = stylex.create({
   }
 });
 
-function Input({ ref: forwardedRef, prefix, suffix, className, inputXstyle = EMPTY_ARRAY, ...props }: InputExtraProps & React.JSX.IntrinsicElements['input'] & { ref?: React.RefObject<HTMLInputElement | null> }) {
+function Input({ ref: forwardedRef, prefix, suffix, className, inputXstyle, ...props }: InputExtraProps & React.JSX.IntrinsicElements['input'] & { ref?: React.RefObject<HTMLInputElement | null> }) {
   return (
     <div {...stylex.props(styles.wrapper)}>
       {prefix}
       <input
         ref={forwardedRef}
         spellCheck={false}
-        {...stylex.props(styles.input, ...inputXstyle)}
-        className={clsx(className, stylex.props(styles.input, ...inputXstyle).className)}
+        {...stylexPropsWithClassName(stylex.props(styles.input, inputXstyle), className)}
         {...props}
       />
       {suffix}

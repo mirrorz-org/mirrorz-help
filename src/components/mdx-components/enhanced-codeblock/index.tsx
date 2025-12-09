@@ -109,11 +109,11 @@ function CodeBlock({
       >
         {codeBlockMenu}
         <Tabs items={[filepath, '快速配置']}>
-          <TabItem value={filepath} xstyle={[styles.code_wrapper]}>
+          <TabItem value={filepath} xstyle={styles.code_wrapper}>
             <LoadingOverlay isLoading={isLoading} />
             <ActualCode code={finalCode} language={codeLanguage} />
           </TabItem>
-          <TabItem value="快速配置" xstyle={[styles.code_wrapper]}>
+          <TabItem value="快速配置" xstyle={styles.code_wrapper}>
             <LoadingOverlay isLoading={isLoading} />
             <ActualCode
               code={buildEchoTee(finalCode, filepath, sudoEnabled)}

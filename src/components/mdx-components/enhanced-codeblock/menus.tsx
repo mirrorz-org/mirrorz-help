@@ -56,11 +56,11 @@ const styles = stylex.create({
   icon: {
     width: {
       default: '14px',
-      '@media screen and (min-width: 840px)': '16px'
+      '@media (min-width: 840px)': '16px'
     },
     height: {
       default: '14px',
-      '@media screen and (min-width: 840px)': '16px'
+      '@media (min-width: 840px)': '16px'
     }
   }
 });

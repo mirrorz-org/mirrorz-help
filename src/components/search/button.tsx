@@ -32,7 +32,7 @@ const styles = stylex.create({
   search_button_on_mobile: {
     display: {
       default: 'inline-flex',
-      '@media screen and (min-width: 840px)': 'none'
+      '@media (min-width: 840px)': 'none'
     },
     alignItems: 'center',
     paddingTop: '4px',
@@ -53,7 +53,7 @@ const styles = stylex.create({
   search_button_in_sidenav: {
     display: {
       default: 'none',
-      '@media screen and (min-width: 840px)': 'flex'
+      '@media (min-width: 840px)': 'flex'
     },
     color: 'var(--text-shallow)',
     width: '100%',

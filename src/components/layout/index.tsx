@@ -29,14 +29,14 @@ const styles = stylex.create({
     display: 'grid',
     gridTemplateColumns: {
       default: 'auto',
-      '@media screen and (min-width: 840px)': '320px auto',
-      '@media screen and (min-width: 1280px)': '320px auto 320px'
+      '@media (min-width: 840px)': '320px auto',
+      '@media (min-width: 1280px)': '320px auto 320px'
     }
   },
   sidenav_container: {
     position: {
       default: 'fixed',
-      '@media screen and (min-width: 840px)': 'sticky'
+      '@media (min-width: 840px)': 'sticky'
     },
     top: 0,
     left: 0,
@@ -46,7 +46,7 @@ const styles = stylex.create({
     zIndex: 50,
     boxShadow: {
       default: 'var(--nav-shadow)',
-      '@media screen and (min-width: 840px)': 'none'
+      '@media (min-width: 840px)': 'none'
     }
   },
   main: {
@@ -57,16 +57,16 @@ const styles = stylex.create({
     height: '64px',
     marginBottom: '8px',
     display: {
-      '@media screen and (min-width: 840px)': 'none'
+      '@media (min-width: 840px)': 'none'
     }
   },
   toc: {
     display: {
       default: 'none',
-      '@media screen and (min-width: 1280px)': 'block'
+      '@media (min-width: 1280px)': 'block'
     },
     maxWidth: {
-      '@media screen and (min-width: 840px)': '336px'
+      '@media (min-width: 840px)': '336px'
     }
   },
   content_wrapper: {
@@ -78,11 +78,11 @@ const styles = stylex.create({
     marginRight: 'auto',
     paddingLeft: {
       default: '20px',
-      '@media screen and (min-width: 640px)': '48px'
+      '@media (min-width: 640px)': '48px'
     },
     paddingRight: {
       default: '20px',
-      '@media screen and (min-width: 640px)': '48px'
+      '@media (min-width: 640px)': '48px'
     }
   }
 });

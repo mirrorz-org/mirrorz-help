@@ -24,33 +24,33 @@ const styles = stylex.create({
   icon_wrapper_prefix: {
     left: {
       default: '6px',
-      '@media screen and (min-width: 840px)': '12px'
+      '@media (min-width: 840px)': '12px'
     }
   },
   icon_wrapper_suffix: {
     right: {
       default: '6px',
-      '@media screen and (min-width: 840px)': '12px'
+      '@media (min-width: 840px)': '12px'
     }
   },
   icon: {
     width: {
       default: '14px',
-      '@media screen and (min-width: 840px)': '16px'
+      '@media (min-width: 840px)': '16px'
     },
     height: {
       default: '14px',
-      '@media screen and (min-width: 840px)': '16px'
+      '@media (min-width: 840px)': '16px'
     }
   },
   select: {
     paddingLeft: {
       default: '24px',
-      '@media screen and (min-width: 840px)': '36px'
+      '@media (min-width: 840px)': '36px'
     },
     paddingRight: {
       default: '24px',
-      '@media screen and (min-width: 840px)': '36px'
+      '@media (min-width: 840px)': '36px'
     },
     fontSize: '14px',
     height: '32px',

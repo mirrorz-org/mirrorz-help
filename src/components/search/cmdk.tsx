@@ -54,11 +54,11 @@ const styles = stylex.create({
   },
   list: {
     height: {
-      '@media screen and (min-width: 640px)': 'var(--cmdk-list-height)'
+      '@media (min-width: 640px)': 'var(--cmdk-list-height)'
     },
     maxHeight: {
       default: '400px',
-      '@media screen and (min-width: 640px)': '650px'
+      '@media (min-width: 640px)': '650px'
     },
     overflow: 'auto',
     overscrollBehaviorX: 'contain',

@@ -11,19 +11,19 @@ const styles = stylex.create({
     color: 'var(--text-secondary)',
     paddingTop: {
       default: '48px',
-      '@media screen and (min-width: 840px)': '64px'
+      '@media (min-width: 840px)': '64px'
     },
     paddingBottom: {
       default: '48px',
-      '@media screen and (min-width: 840px)': '64px'
+      '@media (min-width: 840px)': '64px'
     },
     paddingLeft: {
       default: '20px',
-      '@media screen and (min-width: 840px)': '48px'
+      '@media (min-width: 840px)': '48px'
     },
     paddingRight: {
       default: '20px',
-      '@media screen and (min-width: 840px)': '48px'
+      '@media (min-width: 840px)': '48px'
     }
   },
   copyright: {
@@ -39,8 +39,8 @@ const styles = stylex.create({
     marginRight: 'auto',
     gridTemplateColumns: {
       default: 'repeat(2, minmax(0, 1fr))',
-      '@media screen and (min-width: 640px)': 'repeat(3, minmax(0, 1fr))',
-      '@media screen and (min-width: 1536px)': 'repeat(5, minmax(0, 1fr))'
+      '@media (min-width: 640px)': 'repeat(3, minmax(0, 1fr))',
+      '@media (min-width: 1536px)': 'repeat(5, minmax(0, 1fr))'
     }
   },
   mirrorz_logo: {
@@ -69,11 +69,11 @@ const styles = stylex.create({
     textAlign: 'left',
     gridColumnStart: {
       default: 'span 2',
-      '@media screen and (min-width: 640px)': 'span 1'
+      '@media (min-width: 640px)': 'span 1'
     },
     gridColumnEnd: {
       default: 'span 2',
-      '@media screen and (min-width: 640px)': 'span 1'
+      '@media (min-width: 640px)': 'span 1'
     }
   },
   footer_header: {

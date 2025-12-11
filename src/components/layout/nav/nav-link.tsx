@@ -29,19 +29,19 @@ const styles = stylex.create({
     justifyContent: 'space-between',
     borderTopRightRadius: {
       default: '8px',
-      '@media screen and (min-width: 840px)': '8px'
+      '@media (min-width: 840px)': '8px'
     },
     borderBottomRightRadius: {
       default: '8px',
-      '@media screen and (min-width: 840px)': '8px'
+      '@media (min-width: 840px)': '8px'
     },
     borderTopLeftRadius: {
       default: '8px',
-      '@media screen and (min-width: 840px)': 0
+      '@media (min-width: 840px)': 0
     },
     borderBottomLeftRadius: {
       default: '8px',
-      '@media screen and (min-width: 840px)': 0
+      '@media (min-width: 840px)': 0
     },
     backgroundColor: {
       ':hover': 'var(--bg-hover)'

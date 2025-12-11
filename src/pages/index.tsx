@@ -17,32 +17,32 @@ const styles = stylex.create({
   main: {
     marginTop: {
       default: '32px',
-      '@media screen and (min-width: 840px)': '40px'
+      '@media (min-width: 840px)': '40px'
     },
     marginBottom: {
       default: '32px',
-      '@media screen and (min-width: 840px)': '40px'
+      '@media (min-width: 840px)': '40px'
     },
     display: 'flex',
     flexDirection: {
       default: 'column',
-      '@media screen and (min-width: 640px)': 'row'
+      '@media (min-width: 640px)': 'row'
     },
     flexGrow: 1,
     alignItems: {
       default: 'flex-start',
-      '@media screen and (min-width: 640px)': 'center'
+      '@media (min-width: 640px)': 'center'
     },
     justifyContent: 'flex-start'
   },
   mirrorz_logo: {
     width: {
       default: '80px',
-      '@media screen and (min-width: 640px)': '112px'
+      '@media (min-width: 640px)': '112px'
     },
     height: {
       default: '80px',
-      '@media screen and (min-width: 640px)': '112px'
+      '@media (min-width: 640px)': '112px'
     },
     marginRight: '12px'
   },
@@ -93,8 +93,8 @@ const styles = stylex.create({
     display: 'grid',
     gridTemplateColumns: {
       default: 'repeat(2, minmax(0, 1fr))',
-      '@media screen and (min-width: 640px)': 'repeat(2, minmax(0, 1fr))',
-      '@media screen and (min-width: 1536px)': 'repeat(4, minmax(0, 1fr))'
+      '@media (min-width: 640px)': 'repeat(2, minmax(0, 1fr))',
+      '@media (min-width: 1536px)': 'repeat(4, minmax(0, 1fr))'
     },
     columnGap: '24px',
     rowGap: '24px'

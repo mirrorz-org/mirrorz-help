@@ -11,16 +11,16 @@ const styles = stylex.create({
   wrapper: {
     paddingLeft: {
       default: '20px',
-      '@media screen and (min-width: 640px)': '48px'
+      '@media (min-width: 640px)': '48px'
     },
     paddingRight: {
       default: '20px',
-      '@media screen and (min-width: 640px)': '48px'
+      '@media (min-width: 640px)': '48px'
     },
     paddingTop: {
       default: '32px',
-      '@media screen and (min-width: 640px)': '28px',
-      '@media screen and (min-width: 840px)': '20px'
+      '@media (min-width: 640px)': '28px',
+      '@media (min-width: 840px)': '20px'
     },
     paddingBottom: '24px'
   },
@@ -28,10 +28,10 @@ const styles = stylex.create({
     maxWidth: '1280px',
     marginLeft: {
       default: 0,
-      '@media screen and (min-width: 1280px)': 'auto'
+      '@media (min-width: 1280px)': 'auto'
     },
     marginRight: {
-      '@media screen and (min-width: 1280px)': 'auto'
+      '@media (min-width: 1280px)': 'auto'
     }
   },
   h1: {

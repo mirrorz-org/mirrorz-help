@@ -26,7 +26,7 @@ const styles = stylex.create({
     paddingBottom: '8px',
     fontSize: {
       default: 15,
-      '@media screen and (min-width: 840px)': 13
+      '@media (min-width: 840px)': 13
     },
     lineHeight: 1.25,
     backgroundColor: {

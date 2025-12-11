@@ -8,11 +8,11 @@ const styles = stylex.create({
   main: {
     paddingBlock: {
       default: '20px',
-      '@media screen and (min-width: 1280px)': '28px'
+      '@media (min-width: 1280px)': '28px'
     },
     paddingInline: {
       default: '24px',
-      '@media screen and (min-width: 1280px)': '32px'
+      '@media (min-width: 1280px)': '32px'
     },
     backgroundColor: 'var(--bg-secondary)',
     borderRadius: '8px',

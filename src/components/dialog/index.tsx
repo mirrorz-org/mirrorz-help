@@ -54,20 +54,20 @@ const styles = stylex.create({
     },
     width: {
       default: '90vw',
-      '@media screen and (min-width: 640px)': '640px'
+      '@media (min-width: 640px)': '640px'
     },
     maxWidth: '450px',
     maxHeight: '85vh',
     borderTopLeftRadius: '8px',
     borderTopRightRadius: '8px',
     height: {
-      '@media screen and (min-width: 640px)': 'auto'
+      '@media (min-width: 640px)': 'auto'
     },
     borderBottomLeftRadius: {
-      '@media screen and (min-width: 640px)': '8px'
+      '@media (min-width: 640px)': '8px'
     },
     borderBottomRightRadius: {
-      '@media screen and (min-width: 640px)': '8px'
+      '@media (min-width: 640px)': '8px'
     },
     padding: '25px',
     backgroundColor: 'var(--bg-wash)',

@@ -19,10 +19,10 @@ const styles = stylex.create({
     position: 'sticky',
     top: 0,
     bottom: {
-      '@media screen and (min-width: 840px)': 0
+      '@media (min-width: 840px)': 0
     },
     height: {
-      '@media screen and (min-width: 840px)': '100vh'
+      '@media (min-width: 840px)': '100vh'
     },
     display: 'flex',
     flexDirection: 'column'
@@ -35,29 +35,29 @@ const styles = stylex.create({
     width: '100%',
     display: {
       default: 'flex',
-      '@media screen and (min-width: 840px)': 'block'
+      '@media (min-width: 840px)': 'block'
     },
     zIndex: 50,
     justifyContent: 'space-between',
     backgroundColor: 'var(--bg-wash)',
     paddingTop: {
       default: 0,
-      '@media screen and (min-width: 840px)': '16px'
+      '@media (min-width: 840px)': '16px'
     },
     paddingRight: '20px',
     paddingLeft: {
       default: 0,
-      '@media screen and (min-width: 840px)': '20px'
+      '@media (min-width: 840px)': '20px'
     },
     paddingBottom: {
       default: 0,
-      '@media screen and (min-width: 840px)': '16px'
+      '@media (min-width: 840px)': '16px'
     },
     borderStyle: 'solid',
     borderColor: 'var(--border-secondary)',
     borderBottomWidth: {
       default: 0,
-      '@media screen and (min-width: 840px)': '1px'
+      '@media (min-width: 840px)': '1px'
     }
   },
   header_open: {
@@ -68,17 +68,17 @@ const styles = stylex.create({
     alignItems: 'center',
     width: {
       default: 'auto',
-      '@media screen and (min-width: 1280px)': '100%'
+      '@media (min-width: 1280px)': '100%'
     },
     maxWidth: {
       default: 'none',
-      '@media screen and (min-width: 1280px)': '336px'
+      '@media (min-width: 1280px)': '336px'
     }
   },
   menu_button: {
     display: {
       default: 'flex',
-      '@media screen and (min-width: 840px)': 'none'
+      '@media (min-width: 840px)': 'none'
     },
     alignItems: 'center',
     height: '100%',
@@ -99,7 +99,7 @@ const styles = stylex.create({
     paddingBottom: '4px',
     marginRight: {
       default: 0,
-      '@media screen and (min-width: 640px)': '12px'
+      '@media (min-width: 640px)': '12px'
     },
     fontSize: 20,
     flexGrow: 1,
@@ -113,30 +113,30 @@ const styles = stylex.create({
   search_container_inside_nav: {
     display: {
       default: 'none',
-      '@media screen and (min-width: 840px)': 'block'
+      '@media (min-width: 840px)': 'block'
     },
     paddingTop: {
       default: 0,
-      '@media screen and (min-width: 840px)': '16px'
+      '@media (min-width: 840px)': '16px'
     }
   },
   hidden_on_mobile_then_flex: {
     display: {
       default: 'none',
-      '@media screen and (min-width: 840px)': 'flex'
+      '@media (min-width: 840px)': 'flex'
     }
   },
   search_container_on_mobile: {
     display: {
       default: 'flex',
-      '@media screen and (min-width: 840px)': 'none'
+      '@media (min-width: 840px)': 'none'
     },
     marginBlock: '16px',
     marginInline: '0',
     width: '100%',
     maxWidth: {
       default: 'none',
-      '@media screen and (min-width: 840px)': '384px'
+      '@media (min-width: 840px)': '384px'
     },
     justifyContent: 'flex-end'
   },
@@ -146,11 +146,11 @@ const styles = stylex.create({
     flexGrow: 1,
     paddingLeft: {
       default: '16px',
-      '@media screen and (min-width: 840px)': 0
+      '@media (min-width: 840px)': 0
     },
     width: {
       default: '100%',
-      '@media screen and (min-width: 840px)': '336px'
+      '@media (min-width: 840px)': '336px'
     }
   },
   aside: {
@@ -158,17 +158,17 @@ const styles = stylex.create({
     width: '100%',
     paddingBottom: {
       default: '32px',
-      '@media screen and (min-width: 840px)': 0
+      '@media (min-width: 840px)': 0
     },
     zIndex: 10,
     display: {
-      '@media screen and (min-width: 840px)': 'flex'
+      '@media (min-width: 840px)': 'flex'
     },
     flexGrow: {
-      '@media screen and (min-width: 840px)': 1
+      '@media (min-width: 840px)': 1
     },
     maxWidth: {
-      '@media screen and (min-width: 840px)': '336px'
+      '@media (min-width: 840px)': '336px'
     }
   },
   aside_open: {
@@ -178,21 +178,21 @@ const styles = stylex.create({
   aside_close: {
     display: {
       default: 'none',
-      '@media screen and (min-width: 840px)': 'block'
+      '@media (min-width: 840px)': 'block'
     }
   },
   nav: {
     width: '100%',
     flexGrow: 1,
     paddingRight: {
-      '@media screen and (min-width: 840px)': '20px'
+      '@media (min-width: 840px)': '20px'
     },
     paddingTop: '12px',
     height: {
-      '@media screen and (min-width: 840px)': 'auto'
+      '@media (min-width: 840px)': 'auto'
     },
     paddingBottom: {
-      '@media screen and (min-width: 840px)': '24px'
+      '@media (min-width: 840px)': '24px'
     }
   }
 });

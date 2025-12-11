@@ -8,7 +8,7 @@ const styles = stylex.create({
   main: {
     padding: {
       default: '24px',
-      '@media screen and (min-width: 1280px)': '32px'
+      '@media (min-width: 1280px)': '32px'
     },
     backgroundColor: 'var(--bg-secondary)',
     borderRadius: '8px',
@@ -30,7 +30,7 @@ const styles = stylex.create({
     rowGap: '24px',
     alignItems: 'center',
     columnGap: '24px'
-    // '@media screen and (min-width: 768px)': {
+    // '@media (min-width: 768px)': {
     //   gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
     // }
   }

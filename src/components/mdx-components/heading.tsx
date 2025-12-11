@@ -10,7 +10,7 @@ const styles = stylex.create({
   base: {
     scrollMarginTop: {
       default: '3em',
-      '@media screen and (min-width: 1024px)': '1em'
+      '@media (min-width: 1024px)': '1em'
     },
     paddingRight: '16px',
     '::before': {

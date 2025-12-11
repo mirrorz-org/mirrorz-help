@@ -12,11 +12,11 @@ const styles = stylex.create({
   main: {
     marginTop: {
       default: '32px',
-      '@media screen and (min-width: 840px)': '40px'
+      '@media (min-width: 840px)': '40px'
     },
     marginBottom: {
       default: '32px',
-      '@media screen and (min-width: 840px)': '40px'
+      '@media (min-width: 840px)': '40px'
     }
   },
   title: {

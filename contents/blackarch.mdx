@@ -9,7 +9,19 @@ BlackArch 是一款基于 ArchLinux 的为渗透测试及安全研究人员开�
 
 ## 使用说明
 
-在 `/etc/pacman.conf` 文件末尾添加两行：
+### 为 ArchLinux 添加额外源
+
+适用于给已经安装完毕的 ArchLinux 添加 BlackArch 源的情景
+
+* 导入 GPG key
+
+```
+pacman-key --recv-keys 7533BAFE69A25079
+pacman-key --finger 7533BAFE69A25079
+pacman-key --lsign-key 7533BAFE69A25079
+```
+
+* 在 `/etc/pacman.conf` 文件末尾添加两行：
 
 <CodeBlock>
 
@@ -22,7 +34,7 @@ Server = {{http_protocol}}{{mirror}}/$repo/os/$arch
 
 由于一些软件依赖 32 位的库，需要取消掉 `/etc/pacman.conf` 中 `multilib` 的注释，详见 https://wiki.archlinux.org/index.php/Official_repositories#Enabling_multilib
 
-然后请安装 ``blackarch-keyring`` 包以导入 GPG key。
+* 安装 `blackarch-keyring` 包来保持 GPG key 更新
 
 <CodeBlock>
 ```
@@ -31,3 +43,20 @@ Server = {{http_protocol}}{{mirror}}/$repo/os/$arch
 </CodeBlock>
 
 注：Black Arch 软件源仅包含其打包的工具等软件。如果需要更换 Arch Linux 基础系统的软件源，请查看 [Arch Linux 帮助](/archlinux/)。
+
+### 安装 BlackArch
+
+适用于将 BlackArch 作为发行版安装并使用的情景
+
+编辑 `/etc/pacman.d/blackarch-mirrorlist`，在文件的最顶端添加：
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/pacman.d/blackarch-mirrorlist"
+>
+
+```ini
+Server = {{http_protocol}}{{mirror}}/$repo/os/$arch
+```
+
+</CodeBlock>

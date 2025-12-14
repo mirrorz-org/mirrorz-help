@@ -15,32 +15,32 @@ BlackArch 是一款基于 Arch Linux 的为渗透测试及安全研究人员开�
 
 1. [导入 GPG key](https://github.com/BlackArch/blackarch/issues/3505)：
 
-```
-pacman-key --recv-keys 7533BAFE69A25079
-pacman-key --finger 7533BAFE69A25079
-pacman-key --lsign-key 7533BAFE69A25079
-```
+    ```
+    pacman-key --recv-keys 7533BAFE69A25079
+    pacman-key --finger 7533BAFE69A25079
+    pacman-key --lsign-key 7533BAFE69A25079
+    ```
 
 2. 在 `/etc/pacman.conf` 文件末尾添加两行：
 
-<CodeBlock>
+    <CodeBlock>
 
-```ini
-[blackarch]
-Server = {{http_protocol}}{{mirror}}/$repo/os/$arch
-```
+    ```ini
+    [blackarch]
+    Server = {{http_protocol}}{{mirror}}/$repo/os/$arch
+    ```
 
-</CodeBlock>
+    </CodeBlock>
 
-由于一些软件依赖 32 位的库，需要取消掉 `/etc/pacman.conf` 中 `multilib` 的注释，详见 [https://wiki.archlinux.org/index.php/Official_repositories#Enabling_multilib](https://wiki.archlinux.org/index.php/Official_repositories#Enabling_multilib)。
+    由于一些软件依赖 32 位的库，需要取消掉 `/etc/pacman.conf` 中 `multilib` 的注释，详见 [https://wiki.archlinux.org/index.php/Official_repositories#Enabling_multilib](https://wiki.archlinux.org/index.php/Official_repositories#Enabling_multilib)。
 
 3. 安装 `blackarch-keyring` 包来保持 GPG key 更新：
 
-<CodeBlock>
-```
-{{sudo}}pacman -Sy blackarch-keyring
-```
-</CodeBlock>
+    <CodeBlock>
+    ```
+    {{sudo}}pacman -Sy blackarch-keyring
+    ```
+    </CodeBlock>
 
 注：BlackArch 软件源仅包含其打包的工具等软件。如果需要更换 Arch Linux 基础系统的软件源，请查看 [Arch Linux 帮助](/archlinux/)。
 

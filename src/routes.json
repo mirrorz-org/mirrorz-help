@@ -96,8 +96,8 @@
     "cname": "bioconductor"
   },
   "/blackarch/": {
-    "title": "Black Arch 软件仓库",
-    "fullTitle": "Black Arch 软件仓库镜像使用帮助",
+    "title": "BlackArch 软件仓库",
+    "fullTitle": "BlackArch 软件仓库镜像使用帮助",
     "file": "blackarch.mdx",
     "cname": "blackarch"
   },

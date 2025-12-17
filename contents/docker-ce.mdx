@@ -34,7 +34,7 @@ wget -O- https://raw.githubusercontent.com/docker/docker-install/master/install.
 
 <CodeBlock>
 ```bash
-for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do {{sudo}}apt-get remove $pkg; done
+{{sudo}}apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1)
 ```
 </CodeBlock>
 
@@ -43,7 +43,7 @@ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
 <CodeBlock>
 ```bash
 {{sudo}}apt-get update
-{{sudo}}apt-get install ca-certificates curl gnupg
+{{sudo}}apt-get install ca-certificates curl
 ```
 </CodeBlock>
 
@@ -56,7 +56,6 @@ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
       items: [
         ['Debian', { deb_release: 'debian' }],
         ['Ubuntu', { deb_release: 'ubuntu' }],
-        ['Raspbian', { deb_release: 'raspbian' }],
       ]
     }
   ]}
@@ -64,12 +63,15 @@ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
 
 ```bash
 {{sudo}}install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/{{deb_release}}/gpg | {{sudo}}gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{http_protocol}}{{mirror}}/linux/{{deb_release}} \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  {{sudo}}tee /etc/apt/sources.list.d/docker.list > /dev/null
+{{sudo}}curl -fsSL https://download.docker.com/linux/{{deb_release}}/gpg -o /etc/apt/keyrings/docker.asc
+{{sudo}}chmod a+r /etc/apt/keyrings/docker.asc
+{{sudo}}tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: {{http_protocol}}{{mirror}}/linux/{{deb_release}}
+Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 ```
 </CodeBlock>
 
@@ -86,7 +88,7 @@ echo \
 
 以下内容根据 [官方文档](https://docs.docker.com/engine/install/fedora/) 修改而来。
 
-如果你之前安装过 docker，请先删掉
+如果你之前安装过 docker，请先删掉：
 
 <CodeBlock>
 ```bash
@@ -108,8 +110,7 @@ echo \
 
 <CodeBlock>
 ```bash
-{{sudo}}dnf -y install dnf-plugins-core
-{{sudo}}dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+{{sudo}}dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 {{sudo}}sed -i 's+https://download.docker.com+{{http_protocol}}{{mirror}}+' /etc/yum.repos.d/docker-ce.repo
 ```
 
@@ -127,11 +128,11 @@ echo \
 
 以下内容根据 [官方文档](https://docs.docker.com/engine/install/centos/) 修改而来。
 
-如果你之前安装过 docker，请先删掉
+如果你之前安装过 docker，请先删掉：
 
 <CodeBlock>
 ```bash
-{{sudo}}yum remove docker \
+{{sudo}}dnf remove docker \
                   docker-client \
                   docker-client-latest \
                   docker-common \
@@ -157,8 +158,8 @@ echo \
 >
 
 ```bash
-{{sudo}} yum install -y yum-utils
-yum-config-manager --add-repo https://download.docker.com/linux/{{yum_release}}/docker-ce.repo
+{{sudo}}dnf -y install dnf-plugins-core
+{{sudo}}dnf config-manager --add-repo https://download.docker.com/linux/{{yum_release}}/docker-ce.repo
 {{sudo}}sed -i 's+https://download.docker.com+{{http_protocol}}{{mirror}}+' /etc/yum.repos.d/docker-ce.repo
 ```
 

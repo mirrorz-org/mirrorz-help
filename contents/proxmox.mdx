@@ -7,7 +7,9 @@ cname: 'proxmox'
 
 参考 [Debian 帮助](/debian/) 修改 `/etc/apt/sources.list`。
 
-### 软件源
+### Proxmox 软件源
+
+#### 传统格式（`/etc/apt/sources.list.d/pve-no-subscription.list`）：
 
 新建 `/etc/apt/sources.list.d/pve-no-subscription.list`（如果选择的不是 pve，需要使用另一个文件名），内容为：
 
@@ -37,6 +39,42 @@ cname: 'proxmox'
 
 ```properties
 deb {{http_protocol}}{{mirror}}/debian/{{service}} {{release_name}} {{service}}-no-subscription
+```
+
+</CodeBlock>
+
+#### DEB822 格式（`/etc/apt/sources.list.d/pve-no-subscription.sources`）：
+
+<CodeBlock
+  enableQuickSetup
+  filepath="/etc/apt/sources.list.d/pve-no-subscription.sources"
+  menus={[
+    {
+      title: 'Debian 版本',
+      items: [
+        ['Debian 13', { release_name: 'trixie' }],
+        ['Debian 12', { release_name: 'bookworm' }],
+        ['Debian 11', { release_name: 'bullseye' }],
+      ]
+    },
+    {
+      title: '服务',
+      items: [
+        ['Proxmox Virtual Environment (PVE)', { service: 'pve' }],
+        ['Proxmox Backup Server (PBS)', { service: 'pbs' }],
+        ['Proxmox Backup Client (PBS-CLIENT)', { service: 'pbs-client' }],
+        ['Proxmox Mail Gateway (PMG)', { service: 'pmg' }],
+      ]
+    }
+  ]}
+>
+
+```yaml
+Types: deb
+URIs: {{http_protocol}}{{mirror}}/debian/{{service}}
+Suites: {{release_name}}
+Components: {{service}}-no-subscription
+Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
 ```
 
 </CodeBlock>

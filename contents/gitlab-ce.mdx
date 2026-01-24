@@ -35,7 +35,7 @@ curl -fsSL https://packages.gitlab.com/gpg.key | {{sudo}}gpg --dearmor -o /usr/s
 >
 
 ```properties
-deb [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] {{http_protocol}}{{mirror}}/{{os_name}} {{release_name}} main
+deb [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] {{http_protocol}}{{mirror}}/{{os_name}}/{{release_name}} {{release_name}} main
 ```
 
 </CodeBlock>

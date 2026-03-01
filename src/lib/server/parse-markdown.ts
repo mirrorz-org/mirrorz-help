@@ -23,8 +23,11 @@ import {
   remarkExtractCodeFromEnhancedCodeBlock,
   remarkProcessNormalCodeBlock
 } from './remark-extract-code-from-codeblock';
+import { stringifyNodeOnServer } from '../shared/react-node-json';
 
 import rehypeExternalLinks from '@/compiled/rehype-external-links';
+
+import { renderToStaticMarkup } from 'react-dom/server';
 
 const { FileStore, stableHash } = metroCache;
 
@@ -32,7 +35,7 @@ const contentsPath = path.resolve(process.cwd(), 'contents');
 
 export interface ToC {
   url: string,
-  text: string,
+  content: string,
   depth: number
 }
 
@@ -61,7 +64,7 @@ async function asyncCache<T>(key: string, fn: () => Promise<T>): Promise<T> {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 6;
+const DISK_CACHE_BREAKER = 7;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -167,24 +170,6 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
   return output;
 }
 
-// Serialize a server React tree node to JSON.
-function stringifyNodeOnServer(key: unknown, val: any) {
-  if (
-    val?.$$typeof === Symbol.for('react.transitional.element')
-  ) {
-    // Remove fake MDX props.
-
-    const { mdxType, originalType, parentName, ...cleanProps } = val.props;
-    return [
-      '$r',
-      typeof val.type === 'string' ? val.type : mdxType,
-      val.key,
-      cleanProps
-    ];
-  }
-  return val;
-}
-
 // Get ToC from children
 function getTableOfContents(children: React.ReactNode, depth: number) {
   const anchors: ToC[] = [];
@@ -192,7 +177,7 @@ function getTableOfContents(children: React.ReactNode, depth: number) {
   if (anchors.length > 0) {
     anchors.unshift({
       url: '#',
-      text: 'Overview',
+      content: JSON.stringify('Overview', stringifyNodeOnServer),
       depth: 2
     });
   }
@@ -209,10 +194,10 @@ function extractHeaders(children: React.ReactNode, depth: number, out: ToC[]) {
     if (typeof child === 'object' && 'type' in child && typeof child.type === 'string' && headerTypes.has(child.type)) {
       const cprops = child.props as Record<string, any>;
 
-      const header = {
+      const header: ToC = {
         url: `#${cprops.id}`,
         depth: (child.type && Number.parseInt(child.type.replace('h', ''), 10)) || 0,
-        text: cprops.children
+        content: JSON.stringify(cprops.children, stringifyNodeOnServer)
       };
       out.push(header);
     }

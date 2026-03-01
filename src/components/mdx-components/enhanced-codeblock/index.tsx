@@ -1,10 +1,11 @@
 import { clsx } from 'clsx';
 import * as stylex from '@stylexjs/stylex';
 
-import { memo, useMemo, useState } from 'react';
+import { memo, use, useMemo, useState } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
+import { usePageGlobalVariable } from '@/contexts/page-global-variable';
 
 import type { Menu, MenuValue } from './menus';
 import CodeBlockMenu from './menus';
@@ -58,6 +59,7 @@ function CodeBlock({
   filepath
 }: CodeBlockProps) {
   const [variableState, setVariableState] = useState(() => createInitialState(menus));
+  const globalStateValue = usePageGlobalVariable();
 
   const httpsEnabled = useMirrorHttpsEnabled();
   const sudoEnabled = useMirrorSudoEnabled();
@@ -76,6 +78,7 @@ function CodeBlock({
     const url = new URL('https://' + mirrorUrl);
     const variable: MenuValue = {
       ...variableState,
+      ...globalStateValue,
       mirror: mirrorUrl,
       host: url.host,
       path: url.pathname,
@@ -84,7 +87,7 @@ function CodeBlock({
       sudoE: sudoEnabled ? 'sudo -E ' : ''
     };
     return buildCode(code, variable);
-  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variableState]);
+  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variableState, globalStateValue]);
 
   /** Validation */
   if (process.env.NODE_ENV !== 'production' && !code.includes('{{') && !enableQuickSetup) {

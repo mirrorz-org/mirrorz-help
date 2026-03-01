@@ -4,6 +4,7 @@ import { Code, Divider, LI, OL, Strong, UL } from './inline';
 import Link from './link';
 import SyntaxHighlight from './codeblock';
 import EnhancedCodeBlock from './enhanced-codeblock';
+import GlobalMenu from './globalMenu';
 
 import type React from 'react';
 
@@ -23,5 +24,6 @@ export const MDXComponents: Record<string, React.ComponentType<any>> = {
   li: LI,
   hr: Divider,
   CodeBlock: EnhancedCodeBlock,
+  GlobalMenu,
   SyntaxHighlight
 };

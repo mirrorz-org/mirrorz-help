@@ -7,11 +7,9 @@ MongoDB 镜像自 MongoDB [官方仓库](https://repo.mongodb.org/)，目前有 
 
 更详细的内容，可以参考 [官方文档](https://docs.mongodb.org/master/administration/install-on-linux/)
 
-### Debian/Ubuntu 用户
+请选择 MongoDB 版本：
 
-首先信任 MongoDB 的 GPG 公钥：
-
-<CodeBlock
+<GlobalMenu
   menus={[
     {
       title: 'MongoDB 版本号',
@@ -21,7 +19,13 @@ MongoDB 镜像自 MongoDB [官方仓库](https://repo.mongodb.org/)，目前有 
       ]
     }
   ]}
->
+/>
+
+### Debian/Ubuntu 用户
+
+首先信任 MongoDB 的 GPG 公钥：
+
+<CodeBlock>
 
 ```bash
 wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | {{sudo}}gpg -o /etc/apt/keyrings/mongodb-server-{{version}}.gpg --dearmor
@@ -43,14 +47,6 @@ wget -qO - https://www.mongodb.org/static/pgp/server-{{version}}.asc | {{sudo}}g
         ['Debian 11', { os_name: 'debian', release_name: 'bullseye', component_name: 'main' }],
         ['Ubuntu 24.04 LTS', { os_name: 'ubuntu', release_name: 'noble', component_name: 'multiverse' }],
         ['Ubuntu 22.04 LTS', { os_name: 'ubuntu', release_name: 'jammy', component_name: 'multiverse' }],
-      ]
-    },
-    {
-      title: 'MongoDB 版本号',
-      items: [
-        ['8.0（稳定版）', { version: '8.0' }],
-        ['8.2', { version: '8.2' }],
-        ['7.0', { version: '7.0' }],
       ]
     }
   ]}

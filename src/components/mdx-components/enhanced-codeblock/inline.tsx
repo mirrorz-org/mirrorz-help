@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { useRenderCode } from './render-code';
 import { Code } from '../inline';
 
@@ -9,9 +9,10 @@ interface InlineCodeBlockProps {
 }
 
 function InlineCodeBlock({
-  code
+  code: base64Code
   // TODO: codeLanguage
 }: InlineCodeBlockProps) {
+  const code = useMemo(() => atob(base64Code), [base64Code]);
   const finalCode = useRenderCode(code, {}, true);
   return (
     <Code>{finalCode}</Code>

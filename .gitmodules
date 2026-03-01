@@ -1,0 +1,3 @@
+[submodule "zdoc/global"]
+	path = zdoc/global
+	url = https://github.com/mirrorz-org/mirrorz-docs

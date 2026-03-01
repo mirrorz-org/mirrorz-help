@@ -67,12 +67,6 @@ function CodeBlock({
 
   const finalCode = useRenderCode(code, variableState, isHttpProtocol);
 
-  /** Validation */
-  if (process.env.NODE_ENV !== 'production' && !code.includes('{{') && !enableQuickSetup) {
-    // eslint-disable-next-line no-console -- log message
-    console.warn('CodeBlock: If you don\' use {{variable}} syntax in your code, and don\'t use "enableQuickSetup", you don\'t have to use <CodeBlock />. The extraneous <CodeBlock /> has code starts with:', code.split('\n')[0]);
-  }
-
   const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={setVariableState} />;
 
   if (enableQuickSetup && filepath) {

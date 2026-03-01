@@ -1,11 +1,9 @@
 import { clsx } from 'clsx';
 import * as stylex from '@stylexjs/stylex';
 
-import { memo, use, useMemo, useState } from 'react';
+import { memo, useState } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
-import { useCurrentCname } from '@/contexts/current-cname';
-import { usePageGlobalVariable } from '@/contexts/page-global-variable';
 
 import type { Menu, MenuValue } from './menus';
 import CodeBlockMenu from './menus';
@@ -13,10 +11,11 @@ import ActualCode from '../codeblock';
 import LoadingOverlay from './overlay';
 import { TabItem, Tabs } from '../../tabs';
 
-import { buildCode, buildEchoTee } from './build-code';
-import { useMirrorHttpsEnabled } from '@/contexts/mirror-enable-https';
+import { buildEchoTee } from './build-code';
 import { useMirrorSudoEnabled } from '@/contexts/mirror-enable-sudo';
 import { EMPTY_ARRAY } from '../../../lib/client/constant';
+
+import { useRenderCode } from './render-code';
 
 interface CodeBlockProps {
   isHttpProtocol?: boolean,
@@ -59,44 +58,14 @@ function CodeBlock({
   filepath
 }: CodeBlockProps) {
   const [variableState, setVariableState] = useState(() => createInitialState(menus));
-  const globalStateValue = usePageGlobalVariable();
 
-  const httpsEnabled = useMirrorHttpsEnabled();
   const sudoEnabled = useMirrorSudoEnabled();
-  const cname = useCurrentCname();
-  const { data, isLoading: _isLoading } = useMirrorZData();
+  const { isLoading: _isLoading } = useMirrorZData();
   const currentSelectedMirror = useSelectedMirror();
 
   const isLoading = _isLoading || !currentSelectedMirror;
 
-  const mirrorUrl = useMemo(() => {
-    if (isLoading) return '(Loading...)';
-    return data?.[0][currentSelectedMirror]?.mirrors[cname].full || '(Loading...)';
-  }, [cname, currentSelectedMirror, data, isLoading]);
-
-  const finalCode = useMemo(() => {
-    const urlVars: MenuValue = {
-      mirror: mirrorUrl
-    };
-    if (isLoading) {
-      urlVars.host = '(Loading...)';
-      urlVars.path = '(Loading...)';
-      urlVars.http_protocol = '';
-    } else {
-      const url = new URL('https://' + mirrorUrl);
-      urlVars.host = url.host;
-      urlVars.path = url.pathname;
-      urlVars.http_protocol = isHttpProtocol ? (httpsEnabled ? 'https://' : 'http://') : '';
-    }
-    const variable: MenuValue = {
-      ...variableState,
-      ...globalStateValue,
-      ...urlVars,
-      sudo: sudoEnabled ? 'sudo ' : '',
-      sudoE: sudoEnabled ? 'sudo -E ' : ''
-    };
-    return buildCode(code, variable);
-  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variableState, globalStateValue, isLoading]);
+  const finalCode = useRenderCode(code, variableState, isHttpProtocol);
 
   /** Validation */
   if (process.env.NODE_ENV !== 'production' && !code.includes('{{') && !enableQuickSetup) {

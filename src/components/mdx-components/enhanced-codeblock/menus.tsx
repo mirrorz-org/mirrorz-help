@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
 import IconChevronUpDown from '../../icons/chevron-up-down';
-import { memo, useCallback, useMemo } from 'react';
+import { memo } from 'react';
 
 export type MenuValue = Record<string, string | boolean>;
 export interface Menu {
@@ -71,20 +71,22 @@ interface CodeBlockMenuProps {
 }
 
 function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
-  const valueMap = useMemo(() => {
-    const map: Record<string, MenuValue> = {};
-    menus.forEach((menu, menuIndex) => {
-      menu.items.forEach((item, itemIndex) => {
-        map[`${menuIndex}_${itemIndex}`] = item[1];
-      });
-    });
-    return map;
-  }, [menus]);
+  const chosenValues = menus.map(() => 0);
 
-  const handleChange: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => {
-    const { value } = e.currentTarget;
-    dispatch(valueMap[value]);
-  }, [dispatch, valueMap]);
+  const handleChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    const { name, value } = e.currentTarget;
+    const menuIndex = Number.parseInt(name, 10);
+    const itemIndex = Number.parseInt(value, 10);
+    chosenValues[menuIndex] = itemIndex;
+    const newValue = Object.values(chosenValues).reduce<MenuValue>((acc, chosenIndex, menuIndex) => {
+      const value = menus[menuIndex].items[chosenIndex][1];
+      return {
+        ...acc,
+        ...value
+      };
+    }, {});
+    dispatch(newValue);
+  };
 
   return (
     <div {...stylex.props(styles.container)}>
@@ -92,9 +94,9 @@ function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
         <div {...stylex.props(styles.menu)} key={menu.title}>
           <span>{menu.title}</span>
           <div {...stylex.props(styles.select_wrapper)}>
-            <select {...stylex.props(styles.select)} onChange={handleChange}>
+            <select {...stylex.props(styles.select)} onChange={handleChange} name={menuIndex.toString()} defaultValue="0">
               {menu.items.map((item, optionIndex) => {
-                const value = `${menuIndex}_${optionIndex}`;
+                const value = optionIndex.toString();
                 const key = `${menu.title}_${value}`;
                 return <option key={key} value={value}>{item[0]}</option>;
               })}

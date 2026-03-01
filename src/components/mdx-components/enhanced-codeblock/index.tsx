@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import * as stylex from '@stylexjs/stylex';
 
-import { memo, useMemo, useReducer } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
@@ -41,13 +41,6 @@ const styles = stylex.create({
   }
 });
 
-function reducer(prevState: MenuValue, value: MenuValue) {
-  return {
-    ...prevState,
-    ...value
-  };
-}
-
 function createInitialState(menus: Menu[]): MenuValue {
   return menus.reduce<MenuValue>((acc, menu) => {
     const value = menu.items[0][1];
@@ -64,7 +57,7 @@ function CodeBlock({
   enableQuickSetup = false,
   filepath
 }: CodeBlockProps) {
-  const [variableState, dispatch] = useReducer(reducer, menus, createInitialState);
+  const [variableState, setVariableState] = useState(() => createInitialState(menus));
 
   const httpsEnabled = useMirrorHttpsEnabled();
   const sudoEnabled = useMirrorSudoEnabled();
@@ -99,7 +92,7 @@ function CodeBlock({
     console.warn('CodeBlock: If you don\' use {{variable}} syntax in your code, and don\'t use "enableQuickSetup", you don\'t have to use <CodeBlock />. The extraneous <CodeBlock /> has code starts with:', code.split('\n')[0]);
   }
 
-  const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={dispatch} />;
+  const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={setVariableState} />;
 
   if (enableQuickSetup && filepath) {
     return (

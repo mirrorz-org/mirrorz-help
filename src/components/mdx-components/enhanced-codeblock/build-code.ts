@@ -1,8 +1,8 @@
 import { escapeStringRegexp } from 'next/dist/shared/lib/escape-regexp';
 
-export function buildCode(code: string, variables: Record<string, string>) {
+export function buildCode(code: string, variables: Record<string, string | boolean>) {
   for (const [key, value] of Object.entries(variables)) {
-    code = code.replaceAll(new RegExp(`{{\\s?${escapeStringRegexp(key)}\\s?}}`, 'g'), value);
+    code = code.replaceAll(new RegExp(`{{\\s?${escapeStringRegexp(key)}\\s?}}`, 'g'), value ? String(value) : '');
   }
   return code;
 }

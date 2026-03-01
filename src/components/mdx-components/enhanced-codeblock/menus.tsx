@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex';
 import IconChevronUpDown from '../../icons/chevron-up-down';
 import { memo, useCallback, useMemo } from 'react';
 
-export type MenuValue = Record<string, string>;
+export type MenuValue = Record<string, string | boolean>;
 export interface Menu {
   title: string,
   items: Array<[displayName: string, value: MenuValue]>

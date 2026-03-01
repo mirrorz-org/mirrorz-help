@@ -41,15 +41,15 @@ const styles = stylex.create({
   }
 });
 
-function reducer(prevState: Record<string, string>, value: MenuValue) {
+function reducer(prevState: MenuValue, value: MenuValue) {
   return {
     ...prevState,
     ...value
   };
 }
 
-function createInitialState(menus: Menu[]): Record<string, string> {
-  return menus.reduce<Record<string, string>>((acc, menu) => {
+function createInitialState(menus: Menu[]): MenuValue {
+  return menus.reduce<MenuValue>((acc, menu) => {
     const value = menu.items[0][1];
     acc = { ...acc, ...value };
     return acc;
@@ -81,7 +81,7 @@ function CodeBlock({
 
   const finalCode = useMemo(() => {
     const url = new URL('https://' + mirrorUrl);
-    const variable: Record<string, string> = {
+    const variable: MenuValue = {
       ...variableState,
       mirror: mirrorUrl,
       host: url.host,

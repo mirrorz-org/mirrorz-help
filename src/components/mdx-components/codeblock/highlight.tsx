@@ -24,6 +24,7 @@ import dos from 'highlight.js/lib/languages/dos';
 import perl from 'highlight.js/lib/languages/perl';
 import json from 'highlight.js/lib/languages/json';
 import scheme from 'highlight.js/lib/languages/scheme';
+import plaintext from 'highlight.js/lib/languages/plaintext';
 
 import { clsx } from 'clsx';
 
@@ -64,6 +65,9 @@ lowlight.register('perl', perl);
 lowlight.register('json', json);
 
 lowlight.register('scheme', scheme);
+
+lowlight.register('plaintext', plaintext);
+lowlight.registerAlias({ plaintext: ['text', 'plain'] });
 
 const alias: Record<string, string> = {
   mdown: 'markdown',

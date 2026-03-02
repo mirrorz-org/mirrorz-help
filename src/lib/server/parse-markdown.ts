@@ -33,7 +33,7 @@ import MarkdownIt from 'markdown-it';
 import { VFile } from 'vfile';
 import Hogan from 'hogan.js';
 import * as visitor from 'unist-util-visit';
-import type { Menu, MenuValue } from '@/components/mdx-components/enhanced-codeblock/menus';
+import type { Menu, MenuValue, TextInput, InputType, InputCommon } from '@/components/mdx-components/enhanced-codeblock/menus';
 import { toMarkdown } from 'mdast-util-to-markdown';
 import { gfmTableToMarkdown } from 'mdast-util-gfm-table';
 import { mdxToMarkdown } from 'mdast-util-mdx';
@@ -213,8 +213,12 @@ async function loadBlock(page: pageId, block: string, language: string) {
   return loadFile(page, `${block}.${language}.md`, '');
 };
 
-function transpileInput(name: string, input: ZDocInput): Menu {
+function transpileInput(name: string, input: ZDocInput): InputType {
   const items: Menu['items'] = [];
+  const common: InputCommon = {
+    title: input._,
+    note: input.note
+  };
   if ('option' in input) {
     const transpileOption = ([optionName, optionSettings]: [string, ZDocInputOptionSelect]) => {
       const title = optionSettings?._ || optionName;
@@ -253,16 +257,19 @@ function transpileInput(name: string, input: ZDocInput): Menu {
       transpileBool(true);
     }
   } else {
-    throw new Error('Unsupported input type for input ' + name);
+    return {
+      ...common,
+      defaultValue: (input as ZDocInputText).default,
+      name
+    };
   }
   return {
-    title: input._,
+    ...common,
     items
-    // TODO: note field
   };
 }
 
-function transpileInputToMenuValue(input: string | null | undefined, inputSettings: ZDocConfig['input']): Menu[] | string {
+function transpileInputToMenuValue(input: string | null | undefined, inputSettings: ZDocConfig['input']): InputType[] | string {
   if (!input) return [];
   const inputNames = input.split(' ');
   const missingInput = inputNames.find((inputName) => inputSettings[inputName] === undefined);

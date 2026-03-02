@@ -1,6 +1,0 @@
-input:
-  minorver:
-    _: 使用的小版本
-    option:
-      6.10:
-    default: '6.10'

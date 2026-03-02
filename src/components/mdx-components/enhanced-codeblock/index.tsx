@@ -5,7 +5,7 @@ import { memo, useState } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 
-import type { Menu, MenuValue } from './menus';
+import type { Menu, MenuValue, InputType } from './menus';
 import CodeBlockMenu from './menus';
 import ActualCode from '../codeblock';
 import LoadingOverlay from './overlay';
@@ -19,7 +19,7 @@ import { useRenderCode } from './render-code';
 
 interface CodeBlockProps {
   isHttpProtocol?: boolean,
-  menus?: Menu[],
+  menus?: InputType[],
   children: React.ReactNode,
   code: string,
   codeLanguage?: string,
@@ -41,9 +41,9 @@ const styles = stylex.create({
   }
 });
 
-function createInitialState(menus: Menu[]): MenuValue {
+function createInitialState(menus: InputType[]): MenuValue {
   return menus.reduce<MenuValue>((acc, menu) => {
-    const value = menu.items[0][1];
+    const value = 'items' in menu ? menu.items[0][1] : { [menu.name]: menu.defaultValue || '' };
     acc = { ...acc, ...value };
     return acc;
   }, {});

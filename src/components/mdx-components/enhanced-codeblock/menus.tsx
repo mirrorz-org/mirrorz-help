@@ -3,10 +3,36 @@ import IconChevronUpDown from '../../icons/chevron-up-down';
 import { memo } from 'react';
 
 export type MenuValue = Record<string, string | boolean>;
-export interface Menu {
+
+export interface InputCommon {
   title: string,
+  note?: string
+}
+
+export interface Menu extends InputCommon {
   items: Array<[displayName: string, value: MenuValue]>
 }
+
+export interface TextInput extends InputCommon {
+  name: string,
+  defaultValue?: string
+}
+
+export type InputType = Menu | TextInput;
+
+const controlBase = {
+  display: 'inline-flex',
+  paddingLeft: '8px',
+  fontSize: '14px',
+  height: '32px',
+  lineHeight: 1.5,
+  borderRadius: '8px',
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: 'var(--border)',
+  backgroundColor: 'var(--bg-wash)',
+  color: 'var(--text-primary)'
+} as const;
 
 const styles = stylex.create({
   container: {
@@ -23,28 +49,33 @@ const styles = stylex.create({
     },
     marginBottom: '8px'
   },
-  select_wrapper: {
+  input_wrapper: {
     position: 'relative',
     marginLeft: '12px',
     display: 'flex',
     alignItems: 'center',
     color: 'var(--text-primary)'
   },
+  input_text: {
+    ...controlBase,
+    paddingRight: '8px',
+    minWidth: '140px',
+    marginLeft: '0',
+    marginRight: '0',
+    marginBottom: '0',
+    outline: {
+      default: 'none',
+      ':focus': 'none'
+    },
+    '::placeholder': {
+      color: 'var(--text-shallow)'
+    }
+  },
   select: {
-    display: 'inline-flex',
-    paddingLeft: '8px',
+    ...controlBase,
     paddingRight: '22px',
-    fontSize: '14px',
-    height: '32px',
     cursor: 'pointer',
-    appearance: 'none',
-    lineHeight: 1.5,
-    borderRadius: '8px',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'var(--border)',
-    backgroundColor: 'var(--bg-wash)',
-    color: 'var(--text-primary)'
+    appearance: 'none'
   },
   icon_wrapper: {
     display: 'inline-flex',
@@ -66,20 +97,20 @@ const styles = stylex.create({
 });
 
 interface CodeBlockMenuProps {
-  menus: Menu[],
+  menus: InputType[],
   dispatch: React.Dispatch<MenuValue>
 }
 
 function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
-  const chosenValues = menus.map(() => 0);
+  const chosenValues = menus.map((entry) => ('items' in entry ? 0 as number : entry.defaultValue || ''));
 
-  const handleChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+  const handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement> = (e) => {
     const { name, value } = e.currentTarget;
     const menuIndex = Number.parseInt(name, 10);
-    const itemIndex = Number.parseInt(value, 10);
-    chosenValues[menuIndex] = itemIndex;
-    const newValue = Object.values(chosenValues).reduce<MenuValue>((acc, chosenIndex, menuIndex) => {
-      const value = menus[menuIndex].items[chosenIndex][1];
+    const itemValue = 'items' in menus[menuIndex] ? Number.parseInt(value, 10) : value;
+    chosenValues[menuIndex] = itemValue;
+    const newValue = Object.values(chosenValues).reduce<MenuValue>((acc, chosen, menuIndex) => {
+      const value = 'items' in menus[menuIndex] ? menus[menuIndex].items[chosen as number][1] : { [menus[menuIndex].name]: chosen as string };
       return {
         ...acc,
         ...value
@@ -93,18 +124,28 @@ function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
       {menus.map((menu, menuIndex) => (
         <div {...stylex.props(styles.menu)} key={menu.title}>
           <span>{menu.title}</span>
-          <div {...stylex.props(styles.select_wrapper)}>
-            <select {...stylex.props(styles.select)} onChange={handleChange} name={menuIndex.toString()} defaultValue="0">
-              {menu.items.map((item, optionIndex) => {
-                const value = optionIndex.toString();
-                const key = `${menu.title}_${value}`;
-                return <option key={key} value={value}>{item[0]}</option>;
-              })}
-            </select>
-            <span {...stylex.props(styles.icon_wrapper)}>
-              <IconChevronUpDown {...stylex.props(styles.icon)} />
-            </span>
-          </div>
+          {'items' in menu
+            ? <div {...stylex.props(styles.input_wrapper)}>
+              <select {...stylex.props(styles.select)} onChange={handleChange} name={menuIndex.toString()} defaultValue="0">
+                {menu.items.map((item, optionIndex) => {
+                  const value = optionIndex.toString();
+                  const key = `${menu.title}_${value}`;
+                  return <option key={key} value={value}>{item[0]}</option>;
+                })}
+              </select>
+              <span {...stylex.props(styles.icon_wrapper)}>
+                <IconChevronUpDown {...stylex.props(styles.icon)} />
+              </span>
+            </div>
+            : <div {...stylex.props(styles.input_wrapper)}>
+              <input
+                {...stylex.props(styles.input_text)}
+                type="text"
+                onChange={handleChange}
+                name={menuIndex.toString()}
+                defaultValue={menu.defaultValue}
+              />
+            </div>}
         </div>
       ))}
     </div>

@@ -75,19 +75,28 @@ function CodeBlock({
   }, [cname, currentSelectedMirror, data, isLoading]);
 
   const finalCode = useMemo(() => {
-    const url = new URL('https://' + mirrorUrl);
+    const urlVars: MenuValue = {
+      mirror: mirrorUrl
+    };
+    if (isLoading) {
+      urlVars.host = '(Loading...)';
+      urlVars.path = '(Loading...)';
+      urlVars.http_protocol = '';
+    } else {
+      const url = new URL('https://' + mirrorUrl);
+      urlVars.host = url.host;
+      urlVars.path = url.pathname;
+      urlVars.http_protocol = isHttpProtocol ? (httpsEnabled ? 'https://' : 'http://') : '';
+    }
     const variable: MenuValue = {
       ...variableState,
       ...globalStateValue,
-      mirror: mirrorUrl,
-      host: url.host,
-      path: url.pathname,
-      http_protocol: isHttpProtocol ? (httpsEnabled ? 'https://' : 'http://') : '',
+      ...urlVars,
       sudo: sudoEnabled ? 'sudo ' : '',
       sudoE: sudoEnabled ? 'sudo -E ' : ''
     };
     return buildCode(code, variable);
-  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variableState, globalStateValue]);
+  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variableState, globalStateValue, isLoading]);
 
   /** Validation */
   if (process.env.NODE_ENV !== 'production' && !code.includes('{{') && !enableQuickSetup) {

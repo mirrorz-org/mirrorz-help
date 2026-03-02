@@ -56,7 +56,7 @@ export interface ContentProps {
   toc: ToC[],
   meta: MetaFromFrontMatters,
   cname: string,
-  globalVariables?: MenuValue
+  globalVariables?: Record<string, MenuValue>
 }
 
 function fromHrefToSegments(href: string) {
@@ -291,7 +291,7 @@ function createInitialState(menus: InputType[]): MenuValue {
   }, {});
 }
 
-function transpileToMdx(blockContent: string, blockPath: string | null, page: pageId, conf: ZDocConfig, globalVariables: MenuValue): string {
+function transpileToMdx(blockContent: string, blockPath: string | null, page: pageId, conf: ZDocConfig, globalVariables: Record<string, MenuValue>, generateGlobalMenuId: () => string): string {
   const tokenizer = new MarkdownIt('commonmark').enable('table');
   tokenizer.use(mystPlugin);
   const mdast = tokensToMyst(
@@ -358,9 +358,8 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
             `Global directive must have input variables on page ${page}, block ${blockPath} at line ${node.position?.start.line}, column ${node.position?.start.column}`
           );
         }
-        Object.entries(createInitialState(menus)).forEach(([key, value]) => {
-          globalVariables[key] = value;
-        });
+        const menuId = generateGlobalMenuId();
+        globalVariables[menuId] = createInitialState(menus);
         node.name = 'GlobalMenu';
         node.attributes = [
           {
@@ -370,6 +369,10 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
               type: 'mdxJsxAttributeValueExpression',
               value: JSON.stringify(menus)
             }
+          }, {
+            type: 'mdxJsxAttribute',
+            name: 'id',
+            value: menuId
           }
         ];
       } else {
@@ -462,8 +465,10 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
     `[CMS] Cache miss for MDX for /${id} from ./node_modules/.cache/`
   );
 
-  const globalVariables: MenuValue = {};
-  const transpiledBlocks = blocksContent.map(b => transpileToMdx(b.content, b.path, id, conf, globalVariables));
+  const globalVariables: Record<string, MenuValue> = {};
+  let globalMenuCounter = 0;
+  const generateGlobalMenuId = () => `globalMenu-${globalMenuCounter++}`;
+  const transpiledBlocks = blocksContent.map(b => transpileToMdx(b.content, b.path, id, conf, globalVariables, generateGlobalMenuId));
   const mdx = transpiledBlocks.join('\n\n');
   const meta: MetaFromFrontMatters = {
     title: conf._,

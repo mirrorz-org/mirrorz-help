@@ -6,17 +6,19 @@ import { useSetPageGlobalVariable } from '@/contexts/page-global-variable';
 
 interface GlobalMenuProps {
   menus?: Menu[],
+  id: string,
   children: React.ReactNode
 }
 
 function GlobalMenu({
-  menus = EMPTY_ARRAY
+  menus = EMPTY_ARRAY,
+  id
 }: GlobalMenuProps) {
   const setPageGlobalVars = useSetPageGlobalVariable();
   const setVariableState = (value: MenuValue) => {
     setPageGlobalVars((prev) => ({
       ...prev,
-      ...value
+      [id]: value
     }));
   };
   return (

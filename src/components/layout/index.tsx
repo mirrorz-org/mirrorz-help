@@ -15,7 +15,6 @@ import { SelectedMirrorProvider } from '@/contexts/current-selected-mirror';
 import { MirrorEnableHttpsProvider } from '@/contexts/mirror-enable-https';
 import { FrontMatterProvider } from '@/contexts/current-frontmatters';
 import { MirrorEnableSudoProvider } from '@/contexts/mirror-enable-sudo';
-import { PageGlobalVariableProvider } from '@/contexts/page-global-variable';
 
 import type { MetaFromFrontMatters } from '@/types/front-matter';
 
@@ -154,9 +153,7 @@ export function Layout({ children, meta, toc = EMPTY_ARRAY, cname, isContent = f
 
                   <div {...stylex.props(styles.content_wrapper)}>
                     <div {...stylex.props(styles.content_inner)}>
-                      <PageGlobalVariableProvider>
-                        {children}
-                      </PageGlobalVariableProvider>
+                      {children}
                       {isContent && <MetadataCard />}
                     </div>
                   </div>

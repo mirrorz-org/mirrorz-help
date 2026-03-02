@@ -9,14 +9,6 @@ interface GlobalMenuProps {
   children: React.ReactNode
 }
 
-function createInitialState(menus: Menu[]): MenuValue {
-  return menus.reduce<MenuValue>((acc, menu) => {
-    const value = menu.items[0][1];
-    acc = { ...acc, ...value };
-    return acc;
-  }, {});
-}
-
 function GlobalMenu({
   menus = EMPTY_ARRAY
 }: GlobalMenuProps) {
@@ -27,7 +19,6 @@ function GlobalMenu({
       ...value
     }));
   };
-  setVariableState(createInitialState(menus));
   return (
     <div>
       <CodeBlockMenu menus={menus} dispatch={setVariableState} />

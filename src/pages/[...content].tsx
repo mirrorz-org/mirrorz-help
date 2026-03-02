@@ -7,8 +7,9 @@ import SeoHead from '../components/seo/head';
 import JsonLD from '../components/seo/json-ld';
 import DocumentationWrapper from '../components/documentation-wrapper';
 import { reviveNodeOnClient } from '../lib/shared/react-node-json';
+import { PageGlobalVariableProvider } from '@/contexts/page-global-variable';
 
-export default function ContentPage({ content, toc, meta, cname }: ContentProps) {
+export default function ContentPage({ content, toc, meta, cname, globalVariables }: ContentProps) {
   const parsedContent = useMemo(
     () => JSON.parse(content, reviveNodeOnClient),
     [content]
@@ -27,7 +28,9 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
       />
       <Layout meta={meta} toc={toc} cname={cname} isContent>
         <DocumentationWrapper>
-          {parsedContent}
+          <PageGlobalVariableProvider initialState={globalVariables || {}}>
+            {parsedContent}
+          </PageGlobalVariableProvider>
         </DocumentationWrapper>
       </Layout>
       <JsonLD isContent title={meta.title} />

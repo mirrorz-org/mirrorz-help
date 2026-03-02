@@ -55,7 +55,8 @@ export interface ContentProps {
   content: any,
   toc: ToC[],
   meta: MetaFromFrontMatters,
-  cname: string
+  cname: string,
+  globalVariables?: MenuValue
 }
 
 function fromHrefToSegments(href: string) {
@@ -282,7 +283,15 @@ function transpileInputToMenuValue(input: string | null | undefined, inputSettin
   });
 }
 
-function transpileToMdx(blockContent: string, blockPath: string | null, page: pageId, conf: ZDocConfig): string {
+function createInitialState(menus: InputType[]): MenuValue {
+  return menus.reduce<MenuValue>((acc, menu) => {
+    const value = 'items' in menu ? menu.items[0][1] || {} : { [menu.name]: menu.defaultValue || '' };
+    acc = { ...acc, ...value };
+    return acc;
+  }, {});
+}
+
+function transpileToMdx(blockContent: string, blockPath: string | null, page: pageId, conf: ZDocConfig, globalVariables: MenuValue): string {
   const tokenizer = new MarkdownIt('commonmark').enable('table');
   tokenizer.use(mystPlugin);
   const mdast = tokensToMyst(
@@ -349,6 +358,9 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
             `Global directive must have input variables on page ${page}, block ${blockPath} at line ${node.position?.start.line}, column ${node.position?.start.column}`
           );
         }
+        Object.entries(createInitialState(menus)).forEach(([key, value]) => {
+          globalVariables[key] = value;
+        });
         node.name = 'GlobalMenu';
         node.attributes = [
           {
@@ -450,7 +462,8 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
     `[CMS] Cache miss for MDX for /${id} from ./node_modules/.cache/`
   );
 
-  const transpiledBlocks = blocksContent.map(b => transpileToMdx(b.content, b.path, id, conf));
+  const globalVariables: MenuValue = {};
+  const transpiledBlocks = blocksContent.map(b => transpileToMdx(b.content, b.path, id, conf, globalVariables));
   const mdx = transpiledBlocks.join('\n\n');
   const meta: MetaFromFrontMatters = {
     title: conf._,
@@ -488,6 +501,7 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
       toc,
       content: JSON.stringify(reactTree, stringifyNodeOnServer),
       meta,
+      globalVariables,
       cname: meta.cname
     }
   };

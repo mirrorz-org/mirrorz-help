@@ -57,9 +57,10 @@ export function useRenderCode(codeTemplateCode: string, variables: MenuValue, is
       urlVars.http_protocol = isHttpProtocol ? (httpsEnabled ? 'https://' : 'http://') : '';
       urlVars.endpoint = urlWithScheme.toString();
     }
+    const globalMenuValues = Object.values(globalStateValue).reduce((acc, val) => ({ ...acc, ...val }), {});
     const variable: MenuValue = {
       ...variables,
-      ...globalStateValue,
+      ...globalMenuValues,
       ...urlVars,
       sudo: sudoEnabled ? 'sudo ' : '',
       sudoE: sudoEnabled ? 'sudo -E ' : ''

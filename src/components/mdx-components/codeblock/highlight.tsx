@@ -25,6 +25,7 @@ import perl from 'highlight.js/lib/languages/perl';
 import json from 'highlight.js/lib/languages/json';
 import scheme from 'highlight.js/lib/languages/scheme';
 import plaintext from 'highlight.js/lib/languages/plaintext';
+import gradle from 'highlight.js/lib/languages/gradle';
 
 import { clsx } from 'clsx';
 
@@ -39,7 +40,7 @@ lowlight.registerAlias({ ini: ['toml', 'conf'] });
 lowlight.register('properties', properties);
 
 lowlight.register('bash', bash);
-lowlight.registerAlias({ bash: ['sh', 'zsh', 'fish', 'shell'] });
+lowlight.registerAlias({ bash: ['sh', 'zsh', 'fish', 'shell', 'console'] });
 
 lowlight.register('yaml', yaml);
 lowlight.registerAlias({ yaml: ['yml'] });
@@ -65,6 +66,8 @@ lowlight.register('perl', perl);
 lowlight.register('json', json);
 
 lowlight.register('scheme', scheme);
+
+lowlight.register('gradle', gradle);
 
 lowlight.register('plaintext', plaintext);
 lowlight.registerAlias({ plaintext: ['text', 'plain'] });

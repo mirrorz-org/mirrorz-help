@@ -4,16 +4,15 @@ import { Code } from '../inline';
 
 interface InlineCodeBlockProps {
   children: React.ReactNode,
-  code: string,
+  templateId: string,
   codeLanguage?: string
 }
 
 function InlineCodeBlock({
-  code: base64Code
+  templateId
   // TODO: codeLanguage
 }: InlineCodeBlockProps) {
-  const code = useMemo(() => atob(base64Code), [base64Code]);
-  const finalCode = useRenderCode(code, {}, true);
+  const finalCode = useRenderCode(templateId, {}, true);
   return (
     <Code>{finalCode}</Code>
   );

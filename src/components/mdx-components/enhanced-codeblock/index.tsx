@@ -21,7 +21,7 @@ interface CodeBlockProps {
   isHttpProtocol?: boolean,
   menus?: InputType[],
   children: React.ReactNode,
-  code: string,
+  templateId: string,
   codeLanguage?: string,
   codeMeta?: string,
   enableQuickSetup?: boolean,
@@ -52,7 +52,7 @@ function createInitialState(menus: InputType[]): MenuValue {
 function CodeBlock({
   menus = EMPTY_ARRAY,
   isHttpProtocol = true,
-  code,
+  templateId,
   codeLanguage,
   enableQuickSetup = false,
   filepath
@@ -65,7 +65,7 @@ function CodeBlock({
 
   const isLoading = _isLoading || !currentSelectedMirror;
 
-  const finalCode = useRenderCode(code, variableState, isHttpProtocol);
+  const finalCode = useRenderCode(templateId, variableState, isHttpProtocol);
 
   const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={setVariableState} />;
 

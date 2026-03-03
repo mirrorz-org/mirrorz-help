@@ -56,6 +56,7 @@ export interface ContentProps {
   toc: ToC[],
   meta: MetaFromFrontMatters,
   cname: string,
+  compiledTemplates: Record<string, string>,
   globalVariables?: Record<string, MenuValue>
 }
 
@@ -291,7 +292,7 @@ function createInitialState(menus: InputType[]): MenuValue {
   }, {});
 }
 
-function transpileToMdx(blockContent: string, blockPath: string | null, page: pageId, conf: ZDocConfig, globalVariables: Record<string, MenuValue>, generateGlobalMenuId: () => string): string {
+function transpileToMdx(blockContent: string, blockPath: string | null, page: pageId, conf: ZDocConfig, globalVariables: Record<string, MenuValue>, generateGlobalMenuId: () => string, compiledTemplates: Record<string, string>, generateTemplateId: () => string): string {
   const tokenizer = new MarkdownIt('commonmark').enable('table');
   tokenizer.use(mystPlugin);
   const mdast = tokensToMyst(
@@ -325,6 +326,8 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
         });
         const templateContent = node.value || '';
         const compiled = Hogan.compile(templateContent, { asString: true });
+        const templateId = generateTemplateId();
+        compiledTemplates[templateId] = compiled;
         node.type = 'mdxJsxTextElement';
         node.name = 'CodeInline';
         node.attributes = [
@@ -335,10 +338,8 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
           },
           {
             type: 'mdxJsxAttribute',
-            name: 'code',
-            // XXX: Inline Jsx Attribute value containing "|" nested inside a
-            // table will cause parsing error in MDX.
-            value: Buffer.from(compiled).toString('base64')
+            name: 'templateId',
+            value: templateId
           }
         ];
         node.children = [];
@@ -377,6 +378,8 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
         ];
       } else {
         const compiled = Hogan.compile(templateContent, { asString: true });
+        const templateId = generateTemplateId();
+        compiledTemplates[templateId] = compiled;
         node.name = 'CodeBlock';
         node.attributes = [
           {
@@ -389,8 +392,8 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
           },
           {
             type: 'mdxJsxAttribute',
-            name: 'code',
-            value: compiled
+            name: 'templateId',
+            value: templateId
           },
           ...directiveOptions.lang
             ? [{
@@ -466,9 +469,12 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
   );
 
   const globalVariables: Record<string, MenuValue> = {};
+  const compiledTemplates: Record<string, string> = {};
   let globalMenuCounter = 0;
+  let pageTemplateCounter = 0;
   const generateGlobalMenuId = () => `globalMenu-${globalMenuCounter++}`;
-  const transpiledBlocks = blocksContent.map(b => transpileToMdx(b.content, b.path, id, conf, globalVariables, generateGlobalMenuId));
+  const generateTemplateId = () => `pageTemplate-${id}-${pageTemplateCounter++}`;
+  const transpiledBlocks = blocksContent.map(b => transpileToMdx(b.content, b.path, id, conf, globalVariables, generateGlobalMenuId, compiledTemplates, generateTemplateId));
   const mdx = transpiledBlocks.join('\n\n');
   const meta: MetaFromFrontMatters = {
     title: conf._,
@@ -507,6 +513,7 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
       content: JSON.stringify(reactTree, stringifyNodeOnServer),
       meta,
       globalVariables,
+      compiledTemplates,
       cname: meta.cname
     }
   };

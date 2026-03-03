@@ -8,8 +8,9 @@ import JsonLD from '../components/seo/json-ld';
 import DocumentationWrapper from '../components/documentation-wrapper';
 import { reviveNodeOnClient } from '../lib/shared/react-node-json';
 import { PageGlobalVariableProvider } from '@/contexts/page-global-variable';
+import { CompiledTemplatesProvider } from '@/contexts/compiled-templates';
 
-export default function ContentPage({ content, toc, meta, cname, globalVariables }: ContentProps) {
+export default function ContentPage({ content, toc, meta, cname, globalVariables, compiledTemplates }: ContentProps) {
   const parsedContent = useMemo(
     () => JSON.parse(content, reviveNodeOnClient),
     [content]
@@ -27,11 +28,13 @@ export default function ContentPage({ content, toc, meta, cname, globalVariables
         // }}
       />
       <Layout meta={meta} toc={toc} cname={cname} isContent>
-        <DocumentationWrapper>
-          <PageGlobalVariableProvider initialState={globalVariables || {}}>
-            {parsedContent}
-          </PageGlobalVariableProvider>
-        </DocumentationWrapper>
+        <CompiledTemplatesProvider compiledTemplates={compiledTemplates}>
+          <DocumentationWrapper>
+            <PageGlobalVariableProvider initialState={globalVariables || {}}>
+              {parsedContent}
+            </PageGlobalVariableProvider>
+          </DocumentationWrapper>
+        </CompiledTemplatesProvider>
       </Layout>
       <JsonLD isContent title={meta.title} />
     </>

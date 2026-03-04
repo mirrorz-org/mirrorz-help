@@ -292,7 +292,7 @@ function createInitialState(menus: InputType[]): MenuValue {
   }, {});
 }
 
-function transpileToMdx(blockContent: string, blockPath: string | null, page: pageId, conf: ZDocConfig, globalVariables: Record<string, MenuValue>, generateGlobalMenuId: () => string, compiledTemplates: Record<string, string>, generateTemplateId: () => string): string {
+function transpileToMdx(blockContent: string, blockPath: string | null, page: pageId, conf: ZDocConfig, globalVariables: Record<string, MenuValue>, generateGlobalMenuId: () => string, templateCompiler: (templateContent: string) => string): string {
   const tokenizer = new MarkdownIt('commonmark').enable('table');
   tokenizer.use(mystPlugin);
   const mdast = tokensToMyst(
@@ -325,9 +325,7 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
           }
         });
         const templateContent = node.value || '';
-        const compiled = Hogan.compile(templateContent, { asString: true });
-        const templateId = generateTemplateId();
-        compiledTemplates[templateId] = compiled;
+        const templateId = templateCompiler(templateContent);
         node.type = 'mdxJsxTextElement';
         node.name = 'CodeInline';
         node.attributes = [
@@ -377,9 +375,7 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
           }
         ];
       } else {
-        const compiled = Hogan.compile(templateContent, { asString: true });
-        const templateId = generateTemplateId();
-        compiledTemplates[templateId] = compiled;
+        const templateId = templateCompiler(templateContent);
         node.name = 'CodeBlock';
         node.attributes = [
           {
@@ -470,11 +466,21 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
 
   const globalVariables: Record<string, MenuValue> = {};
   const compiledTemplates: Record<string, string> = {};
+  const templateDeduplicationMap = new Map<string, string>();
   let globalMenuCounter = 0;
   let pageTemplateCounter = 0;
   const generateGlobalMenuId = () => `globalMenu-${globalMenuCounter++}`;
-  const generateTemplateId = () => `pageTemplate-${id}-${pageTemplateCounter++}`;
-  const transpiledBlocks = blocksContent.map(b => transpileToMdx(b.content, b.path, id, conf, globalVariables, generateGlobalMenuId, compiledTemplates, generateTemplateId));
+  const templateCompiler = (templateContent: string) => {
+    if (templateDeduplicationMap.has(templateContent)) {
+      return templateDeduplicationMap.get(templateContent)!;
+    }
+    const templateId = `template-${pageTemplateCounter++}`;
+    const compiled = Hogan.compile(templateContent, { asString: true });
+    compiledTemplates[templateId] = compiled;
+    templateDeduplicationMap.set(templateContent, templateId);
+    return templateId;
+  };
+  const transpiledBlocks = blocksContent.map(b => transpileToMdx(b.content, b.path, id, conf, globalVariables, generateGlobalMenuId, templateCompiler));
   const mdx = transpiledBlocks.join('\n\n');
   const meta: MetaFromFrontMatters = {
     title: conf._,

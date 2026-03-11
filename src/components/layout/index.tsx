@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState } from 'react';
 
 import Nav from './nav';
 import { useRouter } from 'next/router';
@@ -154,7 +154,6 @@ export function Layout({ children, meta, toc = EMPTY_ARRAY, cname, isContent = f
                   <div {...stylex.props(styles.content_wrapper)}>
                     <div {...stylex.props(styles.content_inner)}>
                       {children}
-
                       {isContent && <MetadataCard />}
                     </div>
                   </div>

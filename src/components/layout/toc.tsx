@@ -3,6 +3,7 @@ import * as stylex from '@stylexjs/stylex';
 import { useTocHighlight } from '../../hooks/use-toc-highlight';
 import IconToC from '../icons/toc';
 import { memo } from 'react';
+import { reviveNodeOnClient } from '@/lib/shared/react-node-json';
 
 const styles = stylex.create({
   toc: {
@@ -103,7 +104,7 @@ function ToCAside({ toc }: ToCProps) {
               if (h.depth < 2 && h.depth > 3) return null;
               return (
                 <li
-                  key={`heading-${h.url}-${h.text}`}
+                  key={`heading-${h.url}-index-${h.content}`}
                   {...stylex.props(
                     styles.item,
                     h.depth === 3 && styles.item_deep,
@@ -114,7 +115,7 @@ function ToCAside({ toc }: ToCProps) {
                     {...stylex.props(styles.item_link, selectedIndex === i ? styles.item_link_active : styles.item_link_inactive)}
                     href={h.url}
                   >
-                    {h.text}
+                    {JSON.parse(h.content, reviveNodeOnClient)}
                   </a>
                 </li>
               );

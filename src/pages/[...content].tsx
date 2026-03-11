@@ -1,14 +1,16 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { ContentProps } from '../lib/server/parse-markdown';
 import { getAvaliableSegments, getContentBySegments } from '../lib/server/parse-markdown';
-import { Fragment, useMemo } from 'react';
-import { MDXComponents } from '../components/mdx-components';
+import { useMemo } from 'react';
 import { Layout } from '../components/layout';
 import SeoHead from '../components/seo/head';
 import JsonLD from '../components/seo/json-ld';
 import DocumentationWrapper from '../components/documentation-wrapper';
+import { reviveNodeOnClient } from '../lib/shared/react-node-json';
+import { PageGlobalVariableProvider } from '@/contexts/page-global-variable';
+import { CompiledTemplatesProvider } from '@/contexts/compiled-templates';
 
-export default function ContentPage({ content, toc, meta, cname }: ContentProps) {
+export default function ContentPage({ content, toc, meta, cname, globalVariables, compiledTemplates }: ContentProps) {
   const parsedContent = useMemo(
     () => JSON.parse(content, reviveNodeOnClient),
     [content]
@@ -26,42 +28,17 @@ export default function ContentPage({ content, toc, meta, cname }: ContentProps)
         // }}
       />
       <Layout meta={meta} toc={toc} cname={cname} isContent>
-        <DocumentationWrapper>
-          {parsedContent}
-        </DocumentationWrapper>
+        <CompiledTemplatesProvider compiledTemplates={compiledTemplates}>
+          <DocumentationWrapper>
+            <PageGlobalVariableProvider initialState={globalVariables || {}}>
+              {parsedContent}
+            </PageGlobalVariableProvider>
+          </DocumentationWrapper>
+        </CompiledTemplatesProvider>
       </Layout>
       <JsonLD isContent title={meta.title} />
     </>
   );
-}
-
-// Deserialize a client React tree from JSON.
-function reviveNodeOnClient(parentPropertyName: string, val: any) {
-  if (Array.isArray(val) && val[0] === '$r') {
-    // Assume it's a React element.
-    let Type = val[1];
-    let key = val[2];
-    if (key == null) {
-      key = parentPropertyName; // Index within a parent.
-    }
-    let props = val[3];
-    if (Type === 'wrapper') {
-      Type = Fragment;
-      props = { children: props.children };
-    }
-    if (Type in MDXComponents) {
-      Type = MDXComponents[Type];
-    }
-    if (!Type) {
-      if (Type !== null) {
-        console.error('[reviveNodeOnClient] Unknown type: ' + Type);
-      }
-      Type = Fragment;
-    }
-    return <Type key={key} {...props} />;
-  }
-
-  return val;
 }
 
 export const getStaticProps: GetStaticProps<ContentProps, { content: string[], cname: string }> = (context) => getContentBySegments(context.params?.content || []);

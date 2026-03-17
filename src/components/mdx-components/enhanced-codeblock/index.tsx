@@ -25,6 +25,7 @@ interface CodeBlockProps {
   codeLanguage?: string,
   codeMeta?: string,
   enableQuickSetup?: boolean,
+  append?: boolean,
   filepath?: string
 }
 
@@ -55,6 +56,7 @@ function CodeBlock({
   templateId,
   codeLanguage,
   enableQuickSetup = false,
+  append = false,
   filepath
 }: CodeBlockProps) {
   const [variableState, setVariableState] = useState(() => createInitialState(menus));
@@ -84,7 +86,7 @@ function CodeBlock({
           <TabItem value="快速配置" xstyle={styles.code_wrapper}>
             <LoadingOverlay isLoading={isLoading} />
             <ActualCode
-              code={buildEchoTee(finalCode, filepath, sudoEnabled)}
+              code={buildEchoTee(finalCode, filepath, sudoEnabled, append)}
               language="bash"
             />
           </TabItem>

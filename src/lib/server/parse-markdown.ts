@@ -78,7 +78,7 @@ async function asyncCache<T>(key: string, fn: () => Promise<T>): Promise<T> {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 7;
+const DISK_CACHE_BREAKER = 8;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -406,6 +406,16 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
             }, {
               type: 'mdxJsxAttribute',
               name: 'enableQuickSetup',
+              value: {
+                type: 'mdxJsxAttributeValueExpression',
+                value: 'true'
+              }
+            }]
+            : [],
+          ...directiveOptions.append
+            ? [{
+              type: 'mdxJsxAttribute',
+              name: 'append',
               value: {
                 type: 'mdxJsxAttributeValueExpression',
                 value: 'true'

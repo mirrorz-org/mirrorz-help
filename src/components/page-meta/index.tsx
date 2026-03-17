@@ -58,7 +58,7 @@ export default function MetadataCard() {
         <ExternalLink {...stylex.props(styles.link)} href="#">
           查看我们的贡献指南
         </ExternalLink>，
-        <ExternalLink {...stylex.props(styles.link)} href={`https://github.com/mirrorz-org/mirrorz-help/blob/master/contents/${meta.file}`}>
+        <ExternalLink {...stylex.props(styles.link)} href={`https://github.com/mirrorz-org/mirrorz-docs/tree/main/${meta.cname}`}>
           在 GitHub 上查看此页的源代码
         </ExternalLink>
       </p>

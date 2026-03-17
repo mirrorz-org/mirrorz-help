@@ -1,27 +1,27 @@
 import { clsx } from 'clsx';
 import * as stylex from '@stylexjs/stylex';
 
-import { memo, useMemo, useReducer } from 'react';
+import { memo, useState } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
-import { useCurrentCname } from '@/contexts/current-cname';
 
-import type { Menu, MenuValue } from './menus';
+import type { Menu, MenuValue, InputType } from './menus';
 import CodeBlockMenu from './menus';
 import ActualCode from '../codeblock';
 import LoadingOverlay from './overlay';
 import { TabItem, Tabs } from '../../tabs';
 
-import { buildCode, buildEchoTee } from './build-code';
-import { useMirrorHttpsEnabled } from '@/contexts/mirror-enable-https';
+import { buildEchoTee } from './build-code';
 import { useMirrorSudoEnabled } from '@/contexts/mirror-enable-sudo';
 import { EMPTY_ARRAY } from '../../../lib/client/constant';
 
+import { useRenderCode } from './render-code';
+
 interface CodeBlockProps {
   isHttpProtocol?: boolean,
-  menus?: Menu[],
+  menus?: InputType[],
   children: React.ReactNode,
-  code: string,
+  templateId: string,
   codeLanguage?: string,
   codeMeta?: string,
   enableQuickSetup?: boolean,
@@ -41,16 +41,9 @@ const styles = stylex.create({
   }
 });
 
-function reducer(prevState: Record<string, string>, value: MenuValue) {
-  return {
-    ...prevState,
-    ...value
-  };
-}
-
-function createInitialState(menus: Menu[]): Record<string, string> {
-  return menus.reduce<Record<string, string>>((acc, menu) => {
-    const value = menu.items[0][1];
+function createInitialState(menus: InputType[]): MenuValue {
+  return menus.reduce<MenuValue>((acc, menu) => {
+    const value = 'items' in menu ? menu.items[0][1] : { [menu.name]: menu.defaultValue || '' };
     acc = { ...acc, ...value };
     return acc;
   }, {});
@@ -59,47 +52,22 @@ function createInitialState(menus: Menu[]): Record<string, string> {
 function CodeBlock({
   menus = EMPTY_ARRAY,
   isHttpProtocol = true,
-  code,
+  templateId,
   codeLanguage,
   enableQuickSetup = false,
   filepath
 }: CodeBlockProps) {
-  const [variableState, dispatch] = useReducer(reducer, menus, createInitialState);
+  const [variableState, setVariableState] = useState(() => createInitialState(menus));
 
-  const httpsEnabled = useMirrorHttpsEnabled();
   const sudoEnabled = useMirrorSudoEnabled();
-  const cname = useCurrentCname();
-  const { data, isLoading: _isLoading } = useMirrorZData();
+  const { isLoading: _isLoading } = useMirrorZData();
   const currentSelectedMirror = useSelectedMirror();
 
   const isLoading = _isLoading || !currentSelectedMirror;
 
-  const mirrorUrl = useMemo(() => {
-    if (isLoading) return '(Loading...)';
-    return data?.[0][currentSelectedMirror]?.mirrors[cname].full || '(Loading...)';
-  }, [cname, currentSelectedMirror, data, isLoading]);
+  const finalCode = useRenderCode(templateId, variableState, isHttpProtocol);
 
-  const finalCode = useMemo(() => {
-    const url = new URL('https://' + mirrorUrl);
-    const variable: Record<string, string> = {
-      ...variableState,
-      mirror: mirrorUrl,
-      host: url.host,
-      path: url.pathname,
-      http_protocol: isHttpProtocol ? (httpsEnabled ? 'https://' : 'http://') : '',
-      sudo: sudoEnabled ? 'sudo ' : '',
-      sudoE: sudoEnabled ? 'sudo -E ' : ''
-    };
-    return buildCode(code, variable);
-  }, [code, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variableState]);
-
-  /** Validation */
-  if (process.env.NODE_ENV !== 'production' && !code.includes('{{') && !enableQuickSetup) {
-    // eslint-disable-next-line no-console -- log message
-    console.warn('CodeBlock: If you don\' use {{variable}} syntax in your code, and don\'t use "enableQuickSetup", you don\'t have to use <CodeBlock />. The extraneous <CodeBlock /> has code starts with:', code.split('\n')[0]);
-  }
-
-  const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={dispatch} />;
+  const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={setVariableState} />;
 
   if (enableQuickSetup && filepath) {
     return (

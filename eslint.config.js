@@ -8,7 +8,9 @@ module.exports = require('eslint-config-sukka').sukka(
       customGlobs: [
         'src/compiled/**/*',
         '**/*.{md,mdx}',
-        'src/components/cmdk/index.tsx'
+        'src/components/cmdk/index.tsx',
+        'zdoc/**',
+        '.github/**'
       ]
     },
     node: {

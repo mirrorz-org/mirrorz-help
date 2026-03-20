@@ -55,7 +55,7 @@ export default function MetadataCard() {
       {/** TODO: Contributing Guide */}
       <p {...stylex.props(styles.p)}>
         <span {...stylex.props(styles.bold)}>想完善这个页面？</span>
-        <ExternalLink {...stylex.props(styles.link)} href="#">
+        <ExternalLink {...stylex.props(styles.link)} href="https://github.com/mirrorz-org/mirrorz-docs/blob/main/README.md">
           查看我们的贡献指南
         </ExternalLink>，
         <ExternalLink {...stylex.props(styles.link)} href={`https://github.com/mirrorz-org/mirrorz-docs/tree/main/${meta.cname}`}>

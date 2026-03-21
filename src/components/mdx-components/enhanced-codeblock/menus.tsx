@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex';
 import IconChevronUpDown from '../../icons/chevron-up-down';
 import { memo } from 'react';
+import Switch from '../../form/checkbox';
 
 export type MenuValue = Record<string, string | boolean>;
 
@@ -18,7 +19,14 @@ export interface TextInput extends InputCommon {
   defaultValue?: string
 }
 
-export type InputType = Menu | TextInput;
+export interface BooleanInput extends InputCommon {
+  name: string,
+  defaultValue: boolean,
+  trueValue: string | boolean,
+  falseValue: string | boolean
+}
+
+export type InputType = Menu | TextInput | BooleanInput;
 
 const controlBase = {
   display: 'inline-flex',
@@ -98,19 +106,41 @@ const styles = stylex.create({
 
 interface CodeBlockMenuProps {
   menus: InputType[],
+  state: MenuValue,
   dispatch: React.Dispatch<MenuValue>
 }
 
-function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
-  const chosenValues = menus.map((entry) => ('items' in entry ? 0 as number : entry.defaultValue || ''));
+function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
+  const chosenValues = menus.map((entry) => (
+    'items' in entry
+      ? 0 as number
+      : 'trueValue' in entry
+        ? (state[entry.name] === entry.trueValue)
+        : state[entry.name] || entry.defaultValue || ''
+  ));
 
   const handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement> = (e) => {
     const { name, value } = e.currentTarget;
     const menuIndex = Number.parseInt(name, 10);
-    const itemValue = 'items' in menus[menuIndex] ? Number.parseInt(value, 10) : value;
+    const menu = menus[menuIndex];
+    let itemValue: number | string;
+    if ('items' in menu) {
+      itemValue = Number.parseInt(value, 10);
+    } else {
+      itemValue = value;
+    }
     chosenValues[menuIndex] = itemValue;
     const newValue = Object.values(chosenValues).reduce<MenuValue>((acc, chosen, menuIndex) => {
-      const value = 'items' in menus[menuIndex] ? menus[menuIndex].items[chosen as number][1] : { [menus[menuIndex].name]: chosen as string };
+      const menu = menus[menuIndex];
+      let value: MenuValue;
+      if ('items' in menu) {
+        value = menu.items[chosen as number][1];
+      } else if ('trueValue' in menu) {
+        const boolVal = chosen as boolean;
+        value = { [menu.name]: boolVal ? menu.trueValue : menu.falseValue };
+      } else {
+        value = { [menu.name]: chosen as string };
+      }
       return {
         ...acc,
         ...value
@@ -119,33 +149,54 @@ function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
     dispatch(newValue);
   };
 
+  const handleSwitchChange = (menuIndex: number, menu: BooleanInput) => () => {
+    const currentValue = state[menu.name] === menu.trueValue;
+    const newBoolValue = !currentValue;
+    
+    const newValue = { ...state };
+    newValue[menu.name] = newBoolValue ? menu.trueValue : menu.falseValue;
+    
+    dispatch(newValue);
+  };
+
   return (
     <div {...stylex.props(styles.container)}>
       {menus.map((menu, menuIndex) => (
         <div {...stylex.props(styles.menu)} key={menu.title}>
-          <span>{menu.title}</span>
           {'items' in menu
-            ? <div {...stylex.props(styles.input_wrapper)}>
-              <select {...stylex.props(styles.select)} onChange={handleChange} name={menuIndex.toString()} defaultValue="0">
-                {menu.items.map((item, optionIndex) => {
-                  const value = optionIndex.toString();
-                  const key = `${menu.title}_${value}`;
-                  return <option key={key} value={value}>{item[0]}</option>;
-                })}
-              </select>
-              <span {...stylex.props(styles.icon_wrapper)}>
-                <IconChevronUpDown {...stylex.props(styles.icon)} />
-              </span>
-            </div>
-            : <div {...stylex.props(styles.input_wrapper)}>
-              <input
-                {...stylex.props(styles.input_text)}
-                type="text"
-                onChange={handleChange}
-                name={menuIndex.toString()}
-                defaultValue={menu.defaultValue}
+            ? <>
+              <span>{menu.title}</span>
+              <div {...stylex.props(styles.input_wrapper)}>
+                <select {...stylex.props(styles.select)} onChange={handleChange} name={menuIndex.toString()} defaultValue="0">
+                  {menu.items.map((item, optionIndex) => {
+                    const value = optionIndex.toString();
+                    const key = `${menu.title}_${value}`;
+                    return <option key={key} value={value}>{item[0]}</option>;
+                  })}
+                </select>
+                <span {...stylex.props(styles.icon_wrapper)}>
+                  <IconChevronUpDown {...stylex.props(styles.icon)} />
+                </span>
+              </div>
+            </>
+            : 'trueValue' in menu
+              ? <Switch
+                checked={state[menu.name] === menu.trueValue}
+                onChange={handleSwitchChange(menuIndex, menu)}
+                label={menu.title}
               />
-            </div>}
+              : <>
+                <span>{menu.title}</span>
+                <div {...stylex.props(styles.input_wrapper)}>
+                  <input
+                    {...stylex.props(styles.input_text)}
+                    type="text"
+                    onChange={handleChange}
+                    name={menuIndex.toString()}
+                    defaultValue={menu.defaultValue}
+                  />
+                </div>
+              </>}
         </div>
       ))}
     </div>

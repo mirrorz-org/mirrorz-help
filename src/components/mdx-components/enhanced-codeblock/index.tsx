@@ -44,7 +44,11 @@ const styles = stylex.create({
 
 function createInitialState(menus: InputType[]): MenuValue {
   return menus.reduce<MenuValue>((acc, menu) => {
-    const value = 'items' in menu ? menu.items[0][1] : { [menu.name]: menu.defaultValue || '' };
+    const value = 'items' in menu
+      ? menu.items[0][1]
+      : 'trueValue' in menu
+        ? { [menu.name]: menu.defaultValue ? menu.trueValue : menu.falseValue }
+        : { [menu.name]: menu.defaultValue || '' };
     acc = { ...acc, ...value };
     return acc;
   }, {});
@@ -69,7 +73,7 @@ function CodeBlock({
 
   const finalCode = useRenderCode(templateId, variableState, isHttpProtocol);
 
-  const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={setVariableState} />;
+  const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} state={variableState} dispatch={setVariableState} />;
 
   if (enableQuickSetup && filepath) {
     return (

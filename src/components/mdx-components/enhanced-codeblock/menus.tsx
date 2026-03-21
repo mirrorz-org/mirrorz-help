@@ -149,7 +149,7 @@ function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
     dispatch(newValue);
   };
 
-  const handleSwitchChange = (menuIndex: number, menu: BooleanInput) => () => {
+  const handleSwitchChange = (menu: BooleanInput) => () => {
     const currentValue = state[menu.name] === menu.trueValue;
     const newBoolValue = !currentValue;
 
@@ -183,7 +183,7 @@ function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
               ? (
                 <Switch
                   checked={state[menu.name] === menu.trueValue}
-                  onChange={handleSwitchChange(menuIndex, menu)}
+                  onChange={handleSwitchChange(menu)}
                   label={menu.title}
                 />
               )

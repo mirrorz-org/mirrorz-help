@@ -114,9 +114,9 @@ function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
   const chosenValues = menus.map((entry) => (
     'items' in entry
       ? 0 as number
-      : 'trueValue' in entry
+      : ('trueValue' in entry
         ? (state[entry.name] === entry.trueValue)
-        : state[entry.name] || entry.defaultValue || ''
+        : state[entry.name] || entry.defaultValue || '')
   ));
 
   const handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement> = (e) => {
@@ -152,10 +152,10 @@ function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
   const handleSwitchChange = (menuIndex: number, menu: BooleanInput) => () => {
     const currentValue = state[menu.name] === menu.trueValue;
     const newBoolValue = !currentValue;
-    
+
     const newValue = { ...state };
     newValue[menu.name] = newBoolValue ? menu.trueValue : menu.falseValue;
-    
+
     dispatch(newValue);
   };
 
@@ -179,12 +179,14 @@ function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
                 </span>
               </div>
             </>
-            : 'trueValue' in menu
-              ? <Switch
-                checked={state[menu.name] === menu.trueValue}
-                onChange={handleSwitchChange(menuIndex, menu)}
-                label={menu.title}
-              />
+            : ('trueValue' in menu
+              ? (
+                <Switch
+                  checked={state[menu.name] === menu.trueValue}
+                  onChange={handleSwitchChange(menuIndex, menu)}
+                  label={menu.title}
+                />
+              )
               : <>
                 <span>{menu.title}</span>
                 <div {...stylex.props(styles.input_wrapper)}>
@@ -196,7 +198,7 @@ function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
                     defaultValue={menu.defaultValue}
                   />
                 </div>
-              </>}
+              </>)}
         </div>
       ))}
     </div>

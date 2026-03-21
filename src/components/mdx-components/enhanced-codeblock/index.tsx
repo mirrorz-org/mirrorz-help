@@ -5,7 +5,7 @@ import { memo, useState } from 'react';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 
-import type { Menu, MenuValue, InputType } from './menus';
+import type { MenuValue, InputType } from './menus';
 import CodeBlockMenu from './menus';
 import ActualCode from '../codeblock';
 import LoadingOverlay from './overlay';
@@ -46,9 +46,9 @@ function createInitialState(menus: InputType[]): MenuValue {
   return menus.reduce<MenuValue>((acc, menu) => {
     const value = 'items' in menu
       ? menu.items[0][1]
-      : 'trueValue' in menu
+      : ('trueValue' in menu
         ? { [menu.name]: menu.defaultValue ? menu.trueValue : menu.falseValue }
-        : { [menu.name]: menu.defaultValue || '' };
+        : { [menu.name]: menu.defaultValue || '' });
     acc = { ...acc, ...value };
     return acc;
   }, {});

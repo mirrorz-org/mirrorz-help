@@ -28,18 +28,16 @@ import rehypeExternalLinks from '@/compiled/rehype-external-links';
 import ErrnoException = NodeJS.ErrnoException;
 import { parse as yamlParse } from 'yaml';
 import { tokensToMyst } from 'myst-parser';
-import mystPlugin from 'markdown-it-myst';
+import { mystPlugin } from 'markdown-it-myst';
 import MarkdownIt from 'markdown-it';
 import { VFile } from 'vfile';
 import Hogan from 'hogan.js';
 import * as visitor from 'unist-util-visit';
-import type { Menu, MenuValue, TextInput, InputType, InputCommon } from '@/components/mdx-components/enhanced-codeblock/menus';
+import type { Menu, MenuValue, InputType, InputCommon } from '@/components/mdx-components/enhanced-codeblock/menus';
 import { toMarkdown } from 'mdast-util-to-markdown';
 import { gfmTableToMarkdown } from 'mdast-util-gfm-table';
 import { mdxToMarkdown } from 'mdast-util-mdx';
 import type { Root as MdastRoot } from 'mdast';
-
-import { renderToStaticMarkup } from 'react-dom/server';
 
 const { FileStore, stableHash } = metroCache;
 
@@ -242,22 +240,15 @@ function transpileInput(name: string, input: ZDocInput): InputType {
       transpileOption([k, v]);
     });
   } else if ('true' in input || 'false' in input) {
-    const transpileBool = (boolValue: boolean) => {
-      const val = (input)[boolValue ? 'true' : 'false'];
-      items.push([
-        boolValue ? '是' : '否',
-        {
-          [name]: val === null || val === undefined ? boolValue : val
-        }
-      ]);
+    const trueVal = input.true;
+    const falseVal = input.false;
+    return {
+      ...common,
+      name,
+      defaultValue: input.default ?? false,
+      trueValue: trueVal === null || trueVal === undefined ? true : trueVal,
+      falseValue: falseVal === null || falseVal === undefined ? false : falseVal
     };
-    if (input.default) {
-      transpileBool(true);
-      transpileBool(false);
-    } else {
-      transpileBool(false);
-      transpileBool(true);
-    }
   } else {
     return {
       ...common,

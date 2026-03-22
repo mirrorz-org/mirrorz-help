@@ -71,7 +71,7 @@ export default function Switch({
       <label htmlFor={id} className="mantine-1ld5t9y mantine-Switch-label">
         {label}
       </label>
-      <input onChange={onChange} id={id} type="checkbox" {...stylex.props(styles.sr_only)} />
+      <input checked={checked} onChange={onChange} id={id} type="checkbox" {...stylex.props(styles.sr_only)} />
       <label htmlFor={id} {...stylex.props(styles.track, checked ? styles.track_active : styles.track_inactive)}>
         <div {...stylex.props(styles.thumb, checked && styles.thumb_active)} />
       </label>

@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
 import IconChevronUpDown from '../../icons/chevron-up-down';
-import { memo } from 'react';
+import { memo, useState, useEffect } from 'react';
 import Switch from '../../form/checkbox';
 
 export type MenuValue = Record<string, string | boolean>;
@@ -106,30 +106,16 @@ const styles = stylex.create({
 
 interface CodeBlockMenuProps {
   menus: InputType[],
-  state: MenuValue,
   dispatch: React.Dispatch<MenuValue>
 }
 
-function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
-  const chosenValues = menus.map((entry) => (
+function CodeBlockMenu({ menus, dispatch }: CodeBlockMenuProps) {
+  const [chosenValues, setChosenValues] = useState(menus.map((entry) => (
     'items' in entry
       ? 0 as number
-      : ('trueValue' in entry
-        ? (state[entry.name] === entry.trueValue)
-        : state[entry.name] || entry.defaultValue || '')
-  ));
-
-  const handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement> = (e) => {
-    const { name, value } = e.currentTarget;
-    const menuIndex = Number.parseInt(name, 10);
-    const menu = menus[menuIndex];
-    let itemValue: number | string;
-    if ('items' in menu) {
-      itemValue = Number.parseInt(value, 10);
-    } else {
-      itemValue = value;
-    }
-    chosenValues[menuIndex] = itemValue;
+      : ('trueValue' in entry ? entry.defaultValue : entry.defaultValue || '')
+  )));
+  useEffect(() => {
     const newValue = Object.values(chosenValues).reduce<MenuValue>((acc, chosen, menuIndex) => {
       const menu = menus[menuIndex];
       let value: MenuValue;
@@ -147,16 +133,25 @@ function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
       };
     }, {});
     dispatch(newValue);
+  }, [chosenValues, dispatch, menus]);
+
+  const handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement> = (e) => {
+    const { name, value } = e.currentTarget;
+    const menuIndex = Number.parseInt(name, 10);
+    const itemValue = e.currentTarget instanceof HTMLInputElement ? value : Number.parseInt(value, 10);
+    setChosenValues(prev => {
+      const newValues = [...prev];
+      newValues[menuIndex] = itemValue;
+      return newValues;
+    });
   };
 
-  const handleSwitchChange = (menu: BooleanInput) => () => {
-    const currentValue = state[menu.name] === menu.trueValue;
-    const newBoolValue = !currentValue;
-
-    const newValue = { ...state };
-    newValue[menu.name] = newBoolValue ? menu.trueValue : menu.falseValue;
-
-    dispatch(newValue);
+  const handleSwitchChange = (menuIndex: number) => () => {
+    setChosenValues(prev => {
+      const newValues = [...prev];
+      newValues[menuIndex] = !newValues[menuIndex];
+      return newValues;
+    });
   };
 
   return (
@@ -182,8 +177,8 @@ function CodeBlockMenu({ menus, state, dispatch }: CodeBlockMenuProps) {
             : ('trueValue' in menu
               ? (
                 <Switch
-                  checked={state[menu.name] === menu.trueValue}
-                  onChange={handleSwitchChange(menu)}
+                  checked={chosenValues[menuIndex] as boolean}
+                  onChange={handleSwitchChange(menuIndex)}
                   label={menu.title}
                 />
               )

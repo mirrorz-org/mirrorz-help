@@ -73,7 +73,7 @@ function CodeBlock({
 
   const finalCode = useRenderCode(templateId, variableState, isHttpProtocol);
 
-  const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} state={variableState} dispatch={setVariableState} />;
+  const codeBlockMenu = menus.length > 0 && <CodeBlockMenu menus={menus} dispatch={setVariableState} />;
 
   if (enableQuickSetup && filepath) {
     return (

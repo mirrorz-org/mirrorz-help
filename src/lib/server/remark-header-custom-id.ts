@@ -20,23 +20,25 @@ function patch(context: any, key: string, value: any) {
   return context[key];
 }
 
+const customIdRegex = / {#(?<id>.+)}$/
+
 export default function remarkHeaderCustomId() {
   return function transformer(tree: any) {
     const ids = new Set();
     visit(tree, 'heading', (node) => {
-      const children = [...node.children];
+      const lastChildren = node.children.at(-1);
+      if (lastChildren?.type !== 'text') {
+        return;
+      }
       let id;
-      if (children[children.length - 1].type === 'mdxTextExpression') {
-        // # My header {/*my-header*/}
-        id = children.pop().value;
-        const isValidCustomId = id.startsWith('/*') && id.endsWith('*/');
-        if (!isValidCustomId) {
-          throw new Error(`Expected header ID to be like: {/*some-header*/}. Instead, received: ${id}`);
+      const matched = customIdRegex.exec(lastChildren.value);
+      if (matched?.groups) {
+        // # My header {#my-header}
+        id = matched.groups.id;
+        if (id != toSlug(id)) {
+          throw new Error(`Expected header ID to be a valid slug. You specified: {#${id}}`)
         }
-        id = id.slice(2, -2);
-        if (id !== toSlug(id)) {
-          throw new Error(`Expected header ID to be a valid slug. You specified: {/*${id}*/}. Replace it with: {/*${toSlug(id)}*/}`);
-        }
+        lastChildren.value = lastChildren.value.slice(0, matched.index);
       } else {
         // # My header
         id = toSlug(toString(node));
@@ -46,7 +48,7 @@ export default function remarkHeaderCustomId() {
         throw new Error(
           `Cannot have a duplicate header with id "${id}" on the page. `
           + 'Rename the section or give it an explicit unique ID. '
-          + 'For example: #### Arguments {/*setstate-arguments*/}'
+          + 'For example: #### Arguments {#setstate-arguments}'
         );
       }
       ids.add(id);

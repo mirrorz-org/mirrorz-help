@@ -20,7 +20,7 @@ function patch(context: any, key: string, value: any) {
   return context[key];
 }
 
-const customIdRegex = / {#(?<id>.+)}$/
+const customIdRegex = / {#(?<id>.+)}$/;
 
 export default function remarkHeaderCustomId() {
   return function transformer(tree: any) {
@@ -35,8 +35,8 @@ export default function remarkHeaderCustomId() {
       if (matched?.groups) {
         // # My header {#my-header}
         id = matched.groups.id;
-        if (id != toSlug(id)) {
-          throw new Error(`Expected header ID to be a valid slug. You specified: {#${id}}`)
+        if (id !== toSlug(id)) {
+          throw new Error(`Expected header ID to be a valid slug. You specified: {#${id}}`);
         }
         lastChildren.value = lastChildren.value.slice(0, matched.index);
       } else {

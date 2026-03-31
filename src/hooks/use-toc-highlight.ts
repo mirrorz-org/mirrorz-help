@@ -12,6 +12,8 @@ export function getHeaderAnchors(): HTMLAnchorElement[] {
 
 /**
  * Sets up Table of Contents highlighting.
+ *
+ * Returns index to highlight, of element with toc-heading-anchor class.
  */
 export function useTocHighlight(enableTracking = true) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);

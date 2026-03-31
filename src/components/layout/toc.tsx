@@ -79,7 +79,7 @@ interface ToCProps {
 }
 
 function ToCAside({ toc }: ToCProps) {
-  const currentIndex = useTocHighlight();
+  const currentIndex = useTocHighlight() + (toc.length > 0 ? 1 : 0);
   // Prevent ToC overflow
   const selectedIndex = currentIndex > toc.length - 1 ? toc.length - 1 : currentIndex;
 

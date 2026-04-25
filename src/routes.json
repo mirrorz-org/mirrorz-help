@@ -1,4 +1,10 @@
 {
+  "/adobe-fonts/": {
+    "title": "Adobe 字体",
+    "fullTitle": "Adobe 字体镜像使用帮助",
+    "file": "adobe-fonts.mdx",
+    "cname": "adobe-fonts"
+  },
   "/Adoptium/": {
     "title": "Adoptium 软件仓库",
     "fullTitle": "Adoptium 软件仓库镜像使用帮助",

@@ -76,7 +76,7 @@ async function asyncCache<T>(key: string, fn: () => Promise<T>): Promise<T> {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 8;
+const DISK_CACHE_BREAKER = 9;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -296,6 +296,12 @@ function transpileToMdx(blockContent: string, blockPath: string | null, page: pa
         : null)
     })
   );
+  visitor.visit(mdast as MdastRoot, 'html', (node, index, parent) => {
+    if (parent && index !== undefined && node.value.trimStart().startsWith('<!--')) {
+      parent.children.splice(index, 1);
+      return [visitor.SKIP, index];
+    }
+  });
   visitor.visit(mdast, ['mystRole', 'mystDirective', 'mystDirectiveError', 'mystRoleError'],
     (node) => {
       if (node.type === 'mystDirectiveError' || node.type === 'mystRoleError') {

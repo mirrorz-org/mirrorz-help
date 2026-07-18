@@ -89,14 +89,16 @@ const styles = stylex.create({
 
 interface LayoutProps {
   toc?: ToC[],
+  siteTocs?: Record<string, ToC[]>,
   meta?: MetaFromFrontMatters,
   cname?: string | null,
   isContent?: boolean
 }
 
-export function Layout({ children, meta, toc = EMPTY_ARRAY, cname, isContent = false }: React.PropsWithChildren<LayoutProps>) {
+export function Layout({ children, meta, toc = EMPTY_ARRAY, siteTocs, cname, isContent = false }: React.PropsWithChildren<LayoutProps>) {
   const { asPath } = useRouter();
   useSearchHotKeys();
+  const hasToc = toc.length > 0 || Object.values(siteTocs ?? {}).some(siteToc => siteToc.length > 0);
 
   if (process.env.NODE_ENV !== 'production' && isContent) {
     // Validate Front Matters
@@ -166,8 +168,8 @@ export function Layout({ children, meta, toc = EMPTY_ARRAY, cname, isContent = f
                   * No fallback UI so need to be careful not to suspend directly inside.
                   */}
                   <Suspense fallback={null}>
-                    {toc.length > 0 && (
-                      <ToCAside key={asPath} toc={toc} />
+                    {hasToc && (
+                      <ToCAside key={asPath} toc={toc} siteTocs={siteTocs} />
                     )}
                   </Suspense>
                 </div>

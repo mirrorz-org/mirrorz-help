@@ -4,6 +4,7 @@ import { useTocHighlight } from '../../hooks/use-toc-highlight';
 import IconToC from '../icons/toc';
 import { memo } from 'react';
 import { reviveNodeOnClient } from '@/lib/shared/react-node-json';
+import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 
 const styles = stylex.create({
   toc: {
@@ -75,10 +76,13 @@ const styles = stylex.create({
 });
 
 interface ToCProps {
-  toc: ToC[]
+  toc: ToC[],
+  siteTocs?: Record<string, ToC[]>
 }
 
-function ToCAside({ toc }: ToCProps) {
+function ToCAside({ toc: defaultToc, siteTocs }: ToCProps) {
+  const selectedMirror = useSelectedMirror();
+  const toc = (selectedMirror ? siteTocs?.[selectedMirror] : undefined) ?? defaultToc;
   const currentIndex = useTocHighlight() + (toc.length > 0 ? 1 : 0);
   // Prevent ToC overflow
   const selectedIndex = currentIndex > toc.length - 1 ? toc.length - 1 : currentIndex;

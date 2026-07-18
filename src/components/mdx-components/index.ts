@@ -6,6 +6,7 @@ import SyntaxHighlight from './codeblock';
 import EnhancedCodeBlock from './enhanced-codeblock';
 import EnhancedInlineCodeBlock from './enhanced-codeblock/inline';
 import GlobalMenu from './globalMenu';
+import MirrorBlock, { MirrorVariant } from './mirrorBlock';
 
 import type React from 'react';
 
@@ -27,5 +28,7 @@ export const MDXComponents: Record<string, React.ComponentType<any>> = {
   CodeBlock: EnhancedCodeBlock,
   CodeInline: EnhancedInlineCodeBlock,
   GlobalMenu,
+  MirrorBlock,
+  MirrorVariant,
   SyntaxHighlight
 };

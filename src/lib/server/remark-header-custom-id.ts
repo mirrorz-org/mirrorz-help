@@ -22,43 +22,57 @@ function patch(context: any, key: string, value: any) {
 
 const customIdRegex = / {#(?<id>.+)}$/;
 
+const isMirrorVariant = (node: any) => node?.type === 'mdxJsxFlowElement' && node.name === 'MirrorVariant';
+
+function processNode(node: any, ids: Set<string>) {
+  const lastChildren = node.children.at(-1);
+  if (lastChildren?.type !== 'text') {
+    return;
+  }
+  let id;
+  const matched = customIdRegex.exec(lastChildren.value);
+  if (matched?.groups) {
+    id = matched.groups.id;
+    if (id !== toSlug(id)) {
+      throw new Error(`Expected header ID to be a valid slug. You specified: {#${id}}`);
+    }
+    lastChildren.value = lastChildren.value.slice(0, matched.index);
+  } else {
+    id = toSlug(toString(node));
+  }
+
+  if (ids.has(id)) {
+    throw new Error(
+      `Cannot have a duplicate header with id "${id}" on the page. `
+      + 'Rename the section or give it an explicit unique ID. '
+      + 'For example: #### Arguments {#setstate-arguments}'
+    );
+  }
+  ids.add(id);
+
+  const data = patch(node, 'data', {});
+  patch(data, 'id', id);
+  patch(data, 'htmlAttributes', {});
+  patch(data, 'hProperties', {});
+  patch(data.htmlAttributes, 'id', id);
+  patch(data.hProperties, 'id', id);
+}
+
+function walkTree(node: any, ids: Set<string>) {
+  if (node.type === 'heading') {
+    processNode(node, ids);
+  }
+  if (node.children) {
+    const childIds = isMirrorVariant(node) ? new Set<string>() : ids;
+    for (const child of node.children) {
+      walkTree(child, childIds);
+    }
+  }
+}
+
 export default function remarkHeaderCustomId() {
   return function transformer(tree: any) {
-    const ids = new Set();
-    visit(tree, 'heading', (node) => {
-      const lastChildren = node.children.at(-1);
-      if (lastChildren?.type !== 'text') {
-        return;
-      }
-      let id;
-      const matched = customIdRegex.exec(lastChildren.value);
-      if (matched?.groups) {
-        // # My header {#my-header}
-        id = matched.groups.id;
-        if (id !== toSlug(id)) {
-          throw new Error(`Expected header ID to be a valid slug. You specified: {#${id}}`);
-        }
-        lastChildren.value = lastChildren.value.slice(0, matched.index);
-      } else {
-        // # My header
-        id = toSlug(toString(node));
-      }
-
-      if (ids.has(id)) {
-        throw new Error(
-          `Cannot have a duplicate header with id "${id}" on the page. `
-          + 'Rename the section or give it an explicit unique ID. '
-          + 'For example: #### Arguments {#setstate-arguments}'
-        );
-      }
-      ids.add(id);
-
-      const data = patch(node, 'data', {});
-      patch(data, 'id', id);
-      patch(data, 'htmlAttributes', {});
-      patch(data, 'hProperties', {});
-      patch(data.htmlAttributes, 'id', id);
-      patch(data.hProperties, 'id', id);
-    });
+    const ids = new Set<string>();
+    walkTree(tree, ids);
   };
 }

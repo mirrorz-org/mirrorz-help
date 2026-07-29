@@ -353,6 +353,18 @@
     "file": "gentoo.mdx",
     "cname": "gentoo"
   },
+  "/gentoo-zh/": {
+    "title": "Gentoo-zh Overlay",
+    "fullTitle": "Gentoo-zh Overlay 软件仓库使用帮助",
+    "file": "gentoo-zh.mdx",
+    "cname": "gentoo-zh"
+  },
+  "/gentoo-zh.git/": {
+    "title": "Gentoo-zh Overlay Git",
+    "fullTitle": "Gentoo-zh Overlay Git 使用帮助",
+    "file": "gentoo-zh.git.mdx",
+    "cname": "gentoo-zh.git"
+  },
   "/gentoo-portage/": {
     "title": "Gentoo Portage",
     "fullTitle": "Gentoo Portage 软件仓库使用帮助",

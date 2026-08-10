@@ -31,6 +31,7 @@ export function useRenderCode(templateId: string, variables: MenuValue, isHttpPr
     if (isLoading) {
       urlVars.host = '(Loading...)';
       urlVars.path = '(Loading...)';
+      urlVars.scheme = httpsEnabled ? 'https' : 'http';
       urlVars.http_protocol = '';
       urlVars.endpoint = '(Loading...)';
     } else {
@@ -39,6 +40,7 @@ export function useRenderCode(templateId: string, variables: MenuValue, isHttpPr
       urlWithScheme.protocol = httpsEnabled ? 'https:' : 'http:';
       urlVars.host = url.host;
       urlVars.path = url.pathname;
+      urlVars.scheme = httpsEnabled ? 'https' : 'http';
       urlVars.http_protocol = isHttpProtocol ? (httpsEnabled ? 'https://' : 'http://') : '';
       urlVars.endpoint = urlWithScheme.toString();
     }

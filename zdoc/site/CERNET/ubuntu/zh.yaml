@@ -1,0 +1,43 @@
+_: Ubuntu 软件仓库
+block:
+- ports
+- old-releases
+- intro
+- mirrorlist
+- ubuntu
+input:
+  release:
+    _: Ubuntu 版本
+    option:
+      resolute:
+        _: Ubuntu 26.04 LTS
+      noble:
+        _: Ubuntu 24.04 LTS
+      questing:
+        _: Ubuntu 25.10
+      jammy:
+        _: Ubuntu 22.04 LTS
+  release_deb822:
+    _: Ubuntu 版本
+    option:
+      resolute:
+        _: Ubuntu 26.04 LTS
+      noble:
+        _: Ubuntu 24.04 LTS
+      questing:
+        _: Ubuntu 25.10
+      jammy:
+        _: Ubuntu 22.04 LTS
+  src:
+    _: 启用源码源
+    note: 源码源通常用于构建和调试，开启后影响更新速度
+    true: ''
+    false: '# '
+  proposed:
+    _: 启用 proposed
+    true: ''
+    false: '# '
+  mirror_security:
+    _: 强制安全更新使用镜像
+    note: 为了更及时地获得安全更新，不推荐使用镜像站安全更新软件源
+    true:

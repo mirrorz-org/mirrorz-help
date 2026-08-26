@@ -9,7 +9,7 @@ import * as Log from 'next/dist/build/output/log';
 
 import { transform } from '@swc/core';
 import { MDXComponents } from '@/components/mdx-components';
-import { Children } from 'react';
+import { Children, isValidElement } from 'react';
 
 import type React from 'react';
 import type { MetaFromFrontMatters } from '@/types/front-matter';
@@ -42,6 +42,11 @@ import type { Root as MdastRoot } from 'mdast';
 const { FileStore, stableHash } = metroCache;
 
 const docsDir = path.resolve(process.cwd(), 'zdoc');
+const siteDir = path.resolve(docsDir, 'site');
+
+const DEFAULT_VARIANT = '__default__';
+const MIRROR_BLOCK = 'MirrorBlock';
+const MIRROR_VARIANT = 'MirrorVariant';
 
 export interface ToC {
   url: string,
@@ -52,6 +57,7 @@ export interface ToC {
 export interface ContentProps {
   content: any,
   toc: ToC[],
+  siteTocs: Record<string, ToC[]>,
   meta: MetaFromFrontMatters,
   cname: string,
   compiledTemplates: Record<string, string>,
@@ -76,7 +82,7 @@ async function asyncCache<T>(key: string, fn: () => Promise<T>): Promise<T> {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 9;
+const DISK_CACHE_BREAKER = 11;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -212,6 +218,63 @@ async function loadConf(page: pageId, language: string): Promise<ZDocConfig | nu
 async function loadBlock(page: pageId, block: string, language: string) {
   return loadFile(page, `${block}.${language}.md`, '');
 };
+
+async function listSiteAbbrs(): Promise<string[]> {
+  try {
+    return await fsPromises.readdir(siteDir);
+  } catch (err) {
+    if (isErrnoException(err) && err.code === 'ENOENT') return [];
+    throw err;
+  }
+}
+
+interface SiteConfig {
+  blockList: string[],
+  blockOverrides: Record<string, { path: string, content: string }>
+}
+
+async function discoverSiteConfigs(page: pageId, language: string, baseBlockNames: string[]): Promise<Record<string, SiteConfig>> {
+  const siteAbbrs = await listSiteAbbrs();
+  const configs: Record<string, SiteConfig> = {};
+  await Promise.all(siteAbbrs.map(async (abbr) => {
+    const pageDir = path.join(siteDir, abbr, page);
+    let files: string[];
+    try {
+      files = await fsPromises.readdir(pageDir);
+    } catch (err) {
+      if (!isErrnoException(err) || err.code !== 'ENOENT') throw err;
+      return;
+    }
+    const suffix = `.${language}.md`;
+    const yamlName = `${language}.yaml`;
+    let blockList: string[] | null = null;
+    const blockOverrides: Record<string, { path: string, content: string }> = {};
+    for (const f of files) {
+      if (f === yamlName) {
+        const yamlPath = path.join(pageDir, f);
+        const yamlContent = await fsPromises.readFile(yamlPath, 'utf-8');
+        const parsed = yamlParse(yamlContent) as ZDocConfigOnDisk | null;
+        if (!parsed || !Array.isArray(parsed.block)) {
+          throw new Error(`Site config ${yamlPath} must contain a "block" array`);
+        }
+        blockList = parsed.block;
+      } else if (f.endsWith(suffix)) {
+        const blockName = f.slice(0, -suffix.length);
+        const blockPath = path.join(pageDir, f);
+        const content = await fsPromises.readFile(blockPath, 'utf-8');
+        blockOverrides[blockName] = { path: blockPath, content };
+      }
+    }
+    // A site is included if it has a yaml OR any block overrides
+    if (blockList !== null || Object.keys(blockOverrides).length > 0) {
+      configs[abbr] = {
+        blockList: blockList ?? baseBlockNames,
+        blockOverrides
+      };
+    }
+  }));
+  return configs;
+}
 
 function transpileInput(name: string, input: ZDocInput): InputType {
   const items: Menu['items'] = [];
@@ -440,8 +503,27 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
   if (conf === null) {
     return { notFound: true };
   }
-  const blocksNames = conf.block || ['index'];
-  const blocksContent = await Promise.all(blocksNames.map(block => loadBlock(id, block, language)));
+  const baseBlockNames = conf.block || ['index'];
+  const siteConfigs = await discoverSiteConfigs(id, language, baseBlockNames);
+
+  // Collect all unique block names (base + any site-only blocks from site yamls)
+  const allBlockNames = new Set(baseBlockNames);
+  for (const sc of Object.values(siteConfigs)) {
+    for (const b of sc.blockList) allBlockNames.add(b);
+  }
+
+  // Load and transpile each block (global content + site overrides)
+  const blockNames = [...allBlockNames];
+  const blockData = await Promise.all(blockNames.map(async (block) => {
+    const defaultContent = await loadBlock(id, block, language);
+    const overrides: Record<string, { path: string, content: string }> = {};
+    for (const [abbr, sc] of Object.entries(siteConfigs)) {
+      if (sc.blockOverrides[block]) {
+        overrides[abbr] = sc.blockOverrides[block];
+      }
+    }
+    return { block, defaultContent, overrides };
+  }));
 
   const lockfile = await asyncCache('pnpm-lock.yaml', () => fsPromises.readFile(path.join(process.cwd(), 'pnpm-lock.yaml'), { encoding: 'utf-8' }));
   const mdxComponentNames = Object.keys(MDXComponents);
@@ -451,7 +533,7 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
       // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       // ~~~~ IMPORTANT: Everything that the code below may rely on.
       // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      raw: blocksContent.map(b => b.content).join('\n') + JSON.stringify(conf),
+      raw: blockData.map(b => b.defaultContent.content + Object.entries(b.overrides).map(([a, v]) => `[${a}]${v.content}`).join('')).join('\n---\n') + JSON.stringify(conf) + JSON.stringify(siteConfigs),
       mdxComponentNames,
       DISK_CACHE_BREAKER,
       lockfile
@@ -487,8 +569,50 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
     templateDeduplicationMap.set(templateContent, templateId);
     return templateId;
   };
-  const transpiledBlocks = blocksContent.map(b => transpileToMdx(b.content, b.path, id, conf, globalVariables, generateGlobalMenuId, templateCompiler));
-  const mdx = transpiledBlocks.join('\n\n');
+
+  // Transpile each block version (global + overrides)
+  const transpiledGlobal = new Map<string, string>();
+  const transpiledOverrides = new Map<string, Map<string, string>>();
+  for (const { block, defaultContent, overrides } of blockData) {
+    transpiledGlobal.set(block, transpileToMdx(defaultContent.content, defaultContent.path, id, conf, globalVariables, generateGlobalMenuId, templateCompiler));
+    if (Object.keys(overrides).length > 0) {
+      const overrideMap = new Map<string, string>();
+      for (const [abbr, v] of Object.entries(overrides)) {
+        overrideMap.set(abbr, transpileToMdx(v.content, v.path, id, conf, globalVariables, generateGlobalMenuId, templateCompiler));
+      }
+      transpiledOverrides.set(block, overrideMap);
+    }
+  }
+
+  // Helper: join transpiled blocks by name, using override if available
+  const joinBlocks = (blocks: string[], abbr?: string): string => {
+    const parts: string[] = [];
+    for (const b of blocks) {
+      const mdx = abbr ? (transpiledOverrides.get(b)?.get(abbr) ?? transpiledGlobal.get(b)) : transpiledGlobal.get(b);
+      if (mdx) parts.push(mdx);
+    }
+    return parts.join('\n\n');
+  };
+
+  // Assemble page-level variants
+  const siteAbbrs = Object.keys(siteConfigs).sort();
+  let mdx: string;
+  if (siteAbbrs.length === 0) {
+    // No site configs: inline all base blocks directly (zero overhead)
+    mdx = joinBlocks(baseBlockNames);
+  } else {
+    // Build a MirrorBlock wrapping the entire page
+    const parts: string[] = [`<${MIRROR_BLOCK}>`];
+    // Default variant: all base blocks from global yaml (self-contained)
+    parts.push(`<${MIRROR_VARIANT} site="${DEFAULT_VARIANT}">\n\n${joinBlocks(baseBlockNames)}\n\n</${MIRROR_VARIANT}>`);
+    // Per-site variants
+    for (const abbr of siteAbbrs) {
+      const sc = siteConfigs[abbr];
+      parts.push(`<${MIRROR_VARIANT} site="${abbr}">\n\n${joinBlocks(sc.blockList, abbr)}\n\n</${MIRROR_VARIANT}>`);
+    }
+    parts.push(`</${MIRROR_BLOCK}>`);
+    mdx = parts.join('\n\n');
+  }
   const meta: MetaFromFrontMatters = {
     title: conf._,
     cname: id
@@ -518,11 +642,13 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
   evalJSCode(fakeRequire, fakeExports);
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const reactTree = fakeExports.default({});
-  const toc = getTableOfContents(reactTree.props.children, 10);
+  const siteTocs = getSiteTableOfContents(reactTree);
+  const toc = siteTocs[DEFAULT_VARIANT] ?? getTableOfContents(reactTree.props.children, 10);
 
   const output = {
     props: {
       toc,
+      siteTocs,
       content: JSON.stringify(reactTree, stringifyNodeOnServer),
       meta,
       globalVariables,
@@ -533,6 +659,26 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
   // Cache it on the disk.
   await store.set(hash, output);
   return output;
+}
+
+function getSiteTableOfContents(children: React.ReactNode): Record<string, ToC[]> {
+  const siteTocs: Record<string, ToC[]> = {};
+  for (const child of Children.toArray(children)) {
+    if (!isValidElement<{ children: React.ReactNode }>(child)) continue;
+    if (child.type === MIRROR_BLOCK) {
+      for (const variant of Children.toArray(child.props.children)) {
+        if (
+          isValidElement<{ children: React.ReactNode, site: string }>(variant)
+          && variant.type === MIRROR_VARIANT
+        ) {
+          siteTocs[variant.props.site] = getTableOfContents(variant.props.children, 10);
+        }
+      }
+      continue;
+    }
+    Object.assign(siteTocs, getSiteTableOfContents(child.props.children));
+  }
+  return siteTocs;
 }
 
 // Get ToC from children
@@ -556,6 +702,19 @@ const headerTypes = new Set([
 ]);
 function extractHeaders(children: React.ReactNode, depth: number, out: ToC[]) {
   for (const child of Children.toArray(children)) {
+    if (isValidElement<{ children: React.ReactNode }>(child) && child.type === MIRROR_BLOCK) {
+      for (const variant of Children.toArray(child.props.children)) {
+        if (
+          isValidElement<{ children: React.ReactNode, site: string }>(variant)
+          && variant.type === MIRROR_VARIANT
+          && variant.props.site === DEFAULT_VARIANT
+        ) {
+          extractHeaders(variant.props.children, depth, out);
+          break;
+        }
+      }
+      continue;
+    }
     if (typeof child === 'object' && 'type' in child && typeof child.type === 'string' && headerTypes.has(child.type)) {
       const cprops = child.props as Record<string, any>;
 

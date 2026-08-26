@@ -10,7 +10,7 @@ import { reviveNodeOnClient } from '../lib/shared/react-node-json';
 import { PageGlobalVariableProvider } from '@/contexts/page-global-variable';
 import { CompiledTemplatesProvider } from '@/contexts/compiled-templates';
 
-export default function ContentPage({ content, toc, meta, cname, globalVariables, compiledTemplates }: ContentProps) {
+export default function ContentPage({ content, toc, siteTocs, meta, cname, globalVariables, compiledTemplates }: ContentProps) {
   const parsedContent = useMemo(
     () => JSON.parse(content, reviveNodeOnClient),
     [content]
@@ -27,7 +27,7 @@ export default function ContentPage({ content, toc, meta, cname, globalVariables
         //   height: 630
         // }}
       />
-      <Layout meta={meta} toc={toc} cname={cname} isContent>
+      <Layout meta={meta} toc={toc} siteTocs={siteTocs} cname={cname} isContent>
         <CompiledTemplatesProvider compiledTemplates={compiledTemplates}>
           <DocumentationWrapper>
             <PageGlobalVariableProvider initialState={globalVariables || {}}>

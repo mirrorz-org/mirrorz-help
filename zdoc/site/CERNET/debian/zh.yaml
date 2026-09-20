@@ -1,2 +1,4 @@
 block:
+- intro
 - mirrorlist
+- nginx

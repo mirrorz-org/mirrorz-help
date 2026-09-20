@@ -1,2 +1,5 @@
 block:
+- ports
+- old-releases
+- intro
 - mirrorlist

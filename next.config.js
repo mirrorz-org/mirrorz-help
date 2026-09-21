@@ -12,6 +12,7 @@ module.exports = withBundleAnalyzer(withStyleX({
   nextjsAppRouterMode: false
 })({
   trailingSlash: true,
+  skipTrailingSlashRedirect: true,
   reactStrictMode: true,
   output: 'export'
 }));

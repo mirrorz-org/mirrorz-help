@@ -479,6 +479,12 @@
     "file": "influxdata.mdx",
     "cname": "influxdata"
   },
+  "/jetson-pypi/": {
+    "title": "NVIDIA Jetson PyPI 软件仓库",
+    "fullTitle": "NVIDIA Jetson PyPI 软件仓库使用帮助",
+    "file": "jetson-pypi.mdx",
+    "cname": "jetson-pypi"
+  },
   "/julia/": {
     "title": "Julia 软件仓库",
     "fullTitle": "Julia 软件仓库镜像使用帮助",

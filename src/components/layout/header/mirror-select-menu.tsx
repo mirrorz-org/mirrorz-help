@@ -6,6 +6,7 @@ import { useMirrorZData } from '@/hooks/use-mirrorz-data';
 import { useCurrentCname } from '@/contexts/current-cname';
 import { iconWrapperXStyle, selectWrapperXStyle, selectXStyle, iconXStyle } from './select-style';
 import { sanitizeAbbrForMirrorZ } from '@/lib/client/utils';
+import { useRouter } from 'next/router';
 
 const styles = stylex.create({
   select_wrapper: {
@@ -16,13 +17,24 @@ const styles = stylex.create({
 function MirrorSelectMenu() {
   const selectedMirror = useSelectedMirror();
   const setSelectedMirror = useSetSelectedMirror();
-
-  const handleChange: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => {
-    setSelectedMirror(e.target.value);
-  }, [setSelectedMirror]);
-
+  const router = useRouter();
   const cname = useCurrentCname();
   const { isLoading, data } = useMirrorZData();
+
+  const handleChange: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => {
+    const mirror = e.target.value;
+    setSelectedMirror(mirror);
+    void router.replace({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        mirror
+      }
+    }, undefined, {
+      shallow: true,
+      scroll: false
+    });
+  }, [router, setSelectedMirror]);
 
   return (
     <div {...stylex.props(selectWrapperXStyle, styles.select_wrapper)}>

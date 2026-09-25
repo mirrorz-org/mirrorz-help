@@ -521,6 +521,12 @@
     "file": "kubernetes.mdx",
     "cname": "kubernetes"
   },
+  "/librewolf/": {
+    "title": "LibreWolf 软件仓库",
+    "fullTitle": "LibreWolf 软件仓库镜像使用帮助",
+    "file": "librewolf.mdx",
+    "cname": "librewolf"
+  },
   "/lineageOS/": {
     "title": "LineageOS 源码仓库",
     "fullTitle": "LineageOS 源码仓库镜像使用帮助",
@@ -809,6 +815,12 @@
     "file": "riscv-toolchains.mdx",
     "cname": "riscv-toolchains"
   },
+  "/rocm-pypi/": {
+    "title": "AMD ROCm PyPI 软件仓库",
+    "fullTitle": "AMD ROCm PyPI 软件仓库镜像使用帮助",
+    "file": "rocm-pypi.mdx",
+    "cname": "rocm-pypi"
+  },
   "/rocky/": {
     "title": "Rocky Linux 软件仓库",
     "fullTitle": "Rocky Linux 软件仓库镜像使用帮助",
@@ -862,6 +874,12 @@
     "fullTitle": "Scientific Linux 软件仓库镜像使用帮助",
     "file": "scientificlinux.mdx",
     "cname": "scientificlinux"
+  },
+  "/scoop/": {
+    "title": "Scoop",
+    "fullTitle": "Scoop 镜像使用帮助",
+    "file": "scoop.mdx",
+    "cname": "scoop"
   },
   "/stackage/": {
     "title": "Stackage 软件仓库",

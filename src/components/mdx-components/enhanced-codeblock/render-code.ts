@@ -5,7 +5,7 @@ import { useMirrorHttpsEnabled } from '@/contexts/mirror-enable-https';
 import { useMirrorSudoEnabled } from '@/contexts/mirror-enable-sudo';
 import { useSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
-import { useCurrentCname } from '@/contexts/current-cname';
+import { useResolveSiteCname, useSiteOverrides } from '@/contexts/current-cname';
 import { useTemplate } from '@/contexts/compiled-templates';
 
 export function useRenderCode(templateId: string, variables: MenuValue, isHttpProtocol: boolean): string {
@@ -13,16 +13,19 @@ export function useRenderCode(templateId: string, variables: MenuValue, isHttpPr
   const codeTemplate = useTemplate(templateId);
   const httpsEnabled = useMirrorHttpsEnabled();
   const sudoEnabled = useMirrorSudoEnabled();
-  const cname = useCurrentCname();
+  const resolveSiteCname = useResolveSiteCname();
+  const siteOverrides = useSiteOverrides();
   const { data, isLoading: _isLoading } = useMirrorZData();
   const currentSelectedMirror = useSelectedMirror();
 
   const isLoading = _isLoading || !currentSelectedMirror;
+  const siteCname = resolveSiteCname(currentSelectedMirror);
+  const rewriteRules = currentSelectedMirror ? siteOverrides[currentSelectedMirror]?.rewriteUrl : undefined;
 
   const mirrorUrl = useMemo(() => {
-    if (isLoading) return '(Loading...)';
-    return data?.[0][currentSelectedMirror]?.mirrors[cname].full || '(Loading...)';
-  }, [cname, currentSelectedMirror, data, isLoading]);
+    if (isLoading || !siteCname) return '(Loading...)';
+    return data?.[0][currentSelectedMirror]?.mirrors[siteCname]?.full || '(Loading...)';
+  }, [siteCname, currentSelectedMirror, data, isLoading]);
 
   return useMemo(() => {
     const urlVars: MenuValue = {
@@ -52,6 +55,8 @@ export function useRenderCode(templateId: string, variables: MenuValue, isHttpPr
       sudo: sudoEnabled ? 'sudo ' : '',
       sudoE: sudoEnabled ? 'sudo -E ' : ''
     };
-    return codeTemplate.render(variable);
-  }, [codeTemplate, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variables, globalStateValue, isLoading]);
+    const rendered = codeTemplate.render(variable);
+    if (isLoading || !rewriteRules) return rendered;
+    return rewriteRules.reduce((code, { from, to }) => code.replaceAll(new RegExp(from, 'g'), to), rendered);
+  }, [codeTemplate, httpsEnabled, isHttpProtocol, mirrorUrl, sudoEnabled, variables, globalStateValue, isLoading, rewriteRules]);
 }

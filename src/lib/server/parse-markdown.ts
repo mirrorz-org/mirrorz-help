@@ -13,6 +13,7 @@ import { Children, isValidElement } from 'react';
 
 import type React from 'react';
 import type { MetaFromFrontMatters } from '@/types/front-matter';
+import type { SiteOverride, SiteOverrides } from '@/types/site-override';
 
 import { compile as compileMdx } from '@/compiled/@mdx-js/mdx';
 import remarkGfm from '@/compiled/remark-gfm';
@@ -61,7 +62,8 @@ export interface ContentProps {
   meta: MetaFromFrontMatters,
   cname: string,
   compiledTemplates: Record<string, string>,
-  globalVariables?: Record<string, MenuValue>
+  globalVariables?: Record<string, MenuValue>,
+  siteOverrides: SiteOverrides
 }
 
 function fromHrefToSegments(href: string) {
@@ -82,7 +84,7 @@ async function asyncCache<T>(key: string, fn: () => Promise<T>): Promise<T> {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ IMPORTANT: BUMP THIS IF YOU CHANGE ANY CODE BELOW ~~~
-const DISK_CACHE_BREAKER = 11;
+const DISK_CACHE_BREAKER = 12;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = new FileStore({
@@ -221,16 +223,57 @@ async function loadBlock(page: pageId, block: string, language: string) {
 
 async function listSiteAbbrs(): Promise<string[]> {
   try {
-    return await fsPromises.readdir(siteDir);
+    const entries = await fsPromises.readdir(siteDir, { withFileTypes: true });
+    return entries.reduce<string[]>((acc, e) => {
+      if (e.isDirectory()) acc.push(e.name);
+      return acc;
+    }, []);
   } catch (err) {
     if (isErrnoException(err) && err.code === 'ENOENT') return [];
     throw err;
   }
 }
 
+interface SiteConfigOnDisk {
+  block?: string[],
+  cname?: string,
+  rewrite_url?: Array<{ from: string, to: string }>
+}
+
 interface SiteConfig {
-  blockList: string[],
-  blockOverrides: Record<string, { path: string, content: string }>
+  /** null when the site does not change the page content */
+  blockList: string[] | null,
+  blockOverrides: Record<string, { path: string, content: string }>,
+  overrides: SiteOverride | null
+}
+
+function parseSiteOverride(yamlPath: string, parsed: SiteConfigOnDisk): SiteOverride | null {
+  const override: SiteOverride = {};
+  if (parsed.cname !== undefined) {
+    if (typeof parsed.cname !== 'string' || parsed.cname === '') {
+      throw new TypeError(`Site config ${yamlPath}: "cname" must be a non-empty string`);
+    }
+    override.cname = parsed.cname;
+  }
+  if (parsed.rewrite_url !== undefined) {
+    if (!Array.isArray(parsed.rewrite_url)) {
+      throw new TypeError(`Site config ${yamlPath}: "rewrite_url" must be an array of { from, to }`);
+    }
+    override.rewriteUrl = parsed.rewrite_url.map((rule, i) => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- untrusted yaml
+      if (!rule || typeof rule.from !== 'string' || typeof rule.to !== 'string') {
+        throw new TypeError(`Site config ${yamlPath}: rewrite_url[${i}] must have string "from" and "to"`);
+      }
+      try {
+        // eslint-disable-next-line no-new -- validate regex at build time
+        new RegExp(rule.from, 'g');
+      } catch (err) {
+        throw new Error(`Site config ${yamlPath}: rewrite_url[${i}].from is not a valid regex: ${(err as Error).message}`);
+      }
+      return { from: rule.from, to: rule.to };
+    });
+  }
+  return Object.keys(override).length > 0 ? override : null;
 }
 
 async function discoverSiteConfigs(page: pageId, language: string, baseBlockNames: string[]): Promise<Record<string, SiteConfig>> {
@@ -248,16 +291,26 @@ async function discoverSiteConfigs(page: pageId, language: string, baseBlockName
     const suffix = `.${language}.md`;
     const yamlName = `${language}.yaml`;
     let blockList: string[] | null = null;
+    let overrides: SiteOverride | null = null;
     const blockOverrides: Record<string, { path: string, content: string }> = {};
     for (const f of files) {
       if (f === yamlName) {
         const yamlPath = path.join(pageDir, f);
         const yamlContent = await fsPromises.readFile(yamlPath, 'utf-8');
-        const parsed = yamlParse(yamlContent) as ZDocConfigOnDisk | null;
-        if (!parsed || !Array.isArray(parsed.block)) {
-          throw new Error(`Site config ${yamlPath} must contain a "block" array`);
+        const parsed = yamlParse(yamlContent) as SiteConfigOnDisk | null;
+        if (!parsed || typeof parsed !== 'object') {
+          throw new TypeError(`Site config ${yamlPath} must be a mapping`);
         }
-        blockList = parsed.block;
+        if (parsed.block !== undefined) {
+          if (!Array.isArray(parsed.block)) {
+            throw new TypeError(`Site config ${yamlPath}: "block" must be an array`);
+          }
+          blockList = parsed.block;
+        }
+        overrides = parseSiteOverride(yamlPath, parsed);
+        if (blockList === null && overrides === null) {
+          throw new Error(`Site config ${yamlPath} must contain at least one of "block", "cname" or "rewrite_url"`);
+        }
       } else if (f.endsWith(suffix)) {
         const blockName = f.slice(0, -suffix.length);
         const blockPath = path.join(pageDir, f);
@@ -265,11 +318,13 @@ async function discoverSiteConfigs(page: pageId, language: string, baseBlockName
         blockOverrides[blockName] = { path: blockPath, content };
       }
     }
-    // A site is included if it has a yaml OR any block overrides
-    if (blockList !== null || Object.keys(blockOverrides).length > 0) {
+    const hasContentOverride = blockList !== null || Object.keys(blockOverrides).length > 0;
+    if (hasContentOverride || overrides !== null) {
       configs[abbr] = {
-        blockList: blockList ?? baseBlockNames,
-        blockOverrides
+        // A page variant is only generated when the site changes blocks or block content
+        blockList: hasContentOverride ? (blockList ?? baseBlockNames) : null,
+        blockOverrides,
+        overrides
       };
     }
   }));
@@ -509,7 +564,7 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
   // Collect all unique block names (base + any site-only blocks from site yamls)
   const allBlockNames = new Set(baseBlockNames);
   for (const sc of Object.values(siteConfigs)) {
-    for (const b of sc.blockList) allBlockNames.add(b);
+    for (const b of sc.blockList ?? []) allBlockNames.add(b);
   }
 
   // Load and transpile each block (global content + site overrides)
@@ -595,7 +650,11 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
   };
 
   // Assemble page-level variants
-  const siteAbbrs = Object.keys(siteConfigs).sort();
+  const siteAbbrs = Object.keys(siteConfigs).filter(abbr => siteConfigs[abbr].blockList !== null).sort();
+  const siteOverrides: SiteOverrides = {};
+  for (const [abbr, sc] of Object.entries(siteConfigs)) {
+    if (sc.overrides) siteOverrides[abbr] = sc.overrides;
+  }
   let mdx: string;
   if (siteAbbrs.length === 0) {
     // No site configs: inline all base blocks directly (zero overhead)
@@ -608,7 +667,7 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
     // Per-site variants
     for (const abbr of siteAbbrs) {
       const sc = siteConfigs[abbr];
-      parts.push(`<${MIRROR_VARIANT} site="${abbr}">\n\n${joinBlocks(sc.blockList, abbr)}\n\n</${MIRROR_VARIANT}>`);
+      parts.push(`<${MIRROR_VARIANT} site="${abbr}">\n\n${joinBlocks(sc.blockList!, abbr)}\n\n</${MIRROR_VARIANT}>`);
     }
     parts.push(`</${MIRROR_BLOCK}>`);
     mdx = parts.join('\n\n');
@@ -653,7 +712,8 @@ export async function getContentBySegments(segments: string[]): Promise<{ props:
       meta,
       globalVariables,
       compiledTemplates,
-      cname: meta.cname
+      cname: meta.cname,
+      siteOverrides
     }
   };
   // Cache it on the disk.

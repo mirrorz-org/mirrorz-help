@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { sanitizeAbbrForMirrorZ } from '../lib/client/utils';
 import { useSetDialog } from './dialog';
 import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect';
+import { usePageMirrors } from './current-cname';
 
 // const styles = stylex.create({
 //   link: {
@@ -34,18 +35,14 @@ export function SelectedMirrorProvider({ children, cname }: React.PropsWithChild
   const setDialog = useSetDialog();
   const [invalid, setInvalid] = useState(false);
   const { data } = useMirrorZData();
+  const pageMirrors = usePageMirrors();
 
-  const validAbbrList = useMemo(() => {
-    if (data && cname) {
-      return new Set(data[1][cname].map(m => sanitizeAbbrForMirrorZ(m.site.abbr)));
-    }
-    return new Set<string>();
-  }, [cname, data]);
+  const validAbbrList = useMemo(() => new Set(pageMirrors.map(m => sanitizeAbbrForMirrorZ(m.site.abbr))), [pageMirrors]);
 
   const router = useRouter();
   // When data is finally loaded, but there is no default mirror provided, we set the first mirror as default
   // TODO: use mirror from URL query when available
-  if (data && cname && selectedMirror === null && router.isReady) {
+  if (data && cname && pageMirrors.length > 0 && selectedMirror === null && router.isReady) {
     const mirrorFromUrlQuery = router.query.mirror;
     let select = typeof mirrorFromUrlQuery === 'string' ? sanitizeAbbrForMirrorZ(mirrorFromUrlQuery) : null;
     if (select && !validAbbrList.has(select)) {
@@ -53,7 +50,7 @@ export function SelectedMirrorProvider({ children, cname }: React.PropsWithChild
       select = null;
     }
     if (!select) {
-      select = sanitizeAbbrForMirrorZ(data[1][cname][0].site.abbr);
+      select = sanitizeAbbrForMirrorZ(pageMirrors[0].site.abbr);
     }
     setSelectedMirror(select);
   }

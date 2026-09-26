@@ -1,0 +1,6 @@
+# SJTUG publishes this mirror as `pytorch-wheels` in MirrorZ,
+# and serves the indexes at `/pytorch-wheels/<platform>` (no `/whl/` segment).
+cname: pytorch-wheels
+rewrite_url:
+- from: '/pytorch-wheels/whl/'
+  to: '/pytorch-wheels/'

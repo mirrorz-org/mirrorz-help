@@ -3,7 +3,7 @@ import IconChevronUpDown from '@/components/icons/chevron-up-down';
 import { memo, useCallback } from 'react';
 import { useSelectedMirror, useSetSelectedMirror } from '@/contexts/current-selected-mirror';
 import { useMirrorZData } from '@/hooks/use-mirrorz-data';
-import { useCurrentCname } from '@/contexts/current-cname';
+import { usePageMirrors } from '@/contexts/current-cname';
 import { iconWrapperXStyle, selectWrapperXStyle, selectXStyle, iconXStyle } from './select-style';
 import { sanitizeAbbrForMirrorZ } from '@/lib/client/utils';
 
@@ -21,8 +21,8 @@ function MirrorSelectMenu() {
     setSelectedMirror(e.target.value);
   }, [setSelectedMirror]);
 
-  const cname = useCurrentCname();
-  const { isLoading, data } = useMirrorZData();
+  const { isLoading } = useMirrorZData();
+  const pageMirrors = usePageMirrors();
 
   return (
     <div {...stylex.props(selectWrapperXStyle, styles.select_wrapper)}>
@@ -36,7 +36,7 @@ function MirrorSelectMenu() {
           (isLoading || selectedMirror === null)
             ? <option value="">Loading...</option>
             : (
-              data?.[1][cname].map(mirror => {
+              pageMirrors.map(mirror => {
                 const siteName = mirror.site.name ? `${mirror.site.abbr} - ${mirror.site.name}` : mirror.site.abbr;
                 return (
                   <option

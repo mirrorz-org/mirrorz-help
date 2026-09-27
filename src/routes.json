@@ -83,6 +83,12 @@
     "file": "armbian.mdx",
     "cname": "armbian"
   },
+  "/astral-wheels/": {
+    "title": "Astral GPU indexes",
+    "fullTitle": "Astral GPU indexes 镜像使用帮助",
+    "file": "astral-wheels.mdx",
+    "cname": "astral-wheels"
+  },
   "/bazel-apt/": {
     "title": "Bazel APT 软件仓库",
     "fullTitle": "Bazel APT 软件仓库镜像使用帮助",
@@ -766,6 +772,12 @@
     "fullTitle": "Python 官方仓库镜像使用帮助",
     "file": "python.mdx",
     "cname": "python"
+  },
+  "/pytorch/": {
+    "title": "PyTorch 软件仓库",
+    "fullTitle": "PyTorch 软件仓库镜像使用帮助",
+    "file": "pytorch.mdx",
+    "cname": "pytorch"
   },
   "/qemu.git/": {
     "title": "QEMU Git",

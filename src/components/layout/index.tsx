@@ -4,6 +4,7 @@ import { Suspense, lazy, useState } from 'react';
 import Nav from './nav';
 import { useRouter } from 'next/router';
 import type { ToC } from '@/lib/server/parse-markdown';
+import type { SiteOverrides } from '@/types/site-override';
 import ToCAside from './toc';
 import Footer from './footer';
 import { useSearchHotKeys } from '@/hooks/use-search-hotkeys';
@@ -92,10 +93,11 @@ interface LayoutProps {
   siteTocs?: Record<string, ToC[]>,
   meta?: MetaFromFrontMatters,
   cname?: string | null,
+  siteOverrides?: SiteOverrides,
   isContent?: boolean
 }
 
-export function Layout({ children, meta, toc = EMPTY_ARRAY, siteTocs, cname, isContent = false }: React.PropsWithChildren<LayoutProps>) {
+export function Layout({ children, meta, toc = EMPTY_ARRAY, siteTocs, cname, siteOverrides, isContent = false }: React.PropsWithChildren<LayoutProps>) {
   const { asPath } = useRouter();
   useSearchHotKeys();
   const hasToc = toc.length > 0 || Object.values(siteTocs ?? {}).some(siteToc => siteToc.length > 0);
@@ -131,7 +133,7 @@ export function Layout({ children, meta, toc = EMPTY_ARRAY, siteTocs, cname, isC
 
   return (
     <FrontMatterProvider meta={meta}>
-      <CurrentCnameProvider cname={cname || null}>
+      <CurrentCnameProvider cname={cname || null} siteOverrides={siteOverrides}>
         {/** Always reset state after navigation */}
         <SelectedMirrorProvider key={asPath} cname={cname || null}>
           <MirrorEnableHttpsProvider>

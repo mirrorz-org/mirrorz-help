@@ -116,6 +116,7 @@ function SearchCommandK() {
           data.map(([href, route]) => (
             <Command.Item
               value={href}
+              keywords={[route.title]}
               key={href}
               {...stylex.props(styles.item)}
               onSelect={handleSelect}

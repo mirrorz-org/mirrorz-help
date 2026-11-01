@@ -2,6 +2,7 @@ import { memo, useCallback } from 'react';
 import Link from 'next/link';
 import * as stylex from '@stylexjs/stylex';
 import { useRouter } from 'next/router';
+import { scrollIntoViewIfNeeded } from '@/lib/client/scroll-into-view-if-needed';
 
 interface SidebarLinkProps {
   pathname: string,
@@ -100,7 +101,7 @@ function SidebarLink({
           if ('scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {
             el.scrollIntoViewIfNeeded();
           } else {
-            el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            scrollIntoViewIfNeeded(el);
           }
         }
       }, [isActive])}

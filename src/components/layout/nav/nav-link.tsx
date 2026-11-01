@@ -96,8 +96,12 @@ function SidebarLink({
         query: router.query.mirror ? { mirror: router.query.mirror || null } : undefined
       }}
       ref={useCallback((el: HTMLAnchorElement | null) => {
-        if (el && isActive && 'scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {
-          el.scrollIntoViewIfNeeded();
+        if (el && isActive) {
+          if ('scrollIntoViewIfNeeded' in el && typeof el.scrollIntoViewIfNeeded === 'function') {
+            el.scrollIntoViewIfNeeded();
+          } else {
+            el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+          }
         }
       }, [isActive])}
       title={title}

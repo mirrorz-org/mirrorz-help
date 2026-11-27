@@ -11,6 +11,12 @@
     "file": "Adoptium.mdx",
     "cname": "Adoptium"
   },
+  "/alhp/": {
+    "title": "ALHP 软件仓库",
+    "fullTitle": "ALHP 软件仓库镜像使用帮助",
+    "file": "alhp.mdx",
+    "cname": "alhp"
+  },
   "/almalinux/": {
     "title": "AlmaLinux 软件仓库",
     "fullTitle": "AlmaLinux 软件仓库镜像使用帮助",
@@ -233,6 +239,12 @@
     "file": "debian-elts.mdx",
     "cname": "debian-elts"
   },
+  "/debian-ports/": {
+    "title": "Debian Ports 软件仓库",
+    "fullTitle": "Debian Ports 软件仓库镜像使用帮助",
+    "file": "debian-ports.mdx",
+    "cname": "debian-ports"
+  },
   "/deb-multimedia/": {
     "title": "Deb Multimedia 软件仓库",
     "fullTitle": "Deb Multimedia 软件仓库镜像使用帮助",
@@ -251,11 +263,23 @@
     "file": "docker-ce.mdx",
     "cname": "docker-ce"
   },
+  "/dragonflybsd-dports/": {
+    "title": "DragonFly BSD DPorts 软件仓库",
+    "fullTitle": "DragonFly BSD DPorts 软件仓库镜像使用帮助",
+    "file": "dragonflybsd-dports.mdx",
+    "cname": "dragonflybsd-dports"
+  },
   "/eclipse/": {
     "title": "Eclipse 软件仓库",
     "fullTitle": "Eclipse 软件仓库镜像使用帮助",
     "file": "eclipse.mdx",
     "cname": "eclipse"
+  },
+  "/elan/": {
+    "title": "Elan / Lean 4 工具链镜像",
+    "fullTitle": "Elan / Lean 4 工具链镜像使用帮助",
+    "file": "elan.mdx",
+    "cname": "elan"
   },
   "/elasticstack/": {
     "title": "Elastic Stack 软件仓库",
@@ -533,6 +557,12 @@
     "file": "kubernetes.mdx",
     "cname": "kubernetes"
   },
+  "/leopardsh/": {
+    "title": "leopard.sh / tiger.sh 软件仓库",
+    "fullTitle": "leopard.sh / tiger.sh 软件仓库镜像使用帮助",
+    "file": "leopardsh.mdx",
+    "cname": "leopardsh"
+  },
   "/librewolf/": {
     "title": "LibreWolf 软件仓库",
     "fullTitle": "LibreWolf 软件仓库镜像使用帮助",
@@ -647,6 +677,18 @@
     "file": "msys2.mdx",
     "cname": "msys2"
   },
+  "/mxlinux/": {
+    "title": "MX Linux 软件仓库",
+    "fullTitle": "MX Linux 软件仓库镜像使用帮助",
+    "file": "mxlinux.mdx",
+    "cname": "mxlinux"
+  },
+  "/mxlinux-isos/": {
+    "title": "MX Linux 安装镜像",
+    "fullTitle": "MX Linux 安装镜像使用帮助",
+    "file": "mxlinux-isos.mdx",
+    "cname": "mxlinux-isos"
+  },
   "/mysql/": {
     "title": "MySQL 软件仓库",
     "fullTitle": "MySQL 软件仓库镜像使用帮助",
@@ -743,6 +785,12 @@
     "file": "packman.mdx",
     "cname": "packman"
   },
+  "/parrot/": {
+    "title": "Parrot OS 软件仓库",
+    "fullTitle": "Parrot OS 软件仓库镜像使用帮助",
+    "file": "parrot.mdx",
+    "cname": "parrot"
+  },
   "/pkgsrc/": {
     "title": "pkgsrc 软件仓库",
     "fullTitle": "pkgsrc 软件仓库镜像使用帮助",
@@ -755,6 +803,12 @@
     "file": "pkgsrc.git.mdx",
     "cname": "pkgsrc.git"
   },
+  "/pop-os/": {
+    "title": "Pop!_OS 软件仓库",
+    "fullTitle": "Pop!_OS 软件仓库镜像使用帮助",
+    "file": "pop-os.mdx",
+    "cname": "pop-os"
+  },
   "/postmarketOS/": {
     "title": "postmarketOS 软件仓库",
     "fullTitle": "postmarketOS 软件仓库镜像使用帮助",
@@ -766,6 +820,12 @@
     "fullTitle": "Proxmox 软件仓库镜像使用帮助",
     "file": "proxmox.mdx",
     "cname": "proxmox"
+  },
+  "/putty/": {
+    "title": "PuTTY 软件镜像",
+    "fullTitle": "PuTTY 软件镜像使用帮助",
+    "file": "putty.mdx",
+    "cname": "putty"
   },
   "/pybombs/": {
     "title": "PyBOMBS 软件仓库",
@@ -953,6 +1013,12 @@
     "file": "ubuntu-old-releases.mdx",
     "cname": "ubuntu-old-releases"
   },
+  "/ubuntu-cdimage/": {
+    "title": "Ubuntu CDImage 安装镜像",
+    "fullTitle": "Ubuntu CDImage 安装镜像使用帮助",
+    "file": "ubuntu-cdimage.mdx",
+    "cname": "ubuntu-cdimage"
+  },
   "/ubuntu-cloud-images/": {
     "title": "Ubuntu Cloud Images",
     "fullTitle": "Ubuntu Cloud Images 镜像使用帮助",
@@ -964,6 +1030,12 @@
     "fullTitle": "Ubuntu Ports 软件仓库镜像使用帮助",
     "file": "ubuntu-ports.mdx",
     "cname": "ubuntu-ports"
+  },
+  "/ubuntu-releases/": {
+    "title": "Ubuntu Releases 安装镜像",
+    "fullTitle": "Ubuntu Releases 安装镜像使用帮助",
+    "file": "ubuntu-releases.mdx",
+    "cname": "ubuntu-releases"
   },
   "/virtualbox/": {
     "title": "VirtualBox 软件仓库",
